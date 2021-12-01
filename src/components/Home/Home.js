@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
 
-function App() {
+
+function Home() {
   return (
     <p>Bonjour</p>
   );
 }
 
-export default App;
+export default Home;
