@@ -14,7 +14,7 @@ export default function HomeCard() {
   return (
     
       <Card className="card">
-        <CardContent>
+        <CardContent >
           <CardMedia
             component="img"
             sizes="100"
@@ -43,7 +43,7 @@ export default function HomeCard() {
             size="small"
             variant="contained"
             className="card__button"
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", backgroundColor: "#F36B7F" }}
           >
             En savoir plus
           </Button>

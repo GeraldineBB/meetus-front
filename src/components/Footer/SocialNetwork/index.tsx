@@ -14,11 +14,11 @@ function SocialNetwork() {
 
         <div className='icons'>
 
-            <a  href="https://instagram.com"><InstagramIcon /></a>
+            <a  href="https://instagram.com" target="_blank"><InstagramIcon /></a>
 
-            <a  href={url}><FacebookIcon /></a>
+            <a  href={url} target="_blank"><FacebookIcon /></a>
 
-            <a  href="https://twitter.com"><TwitterIcon /></a>
+            <a  href="https://twitter.com" target="_blank"><TwitterIcon /></a>
             
             
         </div>

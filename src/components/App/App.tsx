@@ -18,8 +18,6 @@ function App() {
       <Header />
       <Slogan />
       <Cards />
-      <HowIsWorking />
-      <Categories />
       <Footer />
     </div>
     </Router>
