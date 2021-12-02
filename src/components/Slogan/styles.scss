@@ -1,0 +1,33 @@
+.slogan {
+
+    display: flex; 
+    margin-left: 1.8rem; 
+
+
+    &__presentation{
+        display: flex;
+        flex-direction: column;
+        width: 50%; 
+        margin-top: 5rem; 
+
+        &__text{
+        font-size: 2rem; 
+        text-align: left; 
+        }
+
+        &__button{
+        width: 30%;
+        }
+
+    }
+
+    &__illustration{
+        width: 50%;
+    }
+
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    }
+
+
+}
