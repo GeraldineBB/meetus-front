@@ -1,18 +1,26 @@
 import './style.scss';
 import HomeCard from './HomeCard'
+import Grid from "@mui/material/Grid";
+import { Box } from "@mui/system";
+import { Container } from '@mui/material';
 
 
 function Cards() {
 
     return (
-
-        <div className='cards'>
-            <HomeCard />
-            <HomeCard />
-            <HomeCard />
-
-        </div>
-
+        <Container maxWidth="lg" sx={{mt: 6, mb: 8}}>
+            <Grid container >
+                <Grid item md={4}>
+                    <HomeCard /> 
+                </Grid>
+                <Grid item md={4}>
+                    <HomeCard /> 
+                </Grid>
+                <Grid item md={4}>
+                    <HomeCard /> 
+                </Grid>
+            </Grid>
+      </Container>
     )
 }
 
