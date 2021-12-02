@@ -1,3 +1,5 @@
+@use '../../../styles/vars'; 
+
 .slogan {
 
     display: flex; 
@@ -20,7 +22,7 @@
 
         .slogan__presentation__button{
         width: 30%;
-        background-color: #F8CF61;
+        background-color:vars.$color-yellow;
         }
 
     }
