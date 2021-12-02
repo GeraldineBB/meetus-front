@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import Slogan from '../Slogan'; 
+import Categories from '../Categories';
 import './App.css';
 import Footer from '../Footer';
 import {
@@ -14,7 +15,8 @@ function App() {
     <div className="App">
       <Header />
       <Slogan />
-      <Footer />
+      <Categories />
+      {/* <Footer /> */}
     </div>
     </Router>
   );
