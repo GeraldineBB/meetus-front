@@ -4,6 +4,7 @@ import Slogan from '../Slogan';
 import HowIsWorking from '../HowIsWorking';
 import './style.scss';
 import Categories from '../Categories';
+import LinkSection from '../LinkSection'; 
 import Footer from '../Footer';
 import {
   BrowserRouter as Router, 
@@ -19,6 +20,7 @@ function App() {
       <Slogan />
       <Cards />
       <HowIsWorking />
+      <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
       <Categories />
       <Footer />
     </div>

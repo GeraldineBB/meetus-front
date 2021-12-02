@@ -1,4 +1,4 @@
-import './styles.scss';
+import './style.scss';
 import Button from '@mui/material/Button';
 import friends from '../../assets/illustrations/friends.svg'; 
 
