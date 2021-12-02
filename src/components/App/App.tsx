@@ -13,6 +13,7 @@ function App() {
     <Router>
     <div className="App">
       <Header />
+      <Slogan />
       <Footer />
     </div>
     </Router>

@@ -17,6 +17,7 @@
 
         &__button{
         width: 30%;
+        background-color: #3040C4;
         }
 
     }
@@ -27,6 +28,14 @@
 
     @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
+        .slogan{
+
+            &__text{
+                font-size: 1.5rem; 
+            }
+
+
+        }
     }
 
 
