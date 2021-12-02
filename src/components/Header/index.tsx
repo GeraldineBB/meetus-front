@@ -3,13 +3,17 @@ import Button from '@mui/material/Button';
 import Logo from '../../assets/logo/logo.svg';
  
 function Header() {
+
     return (
         <div className='header'>
-            <img src={Logo} alt="Logo" />
-            <Button className='header__button__login' color='success' variant="contained">Se connecter</Button>
-            <Button className='header__button__signup' variant="contained">S'inscrire</Button>
-        </div>
+            <div className='header__logo'><img src={Logo} alt="Logo" /></div>
+            <div className='header__buttons'>
+                <Button className='header__buttons__login' variant="contained">Se connecter</Button>
+                <Button className='header__buttons__signup' variant="contained">S'inscrire</Button>
+            </div>
+    </div>
     )
+    
 };
 
 export default Header;
