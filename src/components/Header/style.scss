@@ -1,3 +1,26 @@
 .header {
+    img{
+      width: 10%;
+      display: flex;
+      flex-direction: row;
+    }
+    .header__button__signup{
+        position: absolute; 
+        /*position: relative;
+        //position: fixed;*/
+        right: 0px;
+        top: 0px;
+        z-index: 1;
+    }
+    .header__button__login{
+        position: absolute; 
+        /*position: relative;
+        //position: fixed;*/
+        right: 140px;
+        top: 0px;
+        z-index: 1;
+    }
     
+    
+
 }
