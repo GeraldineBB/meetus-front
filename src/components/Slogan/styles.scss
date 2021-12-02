@@ -2,22 +2,26 @@
 
     display: flex; 
     margin-left: 1.8rem; 
+    justify-content: space-between;
 
 
     &__presentation{
         display: flex;
         flex-direction: column;
-        width: 50%; 
+        width: 40%; 
         margin-top: 5rem; 
+        // margin-right: 3rem;
 
         &__text{
         font-size: 2rem; 
         text-align: left; 
+        font-family:'Space Grotesk', sans-serif;
+
         }
 
-        &__button{
+        .slogan__presentation__button{
         width: 30%;
-        background-color: #3040C4;
+        background-color: #F8CF61;
         }
 
     }
@@ -36,8 +40,8 @@
             width: 100%;
         }
 
-        &__button{
-            width: 70%;
+        .slogan__presentation__button{
+            width: 55%;
             font-size: 0.8rem;
         }
 
@@ -48,6 +52,7 @@
 
         h1{
             font-size: 1.8rem; 
+            font-family:'Space Grotesk', sans-serif;
         }
 
 
