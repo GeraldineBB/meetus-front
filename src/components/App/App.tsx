@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../Header';
 import Slogan from '../Slogan'; 
-import './App.css';
+import HowIsWorking from '../HowIsWorking';
+import './style.scss';
 import Footer from '../Footer';
 import {
   BrowserRouter as Router, 
@@ -14,6 +15,7 @@ function App() {
     <div className="App">
       <Header />
       <Slogan />
+      <HowIsWorking />
       <Footer />
     </div>
     </Router>
