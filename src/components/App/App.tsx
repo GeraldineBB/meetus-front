@@ -18,6 +18,7 @@ function App() {
     <div className="App">
       <Header />
       <Slogan />
+      <LinkSection title={"Evènements à venir"} buttonName={"Voir tous les évènements"}/>
       <Cards />
       <HowIsWorking />
       <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
