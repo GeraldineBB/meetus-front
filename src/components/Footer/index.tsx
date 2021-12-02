@@ -8,7 +8,7 @@ function Footer() {
     return (
 
         <div className='footer'>
-            <p>MeetUs © 2021 444</p>
+            <p>MeetUs © 2021 </p>
             <SocialNetwork />
         </div>
 
