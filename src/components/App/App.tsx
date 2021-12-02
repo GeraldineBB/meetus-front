@@ -7,6 +7,7 @@ import Footer from '../Footer';
 import {
   BrowserRouter as Router, 
 } from "react-router-dom";
+import Cards from '../Cards';
 
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
     <div className="App">
       <Header />
       <Slogan />
+      <Cards />
       <Categories />
-      {/* <Footer /> */}
+      <Footer />
     </div>
     </Router>
   );
