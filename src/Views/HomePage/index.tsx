@@ -10,11 +10,12 @@ import Cards from '../../components/HomePage/Cards';
 
 function HomePage() {
   return (
-    <div className="HomePage">
+    <div className="homePage">
     <Header />
     <Slogan />
-    <Cards />
     <LinkSection title={"Evènements à venir"} buttonName={"Voir tous les évènements"}/>
+    <Cards />
+    <LinkSection title={"Fonctionnement de MeetUs"} buttonName={"Voir tous les évènements"}/>
     <HowIsWorking />
     <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
     <Categories />

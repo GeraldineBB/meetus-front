@@ -1,0 +1,28 @@
+.login__form{
+    &__email{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        margin-bottom: 5em;
+    }
+    &__password{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+}
+h2{
+    margin-top: 3em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    text-transform: initial;
+}
+span{
+    display: flex;
+    justify-content: center;
+}

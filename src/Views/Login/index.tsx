@@ -1,12 +1,15 @@
 import React from 'react';
-import HomePage from '../HomePage';
+import HeaderLogin from '../../components/LoginPage/HeaderLogin';
+import LoginForm from '../../components/LoginPage/LoginForm';
+import './style.scss';
 
 
 
 function Login() {
   return (
-    <div className="login">
-        <HomePage />
+    <div className="loginPage">
+        <HeaderLogin />
+        <LoginForm />
     </div>
   
   );
