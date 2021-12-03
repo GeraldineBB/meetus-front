@@ -1,20 +1,16 @@
 import React from 'react';
-import eventPresentation from '../../../../assets/images/friends-event.jpg';
 import { Link } from 'react-router-dom';
-
 import './style.scss';
-
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
 import { Container } from '@mui/material';
-
+import { useSelector } from 'react-redux';
 
 const CardPresentation = () => {
 
@@ -31,8 +27,8 @@ const CardPresentation = () => {
                             <CardMedia
                                 component="img"
                                 height="180"
-                                image={eventPresentation}
-                                alt="explaining how to use our website"
+                                image={`${process.env.PUBLIC_URL}/images/music.jpg`}
+                                alt='explaining how to use create an event'
                             />
                             <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button >
@@ -46,7 +42,10 @@ const CardPresentation = () => {
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    TODO : ICI VIENDRA UN MINI TUTO D'UTILISATION DU SITE
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Ipsum velit rerum, eaque incidunt dolorum beatae qui dolore! Voluptas itaque nam, 
+                                    repudiandae recusandae assumenda eos facere, 
+                                    laboriosam explicabo sed tempora corrupti?
                                 </Typography>
                             </CardContent>
 
@@ -57,7 +56,7 @@ const CardPresentation = () => {
                             <CardMedia
                                 component="img"
                                 height="180"
-                                image={eventPresentation}
+                                image={`${process.env.PUBLIC_URL}/images/music.jpg`}
                                 alt="explaining how to use create an event"
                             />
                             <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
