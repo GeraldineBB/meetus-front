@@ -1,0 +1,64 @@
+.event__form{
+    &__name{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        margin-bottom: 5em;
+    }
+    &__date{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    &__place{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    &__select{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    &__photo{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    &__description{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    &__number{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+    }
+    
+}
+h2{
+    margin-top: 3em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    text-transform: initial;
+}
+span{
+    display: flex;
+    justify-content: center;
+}
