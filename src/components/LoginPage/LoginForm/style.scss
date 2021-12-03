@@ -10,9 +10,21 @@
     &__password{
         display: flex;
         justify-self: center;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+    }
+    &__button{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 3em;
+        button{
+           background-color: #F36B7F;
+           &:hover {background-color: darken(#F36B7F, 20%);}
+        }
     }
 }
 h2{
@@ -22,7 +34,8 @@ h2{
     justify-content: center;
     text-transform: initial;
 }
-span{
+.alreadyAccount{
     display: flex;
     justify-content: center;
+    margin-top: 1em;
 }
