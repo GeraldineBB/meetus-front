@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import { CardActionArea } from '@mui/material';
 
 
-import music from "../../../assets/illustrations/music.svg";
+import music from "../../../../assets/illustrations/music.svg";
 
 
 const Category = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import eventPresentation from '../../../assets/images/friends-event.jpg';
+import eventPresentation from '../../../../assets/images/friends-event.jpg';
 import { Link } from 'react-router-dom';
 
 import './style.scss';

@@ -6,8 +6,8 @@ import Category from './Category';
 
 
 // import categories pictures
-import music from '../../assets/illustrations/music.svg'
-import concert from '../../assets/images/concert-event.jpg'
+// import music from '../../../assets/illustrations/music.svg'
+// import concert from '../../../assets/images/concert-event.jpg'
 
 const Categories = () => {
 

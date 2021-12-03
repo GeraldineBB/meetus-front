@@ -1,31 +1,20 @@
-import React from 'react';
-import Header from '../Header';
-import Slogan from '../Slogan'; 
-import HowIsWorking from '../HowIsWorking';
-import './style.scss';
-import Categories from '../Categories';
-import LinkSection from '../LinkSection'; 
-import Footer from '../Footer';
-import {
-  BrowserRouter as Router, 
-} from "react-router-dom";
-import Cards from '../Cards';
 
+import {
+  Routes, Route
+} from "react-router-dom";
+
+import HomePage from '../../Views/HomePage';
+import Login from "../../Views/Login";
 
 function App() {
   return (
-    <Router>
     <div className="App">
-      <Header />
-      <Slogan />
-      <LinkSection title={"Evènements à venir"} buttonName={"Voir tous les évènements"}/>
-      <Cards />
-      <HowIsWorking />
-      <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
-      <Categories />
-      <Footer />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </div>
-    </Router>
+  
   );
 }
 
