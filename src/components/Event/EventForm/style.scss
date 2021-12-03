@@ -1,11 +1,19 @@
 .event__form{
+    &__if{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        padding: 1em;
+    }
     &__name{
         display: flex;
         justify-self: center;
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
-        margin-bottom: 5em;
+        padding: 1em;
     }
     &__date{
         display: flex;
@@ -20,6 +28,7 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
     }
     &__select{
         display: flex;
@@ -27,6 +36,7 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
     }
     &__photo{
         display: flex;
@@ -34,6 +44,7 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
     }
     &__description{
         display: flex;
@@ -41,6 +52,7 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
     }
     &__number{
         display: flex;
@@ -48,6 +60,23 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
+    }
+    &__number{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        padding: 1em;
+    }
+    &__buttom{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        padding: 1em;
     }
     
 }
