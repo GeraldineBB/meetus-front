@@ -10,30 +10,32 @@
     }
 
     
-    .header__logo{
+    &__logo{
         margin-left: 0.5em;
     }
-    .header__buttons {
+    &__buttons {
         margin-top: 0.5em;
         margin-right: 1em; 
         margin-bottom: 0.5em; 
         display: flex;
         justify-content: space-between;
-        
-    }
-    .header__buttons__signup{
-        background-color: #F8CF61;
-    }
-    .header__buttons__login{
-        
+        transition: background-color .3s ease;
+        &__signup{
+            background-color: #F8CF61;
+            &:hover {background-color: darken(#F8CF61, 20%) ;}
+        }
+        &__login{
+            &:hover {background-color: darken(#F36B7F, 20%);}
+            background-color: #F36B7F;
 
-        background-color: #F36B7F;
+            display: flex;
+            justify-self: center;
+            margin-right: 1rem;
 
-        display: flex;
-        justify-self: center;
-        margin-right: 1rem;
-
+        }
     }
+    
+    
 }
 
 //DESKTOP

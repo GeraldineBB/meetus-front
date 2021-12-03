@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./style.scss";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -13,7 +12,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 export default function HomeCard() {
   return (
     
-      <Card className="card">
+      <Card className="card" sx={{mr: 2}}>
         <CardContent >
           <CardMedia
             component="img"
@@ -43,7 +42,7 @@ export default function HomeCard() {
             size="small"
             variant="contained"
             className="card__button"
-            sx={{ width: "100%", backgroundColor: "#F36B7F" }}
+            sx={{ width: "100%", backgroundColor: "#F36B7F", '&:hover':{backgroundColor: '#F8CF61'}}}
           >
             En savoir plus
           </Button>

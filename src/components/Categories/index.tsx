@@ -1,31 +1,40 @@
 import './styles.scss';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import { Container } from '@mui/material';
+
+import Category from './Category'; 
+
 
 // import categories pictures
 import music from '../../assets/illustrations/music.svg'
 import concert from '../../assets/images/concert-event.jpg'
 
-const Categories = () => (
+const Categories = () => {
 
-    <div className="categories">
-        
-        <div className="category">
-            <img className="category__img" src={music} alt="friends-illu" />
-            <h3 className="category__name">Musique</h3>
-        </div>
-        <div className="category">
-            <img className="category__img" src={music} alt="friends-illu" />
-            <h3 className="category__name">Musique</h3>
-        </div>
-        <div className="category">
-            <img className="category__img" src={music} alt="friends-illu" />
-            <h3 className="category__name">Musique</h3>
-        </div>
-
-    </div>
-);
+    return (
+        <Container maxWidth="md" sx={{mt: 6, mb: 8}}>
+            <Grid container spacing={4}>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+                <Grid item md={4}>
+                    <Category /> 
+                </Grid>
+            </Grid>
+      </Container>
+    )
+}
 
 export default Categories;

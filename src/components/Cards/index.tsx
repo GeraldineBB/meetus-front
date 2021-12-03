@@ -1,4 +1,3 @@
-import './style.scss';
 import HomeCard from './HomeCard'
 import Grid from "@mui/material/Grid";
 import { Container } from '@mui/material';
