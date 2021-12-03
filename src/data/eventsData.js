@@ -15,7 +15,7 @@ export default [
       "picture": "event_placeholder.png",
       "date": "2021-12-03T10:16:35+01:00",
       "city" : "Marseille",
-      "members" : 10, 
+      "members" : 11, 
     },
     {
       "id": 3,

@@ -1,14 +1,18 @@
 import axios from 'axios';
-import { LOAD_EVENTS_FOR_HOME } from '../actions/events';
+import { LOAD_EVENTS_FOR_HOME, setEventForHome } from '../actions/events';
 
+const api = axios.create({
+  baseURL: 'http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1',
+});
 
 const apiMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOAD_EVENTS_FOR_HOME: {
-      axios.get ('http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1/events?limit=3', {
+      api.get ('/events?limit=3', {
       }).then (
         (response) => {
           console.log(response); 
+          store.dispatch(setEventForHome(response.data));
         }, 
       ).catch(
         (error) => console.log('on a une erreur', error),
