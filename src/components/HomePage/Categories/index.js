@@ -1,8 +1,8 @@
 import './styles.scss';
 import Grid from "@mui/material/Grid";
 import { Container } from '@mui/material';
-
-import Category from './Category'; 
+import { useSelector } from "react-redux";
+import Category from './Category';
 
 
 // import categories pictures
@@ -11,27 +11,16 @@ import Category from './Category';
 
 const Categories = () => {
 
+    const categories = useSelector((state) => state.categories.categoriesList);
+
     return (
         <Container maxWidth="md" sx={{mt: 6, mb: 8}}>
             <Grid container spacing={4}>
+            {categories.map((event) => (
                 <Grid item md={4}>
-                    <Category /> 
+                    <Category title={event.title} picture={event.picture} /> 
                 </Grid>
-                <Grid item md={4}>
-                    <Category /> 
-                </Grid>
-                <Grid item md={4}>
-                    <Category /> 
-                </Grid>
-                <Grid item md={4}>
-                    <Category /> 
-                </Grid>
-                <Grid item md={4}>
-                    <Category /> 
-                </Grid>
-                <Grid item md={4}>
-                    <Category /> 
-                </Grid>
+                ))}
             </Grid>
       </Container>
     )

@@ -5,38 +5,45 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
-import Image from "../../../../assets/images/fire-event.jpg";
+// import Image from "../../../../assets/images/fire-event.jpg";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 
-export default function HomeCard() {
+interface HomeCardProps {
+  picture: string, 
+  date: string, 
+  city: string, 
+  members: number, 
+  title: string, 
+  description: string, 
+};
+
+export default function HomeCard({picture,date,city,members,title, description}: HomeCardProps) {
   return (
-    
       <Card className="card" sx={{mr: 2}}>
         <CardContent >
           <CardMedia
             component="img"
             sizes="100"
-            image={Image}
+            image={picture}
             alt="Paella dish"
           />
           <Typography variant="h5" component="div">
-            Match de volley
+            {title}
           </Typography>
           <Typography color="text.primary">
             <LocationOnIcon fontSize="medium" />
-            Marseille
+            {city}
           </Typography>
           <Typography sx={{ mb: 1.5 }}>
             <CalendarTodayIcon />
-            10/12/2021
+            {date}
           </Typography>
           <Typography sx={{ mb: 1.5 }} variant="body1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
-            repellendus maxime odio nemo dol.
+            {description}
           </Typography>
-          <Typography color="text.primary">10 participants</Typography>
+          <Typography color="text.primary">{members} participants</Typography>
         </CardContent>
         <CardActions>
           <Button
