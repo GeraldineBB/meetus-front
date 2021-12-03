@@ -16,16 +16,7 @@ function Cards() {
                      <HomeCard key={event.id} {...event}/> 
                 </Grid>
             ))}
-            
-                <Grid item md={4}>
-                    <HomeCard /> 
-                </Grid>
-                <Grid item md={4}>
-                    <HomeCard /> 
-                </Grid>
-                <Grid item md={4}>
-                    <HomeCard /> 
-                </Grid>
+
             </Grid>
       </Container>
     )

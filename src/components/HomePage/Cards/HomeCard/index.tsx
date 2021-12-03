@@ -11,9 +11,6 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 
 export default function HomeCard() {
-
-
-
   return (
     
       <Card className="card" sx={{mr: 2}}>
