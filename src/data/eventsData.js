@@ -1,4 +1,4 @@
-export default events = [
+export default [
     {
       "id": 1,
       "title": "Titre :0",

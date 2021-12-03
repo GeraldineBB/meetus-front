@@ -11,7 +11,6 @@ function Cards() {
         <Container maxWidth="lg" sx={{mt: 6, mb: 8}}>
             <Grid container >
 
-            list.map ()
 
                 <Grid item md={4}>
                     <HomeCard /> 

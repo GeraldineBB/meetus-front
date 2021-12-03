@@ -12,7 +12,6 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 export default function HomeCard() {
 
-  const list = useSelector((state) => state.events.list);
 
 
   return (

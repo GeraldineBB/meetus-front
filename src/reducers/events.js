@@ -1,7 +1,7 @@
-import events from '../data';
+import eventsData from '../data/eventsData.js';
 
 export const initialState = {
-    list: events,
+    list: eventsData,
 };
 
 
