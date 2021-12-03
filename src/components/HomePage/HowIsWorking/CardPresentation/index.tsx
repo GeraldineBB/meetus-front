@@ -32,9 +32,9 @@ const CardPresentation = () => {
                                 component="img"
                                 height="180"
                                 image={eventPresentation}
-                                alt="aller vien, ont est bien"
+                                alt="explaining how to use our website"
                             />
-                            <CardActions sx={{display: 'flex', justifyContent: 'center'}}>
+                            <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button >
 
                                     <Link to="/TODOTOUTLESEVENTS">Trouver un évènement</Link></Button>
@@ -46,8 +46,7 @@ const CardPresentation = () => {
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    TODO : ICI VIENDRA UN MINI TUTO D'UTILISATION DU SITE
                                 </Typography>
                             </CardContent>
 
@@ -59,9 +58,9 @@ const CardPresentation = () => {
                                 component="img"
                                 height="180"
                                 image={eventPresentation}
-                                alt="creer un evenement s'il te plait"
+                                alt="explaining how to use create an event"
                             />
-                            <CardActions sx={{display: 'flex', justifyContent: 'center'}}>
+                            <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
                                 <Button >
                                     <Link to="/TODOCREEREVENT">Organiser un évènement</Link></Button>
 
@@ -73,8 +72,10 @@ const CardPresentation = () => {
 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Ipsum velit rerum, eaque incidunt dolorum beatae qui dolore! Voluptas itaque nam, 
+                                    repudiandae recusandae assumenda eos facere, 
+                                    laboriosam explicabo sed tempora corrupti?
                                 </Typography>
                             </CardContent>
 
