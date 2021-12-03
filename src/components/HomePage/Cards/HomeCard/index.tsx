@@ -26,7 +26,7 @@ export default function HomeCard({picture,date,city,members,title, description}:
           <CardMedia
             component="img"
             sizes="100"
-            image={picture}
+            image={`${process.env.PUBLIC_URL}/images/${picture}`}
             alt="Paella dish"
           />
           <Typography variant="h5" component="div">
