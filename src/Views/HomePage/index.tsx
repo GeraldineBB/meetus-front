@@ -11,14 +11,14 @@ import Cards from '../../components/HomePage/Cards';
 function HomePage() {
   return (
     <div className="HomePage">
-    <Header />
-    <Slogan />
-    <Cards />
-    <LinkSection title={"Evènements à venir"} buttonName={"Voir tous les évènements"}/>
-    <HowIsWorking />
-    <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
-    <Categories />
-    <Footer />
+        <Header />
+        <Slogan />
+        <Cards />
+        <LinkSection title={"Evènements à venir"} buttonName={"Voir tous les évènements"}/>
+        <HowIsWorking />
+        <LinkSection title={"Toutes les catégories"} buttonName={"Voir toutes les catégories"}/>
+        <Categories />
+        <Footer />
     </div>
   
   );
