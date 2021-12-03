@@ -9,7 +9,12 @@ import Image from "../../../../assets/images/fire-event.jpg";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
+
 export default function HomeCard() {
+
+  const list = useSelector((state) => state.events.list);
+
+
   return (
     
       <Card className="card" sx={{mr: 2}}>

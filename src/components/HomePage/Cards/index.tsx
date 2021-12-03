@@ -5,6 +5,8 @@ import { Container } from '@mui/material';
 
 function Cards() {
 
+    // const list = useSelector((state) => state.events.list);
+
     return (
         <Container maxWidth="lg" sx={{mt: 6, mb: 8}}>
             <Grid container >
