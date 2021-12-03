@@ -11,7 +11,12 @@ function Cards() {
         <Container maxWidth="lg" sx={{mt: 6, mb: 8}}>
             <Grid container >
 
-
+            {list.map((event) => (
+                <Grid item md={4}>
+                     <HomeCard key={event.id} {...event}/> 
+                </Grid>
+            ))}
+            
                 <Grid item md={4}>
                     <HomeCard /> 
                 </Grid>
