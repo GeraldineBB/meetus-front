@@ -8,7 +8,6 @@ import { color } from "@mui/system";
 
 
 const Category = ({title, picture}) => {
-{console.log(picture)}
     return (
         
         <Card className="card">
