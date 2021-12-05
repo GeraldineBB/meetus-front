@@ -2,19 +2,27 @@
     &__email{
         display: flex;
         justify-self: center;
+        flex-direction: column;
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
         margin-bottom: 5em;
     }
     &__password{
-        display: flex;
-        justify-self: center;
-        flex-wrap: wrap;
-        flex-direction: row-reverse;
+        
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+
+        &__forgot{
+            display: inline;
+            flex-direction: row-reverse;
+            
+        }
+
+        &__error{
+            
+        }
     }
     &__button{
         display: flex;
