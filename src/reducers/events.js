@@ -1,8 +1,8 @@
 import { SET_EVENT_FOR_HOME } from '../actions/events.js';
-import eventsData from '../data/eventsData.js';
+// import eventsData from '../data/eventsData.js';
 
 export const initialState = {
-    list: eventsData,
+    list: [],
 };
 
 

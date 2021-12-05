@@ -1,8 +1,8 @@
 import { SET_CATEGORIES_FOR_HOME } from '../actions/events.js';
-import CategoriesData from '../data/categoriesData.js';
+// import CategoriesData from '../data/categoriesData.js';
 
 export const initialState = {
-    categoriesList: CategoriesData,
+    categoriesList: [],
 };
 
 
