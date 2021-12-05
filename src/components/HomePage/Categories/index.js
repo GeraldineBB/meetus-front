@@ -30,7 +30,7 @@ const Categories = () => {
             <Grid container spacing={4}>
             {categories.map((category) => (
                 <Grid item md={4}>
-                    <Category key={category.id} title={category.title} picture={category.picture} /> 
+                    <Category key={category.id} name={category.name} picture={category.picture} /> 
                 </Grid>
                 ))}
             </Grid>

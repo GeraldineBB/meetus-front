@@ -7,7 +7,7 @@ import { CardActionArea } from '@mui/material';
 import { color } from "@mui/system";
 
 
-const Category = ({title, picture}) => {
+const Category = ({name, picture}) => {
     return (
         
         <Card className="card">
@@ -17,11 +17,11 @@ const Category = ({title, picture}) => {
             <CardMedia
                 component="img"
                 image={`${process.env.PUBLIC_URL}/images/${picture}`}
-                alt={title}
+                alt={name}
                 height="180"
             />
             <Typography variant="h5" component="div">
-                {title}
+                {name}
             </Typography>
             
             </CardContent>
