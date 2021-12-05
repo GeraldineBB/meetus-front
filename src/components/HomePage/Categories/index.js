@@ -16,9 +16,9 @@ const Categories = () => {
     return (
         <Container maxWidth="md" sx={{mt: 6, mb: 8}}>
             <Grid container spacing={4}>
-            {categories.map((event) => (
+            {categories.map((category) => (
                 <Grid item md={4}>
-                    <Category title={event.title} picture={event.picture} /> 
+                    <Category key={category.id} title={category.title} picture={category.picture} /> 
                 </Grid>
                 ))}
             </Grid>
