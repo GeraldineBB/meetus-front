@@ -1,6 +1,6 @@
 import './style.scss';
 import Button from '@mui/material/Button';
-import Logo from '../../assets/logo/logo.svg';
+import Logo from '../../assets/logo/logoWhite.png';
 import { NavLink } from 'react-router-dom';
 function Header() {
 
