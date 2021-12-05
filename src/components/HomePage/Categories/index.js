@@ -1,8 +1,11 @@
+import React, { useEffect } from 'react';
+
 import './styles.scss';
 import Grid from "@mui/material/Grid";
 import { Container } from '@mui/material';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Category from './Category';
+import { LOAD_CATEGORIES_FOR_HOME } from '../../../actions/events';
 
 
 // import categories pictures
@@ -13,6 +16,15 @@ const Categories = () => {
 
     const categories = useSelector((state) => state.categories.categoriesList);
 
+    const dispatch = useDispatch();
+
+    useEffect(
+      () => {
+        dispatch({ type: LOAD_CATEGORIES_FOR_HOME });
+      },
+      [],
+    );
+  
     return (
         <Container maxWidth="md" sx={{mt: 6, mb: 8}}>
             <Grid container spacing={4}>

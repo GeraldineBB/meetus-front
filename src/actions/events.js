@@ -14,4 +14,19 @@ export const setEventForHome = (value) => ({
   value, 
 });
 
+// action to load 6 categories on homepage (middleware)
+export const LOAD_CATEGORIES_FOR_HOME = 'LOAD_CATEGORIES_FOR_HOME';
 
+export const loadCategoriesForHome = () => ({
+  type: LOAD_CATEGORIES_FOR_HOME,
+  
+});
+
+
+// action to change state with 6 categories on homepage (reducer)
+export const SET_CATEGORIES_FOR_HOME = 'SET_CATEGORIES_FOR_HOME';
+
+export const setCategoriesForHome = (value, ) => ({
+  type: SET_CATEGORIES_FOR_HOME,
+  value, 
+});
