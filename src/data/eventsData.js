@@ -6,7 +6,7 @@ export default [
       "picture": "eat-event.jpg",
       "date": "2021-12-03T10:16:35+01:00",
       "city" : "Marseille",
-      "members" : 10, 
+      "membersCount" : 10, 
     },
     {
       "id": 2,
@@ -15,7 +15,7 @@ export default [
       "picture": "event_placeholder.png",
       "date": "2021-12-03T10:16:35+01:00",
       "city" : "Marseille",
-      "members" : 11, 
+      "membersCount" : 11, 
     },
     {
       "id": 3,
@@ -24,6 +24,6 @@ export default [
       "picture": "event_placeholder.png",
       "date": "2021-12-03T10:16:35+01:00",
       "city" : "Marseille",
-      "members" : 10, 
+      "membersCount" : 10, 
     }
 ] 

@@ -14,12 +14,12 @@ interface HomeCardProps {
   picture: string, 
   date: string, 
   city: string, 
-  members: number, 
+  membersCount: number, 
   title: string, 
   description: string, 
 };
 
-export default function HomeCard({picture,date,city,members,title, description}: HomeCardProps) {
+export default function HomeCard({picture,date,city,membersCount,title, description}: HomeCardProps) {
   return (
       <Card className="card" sx={{mr: 2}}>
         <CardContent >
@@ -43,7 +43,7 @@ export default function HomeCard({picture,date,city,members,title, description}:
           <Typography sx={{ mb: 1.5 }} variant="body1">
             {description}
           </Typography>
-          <Typography color="text.primary">{members} participants</Typography>
+          <Typography color="text.primary">{membersCount} participants</Typography>
         </CardContent>
         <CardActions>
           <Button
