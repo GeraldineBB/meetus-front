@@ -2,7 +2,7 @@ import { SET_CATEGORIES_FOR_HOME } from '../actions/events.js';
 // import CategoriesData from '../data/categoriesData.js';
 
 export const initialState = {
-    categoriesList: [],
+    homeCategorieList: [],
 };
 
 
@@ -11,7 +11,7 @@ const reducer = (state = initialState, action = {}) => {
       case SET_CATEGORIES_FOR_HOME:
         return {
           ...state, 
-          categoriesList: action.value, 
+          homeCategorieList: action.value, 
         }
       default:
         return state;

@@ -8,8 +8,8 @@ import { LOAD_EVENTS_FOR_HOME } from '../../../actions/events';
 
 function Cards() {
 
-    const list = useSelector((state) => state.events.list);
-
+    const homeEventList = useSelector((state) => state.events.homeEventList);
+    
     const dispatch = useDispatch();
 
     useEffect(
@@ -24,7 +24,7 @@ function Cards() {
         <Container maxWidth="lg" sx={{mt: 6, mb: 8}}>
             <Grid container >
 
-            {list.map((event) => (
+            {homeEventList.map((event) => (
                 <Grid item md={4}>
                      <HomeCard key={event.id} {...event}/> 
                 </Grid>

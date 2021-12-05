@@ -2,7 +2,7 @@ import { SET_EVENT_FOR_HOME } from '../actions/events.js';
 // import eventsData from '../data/eventsData.js';
 
 export const initialState = {
-    list: [],
+    homeEventList: [],
 };
 
 
@@ -11,7 +11,7 @@ const reducer = (state = initialState, action = {}) => {
       case SET_EVENT_FOR_HOME:
       return {
         ...state,
-        list: action.value,
+        homeEventList: action.value,
       };
       default:
         return state;

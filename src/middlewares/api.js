@@ -3,7 +3,7 @@ import { LOAD_CATEGORIES_FOR_HOME, LOAD_EVENTS_FOR_HOME, setEventForHome, setCat
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: 'http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1',
+  baseURL: 'http://localhost:8080/api/v1',
 });
 
 const apiMiddleware = (store) => (next) => (action) => {

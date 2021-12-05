@@ -14,7 +14,7 @@ import { LOAD_CATEGORIES_FOR_HOME } from '../../../actions/events';
 
 const Categories = () => {
 
-    const categories = useSelector((state) => state.categories.categoriesList);
+    const homeCategorieList = useSelector((state) => state.categories.homeCategorieList);
 
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const Categories = () => {
     return (
         <Container maxWidth="md" sx={{mt: 6, mb: 8}}>
             <Grid container spacing={4}>
-            {categories.map((category) => (
+            {homeCategorieList.map((category) => (
                 <Grid item md={4}>
                     <Category key={category.id} name={category.name} picture={category.picture} /> 
                 </Grid>
