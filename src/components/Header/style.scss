@@ -6,7 +6,9 @@
     background-color: #82B5A5;
 
     img{
-        width: 8em;
+        width: 5em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
     }
 
     
@@ -41,11 +43,19 @@
 //DESKTOP
 .header{
     @media (min-width: 600px) {
+
+
+    img{
+        width: 6em;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+
         .header__buttons{
             
             margin-top: 0.5em;
             margin-right: 1em; 
-            margin-bottom: 0.5em; 
+            // margin-bottom: 0.5em; 
             display: flex;
             justify-content: space-between; 
         }
