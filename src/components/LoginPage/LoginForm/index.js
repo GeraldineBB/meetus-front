@@ -48,8 +48,8 @@ export default function LoginForm() {
         }) => (
           <div className="login">
             <h2>Se connecter</h2>
-            <Form>
-              <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
+
                 <div className="login__form__email">
                   <TextField
                     fullWidth
@@ -67,7 +67,6 @@ export default function LoginForm() {
                     style={{ color: "red" }}
                   />
                 </div>
-              </form>
               {errors.email && touched.email && errors.email}
               <div className="login__form__password">
                 <TextField
