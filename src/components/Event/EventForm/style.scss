@@ -70,14 +70,7 @@
         width: 600px;
         padding: 1em;
     }
-    &__buttom{
-        display: flex;
-        justify-self: center;
-        margin: 0 auto;
-        max-width: 100%;
-        width: 600px;
-        padding: 1em;
-    }
+    
     
 }
 h2{
@@ -87,7 +80,12 @@ h2{
     justify-content: center;
     text-transform: initial;
 }
-span{
+
+.event__form__buttom{
     display: flex;
-    justify-content: center;
+    justify-self: center;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 600px;
+    padding: 1em;
 }

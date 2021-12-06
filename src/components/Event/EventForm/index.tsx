@@ -74,15 +74,16 @@ const EventForm = () => {
                 </div>
 
                 <div className='event__form__photo'>
-                    <Stack >
-                        <label htmlFor="contained-button-file">
+                    <FormControl fullWidth>
+                    <label htmlFor="contained-button-file">
+                       
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                            <Button variant="contained" component="span">
+                            <Button fullWidth variant="contained" component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
-                        </label>
-                    </Stack>
-
+                        
+                    </label>
+                    </FormControl>
                 </div>
 
                 <div className='event__form__description'>
@@ -92,8 +93,11 @@ const EventForm = () => {
                 <div className='event__form__number'>
                     <TextField fullWidth label="Nombre maximum de participant" className="eventForm" />
                 </div>
-
-                <Button sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} /* onSubmit='TODO' */ className='event__form__buttom' variant="contained">Créer mon évènement</Button>
+                <div className='event__form__buttom'>
+                <FormControl fullWidth>
+                <Button  sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} /* onSubmit='TODO' */  variant="contained">Créer mon évènement</Button>
+                </FormControl>
+                </div>
             </form >
 
 
