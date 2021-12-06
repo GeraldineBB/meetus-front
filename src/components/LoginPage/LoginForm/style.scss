@@ -34,14 +34,15 @@
            &:hover {background-color: darken(#F36B7F, 20%);}
         }
     }
+    h2{
+        margin-top: 3em;
+        margin-bottom: 2em;
+        display: flex;
+        justify-content: center;
+        text-transform: initial;
+    }
 }
-h2{
-    margin-top: 3em;
-    margin-bottom: 2em;
-    display: flex;
-    justify-content: center;
-    text-transform: initial;
-}
+
 .alreadyAccount{
     display: flex;
     justify-content: center;

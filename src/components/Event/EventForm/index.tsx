@@ -26,7 +26,7 @@ const EventForm = () => {
 
     return (
 
-        <div>
+        <div className="event__form">
             <h2> Créer votre évènement </h2>
             <form>
                 <div className='event__form__if'>
