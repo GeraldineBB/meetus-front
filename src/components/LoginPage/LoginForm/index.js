@@ -32,7 +32,6 @@ export default function LoginForm() {
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
-            console.log();
             setSubmitting(false);
           }, 400);
         }}
@@ -48,26 +47,24 @@ export default function LoginForm() {
         }) => (
           <div className="login">
             <h2>Se connecter</h2>
-            <Form onSubmit={handleSubmit}>
-
-                <div className="login__form__email">
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    className="loginForm"
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    style={{ color: "red" }}
-                  />
-                </div>
-              {errors.email && touched.email && errors.email}
+            <Form onSubmit={handleSubmit} method="post" /*action={myApi}*/>
+              <div className="login__form__email">
+                <TextField
+                  fullWidth
+                  label="Email"
+                  className="loginForm"
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  style={{ color: "red" }}
+                />
+              </div>
               <div className="login__form__password">
                 <TextField
                   fullWidth
@@ -79,7 +76,7 @@ export default function LoginForm() {
                   onBlur={handleBlur}
                   value={values.password}
                 />
-                {errors.password && touched.password && errors.password}
+
                 <ErrorMessage
                   name="password"
                   component="div"
@@ -109,7 +106,6 @@ export default function LoginForm() {
                   Se connecter
                 </Button>
               </div>
-
               <NavLink style={{ textDecoration: "none", color: "black" }} to="">
                 <span className="alreadyAccount">
                   Vous possédez déjà un compte ?
