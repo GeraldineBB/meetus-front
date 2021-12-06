@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link } from 'react-router-dom';
+
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -16,6 +18,7 @@ interface HomeCardProps {
   membersCount: number;
   title: string;
   description: string;
+  id: number; 
 }
 
 export default function HomeCard({
@@ -25,6 +28,7 @@ export default function HomeCard({
   membersCount,
   title,
   description,
+  id, 
 }: HomeCardProps) {
   return (
     <Card className="card" sx={{ mr: 2 }}>
@@ -54,18 +58,22 @@ export default function HomeCard({
         </Typography>
       </CardContent>
       <CardActions>
+      <Link to={`/events/${id}`}>
+      
         <Button
-          size="small"
-          variant="contained"
-          className="card__button"
-          sx={{
-            width: "100%",
-            backgroundColor: "#F36B7F",
-            "&:hover": { backgroundColor: "#F8CF61" },
-          }}
-        >
-          En savoir plus
-        </Button>
+        size="small"
+        variant="contained"
+        className="card__button"
+        sx={{
+          width: "100%",
+          backgroundColor: "#F36B7F",
+          "&:hover": { backgroundColor: "#F8CF61" },
+        }}
+      >
+        En savoir plus
+      </Button>
+      </Link>
+      
       </CardActions>
     </Card>
   );

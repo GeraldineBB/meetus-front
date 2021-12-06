@@ -8,7 +8,7 @@ import {
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
