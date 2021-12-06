@@ -30,3 +30,21 @@ export const setCategoriesForHome = (value ) => ({
   type: SET_CATEGORIES_FOR_HOME,
   value, 
 });
+
+// action to load event info on eventPage
+export const LOAD_INFO_FOR_PAGE_EVENT = 'LOAD_INFO_FOR_PAGE_EVENT';
+
+export const loadInfoForPageEvent = () => ({
+  type: LOAD_INFO_FOR_PAGE_EVENT,
+  
+});
+
+// action to set event info on eventPage
+export const SET_INFO_FOR_EVENTPAGE = 'SET_INFO_FOR_EVENTPAGE';
+
+export const setInfoForEventPage = (value) => ({
+  type: SET_INFO_FOR_EVENTPAGE,
+  value
+});
+
+
