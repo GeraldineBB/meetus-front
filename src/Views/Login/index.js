@@ -6,7 +6,7 @@ import './style.scss';
 
 
 
-function Login() {
+function LoginPage() {
   return (
     <div className="loginPage">
         <HeaderLogin />
@@ -16,4 +16,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;
