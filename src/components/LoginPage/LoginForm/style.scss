@@ -1,0 +1,49 @@
+.login__form{
+    &__email{
+        display: flex;
+        justify-self: center;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        margin-bottom: 5em;
+    }
+    &__password{
+        
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+
+        &__forgot{
+            display: inline;
+            flex-direction: row-reverse;
+            
+        }
+
+        &__error{
+            
+        }
+    }
+    &__button{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 3em;
+        button{
+           background-color: #F36B7F;
+           &:hover {background-color: darken(#F36B7F, 20%);}
+        }
+    }
+}
+h2{
+    margin-top: 3em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    text-transform: initial;
+}
+.alreadyAccount{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}

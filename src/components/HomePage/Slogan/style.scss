@@ -1,0 +1,94 @@
+@use '../../../../styles/vars'; 
+
+.slogan {
+
+    display: flex; 
+    margin-left: 3rem; 
+    justify-content: space-between;
+
+
+    &__presentation{
+        display: flex;
+        flex-direction: column;
+        width: 40%; 
+        margin-top: 5rem; 
+        // margin-left: 3rem;
+
+        &__text{
+        font-size: 1.8rem; 
+        text-align: left; 
+        font-family:'Space Grotesk', sans-serif;
+        }
+
+        .slogan__presentation__button{
+        width: 40%;
+        background-color:vars.$color-yellow;
+        }
+
+    }
+
+    &__illustration{
+        width: 50%;
+    }
+
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+
+        &__presentation{
+            width: 100%;
+        }
+
+        .slogan__presentation__button{
+            width: 55%;
+            font-size: 0.8rem;
+        }
+
+        &__illustration{
+            margin-top: 1rem;
+            width: 60%;
+        }
+
+        h1{
+            font-size: 1.8rem; 
+            font-family:'Space Grotesk', sans-serif;
+        }
+
+
+    }
+
+    @media only screen and (min-device-width : 480px) and (max-device-width : 768px) {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+
+        &__presentation{
+            width: 100%;
+            text-align: center;
+        }
+
+        &__text{
+            margin: auto;
+        }
+
+        .slogan__presentation__button{
+            width: 35%;
+            font-size: 0.8rem;
+            margin: auto; 
+        }
+
+        &__illustration{
+            margin-top: 1rem;
+            width: 60%;
+        }
+
+        h1{
+            font-size: 1.8rem; 
+            font-family:'Space Grotesk', sans-serif;
+        }
+    }
+
+
+}
