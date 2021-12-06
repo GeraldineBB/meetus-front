@@ -3,7 +3,8 @@ import { SET_EVENT_FOR_HOME, SET_INFO_FOR_EVENTPAGE } from "../actions/events.js
 
 export const initialState = {
   homeEventList: [],
-  eventInfoPage: {}, 
+  eventInfoPage: [], 
+  loading: true, 
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -16,6 +17,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_INFO_FOR_EVENTPAGE:
       return {
         ...state, 
+        loading: false, 
         eventInfoPage: action.value, 
       }
     default:

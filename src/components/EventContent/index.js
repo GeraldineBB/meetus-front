@@ -14,27 +14,36 @@ const EventContent = () => {
         (state) => state.events.eventInfoPage
       );
     
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
-        console.log(eventInfoPage); 
+    const loading = useSelector(
+        (state) => state.events.loading
+    ); 
 
-      }, []);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
+    console.log(eventInfoPage); 
+
+    }, []);
+
+    if (loading) {
+        return <div>coucou</div>;
+    }
 
       return (
+
         <div className="eventContent">
           <div className="eventContent__info">
       
               <div className="eventContent__info__header">
                   <p className="eventContent__info__header--date">
-                    Mardi 10 Décembre                   
+                    {eventInfoPage.event.date}
                     </p>
                   <p className="eventContent__info__header--title">
-                      Match de volley
+                    {eventInfoPage.event.title}
                   </p>
                   <p className="eventContent__info__header--author">
-                      Crée par Catherine
+                    Crée par {eventInfoPage.event.author.fullName}
                   </p>
               </div>
       
@@ -44,7 +53,7 @@ const EventContent = () => {
       
               <div className="eventContent__info__description">
                   <p className="eventContent__info__description--text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas bibendum ipsum, a blandit tellus aliquet eu. Sed ac odio non odio posuere auctor. Donec lobortis egestas aliquam. Duis venenatis.            
+                  {eventInfoPage.event.description}
                   </p>
               </div>
       
@@ -56,16 +65,16 @@ const EventContent = () => {
                   <img src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}/>
               </div>
               <p className="eventContent__detail__date">
-                  10/12/2021
+                {eventInfoPage.event.date}
               </p>
               <p className="eventContent__detail__hour">
-                  16h
+                {eventInfoPage.event.date}
               </p>
               <p className="eventContent__detail__adress">
-                  60 rue lafour
+                {eventInfoPage.event.address}
               </p>
               <p className="eventContent__detail__zipcode">
-                  75 000 Paris
+                {eventInfoPage.event.zipcode}
               </p>
       
               <Button
@@ -82,7 +91,7 @@ const EventContent = () => {
             </Button>
       
               <p className="eventContent__detail__membersCount">
-                 16 Participants
+              {eventInfoPage.event.membersCount} Participants
               </p>
 
           </div>
