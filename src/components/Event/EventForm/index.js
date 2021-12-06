@@ -43,7 +43,7 @@ const EventForm = () => {
             .min(20, 'Une description doit contenir 20 caractères au minimum')
             .required('Une description est requise'),
             numberOfPeople: yup
-            .string('Entré un nombre maximum de participant ')
+            .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
     });
@@ -55,16 +55,18 @@ const EventForm = () => {
                 eventName: '',
                 place:'',
                 description:'',
-                numberOfPeople:''
+                numberOfPeople:'',
+                picked: '',
+                categorySelect: '',
 
             },
             validationSchema: validationSchema,
             onSubmit: (values) => {
-                alert(JSON.stringify(values, null, 2));
+                alert(JSON.stringify(values, null, 2)); 
             },
         });
-    
-       
+        
+        const [value, setValue] = React.useState(new Date());
 
     return (
         
@@ -72,18 +74,21 @@ const EventForm = () => {
 
 
             <h2> Créer votre évènement </h2>
+
             <form onSubmit={formik.handleSubmit}>
+
                 <div className='event__form__if'>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Type d'évènement</FormLabel>
                         <RadioGroup
                             row aria-label="type"
-                            name="controlled__radio__buttons__group"
+                          /*  name="controlled__radio__buttons__group"
                             value=''
-                        /* onChange='TODOHANDLE' */
+                         onChange='TODOHANDLE' */
                         >
-                            <FormControlLabel value="online" control={<Radio />} label="En ligne" />
-                            <FormControlLabel value="realLife" control={<Radio />} label="En présentiel" />
+                            <FormControlLabel value="online" name="picked" control={<Radio />} label="En ligne" />
+                            <FormControlLabel value="realLife" name="picked" control={<Radio />} label="En présentiel" />
+                            {/* <div>Picked TEST: {formik.values.picked}</div> */}
                         </RadioGroup>
                     </FormControl>
                 </div>
@@ -107,10 +112,11 @@ const EventForm = () => {
                             <DateTimePicker
                                 renderInput={(props) => <TextField {...props} />}
                                 label="Date & Heure"
-                                value=''
+                                value={value}
                                 onChange={(newValue) => {
-                                    /* setValue(newValue); */
+                                     setValue(newValue); 
                                 }}
+                                minDateTime={new Date()}
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -118,7 +124,6 @@ const EventForm = () => {
 
                 <div className='event__form__place'>
                     <TextField fullWidth label="Lieu" className="eventForm" 
-                    value=""
                     id="place"
                     name="place"
                     type="place"
@@ -130,9 +135,9 @@ const EventForm = () => {
                         <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
                         <Select
                             labelId="event_form_single_select_label"
-                            id="event_form_single_select"
-                            value=''
+                            id="event_form_single_select"                           
                             label="categorySelect"
+                            name="categorySelect"
                         /* onChange='TODOHANDLE' */
                         >
                             {/* //TODO ICI UNE MAP DE CATEGORIE */}
@@ -147,7 +152,7 @@ const EventForm = () => {
                         <label htmlFor="contained-button-file">
 
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                            <Button fullWidth variant="contained" component="span">
+                            <Button sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }} fullWidth variant="contained" component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
 
@@ -182,7 +187,7 @@ const EventForm = () => {
                 </div>
                 <div className='event__form__buttom'>
                     <FormControl fullWidth>
-                        <Button sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} /* onSubmit='TODO' */ variant="contained" type="submit">Créer mon évènement</Button>
+                        <Button sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} variant="contained" type="submit">Créer mon évènement</Button>
                     </FormControl>
                 </div>
             </form>
