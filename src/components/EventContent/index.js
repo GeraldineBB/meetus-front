@@ -14,13 +14,7 @@ const EventContent = () => {
         (state) => state.events.eventInfoPage
       );
     
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
-        console.log(eventInfoPage); 
-
-      }, []);
+      
 
       return (
         <div className="eventContent">

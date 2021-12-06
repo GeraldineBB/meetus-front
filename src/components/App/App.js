@@ -12,19 +12,6 @@ import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
 
 
 function App() {
-
-  const eventInfoPage = useSelector(
-    (state) => state.events.eventInfoPage
-  );
-
-  const dispatch = useDispatch();
-    
-  useEffect(() => {
-    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
-    console.log(eventInfoPage); 
-
-  }, []);
-
   return (
     <div className="App">
       <Routes>

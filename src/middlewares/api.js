@@ -11,7 +11,7 @@ import {
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
+  baseURL: "https://api-meet-us.herokuapp.com/api/v1",
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
