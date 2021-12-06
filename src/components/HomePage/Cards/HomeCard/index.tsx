@@ -31,7 +31,7 @@ export default function HomeCard({
   id, 
 }: HomeCardProps) {
   return (
-    <Card className="card" sx={{ mr: 2 }}>
+    <Card className="card" sx={{ mr: 3 }}>
       <CardContent>
         <CardMedia
           component="img"
