@@ -30,3 +30,10 @@ export const setCategoriesForHome = (value ) => ({
   type: SET_CATEGORIES_FOR_HOME,
   value, 
 });
+
+export const SET_EVENT_LIST_IN_PROGRESS = 'SET_EVENT_LIST_IN_PROGRESS';
+
+export const setEventListInProgress = (value) =>({
+  type: SET_EVENT_LIST_IN_PROGRESS,
+  value,
+})
