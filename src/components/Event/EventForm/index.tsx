@@ -13,15 +13,17 @@ import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { Input } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
+
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+
 
 const EventForm = () => {
 
     const Input = styled('input')({
         display: 'none',
     });
-
-
 
 
     return (
@@ -49,7 +51,18 @@ const EventForm = () => {
                 </div>
 
                 <div className='event__form__date'>
-                    <TextField fullWidth label="Date et heure" className="eventForm" />
+                <FormControl fullWidth>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DateTimePicker
+                            renderInput={(props) => <TextField {...props} />}
+                            label="Date & Heure"
+                            value=''
+                            onChange={(newValue) => {
+                                /* setValue(newValue); */
+                            }}
+                        />
+                    </LocalizationProvider>
+                    </FormControl>
                 </div>
 
                 <div className='event__form__place'>
@@ -75,14 +88,14 @@ const EventForm = () => {
 
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
-                    <label htmlFor="contained-button-file">
-                       
+                        <label htmlFor="contained-button-file">
+
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
                             <Button fullWidth variant="contained" component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
-                        
-                    </label>
+
+                        </label>
                     </FormControl>
                 </div>
 
@@ -94,9 +107,9 @@ const EventForm = () => {
                     <TextField fullWidth label="Nombre maximum de participant" className="eventForm" />
                 </div>
                 <div className='event__form__buttom'>
-                <FormControl fullWidth>
-                <Button  sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} /* onSubmit='TODO' */  variant="contained">Créer mon évènement</Button>
-                </FormControl>
+                    <FormControl fullWidth>
+                        <Button sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} /* onSubmit='TODO' */ variant="contained">Créer mon évènement</Button>
+                    </FormControl>
                 </div>
             </form >
 
