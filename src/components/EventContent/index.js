@@ -17,8 +17,9 @@ const EventContent = () => {
       const dispatch = useDispatch();
     
       useEffect(() => {
-        console.log(eventInfoPage); 
         dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
+        console.log(eventInfoPage); 
+
       }, []);
 
       return (
@@ -83,16 +84,11 @@ const EventContent = () => {
               <p className="eventContent__detail__membersCount">
                  16 Participants
               </p>
-      
-      
-      
-      
+
           </div>
-      
-          <div className="eventcontent_similar">
-      
-          </div>
+
         </div>
+
         ); 
 
 }

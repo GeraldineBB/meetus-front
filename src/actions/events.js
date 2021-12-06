@@ -26,7 +26,7 @@ export const loadCategoriesForHome = () => ({
 // action to change state with 6 categories on homepage (reducer)
 export const SET_CATEGORIES_FOR_HOME = 'SET_CATEGORIES_FOR_HOME';
 
-export const setCategoriesForHome = (value ) => ({
+export const setCategoriesForHome = (value) => ({
   type: SET_CATEGORIES_FOR_HOME,
   value, 
 });
@@ -44,7 +44,7 @@ export const SET_INFO_FOR_EVENTPAGE = 'SET_INFO_FOR_EVENTPAGE';
 
 export const setInfoForEventPage = (value) => ({
   type: SET_INFO_FOR_EVENTPAGE,
-  value
+  value,
 });
 
 
