@@ -18,36 +18,74 @@ export default function LoginForm() {
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
             errors.email = "Adresse email invalide";
+          } else if (!values.password) {
+            errors.password = "Champ requis";
+          } else if (
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/.test(
+              values.password
+            )
+          ) {
+            errors.password = "Mot de passe incorrect";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
+            console.log();
             setSubmitting(false);
           }, 400);
         }}
       >
-        {({ isSubmitting }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
           <div className="login">
             <h2>Se connecter</h2>
             <Form>
-              <div className="login__form__email">
-                <TextField fullWidth label="Email" className="loginForm" />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  style={{ color: "red" }}
-                />
-              </div>
-
+              <form onSubmit={handleSubmit}>
+                <div className="login__form__email">
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    className="loginForm"
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    style={{ color: "red" }}
+                  />
+                </div>
+              </form>
+              {errors.email && touched.email && errors.email}
               <div className="login__form__password">
                 <TextField
                   fullWidth
                   label="Mot de passe"
                   className="loginForm"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
                 />
-                <ErrorMessage name="password" component="div" />
+                {errors.password && touched.password && errors.password}
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  style={{ color: "red" }}
+                />
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
