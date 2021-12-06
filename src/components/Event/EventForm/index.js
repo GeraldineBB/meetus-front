@@ -64,11 +64,13 @@ const EventForm = () => {
             },
         });
     
-
+       
 
     return (
-
+        
         <div>
+
+
             <h2> Créer votre évènement </h2>
             <form onSubmit={formik.handleSubmit}>
                 <div className='event__form__if'>
