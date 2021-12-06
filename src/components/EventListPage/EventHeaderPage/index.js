@@ -3,9 +3,8 @@ import Button from "@mui/material/Button";
 import { darken } from "@mui/system";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 function EventHeaderPage() {
   return (
@@ -45,7 +44,10 @@ function EventHeaderPage() {
         </Box>
         <h3>Evènements suggérés pour vous</h3>
         <Stack direction="row" spacing={1}>
-          <Chip label="Sport" sx={{backgroundColor: '#788795', color: 'white', mb: '1em'}} />
+          <Chip
+            label="Sport"
+            sx={{ backgroundColor: "#788795", color: "white", mb: "1.4em" }}
+          />
         </Stack>
       </div>
     </div>
