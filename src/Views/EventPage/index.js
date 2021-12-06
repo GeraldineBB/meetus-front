@@ -1,8 +1,14 @@
 import './style.scss';
 
+import Header from "../../components/Header";
+import EventContent from "../../components/EventContent"; 
+import Footer from "../../components/Footer";
+
 const EventPage = () => (
   <div className="eventPage">
-    <h1>test</h1>
+    <Header/>
+    <EventContent/>
+    <Footer/>
   </div>
 );
 
