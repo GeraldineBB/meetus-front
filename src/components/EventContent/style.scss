@@ -1,7 +1,5 @@
 .eventContent{
 
-    display: flex; 
-    justify-content: space-between;
     width: 90%;
     margin-left: 2em;
 
@@ -9,10 +7,12 @@
     &__info{
         width: 90%;
         height: 30%;
+        text-align: center;
+
         // margin: auto;
 
         img{
-            max-width: 80%;
+            max-width: 90%;
         }
 
         &__description--text{
@@ -22,7 +22,11 @@
 
     &__detail{
         width: 90%;
+        text-align: center;
         // margin: auto;
+        img{
+            max-width: 30%;
+        }
 
     }
 
@@ -37,12 +41,16 @@
         width: 90%;
         margin-left: 5em;
         margin-top: 4em; 
+        margin-bottom: 2em;
+        text-align: left;
 
 
         &__info{
             width: 60%;
             justify-content: space-between;
             align-items: flex-start;
+            text-align: left;
+
 
 
             img{
@@ -56,9 +64,15 @@
         }
     
         &__detail{
-            width: 40%;
+            width: 30%;
             justify-content: space-between;
             align-items: flex-start;
+            text-align: left;
+
+
+            img{
+                max-width: 60%;
+            }
 
 
         }

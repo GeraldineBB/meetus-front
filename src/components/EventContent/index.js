@@ -32,7 +32,13 @@ const EventContent = () => (
             </p>
         </div>
 
+    </div>
+
+
     <div className="eventContent__detail">
+        <div className="eventContent__detail__map">
+            <img src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}/>
+        </div>
         <p className="eventContent__detail__date">
             10/12/2021
         </p>
@@ -51,7 +57,7 @@ const EventContent = () => (
         variant="contained"
         className="card__button"
         sx={{
-          width: "100%",
+          width: "60%",
           backgroundColor: "#F36B7F",
           "&:hover": { backgroundColor: "#F8CF61" },
         }}
@@ -64,7 +70,6 @@ const EventContent = () => (
         </p>
 
 
-    </div>
 
 
     </div>
