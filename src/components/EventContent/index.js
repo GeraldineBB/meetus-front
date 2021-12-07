@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import './style.scss';
 
 import Button from "@mui/material/Button";
+// import {format} from "date-fns"; 
+import DayJS from "react-dayjs";
+// import 'dayjs/locale/te'; 
+import "dayjs/locale/fr";
+
 
 import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
 
@@ -26,9 +31,11 @@ const EventContent = () => {
 
     }, []);
 
+
     if (loading) {
         return <div>coucou</div>;
     }
+    const date = {...eventInfoPage.event.date}; 
 
       return (
 
@@ -37,7 +44,12 @@ const EventContent = () => {
       
               <div className="eventContent__info__header">
                   <p className="eventContent__info__header--date">
-                    {eventInfoPage.event.date}
+                    <DayJS
+                    format="dddd D MMMM YYYY" 
+                    locale="fr"
+                    {...eventInfoPage.event.date}
+                    >
+                    </DayJS> 
                     </p>
                   <p className="eventContent__info__header--title">
                     {eventInfoPage.event.title}
