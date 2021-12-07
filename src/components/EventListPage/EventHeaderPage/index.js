@@ -6,23 +6,31 @@ import Input from "@mui/material/Input";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
-function EventHeaderPage({ handleArchived, handleInProgress, inProgress, archived }) {
-
-    const underlineInProgress = inProgress ? "underlined" : '';
-    const underlineArchived = archived ? "underlined" : '';
-
-
+function EventHeaderPage({
+  handleArchived,
+  handleInProgress,
+  inProgress,
+  archived,
+}) {
+  const underlineInProgress = inProgress ? "underlined" : "";
+  const underlineArchived = archived ? "underlined" : "";
 
   return (
     <div className="eventHeaderPage">
       <div className="eventList__header">
-        <h1>Liste des evènements :</h1>
+        <h1>Liste des évènements :</h1>
         <div className="eventList__select">
           <div style={{ display: "flex" }}>
-           <h2 onClick={handleInProgress} style={{ marginRight: "3em"}} className={underlineInProgress}>
-              En cours
+            <h2
+              onClick={handleInProgress}
+              style={{ marginRight: "3em" }}
+              className={underlineInProgress}
+            >
+              A venir
             </h2>
-            <h2 onClick={handleArchived} className={underlineArchived}>Archivé</h2>
+            <h2 onClick={handleArchived} className={underlineArchived}>
+              Archivé
+            </h2>
           </div>
           <Button
             sx={{

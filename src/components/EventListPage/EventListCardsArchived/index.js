@@ -111,7 +111,7 @@ export default function EventListCardsArchived({
                       sx={{ ml: "2em" }}
                     >
                       <LocationOnIcon />
-                      event.city
+                      {event.city}
                     </Typography>
                   </Typography>
                 </div>
