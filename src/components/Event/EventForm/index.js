@@ -29,44 +29,45 @@ const EventForm = () => {
         display: 'none',
     });
 
-    const validationSchema = yup.object({
-        eventName: yup
-            .string('Entré le nom de l\'évènement')
-            .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
-            .required('Le nom de l\'évènement doit être rempli'),
-            place: yup
-            .string('Entré un lieu valide')
-            .min(3, 'Un lieu doit contenir au moins 3 lettres')
-            .required('Un lieu est requis'),
-            description: yup
-            .string('Entré une description')
-            .min(20, 'Une description doit contenir 20 caractères au minimum')
-            .required('Une description est requise'),
-            numberOfPeople: yup
-            .number('Entré un nombre maximum de participant ')
-            .min(2, 'Un évènement doit avoir un moins 2 participant')
-            .required('Le nombre maximum de participant est requis'),
-    });
-
-   
+        
         const formik = useFormik({
             initialValues: {
-                password: '',
                 eventName: '',
                 place:'',
                 description:'',
                 numberOfPeople:'',
                 picked: '',
                 categorySelect: '',
+                date:  new Date() ,
+            },
+            /* validationSchema: yup.object({
+                eventName: yup
+                .string('Entré le nom de l\'évènement')
+                .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
+                .required('Le nom de l\'évènement doit être rempli'),
+                place: yup
+                .string('Entré un lieu valide')
+                .min(3, 'Un lieu doit contenir au moins 3 lettres')
+                .required('Un lieu est requis'),
+                description: yup
+                .string('Entré une description')
+                .min(20, 'Une description doit contenir 20 caractères au minimum')
+                .required('Une description est requise'),
+                numberOfPeople: yup
+                .number('Entré un nombre maximum de participant ')
+                .min(2, 'Un évènement doit avoir un moins 2 participant')
+                .required('Le nombre maximum de participant est requis'),
+            }), */
+            onSubmit: values => {
+              alert(JSON.stringify(values, null, 2));
+            },
+          });
 
-            },
-            validationSchema: validationSchema,
-            onSubmit: (values) => {
-                alert(JSON.stringify(values, null, 2)); 
-            },
-        });
+
+     
         
         const [value, setValue] = React.useState(new Date());
+        
 
     return (
         
@@ -82,12 +83,9 @@ const EventForm = () => {
                         <FormLabel component="legend">Type d'évènement</FormLabel>
                         <RadioGroup
                             row aria-label="type"
-                          /*  name="controlled__radio__buttons__group"
-                            value=''
-                         onChange='TODOHANDLE' */
                         >
-                            <FormControlLabel value="online" name="picked" control={<Radio />} label="En ligne" />
-                            <FormControlLabel value="realLife" name="picked" control={<Radio />} label="En présentiel" />
+                            <FormControlLabel value="online" name="picked" control={<Radio />} onChange={formik.handleChange} label="En ligne" />
+                            <FormControlLabel value="realLife" name="picked" control={<Radio />}  onChange={formik.handleChange} label="En présentiel" />
                             {/* <div>Picked TEST: {formik.values.picked}</div> */}
                         </RadioGroup>
                     </FormControl>
@@ -112,11 +110,15 @@ const EventForm = () => {
                             <DateTimePicker
                                 renderInput={(props) => <TextField {...props} />}
                                 label="Date & Heure"
-                                value={value}
+                                value={formik.touched.date}
+                                id="date"
+                                name="date"
+                                format="MM/dd/yyyy"
+                                type="date"                               
                                 onChange={(newValue) => {
                                      setValue(newValue); 
                                 }}
-                                minDateTime={new Date()}
+                                minDateTime={new Date( ) } ///+ 86400000 1 JOUR
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -124,10 +126,13 @@ const EventForm = () => {
 
                 <div className='event__form__place'>
                     <TextField fullWidth label="Lieu" className="eventForm" 
-                    id="place"
-                    name="place"
-                    type="place"
-                        /* onChange='TODOHANDLE' */ />
+                   id="place"
+                        name="place"
+                        type="place"
+                        value={formik.values.place}
+                        onChange={formik.handleChange}
+                        error={formik.touched.place && Boolean(formik.errors.place)}
+                        helperText={formik.touched.place && formik.errors.place}  />
                 </div>
 
                 <div className='event__form__select'>
@@ -138,7 +143,10 @@ const EventForm = () => {
                             id="event_form_single_select"                           
                             label="categorySelect"
                             name="categorySelect"
-                        /* onChange='TODOHANDLE' */
+                            value={formik.values.categorySelect}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        
                         >
                             {/* //TODO ICI UNE MAP DE CATEGORIE */}
                             <MenuItem value={1}>Category1</MenuItem>
