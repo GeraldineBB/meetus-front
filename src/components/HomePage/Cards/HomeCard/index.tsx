@@ -10,6 +10,7 @@ import { CardMedia } from "@mui/material";
 // import Image from "../../../../assets/images/fire-event.jpg";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 interface HomeCardProps {
   picture: string;
@@ -21,6 +22,15 @@ interface HomeCardProps {
   id: number; 
 }
 
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Space Grotesk",
+    ].join(','),
+  },});
+
+
 export default function HomeCard({
   picture,
   date,
@@ -31,6 +41,8 @@ export default function HomeCard({
   id, 
 }: HomeCardProps) {
   return (
+    <ThemeProvider theme={theme}>
+
     <Card className="card" sx={{ mr: 3 }}>
       <CardContent>
         <CardMedia
@@ -76,5 +88,7 @@ export default function HomeCard({
       
       </CardActions>
     </Card>
+    </ThemeProvider>
+
   );
 }

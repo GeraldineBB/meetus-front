@@ -2,17 +2,22 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "../../Views/Login";
 import HomePage from "../../Views/HomePage";
 import EventPage from "../../Views/EventPage";
-
 import Event from "../Event";
 
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
-
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Space Grotesk",
+    ].join(','),
+  },});
 
 function App() {
+
   return (
+    <ThemeProvider theme={theme}>
+
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -21,6 +26,8 @@ function App() {
         <Route path="/events/:id" element={<EventPage />} />
       </Routes>
     </div>
+    </ThemeProvider>
+
   );
 }
 

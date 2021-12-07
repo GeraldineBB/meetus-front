@@ -80,7 +80,7 @@ const EventContent = () => {
                 </div>
                 <p className="eventContent__detail__date">
                   <DayJS
-                  format="DD MM YYYY"
+                  format="DD / MM / YYYY"
                   locale="fr"
                   {...eventInfoPage.event.date}
                   >
