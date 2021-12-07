@@ -54,14 +54,28 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_INFO_FOR_PAGE_EVENT:{
 
-      // const idEvent = useSelector(
-      //   (state) => state.events.eventInfoPage.event.id
-      // ); 
+      // const state = store.getState();
+      // const { events } = state;
+      // const { eventInfoPage } = events; 
+      // const { event } = eventInfoPage; 
+      // const { id } = event; 
 
-      api.get(`/events/5`, {})
+      api.get("/events/5", {
+        // params: {
+        //   id : 5, 
+        // }
+      })
       .then((response)=> {
         console.log(response);
         store.dispatch(setInfoForEventPage(response.data)); 
+        // console.log(events); 
+
+        // console.log(eventInfoPage); 
+  
+        // console.log(event); 
+  
+        // console.log(id); 
+  
       })
       .catch((error) =>
       console.log("on a une erreur sur les info de l'event", error)
