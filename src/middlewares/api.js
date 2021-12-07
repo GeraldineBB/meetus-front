@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  LOAD_CATEGORIES,
   LOAD_CATEGORIES_FOR_HOME,
   LOAD_EVENTS_FOR_HOME,
   setEventForHome,
@@ -30,6 +31,20 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_CATEGORIES_FOR_HOME: {
+      // endpoints to load 6 cateogories for home
+      api
+        .get("/categories?limit=6", {})
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setCategoriesForHome(response.data));
+        })
+        .catch((error) =>
+          console.log("on a une erreur sur les 6 categories de la home", error)
+        );
+      next(action);
+      break;
+    }
+    case LOAD_CATEGORIES: {
       // endpoints to load 6 cateogories for home
       api
         .get("/categories?limit=6", {})

@@ -1,7 +1,8 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
+import React, { useEffect } from "react";
 import './style.scss';
 
+import TextField from '@mui/material/TextField';
+import { useSelector, useDispatch } from "react-redux";
 import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { Select } from '@mui/material';
@@ -20,6 +21,9 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+
+
+import { LOAD_CATEGORIES } from "../../../actions/events";
 
 
 
@@ -67,7 +71,15 @@ const EventForm = () => {
         },
     });
 
-
+    const categorieList = useSelector(
+        (state) => state.categories.categorieList
+      );
+    
+      const dispatch = useDispatch();
+    
+      useEffect(() => {
+        dispatch({ type: LOAD_CATEGORIES });
+      }, []);
 
 
     const [value, setValue] = React.useState(new Date());
@@ -145,7 +157,7 @@ const EventForm = () => {
                         error={formik.touched.place && Boolean(formik.errors.place)}
                         helperText={formik.touched.place && formik.errors.place} />
                 </div>
-
+                
                 <div className='event__form__select'>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
@@ -156,11 +168,14 @@ const EventForm = () => {
                             name="categorySelect"
                             value={formik.values.categorySelect}
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+                            onBlur={formik.handleBlur} >
 
-                        >
                             {/* //TODO ICI UNE MAP DE CATEGORIE */}
-                            <MenuItem value={1}>Category1</MenuItem>
+                             {categorieList.map((category) => (
+                            <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
+                       ))}
+
+                            
                             <MenuItem value={2}>Category2</MenuItem>
                         </Select>
                     </FormControl>
