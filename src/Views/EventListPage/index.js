@@ -13,7 +13,7 @@ import EventListCardsArchived from "../../components/EventListPage/EventListCard
 import EventListCardsInProgress from "../../components/EventListPage/EventListCardsInProgress";
 
 function EventListPage() {
-  const { inProgress } = useSelector((state) => state.events);
+  const { inProgress, archived } = useSelector((state) => state.events);
   const dispatch = useDispatch();
 
   const handleArchived = () => {
@@ -33,6 +33,8 @@ function EventListPage() {
         <EventHeaderPage
           handleArchived={handleArchived}
           handleInProgress={handleInProgress}
+          inProgress={inProgress}
+          archived={archived}
         />
         <EventListCardsInProgress />
         <Footer />
@@ -46,6 +48,7 @@ function EventListPage() {
         handleArchived={handleArchived}
         handleInProgress={handleInProgress}
         inProgress={inProgress}
+        archived={archived}
       />
       <EventListCardsArchived />
       <Footer />
