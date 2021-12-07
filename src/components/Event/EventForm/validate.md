@@ -1,6 +1,29 @@
+ <Input id="file"
+                             name="file" 
+                             accept="image/*"
+                              id="contained-button-file"
+                               multiple type="file"
+                               value={formik.values.file}
+                            onChange={formik.handleChange} />
+                            <Button sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }} fullWidth variant="contained" component="span">
+                                Téléchargez votre image de couverture d'évènement
+                            </Button>
  
  
- 
+
+onSubmit: values => {
+              alert(JSON.stringify(values, null, 2,
+                 { 
+                fileName: values.file.name, 
+                type: values.file.type,
+                size: `${values.file.size} bytes`
+              }));
+            },
+          });
+
+
+
+
  date : 
 
 renderInput={(props) => <TextField {...props} />}

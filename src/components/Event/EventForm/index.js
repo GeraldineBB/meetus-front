@@ -29,54 +29,58 @@ const EventForm = () => {
         display: 'none',
     });
 
-        
-        const formik = useFormik({
-            initialValues: {
-                eventName: '',
-                place:'',
-                description:'',
-                numberOfPeople:'',
-                picked: '',
-                categorySelect: '',
-                date:  new Date() ,
-            },
-            /* validationSchema: yup.object({
-                eventName: yup
+
+    const formik = useFormik({
+
+
+
+        initialValues: {
+            eventName: '',
+            place: '',
+            description: '',
+            numberOfPeople: '',
+            picked: '',
+            categorySelect: '',
+            date: new Date(),
+        },
+        validationSchema: yup.object({
+            eventName: yup
                 .string('Entré le nom de l\'évènement')
                 .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
                 .required('Le nom de l\'évènement doit être rempli'),
-                place: yup
+            place: yup
                 .string('Entré un lieu valide')
                 .min(3, 'Un lieu doit contenir au moins 3 lettres')
                 .required('Un lieu est requis'),
-                description: yup
+            description: yup
                 .string('Entré une description')
                 .min(20, 'Une description doit contenir 20 caractères au minimum')
                 .required('Une description est requise'),
-                numberOfPeople: yup
+            numberOfPeople: yup
                 .number('Entré un nombre maximum de participant ')
                 .min(2, 'Un évènement doit avoir un moins 2 participant')
                 .required('Le nombre maximum de participant est requis'),
-            }), */
-            onSubmit: values => {
-              alert(JSON.stringify(values, null, 2));
-            },
-          });
+            /* TODO DATE ET FILE VALIDATION, TYPEOF YUP */
+        }),
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
 
 
-     
-        
-        const [value, setValue] = React.useState(new Date());
-        
+
+
+    const [value, setValue] = React.useState(new Date());
+
 
     return (
-        
+
         <div>
 
 
             <h2> Créer votre évènement </h2>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} /*method="POST"*/>
 
                 <div className='event__form__if'>
                     <FormControl component="fieldset">
@@ -84,16 +88,23 @@ const EventForm = () => {
                         <RadioGroup
                             row aria-label="type"
                         >
-                            <FormControlLabel value="online" name="picked" control={<Radio />} onChange={formik.handleChange} label="En ligne" />
-                            <FormControlLabel value="realLife" name="picked" control={<Radio />}  onChange={formik.handleChange} label="En présentiel" />
+                            <FormControlLabel value="online"
+                             name="picked" 
+                            control={<Radio />} 
+                            onChange={formik.handleChange} 
+                            label="En ligne" />
+                            <FormControlLabel value="realLife"
+                             name="picked" 
+                            control={<Radio />} 
+                            onChange={formik.handleChange} 
+                            label="En présentiel" />
                             {/* <div>Picked TEST: {formik.values.picked}</div> */}
                         </RadioGroup>
                     </FormControl>
                 </div>
 
                 <div className='event__form__name'>
-                    <TextField fullWidth label="Nom de l'évènement" className="eventForm" 
-                        /* onChange='TODOHANDLE' */
+                    <TextField fullWidth label="Nom de l'évènement" className="eventForm"
                         id="eventName"
                         name="eventName"
                         type="eventName"
@@ -114,25 +125,25 @@ const EventForm = () => {
                                 id="date"
                                 name="date"
                                 format="MM/dd/yyyy"
-                                type="date"                               
+                                type="date"
                                 onChange={(newValue) => {
-                                     setValue(newValue); 
+                                    setValue(newValue);
                                 }}
-                                minDateTime={new Date( ) } ///+ 86400000 1 JOUR
+                                minDateTime={new Date()} ///+ 86400000 1 JOUR
                             />
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <TextField fullWidth label="Lieu" className="eventForm" 
-                   id="place"
+                    <TextField fullWidth label="Lieu" className="eventForm"
+                        id="place"
                         name="place"
                         type="place"
                         value={formik.values.place}
                         onChange={formik.handleChange}
                         error={formik.touched.place && Boolean(formik.errors.place)}
-                        helperText={formik.touched.place && formik.errors.place}  />
+                        helperText={formik.touched.place && formik.errors.place} />
                 </div>
 
                 <div className='event__form__select'>
@@ -140,13 +151,13 @@ const EventForm = () => {
                         <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
                         <Select
                             labelId="event_form_single_select_label"
-                            id="event_form_single_select"                           
+                            id="event_form_single_select"
                             label="categorySelect"
                             name="categorySelect"
                             value={formik.values.categorySelect}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                        
+
                         >
                             {/* //TODO ICI UNE MAP DE CATEGORIE */}
                             <MenuItem value={1}>Category1</MenuItem>
@@ -160,7 +171,10 @@ const EventForm = () => {
                         <label htmlFor="contained-button-file">
 
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                            <Button sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }} fullWidth variant="contained" component="span">
+                            <Button 
+                            sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
+                             fullWidth variant="contained" 
+                             component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
 
@@ -169,21 +183,21 @@ const EventForm = () => {
                 </div>
 
                 <div className='event__form__description'>
-                    <TextField fullWidth label="Votre description" 
-                    className="eventForm" 
-                        /* onChange='TODOHANDLE' */ 
+                    <TextField fullWidth label="Votre description"
+                        className="eventForm"
+                        /* onChange='TODOHANDLE' */
                         id="description"
                         name="description"
                         type="description"
                         value={formik.values.description}
                         onChange={formik.handleChange}
                         error={formik.touched.description && Boolean(formik.errors.description)}
-                        helperText={formik.touched.description && formik.errors.description}/>
+                        helperText={formik.touched.description && formik.errors.description} />
                 </div>
 
                 <div className='event__form__number'>
-                    <TextField fullWidth label="Nombre maximum de participant" 
-                    className="eventForm" 
+                    <TextField fullWidth label="Nombre maximum de participant"
+                        className="eventForm"
                         /* onChange='TODOHANDLE' */
                         id="numberOfPeople"
                         name="numberOfPeople"
@@ -195,7 +209,12 @@ const EventForm = () => {
                 </div>
                 <div className='event__form__buttom'>
                     <FormControl fullWidth>
-                        <Button sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} variant="contained" type="submit">Créer mon évènement</Button>
+                        <Button
+                         sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} 
+                        variant="contained"
+                         type="submit">
+                         Créer mon évènement
+                         </Button>
                     </FormControl>
                 </div>
             </form>
