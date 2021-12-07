@@ -31,9 +31,46 @@ export const setCategoriesForHome = (value ) => ({
   value, 
 });
 
+// action to change state with event list in progress on eventlist page (reducer)
 export const SET_EVENT_LIST_IN_PROGRESS = 'SET_EVENT_LIST_IN_PROGRESS';
 
 export const setEventListInProgress = (value) =>({
   type: SET_EVENT_LIST_IN_PROGRESS,
   value,
+})
+
+// action to load state with event list in progress on eventlist page (reducer)
+export const LOAD_EVENT_LIST_IN_PROGRESS = 'LOAD_EVENT_LIST_IN_PROGRESS';
+
+export const loadEventListInProgress = (value) =>({
+  type: LOAD_EVENT_LIST_IN_PROGRESS,
+  value,
+})
+
+// action to change state with archived event list on eventlist page (reducer)
+export const SET_EVENT_LIST_ARCHIVED = 'SET_EVENT_LIST_ARCHIVED';
+
+export const setEventListArchived = (value) =>({
+  type: SET_EVENT_LIST_ARCHIVED,
+  value,
+})
+
+// action to load state with archived event list on eventlist page (reducer)
+export const LOAD_EVENT_LIST_ARCHIVED = 'LOAD_EVENT_LIST_ARCHIVED';
+
+export const loadEventListArchived = (value) =>({
+  type: LOAD_EVENT_LIST_ARCHIVED,
+  value,
+})
+
+export const IN_PROGRESS = 'IN_PROGRESS';
+
+export const inProgress = () => ({
+  type: IN_PROGRESS,
+})
+
+export const ARCHIVED = 'ARCHIVED';
+
+export const archived = () => ({
+  type: ARCHIVED,
 })
