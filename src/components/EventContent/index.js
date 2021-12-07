@@ -14,7 +14,7 @@ import LinkSection from "../../components/HomePage/LinkSection";
 
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
-
+import { AvatarGroup, Avatar } from "@mui/material";
 
 import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
 
@@ -114,6 +114,18 @@ const EventContent = () => {
               </Button>
                 <p className="eventContent__detail__membersCount">
                 {eventInfoPage.event.membersCount} Participants
+
+                <AvatarGroup max={4}>
+                  {/* {{eventInfoPage.event.members}.map((member) => (
+                    <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
+                  ))} */}
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                  <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+                  <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+                </AvatarGroup>
+              
                 </p>
             </div>
           </div>
