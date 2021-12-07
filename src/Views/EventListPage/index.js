@@ -22,7 +22,7 @@ function EventListPage() {
   };
 
   const handleInProgress = () => {
-    console.log("en cours");
+    console.log("En cours");
     dispatch({ type: IN_PROGRESS });
   };
 
