@@ -5,6 +5,7 @@ import {
   LOAD_EVENTS_FOR_HOME,
   setEventForHome,
   setCategoriesForHome,
+  setCategories,
 } from "../actions/events";
 
 // link to the API in order to put only endpoints in switch case
@@ -45,15 +46,15 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_CATEGORIES: {
-      // endpoints to load 6 cateogories for home
+      // endpoints to load all cateogories in a list
       api
-        .get("/categories?limit=6", {})
+        .get("/categories?limit=6", {}) /// TODO A CHANGER URL
         .then((response) => {
           console.log(response);
-          store.dispatch(setCategoriesForHome(response.data));
+          store.dispatch(setCategories(response.data));
         })
         .catch((error) =>
-          console.log("on a une erreur sur les 6 categories de la home", error)
+          console.log("problème de chargement des catégories", error)
         );
       next(action);
       break;

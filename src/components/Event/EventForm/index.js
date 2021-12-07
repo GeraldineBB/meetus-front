@@ -64,7 +64,9 @@ const EventForm = () => {
                 .number('Entré un nombre maximum de participant ')
                 .min(2, 'Un évènement doit avoir un moins 2 participant')
                 .required('Le nombre maximum de participant est requis'),
-            /* TODO DATE ET FILE VALIDATION, TYPEOF YUP */
+
+             //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
+             
         }),
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
@@ -110,7 +112,6 @@ const EventForm = () => {
                             control={<Radio />} 
                             onChange={formik.handleChange} 
                             label="En présentiel" />
-                            {/* <div>Picked TEST: {formik.values.picked}</div> */}
                         </RadioGroup>
                     </FormControl>
                 </div>
@@ -141,7 +142,8 @@ const EventForm = () => {
                                 onChange={(newValue) => {
                                     setValue(newValue);
                                 }}
-                                minDateTime={new Date()} ///+ 86400000 1 JOUR
+                                minDateTime={new Date()} 
+                                // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimun, pas réussi encore.
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -170,21 +172,19 @@ const EventForm = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {/* //TODO ICI UNE MAP DE CATEGORIE */}
+                            {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE */}
                              {categorieList.map((category) => (
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
                        ))}
-
-                            
                             <MenuItem value={2}>Category2</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
 
+                            {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}                                
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
                         <label htmlFor="contained-button-file">
-
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
                             <Button 
                             sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
@@ -200,7 +200,6 @@ const EventForm = () => {
                 <div className='event__form__description'>
                     <TextField fullWidth label="Votre description"
                         className="eventForm"
-                        /* onChange='TODOHANDLE' */
                         id="description"
                         name="description"
                         type="description"
@@ -213,7 +212,6 @@ const EventForm = () => {
                 <div className='event__form__number'>
                     <TextField fullWidth label="Nombre maximum de participant"
                         className="eventForm"
-                        /* onChange='TODOHANDLE' */
                         id="numberOfPeople"
                         name="numberOfPeople"
                         type="numberOfPeople"

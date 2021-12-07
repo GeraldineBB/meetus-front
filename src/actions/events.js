@@ -32,9 +32,17 @@ export const setCategoriesForHome = (value ) => ({
 });
 
 // action load all categories on event form (middleware)
-export const LOAD_CATEGORIES = 'LOAD_CATEGORIESE';
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 
 export const loadCategories = () => ({
   type: LOAD_CATEGORIES,
   
+});
+
+// action to change all categories on event form (reducer)
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+export const setCategories = (value ) => ({
+  type: SET_CATEGORIES,
+  value, 
 });
