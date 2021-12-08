@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 import './style.scss';
 
@@ -13,34 +12,37 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
 
+import { useSelector, useDispatch } from "react-redux";
 
 import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
 
 
-const EventContent = () => {
+const EventContent = ({eventId}) => {
 
-    const eventInfoPage = useSelector(
-        (state) => state.events.eventInfoPage
-      );
-    
-    const loading = useSelector(
-        (state) => state.events.loading
-    ); 
+  const eventInfoPage = useSelector(
+    (state) => state.events.eventInfoPage
+    );
+  
+  const loading = useSelector(
+    (state) => state.events.loading
+  ); 
+  
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-    
-    useEffect(() => {
-      dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
-      console.log(eventInfoPage); 
+  useEffect(() => {
 
-    }, []);
+    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
+    console.log(eventInfoPage); 
 
-    if (loading) {
-        return <div>coucou</div>;
-    }
+
+  }, []);
+
+  if (loading) {
+    return <div>coucou</div>;
+  }
+
       return (
 
- 
         <div className="eventPage">
           <div className="eventContent">
             <div className="eventContent__info">
@@ -49,7 +51,7 @@ const EventContent = () => {
                     {eventInfoPage.event.title}
                     </p>
                     <p className="eventContent__info__header--date">
-                    {eventInfoPage.event.date}
+                    {new Date(eventInfoPage.event.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                     {/* <DayJS
                     format="DD / MM / YYYY"
                     {...eventInfoPage.event.date}

@@ -30,6 +30,9 @@ const theme = createTheme({
     ].join(','),
   },});
 
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+}
 
 export default function HomeCard({
   picture,
@@ -72,7 +75,7 @@ export default function HomeCard({
         </Typography>
         <Typography sx={{ mb: 1.5 }}>
           <CalendarTodayIcon />
-          {date}
+          {formatDate(date)}
         </Typography>
         <Typography sx={{ mb: 1.5}} variant="body1">
           {description}

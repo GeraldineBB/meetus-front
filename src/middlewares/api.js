@@ -51,15 +51,15 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_INFO_FOR_PAGE_EVENT:{
 
-      const state = store.getState();
-      const { events } = state;
-      const {id} = events; 
+      // const state = store.getState();
+      // const { events } = state;
+      // const {id} = events; 
       // const { eventInfoPage } = events; 
       // const { event } = eventInfoPage; 
       // const { id } = event; 
 
 
-      api.get(`/events/${id}`, {})
+      api.get(`/events/${action.eventId}`, {})
       .then((response)=> {
         console.log(response);
         store.dispatch(setInfoForEventPage(response.data)); 
