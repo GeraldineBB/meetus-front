@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
 
+
 import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
 
 
@@ -101,8 +102,9 @@ const EventContent = () => {
                 <p className="eventContent__detail__membersCount">
                 {eventInfoPage.event.membersCount} Participants
                 </p>
+                <Container maxWidth="md" sx={{ mt: 2, display: 'flex'}}>
 
-                <AvatarGroup max={4}>
+                <AvatarGroup max={3} sx={{mx: "auto"}}>
                   {/* {{eventInfoPage.event.members}.map((member) => (
                     <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
                   ))} */}
@@ -112,7 +114,8 @@ const EventContent = () => {
                   <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
                   <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
                 </AvatarGroup>
-              
+                </Container>
+
             </div>
           </div>
           <div className="eventSimilar">
