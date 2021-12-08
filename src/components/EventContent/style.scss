@@ -1,5 +1,17 @@
 @use '../../../styles/vars'; 
 
+.eventSimilar{
+
+    &__illustration {
+        display: flex; 
+        justify-content: end;
+        img{
+            max-width: 30%;
+            margin-left: 5rem;
+        }
+    }
+
+}
 
 .eventContent{
 

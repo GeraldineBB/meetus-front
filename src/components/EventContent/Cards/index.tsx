@@ -21,6 +21,10 @@ interface EventCardProps {
   id: number; 
 }
 
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+}
+
 export default function EventCard({
   picture,
   date,
@@ -31,15 +35,23 @@ export default function EventCard({
   id, 
 }: EventCardProps) {
   return (
-    <Card className="card" sx={{ mr: 3 }}>
-      <CardContent>
+    <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
+    <Card className="card" 
+      sx={{ 
+        mr: 3,
+        height: 540, 
+        display: 'flex', justifyContent: 'space-between', flexDirection: 'column'
+      }}>
+      <CardContent
+      >
         <CardMedia
           component="img"
           sizes="100"
           image={`${process.env.PUBLIC_URL}/images/${picture}`}
           alt="Paella dish"
         />
-        <Typography variant="h5" component="div">
+
+        <Typography sx={{ mt: 1.5 }} variant="h5" component="div">
           {title}
         </Typography>
         <Typography color="text.primary">
@@ -47,10 +59,10 @@ export default function EventCard({
           {city}
         </Typography>
         <Typography sx={{ mb: 1.5 }}>
-          <CalendarTodayIcon />
-          {date}
+          <CalendarTodayIcon sx={{ mr: 1.5 }}/>
+          {formatDate(date)}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} variant="body1">
+        <Typography sx={{ mb: 0.3, height: 100}} variant="body1">
           {description}
         </Typography>
         <Typography color="text.primary">
@@ -60,22 +72,24 @@ export default function EventCard({
       <CardActions>
       
         <Button
-          size="small"
-          variant="contained"
-          className="card__button"
-          sx={{
-            width: "100%",
-            backgroundColor: "#F36B7F",
-            "&:hover": { backgroundColor: "#F8CF61" },
-          }}
-          >
-          <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
-          En savoir plus
-          </Link>
-      
-        </Button>
+        size="small"
+        variant="contained"
+        className="card__button"
+        sx={{
+          width: "100%",
+          backgroundColor: "#F36B7F",
+          "&:hover": { backgroundColor: "#F8CF61" },
+        }}
+        >
+        <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
+        En savoir plus
+        </Link>
 
+      </Button>
+      
       </CardActions>
+
     </Card>
+    </Link>
   );
 }

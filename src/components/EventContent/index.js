@@ -37,6 +37,7 @@ const EventContent = ({eventId}) => {
 
   }, []);
 
+
   if (loading) {
     return <div>coucou</div>;
   }
@@ -77,10 +78,13 @@ const EventContent = ({eventId}) => {
                     <img alt="event-illu" src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}/>
                 </div>
                 <p className="eventContent__detail__date">
-                {eventInfoPage.event.date}
+                {new Date(eventInfoPage.event.date).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'numeric', day: 'numeric'})}                  
                 </p>
                 <p className="eventContent__detail__hour">
-                {eventInfoPage.event.date}    
+                {/* {new Date(eventInfoPage.event.date).toLocaleDateString('fr-FR', { hour: 'numeric', minute: 'numeric' })}   */}
+                {("0" + new Date(eventInfoPage.event.date).getHours()).slice(-2)} 
+                H 
+                {("0" + new Date(eventInfoPage.event.date).getMinutes()).slice(-2)}
                 </p>
                 <p className="eventContent__detail__adress">
                   {eventInfoPage.event.address}
@@ -104,6 +108,7 @@ const EventContent = ({eventId}) => {
                 <p className="eventContent__detail__membersCount">
                 {eventInfoPage.event.membersCount} Participants
                 </p>
+
                 <Container maxWidth="md" sx={{ mt: 2, display: 'flex'}}>
 
                 <AvatarGroup max={3} sx={{mx: "auto"}}>
@@ -125,7 +130,7 @@ const EventContent = ({eventId}) => {
            title={"Evènements similaires"}
            buttonName={"Voir tous les évènements"}
           />
-          <Container maxWidth="lg" sx={{ mt: 2, mb: 8}}>
+          <Container maxWidth="lg" sx={{ mt: 2}}>
             <Grid container>
               {eventInfoPage.recommendedEvents.map((event) => (
                 <Grid item md={4}  key={event.id}>
@@ -133,7 +138,11 @@ const EventContent = ({eventId}) => {
                 </Grid>
               ))}
             </Grid>
+            <div className="eventSimilar__illustration">
+            <img alt="event-illu" src={`${process.env.PUBLIC_URL}/illustrations/spring-illu.svg`}/>
+          </div>
           </Container>
+
           </div>
         </div>
 

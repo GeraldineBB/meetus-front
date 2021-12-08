@@ -44,8 +44,9 @@ export default function HomeCard({
   id, 
 }: HomeCardProps) {
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
 
+    <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
     <Card className="card" 
       sx={{ 
         mr: 3,
@@ -53,12 +54,6 @@ export default function HomeCard({
         display: 'flex', justifyContent: 'space-between', flexDirection: 'column'
       }}>
       <CardContent
-      sx={{ 
-        height: 500, 
-        display: 'flex', 
-        justifyContent: 'space-between',
-        flexDirection: 'column'
-      }}
       >
         <CardMedia
           component="img"
@@ -66,6 +61,7 @@ export default function HomeCard({
           image={`${process.env.PUBLIC_URL}/images/${picture}`}
           alt="Paella dish"
         />
+
         <Typography sx={{ mt: 1.5 }} variant="h5" component="div">
           {title}
         </Typography>
@@ -74,10 +70,10 @@ export default function HomeCard({
           {city}
         </Typography>
         <Typography sx={{ mb: 1.5 }}>
-          <CalendarTodayIcon />
+          <CalendarTodayIcon sx={{ mr: 1.5 }}/>
           {formatDate(date)}
         </Typography>
-        <Typography sx={{ mb: 1.5}} variant="body1">
+        <Typography sx={{ mb: 0.3, height: 100}} variant="body1">
           {description}
         </Typography>
         <Typography color="text.primary">
@@ -103,8 +99,11 @@ export default function HomeCard({
       </Button>
       
       </CardActions>
+
     </Card>
-    </ThemeProvider>
+    </Link>
+   
+    // </ThemeProvider>
 
   );
 }
