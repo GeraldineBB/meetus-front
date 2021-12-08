@@ -12,8 +12,6 @@
         height: 30%;
         text-align: center;
 
-        // margin: auto;
-
         img{
             max-width: 90%;
         }
@@ -26,7 +24,6 @@
     &__detail{
         width: 90%;
         text-align: center;
-        // margin: auto;
         img{
             max-width: 30%;
         }
@@ -36,13 +33,10 @@
     @media (min-width: 768px) {
 
         display: flex; 
-        // flex-direction: row;
-        // justify-content: space-between;
 
         align-items: flex-start;
         flex-wrap: nowrap;
         width: 95%;
-        // margin-left: 5em;
         margin-top: 4em; 
         text-align: left;
         background-color: #f3eeee;
@@ -65,7 +59,7 @@
             }
 
             &__header--date{
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
 
 
@@ -75,6 +69,7 @@
 
             &__description{
                 max-width: 60%;
+                font-size: 1.2rem; 
             }
 
         }

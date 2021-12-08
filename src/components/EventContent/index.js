@@ -37,7 +37,6 @@ const EventContent = () => {
 
     }, []);
 
-
     if (loading) {
         return <div>coucou</div>;
     }
@@ -53,13 +52,12 @@ const EventContent = () => {
                     {eventInfoPage.event.title}
                     </p>
                     <p className="eventContent__info__header--date">
-                      <DayJS
-                      format="dddd D MMMM YYYY"
-                      locale="fr"
-                      {...eventInfoPage.event.date}
-                      >
-                      </DayJS>
-                      </p>
+                    <DayJS
+                    format="DD / MM / YYYY"
+                    {...eventInfoPage.event.date}
+                    >
+                    </DayJS>  
+                    </p>
 
                     <p className="eventContent__info__header--author">
                       Crée par {eventInfoPage.event.author.fullName}
@@ -88,11 +86,16 @@ const EventContent = () => {
                 </p>
                 <p className="eventContent__detail__hour">
                   <DayJS
-                  format="hh mm"
-                  locale="fr"
+                  format="HH"
                   {...eventInfoPage.event.date}
                   >
-                  </DayJS>   
+                  </DayJS> 
+                  H
+                  <DayJS
+                  format="mm"
+                  {...eventInfoPage.event.date}
+                  >
+                  </DayJS>     
                 </p>
                 <p className="eventContent__detail__adress">
                   {eventInfoPage.event.address}
@@ -112,6 +115,7 @@ const EventContent = () => {
               >
                Rejoindre
               </Button>
+              
                 <p className="eventContent__detail__membersCount">
                 {eventInfoPage.event.membersCount} Participants
 
