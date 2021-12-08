@@ -30,8 +30,8 @@ const EventContent = () => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
-    console.log(eventInfoPage); 
+      dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT });
+      console.log(eventInfoPage); 
 
     }, []);
 

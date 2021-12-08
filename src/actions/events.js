@@ -31,6 +31,15 @@ export const setCategoriesForHome = (value) => ({
   value, 
 });
 
+// action to set id of the event in state
+export const SET_ID_EVENT = 'SET_ID_EVENT';
+
+export const setIdEvent = (idValue) => ({
+  type: SET_ID_EVENT,
+  idValue
+});
+
+
 // action to load event info on eventPage
 export const LOAD_INFO_FOR_PAGE_EVENT = 'LOAD_INFO_FOR_PAGE_EVENT';
 

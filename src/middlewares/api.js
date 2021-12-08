@@ -10,7 +10,6 @@ import {
 } from "../actions/events";
 
 
-
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
   // baseURL: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1", 
@@ -52,27 +51,18 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_INFO_FOR_PAGE_EVENT:{
 
-      // const state = store.getState();
-      // const { events } = state;
+      const state = store.getState();
+      const { events } = state;
+      const {id} = events; 
       // const { eventInfoPage } = events; 
       // const { event } = eventInfoPage; 
       // const { id } = event; 
 
-      api.get("/events/5", {
-        // params: {
-        //   id : 5, 
-        // }
-      })
+
+      api.get(`/events/${id}`, {})
       .then((response)=> {
         console.log(response);
         store.dispatch(setInfoForEventPage(response.data)); 
-        // console.log(events); 
-
-        // console.log(eventInfoPage); 
-  
-        // console.log(event); 
-  
-        // console.log(id); 
   
       })
       .catch((error) =>

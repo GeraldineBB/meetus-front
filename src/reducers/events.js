@@ -1,10 +1,11 @@
-import { SET_EVENT_FOR_HOME, SET_INFO_FOR_EVENTPAGE } from "../actions/events.js";
+import { SET_EVENT_FOR_HOME, SET_INFO_FOR_EVENTPAGE, SET_ID_EVENT } from "../actions/events.js";
 // import eventsData from '../data/eventsData.js';
 
 export const initialState = {
   homeEventList: [],
   eventInfoPage: [], 
   loading: true, 
+  id: null, 
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -19,6 +20,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state, 
         loading: false, 
         eventInfoPage: action.value, 
+      }
+    case SET_ID_EVENT:
+      return {
+        ...state, 
+        id: action.value, 
       }
     default:
       return state;
