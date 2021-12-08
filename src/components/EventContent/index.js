@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import './style.scss';
 
 import Button from "@mui/material/Button";
-// import {format} from "date-fns"; 
-import DayJS from "react-dayjs";
-// import 'dayjs/locale/te'; 
-import "dayjs/locale/fr";
+
 
 import Cards from "./Cards";
 import LinkSection from "../../components/HomePage/LinkSection";
@@ -40,7 +37,6 @@ const EventContent = () => {
     if (loading) {
         return <div>coucou</div>;
     }
-
       return (
 
  
@@ -52,11 +48,12 @@ const EventContent = () => {
                     {eventInfoPage.event.title}
                     </p>
                     <p className="eventContent__info__header--date">
-                    <DayJS
+                    {eventInfoPage.event.date}
+                    {/* <DayJS
                     format="DD / MM / YYYY"
                     {...eventInfoPage.event.date}
                     >
-                    </DayJS>  
+                    </DayJS>   */}
                     </p>
 
                     <p className="eventContent__info__header--author">
@@ -64,7 +61,7 @@ const EventContent = () => {
                     </p>
                 </div>
                 <div className="eventContent__info__picture">
-                    <img src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}/>
+                    <img alt={eventInfoPage.event.picture} src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}/>
                 </div>
                 <div className="eventContent__info__description">
                     <p className="eventContent__info__description--text">
@@ -74,28 +71,13 @@ const EventContent = () => {
             </div>
             <div className="eventContent__detail">
                 <div className="eventContent__detail__map">
-                    <img src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}/>
+                    <img alt="event-illu" src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}/>
                 </div>
                 <p className="eventContent__detail__date">
-                  <DayJS
-                  format="DD / MM / YYYY"
-                  locale="fr"
-                  {...eventInfoPage.event.date}
-                  >
-                  </DayJS>                
+                {eventInfoPage.event.date}
                 </p>
                 <p className="eventContent__detail__hour">
-                  <DayJS
-                  format="HH"
-                  {...eventInfoPage.event.date}
-                  >
-                  </DayJS> 
-                  H
-                  <DayJS
-                  format="mm"
-                  {...eventInfoPage.event.date}
-                  >
-                  </DayJS>     
+                {eventInfoPage.event.date}    
                 </p>
                 <p className="eventContent__detail__adress">
                   {eventInfoPage.event.address}
@@ -118,6 +100,7 @@ const EventContent = () => {
               
                 <p className="eventContent__detail__membersCount">
                 {eventInfoPage.event.membersCount} Participants
+                </p>
 
                 <AvatarGroup max={4}>
                   {/* {{eventInfoPage.event.members}.map((member) => (
@@ -130,7 +113,6 @@ const EventContent = () => {
                   <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
                 </AvatarGroup>
               
-                </p>
             </div>
           </div>
           <div className="eventSimilar">
@@ -141,7 +123,7 @@ const EventContent = () => {
           <Container maxWidth="lg" sx={{ mt: 2, mb: 8, ml: 6 }}>
             <Grid container>
               {eventInfoPage.recommendedEvents.map((event) => (
-                <Grid item md={4}>
+                <Grid item md={4}  key={event.id}>
                   <Cards key={event.id} {...event} />
                 </Grid>
               ))}

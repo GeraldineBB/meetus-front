@@ -8,9 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Grid from "@mui/material/Grid";
-import { Box } from "@mui/system";
 import { Container } from '@mui/material';
-import { useSelector } from 'react-redux';
 
 const CardPresentation = () => {
 

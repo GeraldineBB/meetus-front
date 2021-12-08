@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 import axios from "axios";
 import {
   LOAD_CATEGORIES_FOR_HOME,
