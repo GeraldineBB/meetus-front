@@ -123,7 +123,7 @@ const EventContent = () => {
            title={"Evènements similaires"}
            buttonName={"Voir tous les évènements"}
           />
-          <Container maxWidth="lg" sx={{ mt: 2, mb: 8, ml: 6 }}>
+          <Container maxWidth="lg" sx={{ mt: 2, mb: 8}}>
             <Grid container>
               {eventInfoPage.recommendedEvents.map((event) => (
                 <Grid item md={4}  key={event.id}>
