@@ -58,22 +58,23 @@ export default function EventCard({
         </Typography>
       </CardContent>
       <CardActions>
-      <Link to={`/events/${id}`}>
       
         <Button
-        size="small"
-        variant="contained"
-        className="card__button"
-        sx={{
-          width: "100%",
-          backgroundColor: "#F36B7F",
-          "&:hover": { backgroundColor: "#F8CF61" },
-        }}
-      >
-        En savoir plus
-      </Button>
-      </Link>
+          size="small"
+          variant="contained"
+          className="card__button"
+          sx={{
+            width: "100%",
+            backgroundColor: "#F36B7F",
+            "&:hover": { backgroundColor: "#F8CF61" },
+          }}
+          >
+          <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
+          En savoir plus
+          </Link>
       
+        </Button>
+
       </CardActions>
     </Card>
   );
