@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
 import { useState } from "react";
+import { FormError, FormSuccess } from "./tools";
 
 
 import { useFormik } from 'formik';
@@ -63,8 +64,7 @@ export function SignUpForm(props) {
  
        const { confirmPassword, ...data } = values; 
 
-
-        axios({
+      const response = await axios({
             headers: { "Authorization": `Bearer ${tokenStr}` } ,
              data: data,
              url: webApiUrl,
@@ -80,14 +80,14 @@ export function SignUpForm(props) {
             console.log(erreur);
         }); 
 
-   /*  if (response && response.data) {
+     if (response && response.data) {
 
           setError(null);
-        setSuccess(response.data.message);  
+        setSuccess(response.data.message);  // TODO MSG SUCCESS CREATE OR NOT ET REDIRECTION PAGE LOGIN
         
         console.log(response);
         formik.resetForm();
-    }  */
+    }  
 
 }; 
 
@@ -115,6 +115,8 @@ export function SignUpForm(props) {
 
       <h2> Créer un compte </h2>
 
+      {!error && <FormSuccess>{success ? success : ""}</FormSuccess>}
+      {!success && <FormError>{error ? error : ""}</FormError>}
       <form onSubmit={formik.handleSubmit} >
 
 
