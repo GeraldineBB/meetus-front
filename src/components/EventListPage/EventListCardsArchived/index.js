@@ -33,6 +33,8 @@ export default function EventListCardsArchived({
     (state) => state.events.eventPageListArchived
   );
 
+  const currentInput = useSelector(state => state.events.currentSearchBar)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,7 +42,14 @@ export default function EventListCardsArchived({
   }, []);
   return (
     <Grid container>
-      {eventList.map((event) => (
+      {eventList.filter((event) => {
+        if (currentInput === ''){
+          console.log(event)
+          return event
+        } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())){
+          return event
+        }
+      }).map((event) => (
         <Grid
           item
           md={12}

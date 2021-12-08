@@ -3,6 +3,7 @@ import {
   ARCHIVED,
   inProgress,
   IN_PROGRESS,
+  SEARCH_BAR_EVENT_LIST,
   SET_EVENT_FOR_HOME,
   SET_EVENT_LIST_ARCHIVED,
   SET_EVENT_LIST_IN_PROGRESS,
@@ -15,6 +16,7 @@ export const initialState = {
   eventPageListArchived: [],
   inProgress: true,
   archived: false,
+  currentSearchBar: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -45,6 +47,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         archived: true,
         inProgress: false,
+      };
+    case SEARCH_BAR_EVENT_LIST:
+      return{
+        ...state,
+        currentSearchBar: action.value
       };
     default:
       return state;

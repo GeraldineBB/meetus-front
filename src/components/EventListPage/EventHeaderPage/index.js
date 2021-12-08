@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useSelector, useDispatch } from "react-redux";
+import { searchBarEventList, SEARCH_BAR_EVENT_LIST } from "../../../actions/events";
+
 
 function EventHeaderPage({
   handleArchived,
@@ -14,6 +17,13 @@ function EventHeaderPage({
 }) {
   const underlineInProgress = inProgress ? "underlined" : "";
   const underlineArchived = archived ? "underlined" : "";
+  const dispatch = useDispatch()
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const value = event.target.value
+    dispatch({ type: SEARCH_BAR_EVENT_LIST, value})
+  }
 
   return (
     <div className="eventHeaderPage">
@@ -51,7 +61,7 @@ function EventHeaderPage({
           noValidate
           autoComplete="off"
         >
-          <Input placeholder="Rechercher" />
+          <Input onChange={handleSearch} placeholder="Rechercher" />
         </Box>
         <h3>Evènements suggérés pour vous</h3>
         <Stack direction="row" spacing={1}>

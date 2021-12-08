@@ -32,6 +32,7 @@ export default function EventListCardsInProgress({
   const eventList = useSelector(
     (state) => state.events.eventPageListInProgress
   );
+  const currentInput = useSelector(state => state.events.currentSearchBar)
 
   const dispatch = useDispatch();
 
@@ -40,7 +41,14 @@ export default function EventListCardsInProgress({
   }, []);
   return (
     <Grid container>
-      {eventList.map((event) => (
+      {eventList.filter((event) => {
+        if (currentInput === ''){
+          console.log(event)
+          return event
+        } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())){
+          return event
+        }
+      }).map((event) => (
         <Grid
           item
           md={12}
@@ -111,7 +119,7 @@ export default function EventListCardsInProgress({
                       sx={{ ml: "2em" }}
                     >
                       <LocationOnIcon />
-                      event.city
+                      {event.city}
                     </Typography>
                   </Typography>
                 </div>

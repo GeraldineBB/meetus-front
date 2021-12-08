@@ -74,3 +74,10 @@ export const ARCHIVED = 'ARCHIVED';
 export const archived = () => ({
   type: ARCHIVED,
 })
+
+export const SEARCH_BAR_EVENT_LIST = 'SEARCH_BAR_EVENT_LIST';
+
+export const searchBarEventList = (value) => ({
+  type: SEARCH_BAR_EVENT_LIST,
+  value
+})

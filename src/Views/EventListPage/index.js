@@ -25,22 +25,6 @@ function EventListPage() {
     console.log("En cours");
     dispatch({ type: IN_PROGRESS });
   };
-
-  if (inProgress === true) {
-    return (
-      <div className="eventListPage">
-        <Header />
-        <EventHeaderPage
-          handleArchived={handleArchived}
-          handleInProgress={handleInProgress}
-          inProgress={inProgress}
-          archived={archived}
-        />
-        <EventListCardsInProgress />
-        <Footer />
-      </div>
-    );
-  }
   return (
     <div className="eventListPage">
       <Header />
@@ -50,7 +34,7 @@ function EventListPage() {
         inProgress={inProgress}
         archived={archived}
       />
-      <EventListCardsArchived />
+      {inProgress ? <EventListCardsInProgress /> : <EventListCardsArchived />}
       <Footer />
     </div>
   );
