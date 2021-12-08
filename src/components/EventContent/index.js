@@ -38,6 +38,7 @@ const EventContent = ({eventId}) => {
   }, []);
 
 
+
   if (loading) {
     return <div>coucou</div>;
   }
@@ -61,7 +62,7 @@ const EventContent = ({eventId}) => {
                     </p>
 
                     <p className="eventContent__info__header--author">
-                      Crée par {eventInfoPage.event.author.fullName}
+                      crée par {eventInfoPage.event.author.fullName}
                     </p>
                 </div>
                 <div className="eventContent__info__picture">
