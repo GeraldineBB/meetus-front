@@ -29,7 +29,7 @@ import { LOAD_CATEGORIES } from "../../../actions/events";
 
 
 
-const EventForm = () => {
+const EventEdit = () => {
 
     const Input = styled('input')({
         display: 'none',
@@ -47,17 +47,18 @@ const EventForm = () => {
     const formik = useFormik({
 
 
-
+                //TODO RECUP EVENT DATA SELON ID
+                
         initialValues: {
             title: '',
             place: '',
             description: '',
             maxMenbers: '',
-            isOnline: '', //TODO VOIR AVEC BACK 
+            isOnline: '', 
             category: '',
             date: new Date(),
-            author:'', //TODO VOIR AVEC BACK 
-            picture: '', //TODO VOIR AVEC BACK 
+            author:'', 
+            picture: '', 
         },
         validationSchema: yup.object({
             eventName: yup
@@ -77,13 +78,13 @@ const EventForm = () => {
                 .min(2, 'Un évènement doit avoir un moins 2 participant')
                 .required('Le nombre maximum de participant est requis'),
 
-             //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
+              
              
         }),
 
 
 
-            //TODO VOIR SI IL FAUT LA SORTIR DU USEFORMIK OU NON
+            
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
             const {  ...data } = values;
@@ -129,9 +130,9 @@ const EventForm = () => {
         <div>
 
 
-            <h2> Créer votre évènement </h2>
+            <h2> Modifier votre évènement </h2>
 
-            <form onSubmit={formik.handleSubmit} >
+            <form onSubmit={formik.handleSubmit} /*method="POST"*/>
 
                 <div className='event__form__if'>
                     <FormControl component="fieldset">
@@ -180,7 +181,7 @@ const EventForm = () => {
                                     setValue(newValue);
                                 }}
                                 minDateTime={new Date()} 
-                                // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
+                                
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -209,7 +210,7 @@ const EventForm = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {/*  //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id*/}
+                            
                             {/*  {categorieList.map((category) => (
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
                        ))} } */}
@@ -218,7 +219,7 @@ const EventForm = () => {
                     </FormControl>
                 </div>
 
-                            {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}                                
+                                                           
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
                         <label htmlFor="contained-button-file">
@@ -263,7 +264,7 @@ const EventForm = () => {
                          sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} 
                         variant="contained"
                          type="submit">
-                         Créer mon évènement
+                         Modifer mon évènement
                          </Button>
                     </FormControl>
                 </div>

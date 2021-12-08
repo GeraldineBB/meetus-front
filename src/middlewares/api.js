@@ -48,7 +48,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all cateogories in a list
       api
-        .get("/categories?limit=6", {}) /// TODO A CHANGER URL
+        .get("/categories", {}) 
         .then((response) => {
           console.log(response);
           store.dispatch(setCategories(response.data));
