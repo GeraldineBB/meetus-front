@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "../../Views/Login";
 import HomePage from "../../Views/HomePage";
-import Event from "../Event";
-import 
+import { SignUpForm } from "../Event/Signup";
+import EventForm from "../Event/EventForm";
+import EventEdit from "../Event/EventEdit";
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/create" element={<Event />} />
-        <Route path="/create" element={<EventEdit />} />
-        <Route path="/create" element={<Event />} />
+        <Route path="/create" element={<EventForm />} />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/edit" element={<EventEdit />} />
       </Routes>
     </div>
   );

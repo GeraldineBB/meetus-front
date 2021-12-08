@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
+import { useState } from "react";
 
 
 import { useFormik } from 'formik';
@@ -20,11 +21,11 @@ import axios from "axios"
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 const validationSchema = yup.object({
-  fullName: yup
+  firstname: yup
     .string()
     .min(3, "Entrez votre prénom s'il vous plait")
     .required("Votre prénom est requis"),
-    fullName: yup
+    lastname: yup
     .string()
     .min(3, "Entrez votre nom s'il vous plait")
     .required("Votre nom est requis"),
@@ -45,38 +46,50 @@ const validationSchema = yup.object({
 });
 
 
-let webApiUrl = 'http://localhost:8080/api/v1/eusers';
+let webApiUrl = 'http://localhost:8080/api/v1/users';
 let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
-axios.post(webApiUrl, { headers: { "Authorization": `Bearer ${tokenStr}` } });
+ 
 
 
 
 export function SignUpForm(props) {
-  /* 
+  
   const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null); */
-
+  const [error, setError] = useState(null); 
+ 
+   
   const onSubmit = async (values) => {
-    alert(JSON.stringify(values, null, 2));
-    const { confirmPassword, ...data } = values;
+    alert(JSON.stringify(values, null, 2)); 
+ 
+       const { confirmPassword, ...data } = values; 
 
 
-    const response = await axios
-      .post(webApiUrl, { headers: { "Authorization": `Bearer ${tokenStr}` } }, data)
-      .catch((err) => {
-        /* if (err && err.response)  setError(err.response.data.message);
-        setSuccess(null); */
-      });
+        axios({
+            headers: { "Authorization": `Bearer ${tokenStr}` } ,
+             data: data,
+             url: webApiUrl,
+             method: 'post',
 
-    if (response && response.data) {
-      /*setError(null);
-      setSuccess(response.data.message);*/
-      formik.resetForm();
-    }
+        })
+        .then(function (reponse) {
+            //On traite la suite une fois la réponse obtenue 
+            console.log(reponse);
+        })
+        .catch(function (erreur) {
+            //On traite ici les erreurs éventuellement survenues
+            console.log(erreur);
+        }); 
 
+   /*  if (response && response.data) {
 
+          setError(null);
+        setSuccess(response.data.message);  
+        
+        console.log(response);
+        formik.resetForm();
+    }  */
 
-  };
+}; 
 
   const formik = useFormik({
     initialValues: {
@@ -91,7 +104,8 @@ export function SignUpForm(props) {
     validationSchema: validationSchema,
   });
 
-  console.log("Error", /* error */);
+
+  console.log("Error: ", formik.errors); 
 
   return (
 
@@ -162,7 +176,7 @@ export function SignUpForm(props) {
             className="confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
-            type="confirmPassword"
+            type="password"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}

@@ -21,11 +21,11 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+ 
+import axios from "axios"; 
 
-import axios from "axios";
 
-
-import { LOAD_CATEGORIES } from "../../../actions/events";
+import { LOAD_CATEGORIES } from "../../../actions/events"; 
 
 
 
@@ -34,32 +34,56 @@ const EventForm = () => {
     const Input = styled('input')({
         display: 'none',
     });
+    const [value, setValue] = React.useState(new Date());
+    let webApiUrl = 'http://localhost:8080/api/v1/events';
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
+    
+    const categorieList = useSelector(
+        (state) => state.categories.categorieList
+    );
+ 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: LOAD_CATEGORIES });
+    }, []);
 
 
+     
+    const onSubmit = async (values) => {
+        alert(JSON.stringify(values, null, 2)); 
+
+           const { ...data } = values; 
 
 
-        let webApiUrl = 'http://localhost:8080/api/v1/events';
-        let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
-        axios.post(webApiUrl, { headers: {"Authorization" : `Bearer ${tokenStr}`} });
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` } ,
+                 data: data,
+                 url: webApiUrl,
+                 method: 'post',
 
+            })
+            .then(function (reponse) {
+                //On traite la suite une fois la réponse obtenue 
+                console.log(reponse);
+            })
+            .catch(function (erreur) {
+                //On traite ici les erreurs éventuellement survenues
+                console.log(erreur);
+            });
 
+       /*  if (response && response.data) {
 
-    const formik = useFormik({
+              setError(null);
+            setSuccess(response.data.message);  
+            
+            console.log(response);
+            formik.resetForm();
+        }  */
+  
+    }; 
 
-
-
-        initialValues: {
-            title: '',
-            place: '',
-            description: '',
-            maxMenbers: '',
-            isOnline: '', //TODO VOIR AVEC BACK 
-            category: '',
-            date: new Date(),
-            author:'', //TODO VOIR AVEC BACK 
-            picture: '', //TODO VOIR AVEC BACK 
-        },
-        validationSchema: yup.object({
+ const validationSchema = yup.object({
             eventName: yup
                 .string('Entré le nom de l\'évènement')
                 .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
@@ -77,51 +101,34 @@ const EventForm = () => {
                 .min(2, 'Un évènement doit avoir un moins 2 participant')
                 .required('Le nombre maximum de participant est requis'),
 
-             //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
-             
-        }),
+            //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
+
+        });
 
 
-
-            //TODO VOIR SI IL FAUT LA SORTIR DU USEFORMIK OU NON
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-            const {  ...data } = values;
-
-        const response = await axios
-          .post(webApiUrl, { headers: {"Authorization" : `Bearer ${tokenStr}`} }, data)
-          .catch((err) => {
-            if (err && err.response) setError(err.response.data.message);
-            setSuccess(null);
+        const formik = useFormik({
+            initialValues: {
+              title: '',
+                place: '',
+                description: '',
+                maxMenbers: '',
+                isOnline: '', //TODO VOIR AVEC BACK 
+                category: '',
+                date: new Date (),
+                author: '', //TODO VOIR AVEC BACK 
+                picture: '', //TODO VOIR AVEC BACK 
+            },
+            validationSchema: validationSchema,
+            onSubmit,
           });
-    
-        if (response && response.data) {
-          setError(null);
-          setSuccess(response.data.message);
-          formik.resetForm();
-        }
+       
+
+            
 
 
-        },
-    });
 
-    
+    console.log("Error: ", formik.errors); 
 
-    const categorieList = useSelector(
-        (state) => state.categories.categorieList
-      );
-    
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        dispatch({ type: LOAD_CATEGORIES });
-      }, []);
-
-
-    const [value, setValue] = React.useState(new Date());
-
-
-    console.log("Error: ", formik.errors);
 
 
     return (
@@ -140,15 +147,15 @@ const EventForm = () => {
                             row aria-label="type"
                         >
                             <FormControlLabel value="online"
-                             name="picked" 
-                            control={<Radio />} 
-                            onChange={formik.handleChange} 
-                            label="En ligne" />
+                                name="picked"
+                                control={<Radio />}
+                                onChange={formik.handleChange}
+                                label="En ligne" />
                             <FormControlLabel value="realLife"
-                             name="picked" 
-                            control={<Radio />} 
-                            onChange={formik.handleChange} 
-                            label="En présentiel" />
+                                name="picked"
+                                control={<Radio />}
+                                onChange={formik.handleChange}
+                                label="En présentiel" />
                         </RadioGroup>
                     </FormControl>
                 </div>
@@ -179,8 +186,8 @@ const EventForm = () => {
                                 onChange={(newValue) => {
                                     setValue(newValue);
                                 }}
-                                minDateTime={new Date()} 
-                                // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
+                                minDateTime={new Date()}
+                            // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
                             />
                         </LocalizationProvider>
                     </FormControl>
@@ -196,7 +203,7 @@ const EventForm = () => {
                         error={formik.touched.place && Boolean(formik.errors.place)}
                         helperText={formik.touched.place && formik.errors.place} />
                 </div>
-                
+
                 <div className='event__form__select'>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
@@ -214,19 +221,20 @@ const EventForm = () => {
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
                        ))} } */}
                             <MenuItem value={2}>Category2</MenuItem>
+                            <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
 
-                            {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}                                
+                {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
                         <label htmlFor="contained-button-file">
                             <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                            <Button 
-                            sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
-                             fullWidth variant="contained" 
-                             component="span">
+                            <Button
+                                sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
+                                fullWidth variant="contained"
+                                component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
 
@@ -260,11 +268,11 @@ const EventForm = () => {
                 <div className='event__form__buttom'>
                     <FormControl fullWidth>
                         <Button
-                         sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }} 
-                        variant="contained"
-                         type="submit">
-                         Créer mon évènement
-                         </Button>
+                            sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
+                            variant="contained"
+                            type="submit">
+                            Créer mon évènement
+                        </Button>
                     </FormControl>
                 </div>
             </form>
