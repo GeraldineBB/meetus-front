@@ -20,7 +20,7 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <CssBaseline />
           <App />
-        </ThemeProvider>,
+        </ThemeProvider>
       </Provider>
     </React.StrictMode>
   </BrowserRouter>,
