@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import "./style.scss";
-
-import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 interface LinkSectionProps {
   title: string;
@@ -10,9 +10,9 @@ interface LinkSectionProps {
 const LinkSection = ({ title, buttonName }: LinkSectionProps) => (
   <div className="linkSection">
     <h2 className="linkSection__title">{title}</h2>
-    <a href="#" className="linkSection__buttonName">
+    <NavLink to="/eventList"><a className="linkSection__buttonName">
       {buttonName}
-    </a>
+    </a></NavLink>
   </div>
 );
 

@@ -1,11 +1,8 @@
-import React from "react";
 import CardPresentation from "./CardPresentation";
 import "./style.scss";
 import { NavLink } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
-import { Box } from "@mui/system";
-import { Container } from "@mui/material";
 import Button from "@mui/material/Button";
 
 const HowIsWorking = () => {

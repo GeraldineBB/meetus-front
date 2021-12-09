@@ -20,13 +20,14 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES_FOR_HOME });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container maxWidth="md" sx={{ mt: 6, mb: 8 }}>
       <Grid container spacing={4}>
         {homeCategorieList.map((category) => (
-          <Grid item md={4}>
+          <Grid item md={4}
+          key={category.id} >
             <Category
               key={category.id}
               name={category.name}

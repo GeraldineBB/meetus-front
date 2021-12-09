@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import EventForm from "./EventForm";
-import Header from "../Header";
+import Header from "../../components/Header";
 import "./style.scss";
 
 
