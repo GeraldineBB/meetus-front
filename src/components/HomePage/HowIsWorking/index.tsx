@@ -1,6 +1,7 @@
 import React from "react";
 import CardPresentation from "./CardPresentation";
 import "./style.scss";
+import { NavLink } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
@@ -22,6 +23,7 @@ const HowIsWorking = () => {
           alignItems="center"
         >
           <Grid>
+          <NavLink to="/create" style={{ textDecoration: "none" }}>
             <Button
               sx={{
                 backgroundColor: "#F36B7F",
@@ -32,6 +34,7 @@ const HowIsWorking = () => {
             >
               Créer un évènement
             </Button>
+            </NavLink>
           </Grid>
         </Grid>
       </div>
