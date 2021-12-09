@@ -11,12 +11,7 @@ import { CardMedia } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
-import { ThemeProvider } from '@material-ui/core/styles';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-
-import theme from '../../../../theme';
-
-interface HomeCardProps {
+interface EventCardProps {
   picture: string;
   date: string;
   city: string;
@@ -26,12 +21,11 @@ interface HomeCardProps {
   id: number; 
 }
 
-
 function formatDate(value: string) {
   return new Date(value).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-export default function HomeCard({
+export default function EventCard({
   picture,
   date,
   city,
@@ -39,13 +33,8 @@ export default function HomeCard({
   title,
   description,
   id, 
-}: HomeCardProps) {
+}: EventCardProps) {
   return (
-
-    <ThemeProvider theme={theme}>
-
-    {/* <CssBaseline /> */}
-
     <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
     <Card className="card" 
       sx={{ 
@@ -102,8 +91,5 @@ export default function HomeCard({
 
     </Card>
     </Link>
-    </ThemeProvider>
-
-
   );
 }

@@ -5,13 +5,22 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+
 import store from "../src/store";
+
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import theme from './theme';
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+          <App />
+        </ThemeProvider>,
       </Provider>
     </React.StrictMode>
   </BrowserRouter>,

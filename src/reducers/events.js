@@ -9,8 +9,8 @@ import {
   SET_EVENT_LIST_ARCHIVED,
   SET_EVENT_LIST_IN_PROGRESS,
   SET_SELECT_CATEGORIES_EVENT_LIST,
+  SET_INFO_FOR_EVENTPAGE,
 } from "../actions/events.js";
-// import eventsData from '../data/eventsData.js';
 
 export const initialState = {
   homeEventList: [],
@@ -23,6 +23,8 @@ export const initialState = {
   selectCategoriesEventList: [],
   selectCategoriesEventListIsOpen: false,
   selectCategoriesEventListIsClose: true,
+  eventInfoPage: [], 
+  loading: true, 
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -81,6 +83,12 @@ const reducer = (state = initialState, action = {}) => {
           ...state,
           currentSelectCategoriesEventList: action.value,
         };
+    case SET_INFO_FOR_EVENTPAGE:
+      return {
+        ...state, 
+        loading: false, 
+        eventInfoPage: action.value, 
+      }
     default:
       return state;
   }

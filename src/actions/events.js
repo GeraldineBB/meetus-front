@@ -26,7 +26,7 @@ export const loadCategoriesForHome = () => ({
 // action to change state with 6 categories on homepage (reducer)
 export const SET_CATEGORIES_FOR_HOME = 'SET_CATEGORIES_FOR_HOME';
 
-export const setCategoriesForHome = (value ) => ({
+export const setCategoriesForHome = (value) => ({
   type: SET_CATEGORIES_FOR_HOME,
   value, 
 });
@@ -113,3 +113,30 @@ export const currentSelectCategoriesEventList = (value) => ({
   type: CURRENT_SELECT_CATEGORIES_EVENT_LIST,
   value
 })
+
+// action to load event info on eventPage
+export const LOAD_INFO_FOR_PAGE_EVENT = 'LOAD_INFO_FOR_PAGE_EVENT';
+
+export const loadInfoForPageEvent = (eventId) => ({
+  type: LOAD_INFO_FOR_PAGE_EVENT,
+  eventId: eventId
+});
+
+// action to set event info on eventPage
+export const SET_INFO_FOR_EVENTPAGE = 'SET_INFO_FOR_EVENTPAGE';
+
+export const setInfoForEventPage = (value) => ({
+  type: SET_INFO_FOR_EVENTPAGE,
+  value,
+});
+
+// action to add an user to an event
+export const ADD_USER_TO_EVENT = 'ADD_USER_TO_EVENT';
+
+export const addUserToEvent = 
+  (userId, 
+  eventId) => ({
+  type: ADD_USER_TO_EVENT,
+  eventId, 
+  userId, 
+});

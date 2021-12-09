@@ -12,12 +12,10 @@ function HomePage() {
     <div className="HomePage">
       <Header />
       <Slogan />
-
       <LinkSection
         title={"Les prochains évènements à venir"}
         buttonName={"Voir tous les évènements"}
       />
-
       <Cards />
       <LinkSection
         title={"Comment fonctionne Meet Us ?"}

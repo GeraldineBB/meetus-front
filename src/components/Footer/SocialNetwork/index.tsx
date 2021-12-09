@@ -9,15 +9,15 @@ function SocialNetwork() {
 
   return (
     <div className="icons">
-      <a href="https://instagram.com" target="_blank">
+      <a href="https://instagram.com" target="_blank" rel="noreferrer">
         <InstagramIcon />
       </a>
 
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noreferrer">
         <FacebookIcon />
       </a>
 
-      <a href="https://twitter.com" target="_blank">
+      <a href="https://twitter.com" target="_blank" rel="noreferrer">
         <TwitterIcon />
       </a>
     </div>
