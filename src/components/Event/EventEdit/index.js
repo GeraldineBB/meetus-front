@@ -177,9 +177,9 @@ const EventEdit = ({eventId}) => {
 
     
 
+/* 
 
-
-    console.log("Error: ", formik.errors);
+    console.log("Error: ", formik.errors); */
 
 //     /* 
 //   if (loading) {

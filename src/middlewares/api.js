@@ -12,7 +12,7 @@ import {
 /* https://api-meet-us.herokuapp.com/api/v1 */
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-   baseURL: "" ,
+   baseURL: "http://localhost:8080/api/v1/" ,
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
@@ -50,7 +50,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all cateogories in a list
       api
-        .get("/categories?limit=6", {}) 
+        .get("/categories", {}) 
         .then((response) => {
           console.log(response);
           store.dispatch(setCategories(response.data));

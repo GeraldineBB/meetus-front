@@ -28,6 +28,17 @@ import axios from "axios";
 import { LOAD_CATEGORIES } from "../../../actions/events"; 
 
 
+/* Access to XMLHttpRequest at 'http://localhost:8080/api/v1/events' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+index.js:72 Error: Network Error
+    at createError (createError.js:16)
+    at XMLHttpRequest.handleError (xhr.js:117)
+xhr.js:210 POST http://localhost:8080/api/v1/events net::ERR_FAILED 
+
+
+xhr.js:210 GET http://localhost:8080/api/v1/categories 401 (Unauthorized)
+*/
+//TODO CORRIGER ERREUR ADD EVENTS
+
 
 const EventForm = () => {
 
@@ -36,7 +47,7 @@ const EventForm = () => {
     });
     const [value, setValue] = React.useState(new Date());
     let webApiUrl = 'http://localhost:8080/api/v1/events';
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkwNDcyNTIsImV4cCI6MTYzOTEzMzY1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.M6L_r4JLHAg4fixUdCl9jQKA9lbE9kqP1LsZ0MVfyF4gd4_0PlU-NRmoJCjF-rWTPYseZO-4mlADhHANWwoLsfb8T-yl0-MmkeCVgTZit1ppyB9Gn8pbEtw9H-LO-FTZNZ2G7dOhO6laCdQwg-4Ind-7SFBelp-tW73FCh0cpIQ43pddObuO4R44IYM69ot6AnTbi6RlxLd14Z-wvLDNGktLtGzfKY6rHOJXqjYqNbCHgDepFZAt0BYRMBEmZ_myJx1Y468n7inH_Zc01sDcyf8X0VjUzTSOMuDmhe6rkCBAqkwh61c8MPLIYXEPyoT3aXVLAv3FQC1kNqVAIW2DDA';
     
     const categorieList = useSelector(
         (state) => state.categories.categorieList
@@ -123,11 +134,11 @@ const EventForm = () => {
        
 
             
+ 
+/* 
 
-
-
-    console.log("Error: ", formik.errors); 
-
+    console.log("Error: ", formik.errors);  
+ */
 
 
     return (
@@ -161,13 +172,13 @@ const EventForm = () => {
 
                 <div className='event__form__name'>
                     <TextField fullWidth label="Nom de l'évènement" className="eventForm"
-                        id="eventName"
-                        name="eventName"
-                        type="eventName"
-                        value={formik.values.eventName}
+                        id="title"
+                        name="title"
+                        type="title"
+                        value={formik.values.title}
                         onChange={formik.handleChange}
-                        error={formik.touched.eventName && Boolean(formik.errors.eventName)}
-                        helperText={formik.touched.eventName && formik.errors.eventName} />
+                        error={formik.touched.title && Boolean(formik.errors.title)}
+                        helperText={formik.touched.title && formik.errors.title} />
 
                 </div>
 
@@ -194,13 +205,13 @@ const EventForm = () => {
 
                 <div className='event__form__place'>
                     <TextField fullWidth label="Lieu" className="eventForm"
-                        id="place"
-                        name="place"
-                        type="place"
-                        value={formik.values.place}
+                        id="city"
+                        name="city"
+                        type="placityce"
+                        value={formik.values.city}
                         onChange={formik.handleChange}
-                        error={formik.touched.place && Boolean(formik.errors.place)}
-                        helperText={formik.touched.place && formik.errors.place} />
+                        error={formik.touched.city && Boolean(formik.errors.city)}
+                        helperText={formik.touched.city && formik.errors.city} />
                 </div>
 
                 <div className='event__form__select'>
@@ -211,16 +222,18 @@ const EventForm = () => {
                             id="event_form_single_select"
                             label="categorySelect"
                             name="categorySelect"
+                            defaultValue=""
+                            type="select"
                             value={formik.values.categorySelect}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {/*  //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id*/}
+                             {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
                               {categorieList.map((category) => (
                                 
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
-                       ))}  
+                       ))}   */}
                             <MenuItem value={2}>Category2</MenuItem>
                             <MenuItem value={3}>Category3</MenuItem>
                         </Select>
@@ -258,13 +271,13 @@ const EventForm = () => {
                 <div className='event__form__number'>
                     <TextField fullWidth label="Nombre maximum de participant"
                         className="eventForm"
-                        id="numberOfPeople"
-                        name="numberOfPeople"
-                        type="numberOfPeople"
-                        value={formik.values.numberOfPeople}
+                        id="maxMembers"
+                        name="maxMembers"
+                        type="maxMembers"
+                        value={formik.values.maxMembers}
                         onChange={formik.handleChange}
-                        error={formik.touched.numberOfPeople && Boolean(formik.errors.numberOfPeople)}
-                        helperText={formik.touched.numberOfPeople && formik.errors.numberOfPeople} />
+                        error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
+                        helperText={formik.touched.maxMembers && formik.errors.maxMembers} />
                 </div>
                 <div className='event__form__buttom'>
                     <FormControl fullWidth>
