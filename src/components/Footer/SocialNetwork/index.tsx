@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import "./style.scss";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";

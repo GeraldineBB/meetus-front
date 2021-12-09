@@ -2,13 +2,19 @@ import axios from "axios";
 import {
   LOAD_CATEGORIES_FOR_HOME,
   LOAD_EVENTS_FOR_HOME,
+  LOAD_EVENT_LIST_IN_PROGRESS,
   setEventForHome,
   setCategoriesForHome,
+  setEventListInProgress,
+  LOAD_EVENT_LIST_ARCHIVED,
+  setEventListArchived,
+  LOAD_SELECT_CATEGORIES_EVENT_LIST,
+  setSelectCategoriesEventList,
 } from "../actions/events";
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://api-meet-us.herokuapp.com/api/v1",
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
@@ -43,7 +49,48 @@ const apiMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
-
+    case LOAD_EVENT_LIST_IN_PROGRESS: {
+      // endpoints to load 6 cateogories for home
+      api
+        .get("/events", {})
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setEventListInProgress(response.data));
+        })
+        .catch((error) =>
+          console.log("on a une erreur sur les evenement de la page liste evenement", error)
+        );
+      next(action);
+      break;
+    }
+    case LOAD_EVENT_LIST_ARCHIVED: {
+      // endpoints to load 6 cateogories for home
+      api
+        .get("/events?limit=2", {})
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setEventListArchived(response.data));
+        })
+        .catch((error) =>
+          console.log("on a une erreur sur les evenement de la page liste evenement", error)
+        );
+      next(action);
+      break;
+    }
+    case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
+      // endpoints to load 6 cateogories for eventList
+      api
+        .get("/categories?limit=50", {})
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setSelectCategoriesEventList(response.data));
+        })
+        .catch((error) =>
+          console.log("on a une erreur sur les 6 categories du select menu dans la page event list", error)
+        );
+      next(action);
+      break;
+    }
     default:
       next(action);
   }

@@ -1,0 +1,15 @@
+.button__eventlist {
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+  background-color: #F8CF61;
+  &:hover {background-color: darken(#F8CF61, 20%) ;}
+}
+
+.eventListCard {
+  width: 80%;
+  margin-bottom: 2em;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}

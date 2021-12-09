@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { CardActionArea } from "@mui/material";
-import { color } from "@mui/system";
 
 const Category = ({ name, picture }) => {
   return (

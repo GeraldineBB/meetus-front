@@ -13,13 +13,13 @@ function Cards() {
 
   useEffect(() => {
     dispatch({ type: LOAD_EVENTS_FOR_HOME });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 6, mb: 8 }}>
       <Grid container>
         {homeEventList.map((event) => (
-          <Grid item md={4}>
+          <Grid item md={4} key={event.id}>
             <HomeCard key={event.id} {...event} />
           </Grid>
         ))}
