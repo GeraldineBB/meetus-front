@@ -81,3 +81,35 @@ export const searchBarEventList = (value) => ({
   type: SEARCH_BAR_EVENT_LIST,
   value
 })
+
+export const LOAD_SELECT_CATEGORIES_EVENT_LIST = 'LOAD_SELECT_CATEGORIES_EVENT_LIST';
+
+export const loadSelectCategoriesEventList = () => ({
+  type: LOAD_SELECT_CATEGORIES_EVENT_LIST,
+});
+
+export const SET_SELECT_CATEGORIES_EVENT_LIST = 'SET_SELECT_CATEGORIES_EVENT_LIST';
+
+export const setSelectCategoriesEventList = (value) => ({
+  type: SET_SELECT_CATEGORIES_EVENT_LIST,
+  value
+})
+
+export const SELECT_CATEGORIES_EVENT_LIST_IS_OPEN = 'SELECT_CATEGORIES_EVENT_LIST_IS_OPEN';
+
+export const selectCategoriesEventListIsOpen = () => ({
+  type: SELECT_CATEGORIES_EVENT_LIST_IS_OPEN,
+})
+
+export const SELECT_CATEGORIES_EVENT_LIST_IS_CLOSE = 'SELECT_CATEGORIES_EVENT_LIST_IS_CLOSE';
+
+export const selectCategoriesEventListIsClose = () => ({
+  type: SELECT_CATEGORIES_EVENT_LIST_IS_CLOSE,
+})
+
+export const CURRENT_SELECT_CATEGORIES_EVENT_LIST= 'CURRENT_SELECT_CATEGORIES_EVENT_LIST';
+
+export const currentSelectCategoriesEventList = (value) => ({
+  type: CURRENT_SELECT_CATEGORIES_EVENT_LIST,
+  value
+})

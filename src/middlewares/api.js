@@ -10,6 +10,9 @@ import {
   setEventListInProgress,
   LOAD_EVENT_LIST_ARCHIVED,
   setEventListArchived,
+  selectCategoriesEventList,
+  LOAD_SELECT_CATEGORIES_EVENT_LIST,
+  setSelectCategoriesEventList,
 } from "../actions/events";
 
 // link to the API in order to put only endpoints in switch case
@@ -73,6 +76,20 @@ const apiMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) =>
           console.log("on a une erreur sur les evenement de la page liste evenement", error)
+        );
+      next(action);
+      break;
+    }
+    case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
+      // endpoints to load 6 cateogories for eventList
+      api
+        .get("/categories?limit=50", {})
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setSelectCategoriesEventList(response.data));
+        })
+        .catch((error) =>
+          console.log("on a une erreur sur les 6 categories du select menu dans la page event list", error)
         );
       next(action);
       break;

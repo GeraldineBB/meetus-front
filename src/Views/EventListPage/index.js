@@ -17,12 +17,10 @@ function EventListPage() {
   const dispatch = useDispatch();
 
   const handleArchived = () => {
-    console.log("Archivé");
     dispatch({ type: ARCHIVED });
   };
 
   const handleInProgress = () => {
-    console.log("En cours");
     dispatch({ type: IN_PROGRESS });
   };
   return (

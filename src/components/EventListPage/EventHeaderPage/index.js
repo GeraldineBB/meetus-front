@@ -1,12 +1,14 @@
 import "./style.scss";
+import { useEffect } from "react";
 import Button from "@mui/material/Button";
 import { darken } from "@mui/system";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import { useSelector, useDispatch } from "react-redux";
-import { searchBarEventList, SEARCH_BAR_EVENT_LIST } from "../../../actions/events";
+import { useDispatch } from "react-redux";
+import { LOAD_SELECT_CATEGORIES_EVENT_LIST, SEARCH_BAR_EVENT_LIST,} from "../../../actions/events";
+import SelectCategories from "./Select";
 
 
 function EventHeaderPage({
@@ -24,6 +26,11 @@ function EventHeaderPage({
     const value = event.target.value
     dispatch({ type: SEARCH_BAR_EVENT_LIST, value})
   }
+
+  useEffect(() => {
+    dispatch({ type: LOAD_SELECT_CATEGORIES_EVENT_LIST })
+    ;
+  }, []);
 
   return (
     <div className="eventHeaderPage">
@@ -63,12 +70,9 @@ function EventHeaderPage({
         >
           <Input onChange={handleSearch} placeholder="Rechercher" />
         </Box>
+        <SelectCategories />
         <h3>Evènements suggérés pour vous</h3>
         <Stack direction="row" spacing={1}>
-          <Chip
-            label="Sport"
-            sx={{ backgroundColor: "#788795", color: "white", mb: "1.4em" }}
-          />
         </Stack>
       </div>
     </div>

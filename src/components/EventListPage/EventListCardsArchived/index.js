@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { LOAD_EVENT_LIST_ARCHIVED, LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
+import { LOAD_EVENT_LIST_ARCHIVED, LOAD_EVENT_LIST_IN_PROGRESS, SET_SELECT_CATEGORIES_EVENT_LIST } from "../../../actions/events";
 import "./style.scss";
 
 export default function EventListCardsArchived({
@@ -34,21 +34,26 @@ export default function EventListCardsArchived({
   );
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
+  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
+  const filterSelect = (event) => {
+    if (event.category.name.includes(currentSelect)){
+      return event
+    }
+  }
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: LOAD_EVENT_LIST_ARCHIVED });
+    dispatch({ type: LOAD_EVENT_LIST_ARCHIVED })
+    ;
   }, []);
   return (
     <Grid container>
       {eventList.filter((event) => {
-        if (currentInput === ''){
-          console.log(event)
-          return event
-        } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())){
-          return event
-        }
+         if (event.title.toLowerCase().includes(currentInput.toLowerCase()) 
+         && event.category.name.includes(currentSelect)){
+           return event;
+         }
       }).map((event) => (
         <Grid
           item
