@@ -35,7 +35,7 @@ const EventContent = ({eventId}) => {
     console.log(eventInfoPage); 
 
 
-  }, []);
+  }, [dispatch]);
 
 
 
