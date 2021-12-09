@@ -217,9 +217,11 @@ const EventForm = () => {
                             onBlur={formik.handleBlur} >
 
                             {/*  //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id*/}
-                            {/*  {categorieList.map((category) => (
-                            <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
-                       ))} } */}
+                              {categorieList.map((category) => (
+                                
+                            <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
+                               
+                       ))}  
                             <MenuItem value={2}>Category2</MenuItem>
                             <MenuItem value={3}>Category3</MenuItem>
                         </Select>

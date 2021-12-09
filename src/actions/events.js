@@ -46,3 +46,14 @@ export const setCategories = (value ) => ({
   type: SET_CATEGORIES,
   value, 
 });
+
+
+// TODO METTRE UN SET ? 
+
+// action to load event info on event edit form
+export const LOAD_EVENT_INFO_FOR_EDIT_FORM = 'LOAD_EVENT_INFO_FOR_EDIT_FORM';
+
+export const setEventInfoForEditForm = () => ({
+  type: LOAD_EVENT_INFO_FOR_EDIT_FORM,
+  
+});

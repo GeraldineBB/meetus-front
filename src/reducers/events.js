@@ -3,6 +3,7 @@ import { SET_EVENT_FOR_HOME } from "../actions/events.js";
 
 export const initialState = {
   homeEventList: [],
+  eventCurrentInfo: [],
 };
 
 const reducer = (state = initialState, action = {}) => {

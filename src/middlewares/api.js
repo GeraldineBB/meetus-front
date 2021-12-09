@@ -3,14 +3,16 @@ import {
   LOAD_CATEGORIES,
   LOAD_CATEGORIES_FOR_HOME,
   LOAD_EVENTS_FOR_HOME,
+  LOAD_EVENT_INFO_FOR_EDIT_FORM,
   setEventForHome,
   setCategoriesForHome,
   setCategories,
+  setEventInfoForEditForm,
 } from "../actions/events";
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://api-meet-us.herokuapp.com/api/v1",
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
@@ -48,7 +50,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all cateogories in a list
       api
-        .get("/categories", {}) 
+        .get("/categories?limit=6", {}) 
         .then((response) => {
           console.log(response);
           store.dispatch(setCategories(response.data));
@@ -56,6 +58,24 @@ const apiMiddleware = (store) => (next) => (action) => {
         .catch((error) =>
           console.log("problème de chargement des catégories", error)
         );
+      next(action);
+      break;
+    }
+    case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
+
+      const state = store.getState();
+      const { events } = state;
+      const {id} = events; 
+
+      api.get(`/events/${id}`, {})
+      .then((response)=> {
+        console.log(response);
+        store.dispatch(setEventInfoForEditForm(response.data)); 
+  
+      })
+      .catch((error) =>
+      console.log("Erreur de chargement", error)
+      );
       next(action);
       break;
     }

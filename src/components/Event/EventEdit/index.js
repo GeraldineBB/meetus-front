@@ -25,26 +25,46 @@ import * as yup from 'yup';
 import axios from "axios";
 
 
-import { LOAD_CATEGORIES } from "../../../actions/events";
+import { LOAD_CATEGORIES, LOAD_EVENT_INFO_FOR_EDIT_FORM } from "../../../actions/events";
+
 
 
 
 const EventEdit = () => {
 
+
+    
+
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+      dispatch({ type: LOAD_EVENT_INFO_FOR_EDIT_FORM });
+      console.log(eventCurrentInfo); 
+    }, []);
+
+
+      useEffect(() => {
+        dispatch({ type: LOAD_CATEGORIES });
+      }, []);
+
+    
+    const eventCurrentInfo = useSelector(
+        (state) => state.events.eventCurrentInfo
+      );
+     
+
+    const categorieList = useSelector(
+        (state) => state.categories.categorieList
+      );
+     console.log(eventCurrentInfo); 
+    
+
     const Input = styled('input')({
         display: 'none',
     });
 
-    
-    const categorieList = useSelector(
-        (state) => state.categories.categorieList
-      );
-    
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        dispatch({ type: LOAD_CATEGORIES });
-      }, []);
+
+
 
 
     const [value, setValue] = React.useState(new Date());
@@ -98,8 +118,8 @@ const EventEdit = () => {
                 
         initialValues: {
             title: '',
-            place: '',
-            description: '',
+            place: 'eventCurrentInfo.event.place',
+            description: 'eventCurrentInfo.event.description',
             maxMenbers: '',
             isOnline: '', 
             category: '',
