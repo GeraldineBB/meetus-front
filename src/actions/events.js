@@ -47,8 +47,14 @@ export const setCategories = (value ) => ({
   value, 
 });
 
+// action to set event info on eventPage
+export const SET_INFO_FOR_EVENTEDIT = 'SET_INFO_FOR_EVENTPAGE';
 
-// TODO METTRE UN SET ? 
+export const setInfoForEventPage = (value) => ({
+  type: SET_INFO_FOR_EVENTEDIT,
+  value,
+});
+
 
 // action to load event info on event edit form
 export const LOAD_EVENT_INFO_FOR_EDIT_FORM = 'LOAD_EVENT_INFO_FOR_EDIT_FORM';

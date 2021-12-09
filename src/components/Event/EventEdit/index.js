@@ -30,7 +30,7 @@ import { LOAD_CATEGORIES, LOAD_EVENT_INFO_FOR_EDIT_FORM } from "../../../actions
 
 
 
-const EventEdit = () => {
+const EventEdit = ({eventId}) => {
 
 
     
@@ -38,7 +38,7 @@ const EventEdit = () => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-      dispatch({ type: LOAD_EVENT_INFO_FOR_EDIT_FORM });
+      dispatch({ type: LOAD_EVENT_INFO_FOR_EDIT_FORM, eventId: eventId });
       console.log(eventCurrentInfo); 
     }, []);
 
@@ -51,6 +51,11 @@ const EventEdit = () => {
     const eventCurrentInfo = useSelector(
         (state) => state.events.eventCurrentInfo
       );
+
+      
+  const loading = useSelector(
+    (state) => state.events.loading
+  ); 
      
 
     const categorieList = useSelector(
@@ -118,7 +123,7 @@ const EventEdit = () => {
                 
         initialValues: {
             title: '',
-            city: 'eventCurrentInfo.event.place',
+            city: eventCurrentInfo.event.city,
             description: 'eventCurrentInfo.event.description',
             maxMembers: '',
             isOnline: '', 
