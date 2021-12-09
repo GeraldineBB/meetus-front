@@ -108,15 +108,14 @@ const EventForm = () => {
 
         const formik = useFormik({
             initialValues: {
-              title: '',
-                place: '',
+                title: '',
+                city: '',
                 description: '',
-                maxMenbers: '',
+                maxMembers: '',
                 isOnline: '', //TODO VOIR AVEC BACK 
                 category: '',
-                date: new Date (),
-                author: '', //TODO VOIR AVEC BACK 
-                picture: '', //TODO VOIR AVEC BACK 
+                date: '',
+                picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
             },
             validationSchema: validationSchema,
             onSubmit,
@@ -178,7 +177,7 @@ const EventForm = () => {
                             <DateTimePicker
                                 renderInput={(props) => <TextField {...props} />}
                                 label="Date & Heure"
-                                value={formik.touched.date}
+                                value={value}//TODO REVOIR LA RECUP DE LA VALUE
                                 id="date"
                                 name="date"
                                 format="MM/dd/yyyy"

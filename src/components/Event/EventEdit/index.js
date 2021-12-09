@@ -118,13 +118,12 @@ const EventEdit = () => {
                 
         initialValues: {
             title: '',
-            place: 'eventCurrentInfo.event.place',
+            city: 'eventCurrentInfo.event.place',
             description: 'eventCurrentInfo.event.description',
-            maxMenbers: '',
+            maxMembers: '',
             isOnline: '', 
             category: '',
-            date: new Date(),
-            author:'', 
+            date: '', 
             picture: '', 
         },
         validationSchema: yup.object({
