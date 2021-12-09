@@ -16,7 +16,7 @@ function Cards() {
   }, [dispatch]);
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 1, mb: 8 }}>
+    <Container maxWidth="lg" sx={{ mt: 1, mb: 2 }}>
       <Grid container>
         {homeEventList.map((event) => (
           <Grid item md={4} key={event.id}>
