@@ -63,18 +63,14 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
 
-      const state = store.getState();
-      const { events } = state;
-      const {id} = events; 
-
-      api.get(`/events/${id}`, {})
+      api.get(`/events/${action.eventId}`, {})
       .then((response)=> {
         console.log(response);
         store.dispatch(setEventInfoForEditForm(response.data)); 
   
       })
       .catch((error) =>
-      console.log("Erreur de chargement", error)
+      console.log("on a une erreur sur les info de l'event", error)
       );
       next(action);
       break;
