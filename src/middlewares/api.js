@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  LOAD_CATEGORIES,
   LOAD_CATEGORIES_FOR_HOME,
   LOAD_EVENTS_FOR_HOME,
   LOAD_EVENT_LIST_IN_PROGRESS,
@@ -10,6 +11,10 @@ import {
   setSelectCategoriesEventList,
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT, 
+
+  LOAD_EVENT_INFO_FOR_EDIT_FORM,
+  setCategories,
+  setEventInfoForEditForm,
 
   setEventForHome,
   setCategoriesForHome,
@@ -155,6 +160,34 @@ const apiMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
+    case LOAD_CATEGORIES: {
+      // endpoints to load all cateogories in a list
+      api
+        .get("/categories", {}) 
+        .then((response) => {
+          console.log(response);
+          store.dispatch(setCategories(response.data));
+        })
+        .catch((error) =>
+          console.log("problème de chargement des catégories", error)
+        );
+      next(action);
+      break;
+    }
+    /* case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
+
+      api.get(`/events/${action.eventId}`,  {})
+      .then((response)=> {
+        console.log(response);
+        store.dispatch(setEventInfoForEditForm(response.data)); 
+  
+      })
+      .catch((error) =>
+      console.log("on a une erreur sur les info de l'event", error)
+      );
+      next(action);
+      break;
+    } */
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
 

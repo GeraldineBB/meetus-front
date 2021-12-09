@@ -12,6 +12,7 @@ import { RadioGroup } from '@mui/material';
 import { Radio } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
+import { Input } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -22,7 +23,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
  
 import axios from "axios"; 
-
 
 /* 
 import { LOAD_CATEGORIES } from "../../../actions/events";  */
@@ -125,7 +125,7 @@ const EventForm = () => {
                 maxMembers: '',
                 isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
                 category: '',
-                date: '',
+                date: value,
                 picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
             },
             validationSchema: validationSchema,
@@ -144,7 +144,9 @@ const EventForm = () => {
     return (
 
         <div>
-            <h2> Créer votre évènement </h2>
+
+
+            <h2> Modifier votre évènement </h2>
 
             <form onSubmit={formik.handleSubmit} >
 
@@ -192,8 +194,7 @@ const EventForm = () => {
                                 type="date"
                                 onChange={(newValue) => {
                                     setValue(newValue);
-                                }}
-                                minDateTime={new Date()}
+                                }}                          
                             // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
                             />
                         </LocalizationProvider>
@@ -280,7 +281,7 @@ const EventForm = () => {
                             sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
                             variant="contained"
                             type="submit">
-                            Créer mon évènement
+                            Modifier mon évènement
                         </Button>
                     </FormControl>
                 </div>

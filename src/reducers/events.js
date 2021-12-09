@@ -25,6 +25,8 @@ export const initialState = {
   selectCategoriesEventListIsClose: true,
   eventInfoPage: [], 
   loading: true, 
+  eventCurrentInfo: [],
+
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -93,5 +95,4 @@ const reducer = (state = initialState, action = {}) => {
       return state;
   }
 };
-
 export default reducer;

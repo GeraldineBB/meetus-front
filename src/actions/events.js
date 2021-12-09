@@ -31,13 +31,44 @@ export const setCategoriesForHome = (value) => ({
   value, 
 });
 
+// action load all categories on event form (middleware)
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+
+export const loadCategories = () => ({
+  type: LOAD_CATEGORIES,
+  
+});
+
+// action to change all categories on event form (reducer)
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+export const setCategories = (value ) => ({
+  type: SET_CATEGORIES,
+  value, 
+});
+
+// action to set event info on eventPage
+export const SET_INFO_FOR_EVENTEDIT = 'SET_INFO_FOR_EVENTPAGE';
+
+export const setInfoForEventPage = (value) => ({
+  type: SET_INFO_FOR_EVENTEDIT,
+  value,
+});
+
+
+// action to load event info on event edit form
+export const LOAD_EVENT_INFO_FOR_EDIT_FORM = 'LOAD_EVENT_INFO_FOR_EDIT_FORM';
+
+export const setEventInfoForEditForm = (eventId) => ({
+  type: LOAD_EVENT_INFO_FOR_EDIT_FORM,
+  eventId: eventId}); 
 // action to change state with event list in progress on eventlist page (reducer)
 export const SET_EVENT_LIST_IN_PROGRESS = 'SET_EVENT_LIST_IN_PROGRESS';
 
 export const setEventListInProgress = (value) =>({
   type: SET_EVENT_LIST_IN_PROGRESS,
   value,
-})
+});
 
 // action to load state with event list in progress on eventlist page (reducer)
 export const LOAD_EVENT_LIST_IN_PROGRESS = 'LOAD_EVENT_LIST_IN_PROGRESS';
@@ -45,7 +76,7 @@ export const LOAD_EVENT_LIST_IN_PROGRESS = 'LOAD_EVENT_LIST_IN_PROGRESS';
 export const loadEventListInProgress = (value) =>({
   type: LOAD_EVENT_LIST_IN_PROGRESS,
   value,
-})
+});
 
 // action to change state with archived event list on eventlist page (reducer)
 export const SET_EVENT_LIST_ARCHIVED = 'SET_EVENT_LIST_ARCHIVED';
