@@ -27,8 +27,8 @@ import {useSelector} from 'react-redux';
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1", 
-  // baseURL: "https://api-meet-us.herokuapp.com/api/v1",
+  // baseURL: "http://localhost:8080/api/v1", 
+  baseURL: "https://api-meet-us.herokuapp.com/api/v1",
   // baseUrl: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1", 
   // headers: {'Authorization': `Bearer ${token}`}
 });
@@ -45,11 +45,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       //   (state) => state.user.token
       //   );
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
       api
         .get("/events?limit=3", {
-            headers: {'Authorization': `Bearer ${token}`}
+            // headers: {'Authorization': `Bearer ${token}`}
         })
         .then((response) => {
           console.log(response);
@@ -66,12 +66,12 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
 
       api
         .get("/categories?limit=6", {
-          headers: {'Authorization': `Bearer ${token}`}
+          // headers: {'Authorization': `Bearer ${token}`}
       })
         .then((response) => {
           console.log(response);
@@ -86,11 +86,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_INFO_FOR_PAGE_EVENT:{
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
 
       api.get(`/events/${action.eventId}`, {
-        headers: {'Authorization': `Bearer ${token}`}
+        // headers: {'Authorization': `Bearer ${token}`}
 
       })
       .then((response)=> {
@@ -111,10 +111,12 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       // envoyer le token 
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
       api.post(`/events/${eventId}/add`, 
-      {headers: eventId, token })
+      {headers: eventId, 
+      // token 
+      })
       .then((response)=> {
         console.log(response);
         console.log('ici je récupère les données de la requête en post', response.data);
@@ -129,10 +131,13 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENT_LIST_IN_PROGRESS: {
       // endpoints to load 6 cateogories for home
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
       api
-        .get("/events", { headers: {'Authorization': `Bearer ${token}`}})
+        .get("/events", 
+        { 
+          // headers: {'Authorization': `Bearer ${token}`}
+        })
         .then((response) => {
           console.log(response);
           store.dispatch(setEventListInProgress(response.data));
@@ -146,10 +151,12 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENT_LIST_ARCHIVED: {
       // endpoints to load 6 cateogories for home
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
       api
-        .get("/events?limit=2", { headers: {'Authorization': `Bearer ${token}`}})
+        .get("/events?limit=2", {
+          // headers: {'Authorization': `Bearer ${token}`}
+        })
         .then((response) => {
           console.log(response);
           store.dispatch(setEventListArchived(response.data));
@@ -191,10 +198,12 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
 
-      const { user: { token } } = store.getState();
+      // const { user: { token } } = store.getState();
 
       api
-        .get("/categories?limit=50", { headers: {'Authorization': `Bearer ${token}`}})
+        .get("/categories?limit=50", { 
+          // headers: {'Authorization': `Bearer ${token}`}
+        })
         .then((response) => {
           console.log(response);
           store.dispatch(setSelectCategoriesEventList(response.data));

@@ -49,8 +49,7 @@ export default function HomeCard({
     <Link to={`/events/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
     <Card className="card" 
       sx={{ 
-        mr: 3,
-        height: 540, 
+        mr: {xs: 0, sm: 0, md: 3, lg: 3},
         display: 'flex', justifyContent: 'space-between', flexDirection: 'column'
       }}>
       <CardContent
@@ -62,7 +61,7 @@ export default function HomeCard({
           alt="Paella dish"
         />
 
-        <Typography sx={{ mt: 1.5 }} variant="h5" component="div">
+        <Typography sx={{ mt: 1.2 }} variant="h5" component="div">
           {title}
         </Typography>
         <Typography color="text.primary">
@@ -73,10 +72,10 @@ export default function HomeCard({
           <CalendarTodayIcon sx={{ mr: 1.5 }}/>
           {formatDate(date)}
         </Typography>
-        <Typography sx={{ mb: 0.3, height: 100}} variant="body1">
+        <Typography sx={{ mb: 2, height: 70, my: 2, overflow: 'hidden', textOverflow: 'ellipsis'  }} variant="body1" component="div">
           {description}
         </Typography>
-        <Typography color="text.primary">
+        <Typography sx={{ mt: 2 }} color="text.primary">
           {membersCount} participants
         </Typography>
       </CardContent>
