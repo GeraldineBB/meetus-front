@@ -173,8 +173,7 @@ const EventForm = () => {
                 <div className='event__form__name'>
                     <TextField fullWidth label="Nom de l'évènement" className="eventForm"
                         id="title"
-                        name="title"
-                        type="title"
+                        name="title"        
                         value={formik.values.title}
                         onChange={formik.handleChange}
                         error={formik.touched.title && Boolean(formik.errors.title)}
@@ -206,8 +205,7 @@ const EventForm = () => {
                 <div className='event__form__place'>
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
-                        name="city"
-                        type="placityce"
+                        name="city"                   
                         value={formik.values.city}
                         onChange={formik.handleChange}
                         error={formik.touched.city && Boolean(formik.errors.city)}
@@ -272,8 +270,7 @@ const EventForm = () => {
                     <TextField fullWidth label="Nombre maximum de participant"
                         className="eventForm"
                         id="maxMembers"
-                        name="maxMembers"
-                        type="maxMembers"
+                        name="maxMembers"                       
                         value={formik.values.maxMembers}
                         onChange={formik.handleChange}
                         error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
