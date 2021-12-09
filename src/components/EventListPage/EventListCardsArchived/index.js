@@ -1,14 +1,10 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect } from "react";
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -16,7 +12,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { LOAD_EVENT_LIST_ARCHIVED, LOAD_EVENT_LIST_IN_PROGRESS, SET_SELECT_CATEGORIES_EVENT_LIST } from "../../../actions/events";
+import { LOAD_EVENT_LIST_ARCHIVED} from "../../../actions/events";
 import "./style.scss";
 
 export default function EventListCardsArchived({
@@ -35,18 +31,13 @@ export default function EventListCardsArchived({
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
-  const filterSelect = (event) => {
-    if (event.category.name.includes(currentSelect)){
-      return event
-    }
-  }
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: LOAD_EVENT_LIST_ARCHIVED })
     ;
-  }, []);
+  }, [dispatch]);
   return (
     <Grid container>
       {eventList.filter((event) => {

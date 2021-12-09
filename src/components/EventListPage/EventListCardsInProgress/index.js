@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -11,7 +12,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { LOAD_EVENT_LIST_IN_PROGRESS, LOAD_SELECT_CATEGORIES_EVENT_LIST, SET_SELECT_CATEGORIES_EVENT_LIST } from "../../../actions/events";
+import { LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
 import "./style.scss";
 
 export default function EventListCardsInProgress({
@@ -36,6 +37,7 @@ export default function EventListCardsInProgress({
   useEffect(() => {
     dispatch({ type: LOAD_EVENT_LIST_IN_PROGRESS })
     ;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Grid container>

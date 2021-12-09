@@ -2,15 +2,12 @@ import axios from "axios";
 import {
   LOAD_CATEGORIES_FOR_HOME,
   LOAD_EVENTS_FOR_HOME,
-  LOAD_INFO_FOR_PAGE_EVENT,
   LOAD_EVENT_LIST_IN_PROGRESS,
   setEventForHome,
   setCategoriesForHome,
-  setInfoForEventPage,
   setEventListInProgress,
   LOAD_EVENT_LIST_ARCHIVED,
   setEventListArchived,
-  selectCategoriesEventList,
   LOAD_SELECT_CATEGORIES_EVENT_LIST,
   setSelectCategoriesEventList,
 } from "../actions/events";

@@ -6,7 +6,6 @@ import Categories from "../../components/HomePage/Categories";
 import LinkSection from "../../components/HomePage/LinkSection";
 import Footer from "../../components/Footer";
 import Cards from "../../components/HomePage/Cards";
-import { NavLink } from "react-router-dom";
 
 function HomePage() {
   return (

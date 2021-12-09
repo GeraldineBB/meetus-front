@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import { darken } from "@mui/system";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
-import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { LOAD_SELECT_CATEGORIES_EVENT_LIST, SEARCH_BAR_EVENT_LIST,} from "../../../actions/events";
@@ -30,6 +29,7 @@ function EventHeaderPage({
   useEffect(() => {
     dispatch({ type: LOAD_SELECT_CATEGORIES_EVENT_LIST })
     ;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

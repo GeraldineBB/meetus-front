@@ -1,6 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import "./style.scss";
-
-import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 interface LinkSectionProps {
