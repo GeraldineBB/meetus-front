@@ -14,12 +14,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         homeEventList: action.value,
       };
-    case SET_INFO_FOR_EVENTEDIT:
+    /* case SET_INFO_FOR_EVENTEDIT:
       return {
         ...state, 
         loading: false, 
         eventInfoPage: action.value, 
-      }
+      } */
     default:
       return state;
   }

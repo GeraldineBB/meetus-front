@@ -59,7 +59,7 @@ export const setInfoForEventPage = (value) => ({
 // action to load event info on event edit form
 export const LOAD_EVENT_INFO_FOR_EDIT_FORM = 'LOAD_EVENT_INFO_FOR_EDIT_FORM';
 
-export const setEventInfoForEditForm = () => ({
+export const setEventInfoForEditForm = (eventId) => ({
   type: LOAD_EVENT_INFO_FOR_EDIT_FORM,
-  
+  eventId: eventId
 });

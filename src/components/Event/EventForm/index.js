@@ -112,7 +112,7 @@ const EventForm = () => {
                 city: '',
                 description: '',
                 maxMembers: '',
-                isOnline: '', //TODO VOIR AVEC BACK 
+                isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
                 category: '',
                 date: '',
                 picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik

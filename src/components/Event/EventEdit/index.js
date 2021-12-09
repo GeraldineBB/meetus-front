@@ -32,36 +32,53 @@ import { LOAD_CATEGORIES, LOAD_EVENT_INFO_FOR_EDIT_FORM } from "../../../actions
 
 const EventEdit = ({eventId}) => {
 
+    
+    
+/* 
+    const url = 'http://localhost:8080/api/v1/events/5';
+    const getAllEventInfo = () => {  
+        axios.get(url).then(resp => {
 
+        console.log(resp.data);
+    });
+     } */
     
 
     const dispatch = useDispatch();
-    
+    /* 
     useEffect(() => {
-      dispatch({ type: LOAD_EVENT_INFO_FOR_EDIT_FORM, eventId: eventId });
+      dispatch({ type: LOAD_EVENT_INFO_FOR_EDIT_FORM, eventId });
       console.log(eventCurrentInfo); 
-    }, []);
-
-
-      useEffect(() => {
-        dispatch({ type: LOAD_CATEGORIES });
-      }, []);
-
-    
-    const eventCurrentInfo = useSelector(
-        (state) => state.events.eventCurrentInfo
-      );
-
-      
-  const loading = useSelector(
-    (state) => state.events.loading
-  ); 
-     
+    }, []); */
 
     const categorieList = useSelector(
         (state) => state.categories.categorieList
       );
-     console.log(eventCurrentInfo); 
+  
+    useEffect(() => {
+        dispatch({ type: LOAD_CATEGORIES });
+        console.log(categorieList); 
+    }, []);
+
+    
+
+     /* 
+    const eventCurrentInfo = useSelector(
+        (state) => state.events.eventCurrentInfo
+      );
+ */
+     /* 
+  const loading = useSelector(
+    (state) => state.events.loading
+  );  
+
+  const loadingCategory = useSelector(
+    (state) => state.category.loading
+  );  
+     
+      */
+
+
     
 
     const Input = styled('input')({
@@ -123,7 +140,7 @@ const EventEdit = ({eventId}) => {
                 
         initialValues: {
             title: '',
-            city: eventCurrentInfo.event.city,
+            city: 'eventCurrentInfo.event.city',
             description: 'eventCurrentInfo.event.description',
             maxMembers: '',
             isOnline: '', 
@@ -164,6 +181,10 @@ const EventEdit = ({eventId}) => {
 
     console.log("Error: ", formik.errors);
 
+//     /* 
+//   if (loading) {
+//     return <div>coucou</div>;
+//   } */
 
     return (
 
@@ -251,9 +272,9 @@ const EventEdit = ({eventId}) => {
                             onBlur={formik.handleBlur} >
 
                             
-                            {/*  {categorieList.map((category) => (
+                              {categorieList.map((category) => (
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>       
-                       ))} } */}
+                       ))} 
                             <MenuItem value={2}>Category2</MenuItem>
                         </Select>
                     </FormControl>

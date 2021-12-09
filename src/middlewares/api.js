@@ -9,10 +9,10 @@ import {
   setCategories,
   setEventInfoForEditForm,
 } from "../actions/events";
-
+/* https://api-meet-us.herokuapp.com/api/v1 */
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "https://api-meet-us.herokuapp.com/api/v1",
+   baseURL: "" ,
 });
 
 const apiMiddleware = (store) => (next) => (action) => {
@@ -61,9 +61,9 @@ const apiMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     }
-    case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
+    /* case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
 
-      api.get(`/events/${action.eventId}`, {})
+      api.get(`/events/${action.eventId}`,  {})
       .then((response)=> {
         console.log(response);
         store.dispatch(setEventInfoForEditForm(response.data)); 
@@ -74,7 +74,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       );
       next(action);
       break;
-    }
+    } */
 
     default:
       next(action);
