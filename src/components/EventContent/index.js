@@ -14,7 +14,8 @@ import { AvatarGroup, Avatar } from "@mui/material";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { LOAD_INFO_FOR_PAGE_EVENT } from '../../actions/events';
+import { LOAD_INFO_FOR_PAGE_EVENT, ADD_USER_TO_EVENT } from '../../actions/events';
+
 
 
 const EventContent = ({eventId}) => {
@@ -36,7 +37,6 @@ const EventContent = ({eventId}) => {
 
 
   }, [dispatch]);
-
 
 
   if (loading) {
@@ -102,7 +102,10 @@ const EventContent = ({eventId}) => {
                   backgroundColor: "#F36B7F",
                   "&:hover": { backgroundColor: "#F8CF61" },
                 }}
-              >
+                onClick={() => {
+                  alert('clicked');
+                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId, userId:  1 });
+                }}>
                Rejoindre
               </Button>
               

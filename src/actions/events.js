@@ -48,4 +48,13 @@ export const setInfoForEventPage = (value) => ({
   value,
 });
 
+// action to add an user to an event
+export const ADD_USER_TO_EVENT = 'ADD_USER_TO_EVENT';
 
+export const addUserToEvent = 
+  (userId, 
+  eventId) => ({
+  type: ADD_USER_TO_EVENT,
+  eventId, 
+  userId, 
+});
