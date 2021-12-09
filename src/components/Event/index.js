@@ -1,6 +1,6 @@
 import React from "react";
 import EventForm from "./EventForm";
-import Header from "../../components/Header";
+import Header from "../Header";
 import "./style.scss";
 const Event = () => {
   return (

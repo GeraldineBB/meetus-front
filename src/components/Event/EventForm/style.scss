@@ -21,6 +21,7 @@
         margin: 0 auto;
         max-width: 100%;
         width: 600px;
+        padding: 1em;
     }
     &__place{
         display: flex;
@@ -70,24 +71,22 @@
         width: 600px;
         padding: 1em;
     }
-    &__buttom{
-        display: flex;
-        justify-self: center;
-        margin: 0 auto;
-        max-width: 100%;
-        width: 600px;
-        padding: 1em;
-    }
-    h2{
-        margin-top: 3em;
-        margin-bottom: 2em;
-        display: flex;
-        justify-content: center;
-        text-transform: initial;
-    }
+    
+    
+}
+h2{
+    margin-top: 3em;
+    margin-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    text-transform: initial;
+}
 
-    span{
-        display: flex;
-        justify-content: center;
-    }
+.event__form__buttom{
+    display: flex;
+    justify-self: center;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 600px;
+    padding: 1em;
 }
