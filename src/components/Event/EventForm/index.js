@@ -25,7 +25,8 @@ import * as yup from 'yup';
 import axios from "axios"; 
 
 
-import { LOAD_CATEGORIES } from "../../../actions/events"; 
+/* 
+import { LOAD_CATEGORIES } from "../../../actions/events";  */
 
 
 /* Access to XMLHttpRequest at 'http://localhost:8080/api/v1/events' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
@@ -49,7 +50,7 @@ const EventForm = () => {
     let webApiUrl = 'http://localhost:8080/api/v1/events';
     let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkwNDcyNTIsImV4cCI6MTYzOTEzMzY1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.M6L_r4JLHAg4fixUdCl9jQKA9lbE9kqP1LsZ0MVfyF4gd4_0PlU-NRmoJCjF-rWTPYseZO-4mlADhHANWwoLsfb8T-yl0-MmkeCVgTZit1ppyB9Gn8pbEtw9H-LO-FTZNZ2G7dOhO6laCdQwg-4Ind-7SFBelp-tW73FCh0cpIQ43pddObuO4R44IYM69ot6AnTbi6RlxLd14Z-wvLDNGktLtGzfKY6rHOJXqjYqNbCHgDepFZAt0BYRMBEmZ_myJx1Y468n7inH_Zc01sDcyf8X0VjUzTSOMuDmhe6rkCBAqkwh61c8MPLIYXEPyoT3aXVLAv3FQC1kNqVAIW2DDA';
     
-    const categorieList = useSelector(
+    /* const categorieList = useSelector(
         (state) => state.categories.categorieList
     );
  
@@ -58,7 +59,7 @@ const EventForm = () => {
     useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
     }, []);
-
+ */
 
      
     const onSubmit = async (values) => {
@@ -95,11 +96,11 @@ const EventForm = () => {
     }; 
 
  const validationSchema = yup.object({
-            eventName: yup
+            title: yup
                 .string('Entré le nom de l\'évènement')
                 .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
                 .required('Le nom de l\'évènement doit être rempli'),
-            place: yup
+            city: yup
                 .string('Entré un lieu valide')
                 .min(3, 'Un lieu doit contenir au moins 3 lettres')
                 .required('Un lieu est requis'),
@@ -107,7 +108,7 @@ const EventForm = () => {
                 .string('Entré une description')
                 .min(20, 'Une description doit contenir 20 caractères au minimum')
                 .required('Une description est requise'),
-            numberOfPeople: yup
+            maxMembers: yup
                 .number('Entré un nombre maximum de participant ')
                 .min(2, 'Un évènement doit avoir un moins 2 participant')
                 .required('Le nombre maximum de participant est requis'),
@@ -144,8 +145,6 @@ const EventForm = () => {
     return (
 
         <div>
-
-
             <h2> Créer votre évènement </h2>
 
             <form onSubmit={formik.handleSubmit} >
