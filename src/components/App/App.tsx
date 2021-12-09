@@ -13,7 +13,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create" element={<EventForm />} />
         <Route path="/signup" element={<SignUpForm />} />
-        <Route path="/edit" element={<EventEdit />} />
+        <Route path="/edit/:id" element={<EventEdit />} />
       </Routes>
     </div>
   );
