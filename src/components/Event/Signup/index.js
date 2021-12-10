@@ -19,7 +19,7 @@ import axios from "axios"
 
 
 
-const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
 
 const validationSchema = yup.object({
   firstname: yup
@@ -48,25 +48,24 @@ const validationSchema = yup.object({
 
 
 let webApiUrl = 'http://localhost:8080/api/v1/users';
-let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
  
-
 
 
 export function SignUpForm(props) {
   
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null); 
- 
-   
+
   const onSubmit = async (values) => {
     alert(JSON.stringify(values, null, 2)); 
  
-       const { confirmPassword, ...data } = values; 
-
       const response = await axios({
-            headers: { "Authorization": `Bearer ${tokenStr}` } ,
-             data: data,
+             data: {
+               email : values.email, 
+               password: values.password, 
+               lastname: values.lastname, 
+               firstname: values.firstname
+             },
              url: webApiUrl,
              method: 'post',
 
@@ -82,7 +81,7 @@ export function SignUpForm(props) {
 
      if (response && response.data) {
 
-          setError(null);
+        setError(null);
         setSuccess(response.data.message);  // TODO MSG SUCCESS CREATE OR NOT ET REDIRECTION PAGE LOGIN
         
         console.log(response);
