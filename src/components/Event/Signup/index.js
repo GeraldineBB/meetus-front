@@ -8,8 +8,6 @@ import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
 import { useState, useSelector } from "react";
 import { FormError, FormSuccess } from "./tools";
-/* 
-import { setResponse } from '../../../../src/actions/events';  */
 
 
 import { useFormik } from 'formik';
@@ -17,36 +15,6 @@ import * as yup from 'yup';
 
 import axios from "axios"
 
-/* 
-https://gist.github.com/verticalgrain/195468e69f2ac88f3d9573d285b09764
-
-const [response, setResponses] = useState(false);
-
-axios(...).then((res) => { setResponse(true) })
-
-return (
-  {response ?  <Redirect to="..."/> : <SomeComponent>}
-)
-
-const BasicForm: React.FC < {} > = () => {
-      const [isSent, setIsSent] = React.useState(false);
-
-then, the fetch callback:
-
-.then(r =>
-      ...
-      setIsSent(true);
-
-Finally in your render function
-
-render={({ isSubmitting, status }) =>
-          !isSent ?
-            <Form> ... </Form>:
-            <div>Success</div>
-
-
-
- */
 
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
@@ -116,8 +84,6 @@ export function SignUpForm(props) {
          
     
       }; 
-
-   
 
 
   const formik = useFormik({

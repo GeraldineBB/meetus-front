@@ -14,6 +14,8 @@ import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+import { NavLink, Redirect, Navigate } from "react-router-dom";
+
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
@@ -60,6 +62,10 @@ const EventForm = () => {
     }, []);
  */
 
+    
+    const [responseFormValidateEdit, setResponseValidateEdit] = useState(false); 
+    
+
      
     const onSubmit = async (values) => {
         alert(JSON.stringify(values, null, 2)); 
@@ -76,6 +82,7 @@ const EventForm = () => {
             })
             .then(function (reponse) {
                 //On traite la suite une fois la réponse obtenue 
+                setResponseValidateEdit(true);
                 console.log(reponse);
             })
             .catch(function (erreur) {
@@ -140,7 +147,9 @@ const EventForm = () => {
     console.log("Error: ", formik.errors);  
  */
 
-
+    if (responseFormValidateEdit)  {
+        return <Navigate to="/" />
+      }    
     return (
 
         <div>
