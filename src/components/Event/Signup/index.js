@@ -1,13 +1,15 @@
 import React from "react";
 import './style.scss';
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect, Navigate } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
-import { useState } from "react";
+import { useState, useSelector } from "react";
 import { FormError, FormSuccess } from "./tools";
+/* 
+import { setResponse } from '../../../../src/actions/events';  */
 
 
 import { useFormik } from 'formik';
@@ -15,8 +17,36 @@ import * as yup from 'yup';
 
 import axios from "axios"
 
+/* 
+https://gist.github.com/verticalgrain/195468e69f2ac88f3d9573d285b09764
+
+const [response, setResponses] = useState(false);
+
+axios(...).then((res) => { setResponse(true) })
+
+return (
+  {response ?  <Redirect to="..."/> : <SomeComponent>}
+)
+
+const BasicForm: React.FC < {} > = () => {
+      const [isSent, setIsSent] = React.useState(false);
+
+then, the fetch callback:
+
+.then(r =>
+      ...
+      setIsSent(true);
+
+Finally in your render function
+
+render={({ isSubmitting, status }) =>
+          !isSent ?
+            <Form> ... </Form>:
+            <div>Success</div>
 
 
+
+ */
 
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
@@ -51,44 +81,44 @@ let webApiUrl = 'http://localhost:8080/api/v1/users';
  
 
 
+
 export function SignUpForm(props) {
   
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null); 
 
-  const onSubmit = async (values) => {
-    alert(JSON.stringify(values, null, 2)); 
- 
-      const response = await axios({
-             data: {
-               email : values.email, 
-               password: values.password, 
-               lastname: values.lastname, 
-               firstname: values.firstname
-             },
-             url: webApiUrl,
-             method: 'post',
+    const [responseFormValidate, setResponseValidate] = useState(false); 
+    
+  
+        const onSubmit = async (values) => {
+          alert(JSON.stringify(values, null, 2)); 
+  
+  
+              axios({
+                   data: {
+                    email : values.email, 
+                    password: values.password, 
+                    lastname: values.lastname, 
+                    firstname: values.firstname, 
+                  },
+                   url: webApiUrl,
+                   method: 'post',
+  
+              })
+              .then(function (reponse) {
+                  //On traite la suite une fois la réponse obtenue 
+                  setResponseValidate(true);
+                  console.log(reponse);
+              })
+              .catch(function (erreur) {
+                  //On traite ici les erreurs éventuellement survenues
+                  console.log(erreur);
+              });
+  
+         
+    
+      }; 
 
-        })
-        .then(function (reponse) {
-            //On traite la suite une fois la réponse obtenue 
-            console.log(reponse);
-        })
-        .catch(function (erreur) {
-            //On traite ici les erreurs éventuellement survenues
-            console.log(erreur);
-        }); 
+   
 
-     if (response && response.data) {
-
-        setError(null);
-        setSuccess(response.data.message);  // TODO MSG SUCCESS CREATE OR NOT ET REDIRECTION PAGE LOGIN
-        
-        console.log(response);
-        formik.resetForm();
-    }  
-
-}; 
 
   const formik = useFormik({
     initialValues: {
@@ -103,21 +133,20 @@ export function SignUpForm(props) {
     validationSchema: validationSchema,
   });
 
+/* 
+  console.log("Error: ", formik.errors);  */
 
-  console.log("Error: ", formik.errors); 
+  if (responseFormValidate)  {
+    return <Navigate to="/" />
+  } 
 
   return (
 
-
     <div>
-
 
       <h2> Créer un compte </h2>
 
-      {!error && <FormSuccess>{success ? success : ""}</FormSuccess>}
-      {!success && <FormError>{error ? error : ""}</FormError>}
       <form onSubmit={formik.handleSubmit} >
-
 
         <div className='event__form__lastname'>
           <TextField fullWidth label="Votre nom" className="lastname"
@@ -214,8 +243,9 @@ export function SignUpForm(props) {
 
 
     </div>
-
-
+   
 
   );
+
+
 }

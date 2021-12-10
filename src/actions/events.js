@@ -163,3 +163,10 @@ export const addUserToEvent =
   eventId, 
   userId, 
 });
+
+export const SET_RESPONSE = 'SET_RESPONSE';
+
+export const setResponse = () => ({
+  type: SET_RESPONSE,
+  
+});
