@@ -3,9 +3,13 @@ import TextField from "@mui/material/TextField";
 import "./style.scss";
 import { NavLink } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
+import { login } from "../../../actions/user";
 
 export default function LoginForm() {
+
+  const dispatch = useDispatch()
   return (
     <div>
       <Formik
@@ -29,11 +33,9 @@ export default function LoginForm() {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(values) => {
+          dispatch(login(values))
+          console.log(values)
         }}
       >
         {({

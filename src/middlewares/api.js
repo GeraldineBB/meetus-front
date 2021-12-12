@@ -15,9 +15,11 @@ import {
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
-  LOGIN,
-  login, 
+  
 } from "../actions/events";
+import {LOGIN,
+  login,
+  setCurrentUser, } from "../actions/user";
 
 
 
@@ -208,18 +210,15 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOGIN: {
       // endpoints to load 6 cateogories for eventList
-
-      const { user: { email,token, password } } = store.getState();
-
       api
-        .get("/login_check", {
-        headers: {'Authorization': `Bearer ${token}`},
-        username: email,
-        password: password,
+        .post("/login_check", {
+        username: action.values.email,
+        password: action.values.password,
          })
         .then((response) => {
-          console.log(response);
-          store.dispatch(login(response.data));
+          console.log(response.data);
+          store.dispatch(setCurrentUser(response.data));
+          
         })
         .catch((error) =>
           console.log("on a une erreur sur la ", error)
