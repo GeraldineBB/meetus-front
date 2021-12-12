@@ -26,19 +26,11 @@ import * as yup from 'yup';
 import axios from "axios"; 
 
 
-/* 
-import { LOAD_CATEGORIES } from "../../../actions/events";  */
+import HeaderSignUp from "../Signup/HeaderSignup";
+
+import LocationAutoComplete from '../Tools';
 
 
-/* Access to XMLHttpRequest at 'http://localhost:8080/api/v1/events' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
-index.js:72 Error: Network Error
-    at createError (createError.js:16)
-    at XMLHttpRequest.handleError (xhr.js:117)
-xhr.js:210 POST http://localhost:8080/api/v1/events net::ERR_FAILED 
-
-
-xhr.js:210 GET http://localhost:8080/api/v1/categories 401 (Unauthorized)
-*/
 //TODO CORRIGER ERREUR ADD EVENTS
 
 
@@ -63,7 +55,7 @@ const EventForm = () => {
  */
 
     
-    const [responseFormValidateEdit, setResponseValidateEdit] = useState(false); 
+    const [responseFormValidateForm, setResponseValidateForm] = useState(false); 
     
 
      
@@ -82,22 +74,17 @@ const EventForm = () => {
             })
             .then(function (reponse) {
                 //On traite la suite une fois la réponse obtenue 
-                setResponseValidateEdit(true);
+                setResponseValidateForm(true);
                 console.log(reponse);
             })
             .catch(function (erreur) {
+                
+                window.alert("Une erreur s'est produite, veuillez réessayer");
                 //On traite ici les erreurs éventuellement survenues
                 console.log(erreur);
             });
 
-       /*  if (response && response.data) {
-
-              setError(null);
-            setSuccess(response.data.message);  
-            
-            console.log(response);
-            formik.resetForm();
-        }  */
+       
   
     }; 
 
@@ -133,6 +120,7 @@ const EventForm = () => {
                 isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
                 category: '',
                 date: '',
+                place:'',
                 picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
             },
             validationSchema: validationSchema,
@@ -147,12 +135,14 @@ const EventForm = () => {
     console.log("Error: ", formik.errors);  
  */
 
-    if (responseFormValidateEdit)  {
+    if (responseFormValidateForm)  {
         return <Navigate to="/" />
       }    
     return (
 
         <div>
+        
+        <HeaderSignUp />
             <h2> Créer votre évènement </h2>
 
             <form onSubmit={formik.handleSubmit} >
@@ -210,6 +200,12 @@ const EventForm = () => {
                 </div>
 
                 <div className='event__form__place'>
+                    <LocationAutoComplete className="eventForm"
+                        id="place"
+                        name="place"                   
+                        value={formik.values.place}
+                        onChange={formik.handleChange} />
+
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
                         name="city"                   
