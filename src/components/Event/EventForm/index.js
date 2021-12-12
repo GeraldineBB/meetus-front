@@ -32,6 +32,9 @@ import LocationAutoComplete from '../Tools';
 
 
 
+import Thumb from "../Tools/Thumb";
+
+
 
 //TODO CORRIGER ERREUR ADD EVENTS
 
@@ -61,27 +64,31 @@ const EventForm = () => {
 
 
     const onSubmit = async (values) => {
-        alert(JSON.stringify(values, null, 2));
-
-        const { ...data } = values;
-
+        alert(JSON.stringify( values, null, 2));
 
         axios({
             headers: { "Authorization": `Bearer ${tokenStr}` },
-            data: data,
+            data: {
+                title : values.email, 
+                picture:values.picture.name,
+                description: values.description,
+                maxMembers:values.maxMembers ,
+                isOnline: values.isOnline,
+                category: values.category,
+                date: values.date,
+                place:values.place,
+              },
             url: webApiUrl,
             method: 'post',
 
         })
             .then(function (reponse) {
-                //On traite la suite une fois la réponse obtenue 
                 setResponseValidateForm(true);
                 console.log(reponse);
             })
             .catch(function (erreur) {
 
-                window.alert("Une erreur s'est produite, veuillez réessayer");
-                //On traite ici les erreurs éventuellement survenues
+                window.alert("Une erreur s'est produite, veuillez réessayer");              
                 console.log(erreur);
             });
 
@@ -106,11 +113,13 @@ const EventForm = () => {
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-
-        //TODO FILE VALIDATION, TYPEOF YUP A REVOIR 
+        picture : yup.object().shape({
+            file: yup.mixed().required(),
+          })
+        //TODO Date VALIDATION
 
     });
-    
+
 
 
     const formik = useFormik({
@@ -124,10 +133,10 @@ const EventForm = () => {
             date: new Date(),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
-            picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
+            picture: '', 
         },
-          validationSchema: validationSchema, 
-        onSubmit,       
+        /* validationSchema: validationSchema, */
+        onSubmit,
     });
 
 
@@ -144,146 +153,145 @@ const EventForm = () => {
             <h2> Créer votre évènement </h2>
 
 
-                    <form onSubmit={formik.handleSubmit} >
+            <form onSubmit={formik.handleSubmit} >
 
-                        <div className='event__form__if'>
-                            <FormControl component="fieldset">
-                                <FormLabel component="legend">Type d'évènement</FormLabel>
-                                <RadioGroup
-                                    row aria-label="type"
-                                >
-                                    <FormControlLabel value="online"
-                                        name="picked"
-                                        control={<Radio />}
-                                        onChange={formik.handleChange}
-                                        label="En ligne" />
-                                    <FormControlLabel value="realLife"
-                                        name="picked"
-                                        control={<Radio />}
-                                        onChange={formik.handleChange}
-                                        label="En présentiel" />
-                                </RadioGroup>
-                            </FormControl>
-                        </div>
-
-                        <div className='event__form__name'>
-                            <TextField fullWidth label="Nom de l'évènement" className="eventForm"
-                                id="title"
-                                name="title"
-                                value={formik.values.title}
+                <div className='event__form__if'>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Type d'évènement</FormLabel>
+                        <RadioGroup
+                            row aria-label="type"
+                        >
+                            <FormControlLabel value="online"
+                                name="picked"
+                                control={<Radio />}
                                 onChange={formik.handleChange}
-                                error={formik.touched.title && Boolean(formik.errors.title)}
-                                helperText={formik.touched.title && formik.errors.title} />
-
-                        </div>
-
-                        <div className='event__form__date'>
-                            <FormControl fullWidth>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DateTimePicker
-                                        label="Date&Time picker"
-                                        value={formik.values.date}
-                                        onChange={(newDate) => {
-                                            formik.setFieldValue("date", newDate);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />
-                                </LocalizationProvider>
-                            </FormControl>
-                        </div>
-
-                        <div className='event__form__place'>
-                            <LocationAutoComplete className="eventForm"
-                                id="place"
-                                name="place"
-                                value={formik.values.place}
-                                onChange={formik.handleChange} />
-
-                            <TextField fullWidth label="Lieu" className="eventForm"
-                                id="city"
-                                name="city"
-                                value={formik.values.city}
+                                label="En ligne" />
+                            <FormControlLabel value="realLife"
+                                name="picked"
+                                control={<Radio />}
                                 onChange={formik.handleChange}
-                                error={formik.touched.city && Boolean(formik.errors.city)}
-                                helperText={formik.touched.city && formik.errors.city} />
-                        </div>
+                                label="En présentiel" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
 
-                        <div className='event__form__select'>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
-                                <Select
-                                    labelId="event_form_single_select_label"
-                                    id="event_form_single_select"
-                                    label="categorySelect"
-                                    name="categorySelect"
-                                    defaultValue=""
-                                    type="select"
-                                    value={formik.values.categorySelect}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur} >
+                <div className='event__form__name'>
+                    <TextField fullWidth label="Nom de l'évènement" className="eventForm"
+                        id="title"
+                        name="title"
+                        value={formik.values.title}
+                        onChange={formik.handleChange}
+                        error={formik.touched.title && Boolean(formik.errors.title)}
+                        helperText={formik.touched.title && formik.errors.title} />
 
-                                    {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
+                </div>
+
+                <div className='event__form__date'>
+                    <FormControl fullWidth>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DateTimePicker
+                                label="Date&Time picker"
+                                value={formik.values.date}
+                                onChange={(newDate) => {
+                                    formik.setFieldValue("date", newDate);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                    </FormControl>
+                </div>
+
+                <div className='event__form__place'>
+                    <LocationAutoComplete />
+
+                    <TextField fullWidth label="Lieu" className="eventForm"
+                        id="city"
+                        name="city"
+                        value={formik.values.city}
+                        onChange={formik.handleChange}
+                        error={formik.touched.city && Boolean(formik.errors.city)}
+                        helperText={formik.touched.city && formik.errors.city} />
+                </div>
+
+                <div className='event__form__select'>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Choix de catégorie</InputLabel>
+                        <Select
+                            labelId="event_form_single_select_label"
+                            id="event_form_single_select"
+                            label="categorySelect"
+                            name="categorySelect"
+                            defaultValue=""
+                            type="select"
+                            value={formik.values.categorySelect}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} >
+
+                            {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
                               {categorieList.map((category) => (
                                 
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
                        ))}   */}
-                                    <MenuItem value={2}>Category2</MenuItem>
-                                    <MenuItem value={3}>Category3</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div>
+                            <MenuItem value={2}>Category2</MenuItem>
+                            <MenuItem value={3}>Category3</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
 
-                        {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}
-                        <div className='event__form__photo'>
-                            <FormControl fullWidth>
-                                <label htmlFor="contained-button-file">
-                                    <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                                    <Button
-                                        sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
-                                        fullWidth variant="contained"
-                                        component="span">
-                                        Téléchargez votre image de couverture d'évènement
-                                    </Button>
+                <div className='event__form__photo'>
+                    <FormControl fullWidth>
+                        <label htmlFor="contained-button-file">
+                            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => {
+                                formik.setFieldValue("picture", event.currentTarget.files[0]);
+                            }} />
+                            <Button
+                                sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
+                                fullWidth variant="contained"
+                                component="span">
+                                Téléchargez votre image de couverture d'évènement
+                            </Button>
+                            
+                        </label>
+                    </FormControl>
+                </div>
+                <div className='event__form__photo'>
+                    <Thumb file={formik.values.picture} />
+                </div>
+                <div className='event__form__description'>
+                    <TextField fullWidth label="Votre description"
+                        className="eventForm"
+                        id="description"
+                        name="description"
+                        type="description"
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        error={formik.touched.description && Boolean(formik.errors.description)}
+                        helperText={formik.touched.description && formik.errors.description} />
+                </div>
 
-                                </label>
-                            </FormControl>
-                        </div>
+                <div className='event__form__number'>
+                    <TextField fullWidth label="Nombre maximum de participant"
+                        className="eventForm"
+                        id="maxMembers"
+                        name="maxMembers"
+                        value={formik.values.maxMembers}
+                        onChange={formik.handleChange}
+                        error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
+                        helperText={formik.touched.maxMembers && formik.errors.maxMembers} />
+                </div>
+                <div className='event__form__buttom'>
+                    <FormControl fullWidth>
+                        <Button
+                            sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
+                            variant="contained"
+                            type="submit">
+                            Créer mon évènement
+                        </Button>
+                    </FormControl>
+                </div>
 
-                        <div className='event__form__description'>
-                            <TextField fullWidth label="Votre description"
-                                className="eventForm"
-                                id="description"
-                                name="description"
-                                type="description"
-                                value={formik.values.description}
-                                onChange={formik.handleChange}
-                                error={formik.touched.description && Boolean(formik.errors.description)}
-                                helperText={formik.touched.description && formik.errors.description} />
-                        </div>
-
-                        <div className='event__form__number'>
-                            <TextField fullWidth label="Nombre maximum de participant"
-                                className="eventForm"
-                                id="maxMembers"
-                                name="maxMembers"
-                                value={formik.values.maxMembers}
-                                onChange={formik.handleChange}
-                                error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
-                                helperText={formik.touched.maxMembers && formik.errors.maxMembers} />
-                        </div>
-                        <div className='event__form__buttom'>
-                            <FormControl fullWidth>
-                                <Button
-                                    sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
-                                    variant="contained"
-                                    type="submit">
-                                    Créer mon évènement
-                                </Button>
-                            </FormControl>
-                        </div>
-
-                    </form>
+            </form>
 
         </div>
 
