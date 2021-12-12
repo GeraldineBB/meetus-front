@@ -8,6 +8,7 @@ import EventListPage from "../../Views/EventListPage";
 import { SignUpForm } from "../Event/Signup";
 import EventForm from "../Event/EventForm";
 import EventEdit from "../Event/EventEdit";
+import RedirectSignup from "../Event/Signup/Loading";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/signup-done" element={<RedirectSignup />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/eventList" element={<EventListPage />} />

@@ -13,7 +13,9 @@ import { FormError, FormSuccess } from "./tools";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios"
+import axios from "axios";
+
+import HeaderSignUp from "./HeaderSignup";
 
 
 
@@ -31,7 +33,7 @@ const validationSchema = yup.object({
   email: yup.string().email("Entrez un email valide s'il vous plait").required(),
   password: yup
     .string()
-    .matches(PASSWORD_REGEX, "Entrez un mot de passe sécurisé")
+    .matches(PASSWORD_REGEX, "Entrez un mot de passe contenant au moins 8 caractères, une majuscule et un caractère spécial")
     .required(),
   confirmPassword: yup
     .string()
@@ -57,8 +59,8 @@ export function SignUpForm(props) {
     
   
         const onSubmit = async (values) => {
-          alert(JSON.stringify(values, null, 2)); 
-  
+          /* alert(JSON.stringify(values, null, 2)); 
+   */
   
               axios({
                    data: {
@@ -79,6 +81,7 @@ export function SignUpForm(props) {
               .catch(function (erreur) {
                   //On traite ici les erreurs éventuellement survenues
                   console.log(erreur);
+                  window.alert("Une erreur s'est produite, veuillez réessayer");
               });
   
          
@@ -103,12 +106,14 @@ export function SignUpForm(props) {
   console.log("Error: ", formik.errors);  */
 
   if (responseFormValidate)  {
-    return <Navigate to="/" />
+    return <Navigate to="/signup-done" />
   } 
 
   return (
 
     <div>
+
+      <HeaderSignUp />
 
       <h2> Créer un compte </h2>
 
