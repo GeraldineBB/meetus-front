@@ -257,6 +257,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       .then(function (reponse) {
           //TODO setResponseValidateForm(true);
           console.log(reponse.data);
+          console.log("CA A FONCTIONNER")
       })
       .catch(function (erreur) {
         window.alert("Une erreur s'est produite, veuillez réessayer"); 

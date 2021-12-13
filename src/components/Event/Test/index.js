@@ -23,6 +23,9 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+import axios from "axios";
+
+
 import HeaderSignUp from "../../Signup/HeaderSignup";
 
 /* 
@@ -36,21 +39,29 @@ import { LOAD_CATEGORIES } from "../../../actions/events";
 
 import { format } from 'date-fns';
 
-import { setNewEvent, setNewEventOnline } from "../../../actions/events";
-
 console.log(format(new Date(), 'yyyy-dd-MM kk:mm:ss'))
+
+
 
 const Test = () => {
 
     const Input = styled('input')({
         display: 'none',
     });
+    let webApiUrl = 'http://localhost:8080/api/v1/events';
+
+    let webApiUrlOnlineEvent = 'hhttp://localhost:8080/api/v1/events?type=online';
+
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
+    
     
       const dispatch = useDispatch();
     
+
       const categorieList = useSelector(
         (state) => state.categories.categorieList
       );
+    
     
       useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
@@ -65,14 +76,67 @@ const Test = () => {
         /* alert(JSON.stringify( values, null, 2)); */
 
         if (values.isOnline === '1')
-         {           
-            dispatch(setNewEventOnline(values))
-            console.log(values);
-         
+         {
+            alert(JSON.stringify( values.picture.name, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.title, 
+                    picture: values.picture.name,
+                    description: values.description,
+                    maxMembers:values.maxMembers ,
+                    isOnline: values.picked,
+                    category: values.category,
+                    date: values.date,
+                    address: values.place,
+                    author: values.author,                               
+                  },
+                url: webApiUrlOnlineEvent,
+                method: 'post',
+            })
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
         } else {
-            dispatch(setNewEvent(values))
-            console.log(values);
+            alert(JSON.stringify( values, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.title, 
+                    description: values.description,
+                    date: values.date,
+                    category: values.category,
+                    maxMembers:values.maxMembers,
+                    picture: values.picture.name,
+                    author: values.author,
+                    address: values.address,
+                    city: values.city,
+                    country: values.country,
+                    zipcode: values.zipcode,
+                },
+                url: webApiUrl,
+                method: 'post',    
+            })
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
         }; 
+
+        
+
+
     };
 
     const validationSchema = yup.object({
@@ -92,11 +156,6 @@ const Test = () => {
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-        picture : yup.object().shape({
-            file: yup.mixed().required(),
-          })
-        //TODO Date VALIDATION  +1 JOURS ...
-
     });
 
 
@@ -118,7 +177,7 @@ const Test = () => {
             country:'FRANCE',
 
         },
-          validationSchema: validationSchema,  
+         validationSchema: validationSchema,  
         onSubmit,
     });
 
