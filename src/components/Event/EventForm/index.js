@@ -45,6 +45,9 @@ const EventForm = () => {
         display: 'none',
     });
     let webApiUrl = 'http://localhost:8080/api/v1/events';
+
+    let webApiUrlOnlineEvent = 'hhttp://localhost:8080/api/v1/events?type=online';
+
     let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
     
     
@@ -63,41 +66,73 @@ const EventForm = () => {
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-
+// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI.
 
     const onSubmit = async (values) => {
-        alert(JSON.stringify( values, null, 2));
+        /* alert(JSON.stringify( values, null, 2)); */
 
-        axios({
-            headers: { "Authorization": `Bearer ${tokenStr}` },
-            data: {
-                title : values.email, 
-                picture:values.picture.name,
-                description: values.description,
-                maxMembers:values.maxMembers ,
-                isOnline: values.isOnline,
-                category: values.category.id,
-                date: values.date,
-                adress:values.place,
-                author:values.author,
-                city:values.city,
-                country:values.country,
-
-              },
-            url: webApiUrl,
-            method: 'post',
-
-        })
-            .then(function (reponse) {
-                setResponseValidateForm(true);
-                console.log(reponse);
+        if (values.isOnline === '1')
+         {
+            alert(JSON.stringify( values.picture.name,webApiUrlOnlineEvent, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.email, 
+                    picture: values.picture.name,
+                    description: values.description,
+                    maxMembers:values.maxMembers ,
+                    isOnline: values.picked,
+                    category: values.category.id,
+                    date: values.date,
+                    adress: values.place,
+                    author: values.author,                                   
+                  },
+                url: webApiUrlOnlineEvent,
+                method: 'post',
             })
-            .catch(function (erreur) {
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
+        } else {
+            alert(JSON.stringify( values, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.email, 
+                    picture: values.picture.name,
+                    description: values.description,
+                    maxMembers:values.maxMembers,
+                    isOnline: values.picked,
+                    category: values.category.id,
+                    date: values.date,
+                    adress: values.place,
+                    author: values.author,
+                    city: values.city,
+                    country: values.country,
+                  },
+                url: webApiUrl,
+                method: 'post',
+    
+            })
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
+    
+        }; 
 
-                window.alert("Une erreur s'est produite, veuillez réessayer");              
-                console.log(erreur);
-            });
-
+        
 
 
     };
@@ -141,8 +176,8 @@ const EventForm = () => {
             picture: '',
             author: 'TODOWITHTOKEN',
             city:'TODOGoogleAPI',
-            zipcode:'TODO',
-            country:'TODO',
+            zipcode:'38000',
+            country:'FRANCE',
 
         },
          /* validationSchema: validationSchema, */   
@@ -171,13 +206,13 @@ const EventForm = () => {
                         <RadioGroup
                             row aria-label="type"
                         >
-                            <FormControlLabel value="online"
-                                name="picked"
+                            <FormControlLabel value="1"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En ligne" />
-                            <FormControlLabel value="realLife"
-                                name="picked"
+                            <FormControlLabel value="0"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En présentiel" />
