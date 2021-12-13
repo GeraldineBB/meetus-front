@@ -142,7 +142,7 @@ const EventForm = () => {
             place: '',
             picture: '',
             author: 'TODOWITHTOKEN',
-            city:'TODO',
+            city:'TODOGoogleAPI',
             zipcode:'TODO',
             country:'TODO',
 
