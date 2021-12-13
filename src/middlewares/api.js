@@ -321,6 +321,7 @@ const apiMiddleware = (store) => (next) => (action) => {
   
     case EDIT_EVENT: {
 
+
       const cookies = new Cookies();
       const token = cookies.get('Pizzeria');
       axios({

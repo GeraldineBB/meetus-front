@@ -80,7 +80,8 @@ const EventEdit = ({eventId}) => {
         //     dispatch(setNewEvent(values));
         // }; 
         
-        dispatch (editEvent(values)); 
+        dispatch (editEvent(values, eventId)); 
+        console.log('log edition form', values); 
     };
 
     const validationSchema = yup.object({
@@ -119,7 +120,7 @@ const EventEdit = ({eventId}) => {
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: '',
+            date: new Date(),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
             picture: '',
@@ -130,7 +131,8 @@ const EventEdit = ({eventId}) => {
 
         },
          /* validationSchema: validationSchema, */   
-        onSubmit,
+        //  enableReinitialize: true,
+         onSubmit,
     });
 
     if (responseFormValidateForm) {
@@ -173,7 +175,7 @@ const EventEdit = ({eventId}) => {
                     <TextField fullWidth label="Nom de l'évènement" className="eventForm"
                         id="title"
                         name="title"
-                        value={eventInfoPage.event.title}
+                        value={formik.values.title}
                         onChange={formik.handleChange}
                         error={formik.touched.title && Boolean(formik.errors.title)}
                         helperText={formik.touched.title && formik.errors.title} />
@@ -185,7 +187,7 @@ const EventEdit = ({eventId}) => {
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DateTimePicker
                                 label="Date&Time picker"
-                                value={eventInfoPage.event.date}
+                                value={formik.values.date}
                                 onChange={(newDate) => {
                                     formik.setFieldValue("date", newDate);
                                 }}
@@ -201,7 +203,7 @@ const EventEdit = ({eventId}) => {
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
                         name="city"
-                        value={eventInfoPage.event.address}
+                        value={formik.values.city}
                         onChange={formik.handleChange}
                         error={formik.touched.city && Boolean(formik.errors.city)}
                         helperText={formik.touched.city && formik.errors.city} />
@@ -216,7 +218,7 @@ const EventEdit = ({eventId}) => {
                             label="category"
                             name="category"                           
                             type="select"
-                            value={eventInfoPage.event.category.name}
+                            value={formik.values.category}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
@@ -254,7 +256,7 @@ const EventEdit = ({eventId}) => {
                         id="description"
                         name="description"
                         type="description"
-                        value={eventInfoPage.event.description}
+                        value={formik.values.description}
                         onChange={formik.handleChange}
                         error={formik.touched.description && Boolean(formik.errors.description)}
                         helperText={formik.touched.description && formik.errors.description} />
@@ -265,7 +267,7 @@ const EventEdit = ({eventId}) => {
                         className="eventForm"
                         id="maxMembers"
                         name="maxMembers"
-                        value={eventInfoPage.event.maxMembers}
+                        value={formik.values.maxMembers}
                         onChange={formik.handleChange}
                         error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
                         helperText={formik.touched.maxMembers && formik.errors.maxMembers} />
@@ -284,6 +286,7 @@ const EventEdit = ({eventId}) => {
             </form>
 
         </div>
+
 
     );
 };
