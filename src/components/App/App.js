@@ -1,6 +1,6 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Redirect } from "react-router-dom";
 import React, { useEffect } from 'react';
-
+import { useSelector } from "react-redux";
 import LoginPage from "../../Views/Login";
 import HomePage from "../../Views/HomePage";
 import EventPage from "../../Views/EventPage";
@@ -14,11 +14,12 @@ function App() {
   // quand la location change, on applique un effet qui fait
   // scroller la page en haut
   const location = useLocation();
-
+  const {logged} = useSelector(state => state.user)
   useEffect(
     () => {
       console.log('on veut scroller !');
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
     },
     [location],
   );
