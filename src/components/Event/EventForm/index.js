@@ -34,6 +34,8 @@ import LocationAutoComplete from '../Tools';
 
 import Thumb from "../Tools/Thumb";
 
+import { LOAD_CATEGORIES } from "../../../actions/events";
+
 
 
 //TODO CORRIGER ERREUR ADD EVENTS
@@ -46,32 +48,19 @@ const EventForm = () => {
     });
     let webApiUrl = 'http://localhost:8080/api/v1/events';
     let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
-
-    /* const categorieList = useSelector(
+    
+    
+    const categorieList = useSelector(
         (state) => state.categories.categorieList
-    );
- 
-    const dispatch = useDispatch();
+      );
 
-    useEffect(() => {
+    console.log(categorieList);  
+    
+      const dispatch = useDispatch();
+    
+      useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
-    }, []);
-
-
-    {
-	"title": "encore et encore un match de volley",
-	"description": "venez vous joindre à nous pour ce match de volley !",
-	"date": "2022-02-12 10:55:00",
-	"category": 1,
-	"maxMembers": 2,
-	"author": 3,
-	"picture": "",
-	"address": "16 rue test",
-	"zipcode": "",
-	"city": "Sarcelles",
-	"country": "France"
-}*/
- */
+      }, [dispatch]);
 
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
@@ -158,11 +147,7 @@ const EventForm = () => {
             country:'TODO',
 
         },
-<<<<<<< HEAD
          validationSchema: validationSchema,   
-=======
-         validationSchema: validationSchema, 
->>>>>>> 1b1f628ff1df53309f24b1cbff07a633998e09df
         onSubmit,
     });
 
@@ -254,12 +239,11 @@ const EventForm = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
-                              {categorieList.map((category) => (
+                            {categorieList.map((category) => (
                                 
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
-                       ))}   */}
+                       ))}   
                             <MenuItem value={2}>Category2</MenuItem>
                             <MenuItem value={3}>Category3</MenuItem>
                         </Select>

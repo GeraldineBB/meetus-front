@@ -17,8 +17,7 @@ const reducer = (state = initialState, action = {}) => {
       case SET_CATEGORIES:
       return {
         ...state,
-        categorieList: action.value,
-        loading: false,
+        categorieList: action.value,     
       };
 
     default:
