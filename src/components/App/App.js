@@ -7,7 +7,7 @@ import EventPage from "../../Views/EventPage";
 import EventListPage from "../../Views/EventListPage";
 import { SignUpForm } from "../Signup";
 import EventForm from "../Event/EventForm";
-import EventEdit from "../Event/EventEdit";
+import EventEdit from "../../Views/EventEdit";
 import RedirectSignup from "../Signup/Loading";
 
 function App() {

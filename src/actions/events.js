@@ -195,7 +195,8 @@ export const setValidateForm = () => ({
 
 export const EDIT_EVENT = 'EDIT_EVENT';
 
-export const editEvent = (value) => ({
+export const editEvent = (values) => ({
   type: EDIT_EVENT,
-  value
+  values
 });
+

@@ -34,124 +34,70 @@ import LocationAutoComplete from '../Tools';
 
 import Thumb from "../Tools/Thumb";
 
-import { LOAD_CATEGORIES } from "../../../actions/events";
+import { LOAD_INFO_FOR_PAGE_EVENT, LOAD_CATEGORIES, editEvent, setNewEvent, setNewEventOnline} from "../../../actions/events";
 
 
 
 
-const EventForm = () => {
+const EventEdit = ({eventId}) => {
 
     const Input = styled('input')({
         display: 'none',
     });
-    let webApiUrl = 'http://localhost:8080/api/v1/events';
 
-    let webApiUrlOnlineEvent = 'hhttp://localhost:8080/api/v1/events?type=online';
+    const eventInfoPage = useSelector(
+    (state) => state.events.eventInfoPage);
 
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
-    
-    
-      const dispatch = useDispatch();
-    
+    const loading = useSelector(
+    (state) => state.events.loading);     
 
-      const categorieList = useSelector(
-        (state) => state.categories.categorieList
-      );
-    
-    
-      useEffect(() => {
-        dispatch({ type: LOAD_CATEGORIES });
-      }, [dispatch]);
+    const dispatch = useDispatch();
+
+    const categorieList = useSelector(
+    (state) => state.categories.categorieList
+    );
+
+
+    useEffect(() => {
+    dispatch({ type: LOAD_CATEGORIES });
+    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
+    console.log(eventInfoPage);     
+    }, [dispatch, eventId]);
 
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI.
 
     const onSubmit = async (values) => {
         /* alert(JSON.stringify( values, null, 2)); */
 
-        if (values.isOnline === '1')
-         {
-            alert(JSON.stringify( values.picture.name,webApiUrlOnlineEvent, null, 2));
-            axios({
-                headers: { "Authorization": `Bearer ${tokenStr}` },
-                data: {
-                    title : values.email, 
-                    picture: values.picture.name,
-                    description: values.description,
-                    maxMembers:values.maxMembers ,
-                    isOnline: values.picked,
-                    category: values.category.id,
-                    date: values.date,
-                    adress: values.place,
-                    author: values.author,                                   
-                  },
-                url: webApiUrlOnlineEvent,
-                method: 'post',
-            })
-                .then(function (reponse) {
-                    setResponseValidateForm(true);
-                    console.log(reponse);
-                })
-                .catch(function (erreur) {
-    
-                    window.alert("Une erreur s'est produite, veuillez réessayer");              
-                    console.log(erreur);
-                });
-        } else {
-            alert(JSON.stringify( values, null, 2));
-            axios({
-                headers: { "Authorization": `Bearer ${tokenStr}` },
-                data: {
-                    title : values.email, 
-                    picture: values.picture.name,
-                    description: values.description,
-                    maxMembers:values.maxMembers,
-                    isOnline: values.picked,
-                    category: values.category.id,
-                    date: values.date,
-                    adress: values.place,
-                    author: values.author,
-                    city: values.city,
-                    country: values.country,
-                  },
-                url: webApiUrl,
-                method: 'post',
-    
-            })
-                .then(function (reponse) {
-                    setResponseValidateForm(true);
-                    console.log(reponse);
-                })
-                .catch(function (erreur) {
-    
-                    window.alert("Une erreur s'est produite, veuillez réessayer");              
-                    console.log(erreur);
-                });
-    
-        }; 
-
+        // if (values.isOnline === '1')
+        // {
+        //     alert(JSON.stringify( values.title, null, 2));
+        //     dispatch(setNewEventOnline(values));
+        // } else {
+        //     alert(JSON.stringify( values, null, 2));
+        //     dispatch(setNewEvent(values));
+        // }; 
         
-
-
+        dispatch (editEvent(values)); 
     };
 
     const validationSchema = yup.object({
         title: yup
-            .string('Entré le nom de l\'évènement')
+            .string('Entrer le nom de l\'évènement')
             .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
             .required('Le nom de l\'évènement doit être rempli'),
         city: yup
-            .string('Entré un lieu valide')
+            .string('Entrer un lieu valide')
             .min(3, 'Un lieu doit contenir au moins 3 lettres')
             .required('Un lieu est requis'),
         description: yup
-            .string('Entré une description')
+            .string('Entrer une description')
             .min(20, 'Une description doit contenir 20 caractères au minimum')
             .required('Une description est requise'),
         maxMembers: yup
-            .number('Entré un nombre maximum de participant ')
+            .number('Entrer un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
         picture : yup.object().shape({
@@ -161,21 +107,24 @@ const EventForm = () => {
 
     });
 
-
+    // const myForm = () => {
+        
+    // }
 
     const formik = useFormik({
+
         initialValues: {
-            title: '',           
+            title: '',
             description: '',
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: new Date(),
+            date: '',
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
             picture: '',
             author: 'TODOWITHTOKEN',
-            city:'TODOGoogleAPI',
+            city:'',
             zipcode:'38000',
             country:'FRANCE',
 
@@ -184,18 +133,18 @@ const EventForm = () => {
         onSubmit,
     });
 
-
-
-
-
     if (responseFormValidateForm) {
         return <Navigate to="/" />
+    }
+
+    if (loading) {
+        return <div>coucou</div>;
     }
     return (
 
         <div>
             <HeaderSignUp />
-            <h2> Créer votre évènement </h2>
+            <h2> Modifier votre évènement </h2>
 
 
             <form onSubmit={formik.handleSubmit} >
@@ -224,7 +173,7 @@ const EventForm = () => {
                     <TextField fullWidth label="Nom de l'évènement" className="eventForm"
                         id="title"
                         name="title"
-                        value={formik.values.title}
+                        value={eventInfoPage.event.title}
                         onChange={formik.handleChange}
                         error={formik.touched.title && Boolean(formik.errors.title)}
                         helperText={formik.touched.title && formik.errors.title} />
@@ -236,7 +185,7 @@ const EventForm = () => {
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DateTimePicker
                                 label="Date&Time picker"
-                                value={formik.values.date}
+                                value={eventInfoPage.event.date}
                                 onChange={(newDate) => {
                                     formik.setFieldValue("date", newDate);
                                 }}
@@ -252,7 +201,7 @@ const EventForm = () => {
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
                         name="city"
-                        value={formik.values.city}
+                        value={eventInfoPage.event.address}
                         onChange={formik.handleChange}
                         error={formik.touched.city && Boolean(formik.errors.city)}
                         helperText={formik.touched.city && formik.errors.city} />
@@ -267,7 +216,7 @@ const EventForm = () => {
                             label="category"
                             name="category"                           
                             type="select"
-                            value={formik.values.category}
+                            value={eventInfoPage.event.category.name}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
@@ -276,8 +225,6 @@ const EventForm = () => {
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
                        ))}   
-                            <MenuItem value={2}>Category2</MenuItem>
-                            <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -307,7 +254,7 @@ const EventForm = () => {
                         id="description"
                         name="description"
                         type="description"
-                        value={formik.values.description}
+                        value={eventInfoPage.event.description}
                         onChange={formik.handleChange}
                         error={formik.touched.description && Boolean(formik.errors.description)}
                         helperText={formik.touched.description && formik.errors.description} />
@@ -318,7 +265,7 @@ const EventForm = () => {
                         className="eventForm"
                         id="maxMembers"
                         name="maxMembers"
-                        value={formik.values.maxMembers}
+                        value={eventInfoPage.event.maxMembers}
                         onChange={formik.handleChange}
                         error={formik.touched.maxMembers && Boolean(formik.errors.maxMembers)}
                         helperText={formik.touched.maxMembers && formik.errors.maxMembers} />
@@ -329,7 +276,7 @@ const EventForm = () => {
                             sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
                             variant="contained"
                             type="submit">
-                            Créer mon évènement
+                            Modifier mon évènement
                         </Button>
                     </FormControl>
                 </div>
@@ -342,4 +289,4 @@ const EventForm = () => {
 };
 
 
-export default EventForm;
+export default EventEdit;
