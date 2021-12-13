@@ -38,8 +38,6 @@ import { LOAD_CATEGORIES } from "../../../actions/events";
 
 
 
-//TODO CORRIGER ERREUR ADD EVENTS
-
 
 const EventForm = () => {
 
@@ -135,7 +133,7 @@ const EventForm = () => {
             title: '',           
             description: '',
             maxMembers: '',
-            isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
+            isOnline: '', 
             category: '',
             date: new Date(),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
