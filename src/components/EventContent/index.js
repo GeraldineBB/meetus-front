@@ -36,7 +36,7 @@ const EventContent = ({eventId}) => {
     console.log(eventInfoPage); 
 
 
-  }, [dispatch, eventId, eventInfoPage]);
+  }, [dispatch, eventId]);
 
 
   if (loading) {
