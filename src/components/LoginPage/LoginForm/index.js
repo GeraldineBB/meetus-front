@@ -1,11 +1,28 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import "./style.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form, ErrorMessage } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
+import { login } from "../../../actions/user";
+import Cookies from 'universal-cookie';
 
 export default function LoginForm() {
+  const navigate = useNavigate()
+  const {logged} = useSelector(state => state.user)
+
+  const handleVerify = () => {
+    if(logged === true){
+      console.log(logged)
+      return navigate("/");
+    }
+    return navigate("/login");
+  }
+
+  handleVerify();
+
+  const dispatch = useDispatch()
   return (
     <div>
       <Formik
@@ -29,12 +46,11 @@ export default function LoginForm() {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(values) => {
+          dispatch(login(values))
+          console.log(values)
         }}
+
       >
         {({
           values,
