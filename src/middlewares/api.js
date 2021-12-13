@@ -338,7 +338,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           city: action.values.city,
           country: action.values.country,
         },
-        method: 'patch',
+        method: 'put',
         url: `http://localhost:8080/api/v1/events/${action.eventId}`, 
       })
         .then((response) => {

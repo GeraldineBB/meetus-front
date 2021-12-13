@@ -112,6 +112,7 @@ const EventEdit = ({eventId}) => {
         
     // }
 
+
     const formik = useFormik({
 
         initialValues: {
@@ -124,7 +125,7 @@ const EventEdit = ({eventId}) => {
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
             picture: '',
-            author: 'TODOWITHTOKEN',
+            author: 2,
             city:'',
             zipcode:'38000',
             country:'FRANCE',
@@ -142,6 +143,8 @@ const EventEdit = ({eventId}) => {
     if (loading) {
         return <div>coucou</div>;
     }
+
+
     return (
 
         <div>
