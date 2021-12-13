@@ -14,7 +14,7 @@ import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -31,7 +31,12 @@ import HeaderSignUp from "../Signup/HeaderSignup";
 import LocationAutoComplete from '../Tools';
 
 
-//TODO CORRIGER ERREUR ADD EVENTS
+
+import Thumb from "../Tools/Thumb";
+
+import { LOAD_CATEGORIES } from "../../../actions/events";
+
+
 
 
 const EventForm = () => {
@@ -39,51 +44,94 @@ const EventForm = () => {
     const Input = styled('input')({
         display: 'none',
     });
-    const [value, setValue] = React.useState(new Date());
     let webApiUrl = 'http://localhost:8080/api/v1/events';
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkwNDcyNTIsImV4cCI6MTYzOTEzMzY1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.M6L_r4JLHAg4fixUdCl9jQKA9lbE9kqP1LsZ0MVfyF4gd4_0PlU-NRmoJCjF-rWTPYseZO-4mlADhHANWwoLsfb8T-yl0-MmkeCVgTZit1ppyB9Gn8pbEtw9H-LO-FTZNZ2G7dOhO6laCdQwg-4Ind-7SFBelp-tW73FCh0cpIQ43pddObuO4R44IYM69ot6AnTbi6RlxLd14Z-wvLDNGktLtGzfKY6rHOJXqjYqNbCHgDepFZAt0BYRMBEmZ_myJx1Y468n7inH_Zc01sDcyf8X0VjUzTSOMuDmhe6rkCBAqkwh61c8MPLIYXEPyoT3aXVLAv3FQC1kNqVAIW2DDA';
 
-    /* const categorieList = useSelector(
+    let webApiUrlOnlineEvent = 'hhttp://localhost:8080/api/v1/events?type=online';
+
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
+    
+    
+      const dispatch = useDispatch();
+    
+
+      const categorieList = useSelector(
         (state) => state.categories.categorieList
-    );
- 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
+      );
+    
+    
+      useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
-    }, []);
- */
+      }, [dispatch]);
 
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-
+// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI.
 
     const onSubmit = async (values) => {
-        alert(JSON.stringify(values, null, 2));
+        /* alert(JSON.stringify( values, null, 2)); */
 
-        const { ...data } = values;
-
-
-        axios({
-            headers: { "Authorization": `Bearer ${tokenStr}` },
-            data: data,
-            url: webApiUrl,
-            method: 'post',
-
-        })
-            .then(function (reponse) {
-                //On traite la suite une fois la réponse obtenue 
-                setResponseValidateForm(true);
-                console.log(reponse);
+        if (values.isOnline === '1')
+         {
+            alert(JSON.stringify( values.picture.name,webApiUrlOnlineEvent, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.email, 
+                    picture: values.picture.name,
+                    description: values.description,
+                    maxMembers:values.maxMembers ,
+                    isOnline: values.picked,
+                    category: values.category.id,
+                    date: values.date,
+                    adress: values.place,
+                    author: values.author,                                   
+                  },
+                url: webApiUrlOnlineEvent,
+                method: 'post',
             })
-            .catch(function (erreur) {
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
+        } else {
+            alert(JSON.stringify( values, null, 2));
+            axios({
+                headers: { "Authorization": `Bearer ${tokenStr}` },
+                data: {
+                    title : values.email, 
+                    picture: values.picture.name,
+                    description: values.description,
+                    maxMembers:values.maxMembers,
+                    isOnline: values.picked,
+                    category: values.category.id,
+                    date: values.date,
+                    adress: values.place,
+                    author: values.author,
+                    city: values.city,
+                    country: values.country,
+                  },
+                url: webApiUrl,
+                method: 'post',
+    
+            })
+                .then(function (reponse) {
+                    setResponseValidateForm(true);
+                    console.log(reponse);
+                })
+                .catch(function (erreur) {
+    
+                    window.alert("Une erreur s'est produite, veuillez réessayer");              
+                    console.log(erreur);
+                });
+        }; 
 
-                window.alert("Une erreur s'est produite, veuillez réessayer");
-                //On traite ici les erreurs éventuellement survenues
-                console.log(erreur);
-            });
-
+        
 
 
     };
@@ -105,50 +153,39 @@ const EventForm = () => {
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-
-        //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
+        picture : yup.object().shape({
+            file: yup.mixed().required(),
+          })
+        //TODO Date VALIDATION
 
     });
-/* 
-    const [cityId, setCityId] = React.useState({ city_id: '' });
 
-    const handleChange = (value) => {
-        // Here is the value is a selected option label or the new typed value
-        setCityId({ city_id: value });
-    }
- */
 
-    const [timeForm,setTimeForm]=React.useState({time_form:''});
-
-const handleChange=(value)=>{
-  // Here is the value is a selected option label or the new typed value
-  setTimeForm({time_form:value});
-}
 
     const formik = useFormik({
         initialValues: {
-            title: '',
-            city: '',
+            title: '',           
             description: '',
             maxMembers: '',
-            isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
+            isOnline: '', 
             category: '',
-            date: {timeForm},
+            date: new Date(),
+            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
-            picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
+            picture: '',
+            author: 'TODOWITHTOKEN',
+            city:'TODOGoogleAPI',
+            zipcode:'38000',
+            country:'FRANCE',
+
         },
-        validationSchema: validationSchema,
+         /* validationSchema: validationSchema, */   
         onSubmit,
-        handleChange,             
     });
 
 
 
 
-    /* 
-    
-        console.log("Error: ", formik.errors);  
-     */
 
     if (responseFormValidateForm) {
         return <Navigate to="/" />
@@ -156,9 +193,9 @@ const handleChange=(value)=>{
     return (
 
         <div>
-
             <HeaderSignUp />
             <h2> Créer votre évènement </h2>
+
 
             <form onSubmit={formik.handleSubmit} >
 
@@ -168,13 +205,13 @@ const handleChange=(value)=>{
                         <RadioGroup
                             row aria-label="type"
                         >
-                            <FormControlLabel value="online"
-                                name="picked"
+                            <FormControlLabel value="1"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En ligne" />
-                            <FormControlLabel value="realLife"
-                                name="picked"
+                            <FormControlLabel value="0"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En présentiel" />
@@ -197,27 +234,19 @@ const handleChange=(value)=>{
                     <FormControl fullWidth>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DateTimePicker
-                                renderInput={(props) => <TextField {...props} />}
-                                label="Date & Heure"
-                                value={formik.values.date}//TODO REVOIR LA RECUP DE LA VALUE
-                                id="date"
-                                name="date"
-                                format="MM/dd/yyyy"
-                                type="date"
-                                onChange={handleChange}
-                                minDateTime={new Date()}
-                            // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
+                                label="Date&Time picker"
+                                value={formik.values.date}
+                                onChange={(newDate) => {
+                                    formik.setFieldValue("date", newDate);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <LocationAutoComplete className="eventForm"
-                        id="place"
-                        name="place"
-                        value={formik.values.place}
-                        onChange={formik.handleChange} />
+                    <LocationAutoComplete />
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -234,42 +263,43 @@ const handleChange=(value)=>{
                         <Select
                             labelId="event_form_single_select_label"
                             id="event_form_single_select"
-                            label="categorySelect"
-                            name="categorySelect"
-                            defaultValue=""
+                            label="category"
+                            name="category"                           
                             type="select"
-                            value={formik.values.categorySelect}
+                            value={formik.values.category}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
-                              {categorieList.map((category) => (
+                            {categorieList.map((category) => (
                                 
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
-                       ))}   */}
+                       ))}   
                             <MenuItem value={2}>Category2</MenuItem>
                             <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
 
-                {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
                         <label htmlFor="contained-button-file">
-                            <Input accept="image/*" id="contained-button-file" multiple type="file" />
+                            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => {
+                                formik.setFieldValue("picture", event.currentTarget.files[0]);
+                            }} />
                             <Button
                                 sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
                                 fullWidth variant="contained"
                                 component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
-
+                            
                         </label>
                     </FormControl>
                 </div>
-
+                <div className='event__form__photo'>
+                    <Thumb file={formik.values.picture} />
+                </div>
                 <div className='event__form__description'>
                     <TextField fullWidth label="Votre description"
                         className="eventForm"
@@ -302,7 +332,9 @@ const handleChange=(value)=>{
                         </Button>
                     </FormControl>
                 </div>
+
             </form>
+
         </div>
 
     );

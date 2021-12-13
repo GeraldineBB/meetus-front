@@ -11,12 +11,19 @@ import {
   setSelectCategoriesEventList,
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
+  SET_NEW_EVENT,
+  SET_NEW_EVENT_ONLINE,
+  setNewEvent,
+  setNewEventOnline,
   setCategories,
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
+  setValidateForm, 
+  EDIT_EVENT, 
 } from "../actions/events";
-import { LOGIN, login, setCurrentUser } from "../actions/user";
+import setResponseValidateForm from '../components/Event/EventForm'
+import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 import Cookies from 'universal-cookie';
 import { set } from "date-fns";
 
@@ -57,7 +64,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
-     const cookies = new Cookies();
+      const cookies = new Cookies();
       const token = cookies.get('Pizzeria');
 
       api
@@ -166,7 +173,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all categories 
 
-     const cookies = new Cookies();
+      const cookies = new Cookies();
       const token = cookies.get('Pizzeria');
 
       api
@@ -216,13 +223,135 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(setCurrentUser(response.data));
-          const {user: { token }} = store.getState();
+          const { user: { token } } = store.getState();
           cookies.set("Pizzeria", token);
         })
         .catch((error) => console.log("on a une erreur sur la ", error));
       next(action);
       break;
     }
+    case SET_NEW_EVENT: {
+
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
+      axios({
+        headers: { "Authorization": `Bearer ${token}` },
+        data: { 
+          title: action.values.email,
+          picture: action.values.picture.name,
+          description: action.values.description,
+          maxMembers: action.values.maxMembers,
+          isOnline: action.values.picked,
+          category: action.values.category.id,
+          date: action.values.date,
+          adress: action.values.place,
+          author: action.values.author,
+        },
+          method: 'post',
+          url: `http://localhost:8080/api/v1/events`, 
+        })
+        .then((response) => {
+          store.dispatch(setValidateForm());
+          store.dispatch(setNewEvent(response.data));
+          console.log(response);
+        })
+        .catch((erreur) => {
+          window.alert("Une erreur s'est produite, veuillez réessayer");
+          console.log(erreur);
+        })
+      next(action);
+      break;
+    }
+    case SET_NEW_EVENT_ONLINE: {
+
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
+      axios({
+        headers: { "Authorization": `Bearer ${token}` },
+        data: { 
+          title: action.values.email,
+          picture: action.values.picture.name,
+          description: action.values.description,
+          maxMembers: action.values.maxMembers,
+          category: action.values.category.id,
+          date: action.values.date,
+          adress: action.values.place,
+          author: action.values.author,
+          city: action.values.city,
+          country: action.values.country,
+        },
+        method: 'post',
+        url: `http://localhost:8080/api/v1/events?type=online`, 
+      })
+        .then((response) => {
+          store.dispatch(setValidateForm());
+          store.dispatch(setNewEventOnline(response.data));
+          console.log(response);
+        })
+        .catch((erreur) => {
+          window.alert("Une erreur s'est produite, veuillez réessayer");
+          console.log(erreur);
+        })
+      next(action);
+      break;
+    }
+    case SIGNUP: {
+      axios({   
+        // headers: { "Authorization": '' },   
+        data: { 
+          email : action.values.email, 
+          password: action.values.password, 
+          lastname: action.values.lastname, 
+          firstname: action.values.firstname,
+        },
+          method: 'post',
+          url: `http://localhost:8080/api/v1/users`, 
+        })
+        .then((response) => {
+          // store.dispatch(setValidateForm());
+          console.log(response);
+        })
+        .catch((erreur) => {
+          console.log(erreur);
+          window.alert("Une erreur s'est produite, veuillez réessayer");
+        })
+      next(action);
+      break;
+    } 
+  
+    case EDIT_EVENT: {
+
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
+      axios({
+        headers: { "Authorization": `Bearer ${token}` },
+        data: { 
+          title: action.values.email,
+          picture: action.values.picture.name,
+          description: action.values.description,
+          maxMembers: action.values.maxMembers,
+          category: action.values.category.id,
+          date: action.values.date,
+          adress: action.values.place,
+          author: action.values.author,
+          city: action.values.city,
+          country: action.values.country,
+        },
+        method: 'patch',
+        url: `http://localhost:8080/api/v1/events/${action.eventId}`, 
+      })
+        .then((response) => {
+          store.dispatch(setValidateForm());
+          store.dispatch(setNewEventOnline(response.data));
+          console.log(response);
+        })
+        .catch((erreur) => {
+          window.alert("Une erreur s'est produite, veuillez réessayer");
+          console.log(erreur);
+        })
+      next(action);
+      break;
+    } 
     default:
       next(action);
   }

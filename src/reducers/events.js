@@ -10,6 +10,7 @@ import {
   SET_EVENT_LIST_IN_PROGRESS,
   SET_SELECT_CATEGORIES_EVENT_LIST,
   SET_INFO_FOR_EVENTPAGE,
+  SET_VALIDATE_FORM, 
 } from "../actions/events.js";
 
 export const initialState = {
@@ -26,6 +27,7 @@ export const initialState = {
   eventInfoPage: [], 
   loading: true, 
   eventCurrentInfo: [],
+  setValidateForm: false, 
 
 };
 
@@ -91,6 +93,11 @@ const reducer = (state = initialState, action = {}) => {
         loading: false, 
         eventInfoPage: action.value, 
       }
+      case SET_VALIDATE_FORM:
+        return {
+          ...state, 
+          setValidateForm: true, 
+        }
     default:
       return state;
   }

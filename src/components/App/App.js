@@ -5,10 +5,10 @@ import LoginPage from "../../Views/Login";
 import HomePage from "../../Views/HomePage";
 import EventPage from "../../Views/EventPage";
 import EventListPage from "../../Views/EventListPage";
-import { SignUpForm } from "../Event/Signup";
+import { SignUpForm } from "../Signup";
 import EventForm from "../Event/EventForm";
 import EventEdit from "../Event/EventEdit";
-import RedirectSignup from "../Event/Signup/Loading";
+import RedirectSignup from "../Signup/Loading";
 
 function App() {
 

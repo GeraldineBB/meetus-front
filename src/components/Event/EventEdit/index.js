@@ -26,7 +26,7 @@ import * as yup from 'yup';
 import axios from "axios";
 
 
-import HeaderSignUp from "../Signup/HeaderSignup";
+import HeaderSignUp from "../../Signup/HeaderSignup";
 
 import LocationAutoComplete from '../Tools';
 

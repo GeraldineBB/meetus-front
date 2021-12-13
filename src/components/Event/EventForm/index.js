@@ -14,7 +14,7 @@ import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -23,10 +23,8 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios";
 
-
-import HeaderSignUp from "../Signup/HeaderSignup";
+import HeaderSignUp from "../../Signup/HeaderSignup";
 
 import LocationAutoComplete from '../Tools';
 
@@ -34,7 +32,7 @@ import LocationAutoComplete from '../Tools';
 
 import Thumb from "../Tools/Thumb";
 
-import { LOAD_CATEGORIES } from "../../../actions/events";
+import { LOAD_CATEGORIES, setNewEvent, setNewEventOnline } from "../../../actions/events";
 
 
 
@@ -44,13 +42,7 @@ const EventForm = () => {
     const Input = styled('input')({
         display: 'none',
     });
-    let webApiUrl = 'http://localhost:8080/api/v1/events';
 
-    let webApiUrlOnlineEvent = 'hhttp://localhost:8080/api/v1/events?type=online';
-
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
-    
-    
       const dispatch = useDispatch();
     
 
@@ -73,68 +65,12 @@ const EventForm = () => {
 
         if (values.isOnline === '1')
          {
-            alert(JSON.stringify( values.picture.name,webApiUrlOnlineEvent, null, 2));
-            axios({
-                headers: { "Authorization": `Bearer ${tokenStr}` },
-                data: {
-                    title : values.email, 
-                    picture: values.picture.name,
-                    description: values.description,
-                    maxMembers:values.maxMembers ,
-                    isOnline: values.picked,
-                    category: values.category.id,
-                    date: values.date,
-                    adress: values.place,
-                    author: values.author,                                   
-                  },
-                url: webApiUrlOnlineEvent,
-                method: 'post',
-            })
-                .then(function (reponse) {
-                    setResponseValidateForm(true);
-                    console.log(reponse);
-                })
-                .catch(function (erreur) {
-    
-                    window.alert("Une erreur s'est produite, veuillez réessayer");              
-                    console.log(erreur);
-                });
+            alert(JSON.stringify( values.title, null, 2));
+            dispatch(setNewEventOnline(values));
         } else {
             alert(JSON.stringify( values, null, 2));
-            axios({
-                headers: { "Authorization": `Bearer ${tokenStr}` },
-                data: {
-                    title : values.email, 
-                    picture: values.picture.name,
-                    description: values.description,
-                    maxMembers:values.maxMembers,
-                    isOnline: values.picked,
-                    category: values.category.id,
-                    date: values.date,
-                    adress: values.place,
-                    author: values.author,
-                    city: values.city,
-                    country: values.country,
-                  },
-                url: webApiUrl,
-                method: 'post',
-    
-            })
-                .then(function (reponse) {
-                    setResponseValidateForm(true);
-                    console.log(reponse);
-                })
-                .catch(function (erreur) {
-    
-                    window.alert("Une erreur s'est produite, veuillez réessayer");              
-                    console.log(erreur);
-                });
-    
+            dispatch(setNewEvent(values));
         }; 
-
-        
-
-
     };
 
     const validationSchema = yup.object({
@@ -180,7 +116,7 @@ const EventForm = () => {
             country:'FRANCE',
 
         },
-         /* validationSchema: validationSchema, */   
+          validationSchema: validationSchema,   
         onSubmit,
     });
 
