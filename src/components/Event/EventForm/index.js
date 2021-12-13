@@ -45,7 +45,7 @@ const EventForm = () => {
         display: 'none',
     });
     let webApiUrl = 'http://localhost:8080/api/v1/events';
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkwNDcyNTIsImV4cCI6MTYzOTEzMzY1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.M6L_r4JLHAg4fixUdCl9jQKA9lbE9kqP1LsZ0MVfyF4gd4_0PlU-NRmoJCjF-rWTPYseZO-4mlADhHANWwoLsfb8T-yl0-MmkeCVgTZit1ppyB9Gn8pbEtw9H-LO-FTZNZ2G7dOhO6laCdQwg-4Ind-7SFBelp-tW73FCh0cpIQ43pddObuO4R44IYM69ot6AnTbi6RlxLd14Z-wvLDNGktLtGzfKY6rHOJXqjYqNbCHgDepFZAt0BYRMBEmZ_myJx1Y468n7inH_Zc01sDcyf8X0VjUzTSOMuDmhe6rkCBAqkwh61c8MPLIYXEPyoT3aXVLAv3FQC1kNqVAIW2DDA';
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
 
     /* const categorieList = useSelector(
         (state) => state.categories.categorieList
@@ -56,6 +56,21 @@ const EventForm = () => {
     useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
     }, []);
+
+
+    {
+	"title": "encore et encore un match de volley",
+	"description": "venez vous joindre à nous pour ce match de volley !",
+	"date": "2022-02-12 10:55:00",
+	"category": 1,
+	"maxMembers": 2,
+	"author": 3,
+	"picture": "",
+	"address": "16 rue test",
+	"zipcode": "",
+	"city": "Sarcelles",
+	"country": "France"
+}*/
  */
 
 
@@ -76,7 +91,11 @@ const EventForm = () => {
                 isOnline: values.isOnline,
                 category: values.category,
                 date: values.date,
-                place:values.place,
+                adress:values.place,
+                author:values.author,
+                city:values.city,
+                country:values.country,
+
               },
             url: webApiUrl,
             method: 'post',
@@ -124,8 +143,7 @@ const EventForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            title: '',
-            city: '',
+            title: '',           
             description: '',
             maxMembers: '',
             isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
@@ -133,9 +151,14 @@ const EventForm = () => {
             date: new Date(),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
             place: '',
-            picture: '', 
+            picture: '',
+            author: 'TODOWITHTOKEN',
+            city:'TODO',
+            zipcode:'TODO',
+            country:'TODO',
+
         },
-        /* validationSchema: validationSchema, */
+         validationSchema: validationSchema,   
         onSubmit,
     });
 
