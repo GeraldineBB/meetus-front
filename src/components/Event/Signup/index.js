@@ -1,25 +1,24 @@
 import React from "react";
 import './style.scss';
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect, Navigate } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
-import { useState } from "react";
-import { FormError, FormSuccess } from "./tools";
+import { useState, useSelector } from "react";
 
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios"
+import axios from "axios";
+
+import HeaderSignUp from "./HeaderSignup";
 
 
 
-
-
-const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
 
 const validationSchema = yup.object({
   firstname: yup
@@ -33,7 +32,7 @@ const validationSchema = yup.object({
   email: yup.string().email("Entrez un email valide s'il vous plait").required(),
   password: yup
     .string()
-    .matches(PASSWORD_REGEX, "Entrez un mot de passe sécurisé")
+    .matches(PASSWORD_REGEX, "Entrez un mot de passe contenant au moins 8 caractères, une majuscule et un caractère spécial")
     .required(),
   confirmPassword: yup
     .string()
@@ -48,48 +47,46 @@ const validationSchema = yup.object({
 
 
 let webApiUrl = 'http://localhost:8080/api/v1/users';
-let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2Mzg5NTcxNjUsImV4cCI6MTYzOTA0MzU2NSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.cRDNRlFB0oGoGx-WayU3KNvtoR9vJt4r2hx6Icb1qSAfHXkBN_yNDKbHX6iYsBg6jOsJUwfkKu39mDjIKMLKM0uxM57JIHKljpP4XKGLx4u3mluifF9riRqiqVK4fUSt_ySLnQf7itOBY-00fKd6vBd4t-TDHX_wGfUIvWOX-sVDsKPuuTd1HAF1Kt16HjGHl0jFhP020kutXvNrW_yz5Snp4QahrTZELYz7ezhDaRb1CRU9IAsv5PzJb0wDhrphqmcUTPOmI1Fm2FrsM039uDOOGWjjDwh0YUEg6dFMaSRUWmXi5VPqTOU3W4-yALt2vUSlXI5V_aEaS6eAVwz-CQ';
  
 
 
 
 export function SignUpForm(props) {
   
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null); 
- 
-   
-  const onSubmit = async (values) => {
-    alert(JSON.stringify(values, null, 2)); 
- 
-       const { confirmPassword, ...data } = values; 
 
-      const response = await axios({
-            headers: { "Authorization": `Bearer ${tokenStr}` } ,
-             data: data,
-             url: webApiUrl,
-             method: 'post',
+    const [responseFormValidate, setResponseValidate] = useState(false); 
+    
+  
+        const onSubmit = async (values) => {
+          /* alert(JSON.stringify(values, null, 2)); 
+   */
+  
+              axios({
+                   data: {
+                    email : values.email, 
+                    password: values.password, 
+                    lastname: values.lastname, 
+                    firstname: values.firstname, 
+                  },
+                   url: webApiUrl,
+                   method: 'post',
+  
+              })
+              .then(function (reponse) {
+                  //On traite la suite une fois la réponse obtenue 
+                  setResponseValidate(true);
+                  console.log(reponse);
+              })
+              .catch(function (erreur) {
+                  //On traite ici les erreurs éventuellement survenues
+                  console.log(erreur);
+                  window.alert("Une erreur s'est produite, veuillez réessayer");
+              });
+  
+         
+    
+      }; 
 
-        })
-        .then(function (reponse) {
-            //On traite la suite une fois la réponse obtenue 
-            console.log(reponse);
-        })
-        .catch(function (erreur) {
-            //On traite ici les erreurs éventuellement survenues
-            console.log(erreur);
-        }); 
-
-     if (response && response.data) {
-
-          setError(null);
-        setSuccess(response.data.message);  // TODO MSG SUCCESS CREATE OR NOT ET REDIRECTION PAGE LOGIN
-        
-        console.log(response);
-        formik.resetForm();
-    }  
-
-}; 
 
   const formik = useFormik({
     initialValues: {
@@ -104,21 +101,22 @@ export function SignUpForm(props) {
     validationSchema: validationSchema,
   });
 
+/* 
+  console.log("Error: ", formik.errors);  */
 
-  console.log("Error: ", formik.errors); 
+  if (responseFormValidate)  {
+    return <Navigate to="/signup-done" />
+  } 
 
   return (
 
-
     <div>
 
+      <HeaderSignUp />
 
       <h2> Créer un compte </h2>
 
-      {!error && <FormSuccess>{success ? success : ""}</FormSuccess>}
-      {!success && <FormError>{error ? error : ""}</FormError>}
       <form onSubmit={formik.handleSubmit} >
-
 
         <div className='event__form__lastname'>
           <TextField fullWidth label="Votre nom" className="lastname"
@@ -215,8 +213,9 @@ export function SignUpForm(props) {
 
 
     </div>
-
-
+   
 
   );
+
+
 }
