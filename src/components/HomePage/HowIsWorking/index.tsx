@@ -25,6 +25,7 @@ const HowIsWorking = () => {
               sx={{
                 backgroundColor: "#F36B7F",
                 "&:hover": { backgroundColor: "#F8CF61" },
+                mb: '1em'
               }}
               className="buttom"
               variant="contained"

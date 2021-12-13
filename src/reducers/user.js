@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from "../actions/user";
+import { LOGOUT, SET_CURRENT_USER, STOCK_LOGIN_COOKIE } from "../actions/user";
 
 export const initialState = {
     token: null,
@@ -14,6 +14,19 @@ export const initialState = {
           ...state,
           token: action.values.token,
           user: action.values.data.user,
+          logged: true,
+        }
+        case LOGOUT:
+        return {
+          ...state,
+          token: null,
+          user: {},
+          logged: false,
+        }
+        case STOCK_LOGIN_COOKIE:
+        return {
+          ...state,
+          token: action.token,
           logged: true,
         }
       default:

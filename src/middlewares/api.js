@@ -40,7 +40,6 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get("v1/events?limit=3", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -80,7 +79,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get(`v1/events/${action.eventId}`, {
-          headers: { Authorization: `Bearer ${token}` },
+
         })
         .then((response) => {
           console.log(response);
@@ -127,7 +126,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       const token = cookies.get('Pizzeria');
       api
         .get("v1/events", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -149,7 +147,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       const token = cookies.get('Pizzeria');
       api
         .get("v1/events?limit=2", {
-          headers: { Authorization: `Bearer ${token}` },
+
         })
         .then((response) => {
           console.log(response);
@@ -200,7 +198,6 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get("v1/categories?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
