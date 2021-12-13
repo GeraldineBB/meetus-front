@@ -15,7 +15,6 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     cookie.remove("Pizzeria");
-    window.location.reload();
   }
   if (logged === false) {
     return (

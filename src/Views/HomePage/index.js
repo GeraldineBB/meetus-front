@@ -6,7 +6,6 @@ import Categories from "../../components/HomePage/Categories";
 import LinkSection from "../../components/HomePage/LinkSection";
 import Footer from "../../components/Footer";
 import Cards from "../../components/HomePage/Cards";
-import Cookies from "universal-cookie";
 import {useSelector} from "react-redux";
 
 function HomePage() {
