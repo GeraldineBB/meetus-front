@@ -5,14 +5,18 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { logout } from "../../actions/user";
+import Cookies from "universal-cookie";
+import {useEffect} from "react";
 
 function Header() {
   const { logged } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const cookie = new Cookies();
   const handleLogout = () => {
     dispatch(logout());
-  };
-
+    cookie.remove("Pizzeria");
+    window.location.reload();
+  }
   if (logged === false) {
     return (
       <div className="header">

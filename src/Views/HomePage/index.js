@@ -6,8 +6,11 @@ import Categories from "../../components/HomePage/Categories";
 import LinkSection from "../../components/HomePage/LinkSection";
 import Footer from "../../components/Footer";
 import Cards from "../../components/HomePage/Cards";
+import Cookies from "universal-cookie";
+import {useSelector} from "react-redux";
 
 function HomePage() {
+  const {logged} = useSelector(state => state.user)
   return (
     <div className="HomePage">
       <Header />
@@ -17,16 +20,25 @@ function HomePage() {
         buttonName={"Voir tous les évènements"}
       />
       <Cards />
-      <LinkSection
-        title={"Comment fonctionne Meet Us ?"}
-        buttonName={"Voir tous les évènements"}
-      />
-      <HowIsWorking />
-      <LinkSection
-        title={"Toutes les catégories"}
-        buttonName={"Voir toutes les catégories"}
-      />
-      <Categories />
+
+      {logged ? (
+        <>
+          <LinkSection
+            title={"Toutes les catégories"}
+            buttonName={"Voir toutes les catégories"}
+          />
+          <Categories />
+        </>
+      ) : (
+        <>
+          <LinkSection
+            title={"Comment fonctionne Meet Us ?"}
+            buttonName={"Voir tous les évènements"}
+          />
+          <HowIsWorking />
+        </>
+      )}
+
       <Footer />
     </div>
   );

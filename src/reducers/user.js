@@ -1,10 +1,10 @@
-import { LOGOUT, SET_CURRENT_USER } from "../actions/user";
+import { LOGOUT, SET_CURRENT_USER, STOCK_LOGIN_COOKIE } from "../actions/user";
 
 export const initialState = {
     token: null,
     user: {
     },
-    logged: true,
+    logged: false,
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -22,6 +22,12 @@ export const initialState = {
           token: null,
           user: {},
           logged: false,
+        }
+        case STOCK_LOGIN_COOKIE:
+        return {
+          ...state,
+          token: action.token,
+          logged: true,
         }
       default:
         return state;
