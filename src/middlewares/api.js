@@ -164,33 +164,25 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_CATEGORIES: {
-      // endpoints to load all cateogories in a list
+      // endpoints to load all categories 
+
+     const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
+
       api
-        .get("v1/categories", {})
+        .get("v1/categories?limit=50", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((response) => {
           console.log(response);
           store.dispatch(setCategories(response.data));
         })
         .catch((error) =>
-          console.log("problème de chargement des catégories", error)
+          console.log("on a une erreur sur les 6 categories de la home", error)
         );
       next(action);
       break;
     }
-    /* case LOAD_EVENT_INFO_FOR_EDIT_FORM:{
-
-      api.get(`/events/${action.eventId}`,  {})
-      .then((response)=> {
-        console.log(response);
-        store.dispatch(setEventInfoForEditForm(response.data)); 
-  
-      })
-      .catch((error) =>
-      console.log("on a une erreur sur les info de l'event", error)
-      );
-      next(action);
-      break;
-    } */
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
 

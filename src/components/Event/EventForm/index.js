@@ -48,13 +48,13 @@ const EventForm = () => {
     let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
     
     
-    const categorieList = useSelector(
+      const dispatch = useDispatch();
+    
+
+      const categorieList = useSelector(
         (state) => state.categories.categorieList
       );
-
-    console.log(categorieList);  
     
-      const dispatch = useDispatch();
     
       useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
@@ -76,7 +76,7 @@ const EventForm = () => {
                 description: values.description,
                 maxMembers:values.maxMembers ,
                 isOnline: values.isOnline,
-                category: values.category,
+                category: values.category.id,
                 date: values.date,
                 adress:values.place,
                 author:values.author,
@@ -145,7 +145,7 @@ const EventForm = () => {
             country:'TODO',
 
         },
-         validationSchema: validationSchema,   
+         /* validationSchema: validationSchema, */   
         onSubmit,
     });
 
@@ -229,11 +229,10 @@ const EventForm = () => {
                         <Select
                             labelId="event_form_single_select_label"
                             id="event_form_single_select"
-                            label="categorySelect"
-                            name="categorySelect"
-                            defaultValue=""
+                            label="category"
+                            name="category"                           
                             type="select"
-                            value={formik.values.categorySelect}
+                            value={formik.values.category}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
