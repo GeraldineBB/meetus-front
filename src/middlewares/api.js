@@ -95,26 +95,27 @@ const apiMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TO_EVENT: {
       const eventId = action.eventId;
 
-      // envoyer le token
-
       const cookies = new Cookies();
       const token = cookies.get('Pizzeria');
 
-      api
-        .post(`v1/events/${eventId}/add`, { headers: eventId, token })
-        .then((response) => {
-          console.log(response);
-          console.log(
-            "ici je récupère les données de la requête en post",
-            response.data
-          );
-        })
-        .catch((error) =>
-          console.log(
-            "on a une erreur sur l'ajout d'un membre à un event",
-            error
-          )
-        );
+        axios({
+          headers: { "Authorization": `Bearer ${token}` } ,
+           data: {
+             eventId: eventId, 
+           },
+           url: `http://localhost:8080/api/v1/events/${eventId}/add`, 
+           method: 'post',
+
+      })
+      .then(function (reponse) {
+          //On traite la suite une fois la réponse obtenue 
+          console.log(reponse.data);
+      })
+      .catch(function (erreur) {
+          //On traite ici les erreurs éventuellement survenues
+          console.log(erreur);
+      });
+
       next(action);
       break;
     }

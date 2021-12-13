@@ -31,12 +31,7 @@ import HeaderSignUp from "../Signup/HeaderSignup";
 import LocationAutoComplete from '../Tools';
 
 
-
-import Thumb from "../Tools/Thumb";
-
-import { LOAD_CATEGORIES } from "../../../actions/events";
-
-
+//TODO CORRIGER ERREUR ADD EVENTS
 
 
 const EventForm = () => {
@@ -44,21 +39,20 @@ const EventForm = () => {
     const Input = styled('input')({
         display: 'none',
     });
+    const [value, setValue] = React.useState(new Date());
     let webApiUrl = 'http://localhost:8080/api/v1/events';
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
-    
-    
-    const categorieList = useSelector(
-        (state) => state.categories.categorieList
-      );
+    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkwNDcyNTIsImV4cCI6MTYzOTEzMzY1Miwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.M6L_r4JLHAg4fixUdCl9jQKA9lbE9kqP1LsZ0MVfyF4gd4_0PlU-NRmoJCjF-rWTPYseZO-4mlADhHANWwoLsfb8T-yl0-MmkeCVgTZit1ppyB9Gn8pbEtw9H-LO-FTZNZ2G7dOhO6laCdQwg-4Ind-7SFBelp-tW73FCh0cpIQ43pddObuO4R44IYM69ot6AnTbi6RlxLd14Z-wvLDNGktLtGzfKY6rHOJXqjYqNbCHgDepFZAt0BYRMBEmZ_myJx1Y468n7inH_Zc01sDcyf8X0VjUzTSOMuDmhe6rkCBAqkwh61c8MPLIYXEPyoT3aXVLAv3FQC1kNqVAIW2DDA';
 
-    console.log(categorieList);  
-    
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
+    /* const categorieList = useSelector(
+        (state) => state.categories.categorieList
+    );
+ 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
-      }, [dispatch]);
+    }, []);
+ */
 
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
@@ -66,35 +60,27 @@ const EventForm = () => {
 
 
     const onSubmit = async (values) => {
-        alert(JSON.stringify( values, null, 2));
+        alert(JSON.stringify(values, null, 2));
+
+        const { ...data } = values;
+
 
         axios({
             headers: { "Authorization": `Bearer ${tokenStr}` },
-            data: {
-                title : values.email, 
-                picture:values.picture.name,
-                description: values.description,
-                maxMembers:values.maxMembers ,
-                isOnline: values.isOnline,
-                category: values.category,
-                date: values.date,
-                adress:values.place,
-                author:values.author,
-                city:values.city,
-                country:values.country,
-
-              },
+            data: data,
             url: webApiUrl,
             method: 'post',
 
         })
             .then(function (reponse) {
+                //On traite la suite une fois la réponse obtenue 
                 setResponseValidateForm(true);
                 console.log(reponse);
             })
             .catch(function (erreur) {
 
-                window.alert("Une erreur s'est produite, veuillez réessayer");              
+                window.alert("Une erreur s'est produite, veuillez réessayer");
+                //On traite ici les erreurs éventuellement survenues
                 console.log(erreur);
             });
 
@@ -119,39 +105,50 @@ const EventForm = () => {
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-        picture : yup.object().shape({
-            file: yup.mixed().required(),
-          })
-        //TODO Date VALIDATION
+
+        //TODO DATE ET FILE VALIDATION, TYPEOF YUP A REVOIR 
 
     });
+/* 
+    const [cityId, setCityId] = React.useState({ city_id: '' });
 
+    const handleChange = (value) => {
+        // Here is the value is a selected option label or the new typed value
+        setCityId({ city_id: value });
+    }
+ */
 
+    const [timeForm,setTimeForm]=React.useState({time_form:''});
+
+const handleChange=(value)=>{
+  // Here is the value is a selected option label or the new typed value
+  setTimeForm({time_form:value});
+}
 
     const formik = useFormik({
         initialValues: {
-            title: '',           
+            title: '',
+            city: '',
             description: '',
             maxMembers: '',
-            isOnline: '', 
+            isOnline: '', //TODO VOIR AVEC BACK >> Changer route envoi selon Online ou Présentiel
             category: '',
-            date: new Date(),
-            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
+            date: {timeForm},
             place: '',
-            picture: '',
-            author: 'TODOWITHTOKEN',
-            city:'TODOGoogleAPI',
-            zipcode:'TODO',
-            country:'TODO',
-
+            picture: '', //TODO INPUT FILE FORMIK https://stackoverflow.com/questions/56149756/reactjs-how-to-handle-image-file-upload-with-formik
         },
-         validationSchema: validationSchema,   
+        validationSchema: validationSchema,
         onSubmit,
+        handleChange,             
     });
 
 
 
 
+    /* 
+    
+        console.log("Error: ", formik.errors);  
+     */
 
     if (responseFormValidateForm) {
         return <Navigate to="/" />
@@ -159,9 +156,9 @@ const EventForm = () => {
     return (
 
         <div>
+
             <HeaderSignUp />
             <h2> Créer votre évènement </h2>
-
 
             <form onSubmit={formik.handleSubmit} >
 
@@ -200,19 +197,27 @@ const EventForm = () => {
                     <FormControl fullWidth>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DateTimePicker
-                                label="Date&Time picker"
-                                value={formik.values.date}
-                                onChange={(newDate) => {
-                                    formik.setFieldValue("date", newDate);
-                                }}
-                                renderInput={(params) => <TextField {...params} />}
+                                renderInput={(props) => <TextField {...props} />}
+                                label="Date & Heure"
+                                value={formik.values.date}//TODO REVOIR LA RECUP DE LA VALUE
+                                id="date"
+                                name="date"
+                                format="MM/dd/yyyy"
+                                type="date"
+                                onChange={handleChange}
+                                minDateTime={new Date()}
+                            // TODO (mémo : + 86400000 1 JOUR) TODO Rajouté +1 jour a la date minimum, pas réussi encore.
                             />
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <LocationAutoComplete />
+                    <LocationAutoComplete className="eventForm"
+                        id="place"
+                        name="place"
+                        value={formik.values.place}
+                        onChange={formik.handleChange} />
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -237,36 +242,34 @@ const EventForm = () => {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
-                            {categorieList.map((category) => (
+                            {/* //TODO ICI UNE MAP DE CATEGORIE A VERIFIER SI CA FONCTIONNE et renvoyé id
+                              {categorieList.map((category) => (
                                 
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
-                       ))}   
+                       ))}   */}
                             <MenuItem value={2}>Category2</MenuItem>
                             <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
 
+                {/* //TODO  REUSSIR A RECUPERER UN INPUT FILE ET LENVOYER AU BACK */}
                 <div className='event__form__photo'>
                     <FormControl fullWidth>
                         <label htmlFor="contained-button-file">
-                            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => {
-                                formik.setFieldValue("picture", event.currentTarget.files[0]);
-                            }} />
+                            <Input accept="image/*" id="contained-button-file" multiple type="file" />
                             <Button
                                 sx={{ backgroundColor: '#9FBFFF', '&:hover': { backgroundColor: '#82B5A5' } }}
                                 fullWidth variant="contained"
                                 component="span">
                                 Téléchargez votre image de couverture d'évènement
                             </Button>
-                            
+
                         </label>
                     </FormControl>
                 </div>
-                <div className='event__form__photo'>
-                    <Thumb file={formik.values.picture} />
-                </div>
+
                 <div className='event__form__description'>
                     <TextField fullWidth label="Votre description"
                         className="eventForm"
@@ -299,9 +302,7 @@ const EventForm = () => {
                         </Button>
                     </FormControl>
                 </div>
-
             </form>
-
         </div>
 
     );

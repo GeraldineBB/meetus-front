@@ -30,8 +30,11 @@ const EventContent = ({ eventId }) => {
 
   useEffect(() => {
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
-    console.log(eventInfoPage);
-  }, []);
+    console.log(eventInfoPage); 
+
+
+  }, [dispatch, eventId]);
+
 
   if (loading) {
     return <div>coucou</div>;
