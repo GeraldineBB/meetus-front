@@ -17,6 +17,7 @@ import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
+import { NavLink } from "react-router-dom";
 
 const EventContent = ({ eventId }) => {
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
@@ -99,7 +100,22 @@ const EventContent = ({ eventId }) => {
           <p className="eventContent__detail__zipcode">
             {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
           </p>
-          {logged && (
+          {!logged ? (
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+              <Button
+                size="small"
+                variant="contained"
+                className="card__button"
+                sx={{
+                  width: "60%",
+                  backgroundColor: "#F36B7F",
+                  "&:hover": { backgroundColor: "#F8CF61" },
+                }}
+              >
+                Rejoindre
+              </Button>
+            </NavLink>
+          ) : (
             <Button
               size="small"
               variant="contained"
