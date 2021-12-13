@@ -23,7 +23,6 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios";
 
 
 import HeaderSignUp from "../../Signup/HeaderSignup";

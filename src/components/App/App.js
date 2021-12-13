@@ -9,6 +9,7 @@ import { SignUpForm } from "../Signup";
 import EventForm from "../Event/EventForm";
 import EventEdit from "../../Views/EventEdit";
 import RedirectSignup from "../Signup/Loading";
+import Test from "../Event/Test";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
 
     <div className="App">
       <Routes>
+        <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/signup-done" element={<RedirectSignup />} />
         <Route path="/login" element={<LoginPage />} />

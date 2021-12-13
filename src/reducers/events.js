@@ -11,7 +11,9 @@ import {
   SET_SELECT_CATEGORIES_EVENT_LIST,
   SET_INFO_FOR_EVENTPAGE,
   SET_VALIDATE_FORM, 
-  EDIT_EVENT, 
+  EDIT_EVENT,
+  SET_NEW_EVENT, 
+  SET_NEW_EVENT_ONLINE,
 } from "../actions/events.js";
 
 export const initialState = {
@@ -103,6 +105,16 @@ const reducer = (state = initialState, action = {}) => {
         return {
           ...state, 
           eventInfoPage: action.values, 
+        }
+        case SET_NEW_EVENT:
+        return {
+          ...state,
+          setValidateForm: true,
+        }
+        case SET_NEW_EVENT_ONLINE:
+        return {
+          ...state,
+          setValidateForm: true,
         }
     default:
       return state;
