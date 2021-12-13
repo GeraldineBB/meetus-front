@@ -13,7 +13,7 @@ import { Container } from '@mui/material';
 const CardPresentation = () => {
   return (
     <div className="card">
-      <Container maxWidth="lg" sx={{ mt: 6, mb: 8 }}>
+      <Container maxWidth="lg" sx={{ mt: 3, mb: 5 }}>
         <Grid
           container
           direction="row-reverse"
@@ -21,11 +21,14 @@ const CardPresentation = () => {
           alignItems="center"
         >
           <Grid item md={4}>
-            <Card sx={{ maxWidth: 345 }} className="card__single">
+            <Card sx={{ 
+            maxWidth: 345,         
+            mb: {xs: 1, sm: 1, md: 0, lg: 0},
+            }} className="card__single">
               <CardMedia
                 component="img"
                 height="180"
-                image={`${process.env.PUBLIC_URL}/images/music.jpg`}
+                image={`${process.env.PUBLIC_URL}/illustrations/camera-illu.svg`}
                 alt="explaining how to use create an event"
               />
               <CardActions sx={{ display: "flex", justifyContent: "center" }}>
@@ -36,43 +39,44 @@ const CardPresentation = () => {
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h5"
+                  variant="h4"
                   component="div"
                 ></Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                  velit rerum, eaque incidunt dolorum beatae qui dolore!
-                  Voluptas itaque nam, repudiandae recusandae assumenda eos
-                  facere, laboriosam explicabo sed tempora corrupti?
+                  Vous ne savez pas quoi faire ce week-end ? 
+                  Parcourez la liste des évènements et choisissez celui qui vous convient ! 
+                  Meet Us, c'est l'occasion de tester de nouvelles activités ! 
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item md={4}>
-            <Card sx={{ maxWidth: 345 }} className="card__single">
+            <Card sx={{ 
+              maxWidth: 345,
+              mb: {xs: 1, sm: 1, md: 0, lg: 0},
+              }} className="card__single">
               <CardMedia
                 component="img"
                 height="180"
-                image={`${process.env.PUBLIC_URL}/images/music.jpg`}
+                image={`${process.env.PUBLIC_URL}/illustrations/music-illu.svg`}
                 alt="explaining how to use create an event"
               />
               <CardActions sx={{ display: "flex", justifyContent: "center" }}>
                 <Button>
-                  <Link to="/TODOCREEREVENT">Organiser un évènement</Link>
+                  <Link to="/TODOCREEREVENT" sx={{textDecoration: "none"}}>Organiser un évènement </Link>
                 </Button>
               </CardActions>
 
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h5"
+                  variant="h4"
                   component="div"
                 ></Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                  velit rerum, eaque incidunt dolorum beatae qui dolore!
-                  Voluptas itaque nam, repudiandae recusandae assumenda eos
-                  facere, laboriosam explicabo sed tempora corrupti?
+                  Vous avez une passion que vous souhaitez partager ? 
+                  Avec MeetUs vous pouvez trouver vos prochains compagnons ! 
+                  Etre entouré vous permettra d'aller au bout de vos envies...
                 </Typography>
               </CardContent>
             </Card>
