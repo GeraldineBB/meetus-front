@@ -17,7 +17,9 @@ import {
   setInfoForEventPage,
 } from "../actions/events";
 import { LOGIN, login, setCurrentUser } from "../actions/user";
-import { useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import { set } from "date-fns";
+
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
@@ -32,9 +34,9 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENTS_FOR_HOME: {
       // endpoints to load the 3 next events for home
 
-      const {
-        user: { token },
-      } = store.getState();
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
+      console.log(token)
 
       api
         .get("v1/events?limit=3", {
@@ -55,9 +57,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
-      const {
-        user: { token },
-      } = store.getState();
+     const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
 
       api
         .get("v1/categories?limit=6", {
@@ -74,9 +75,8 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_INFO_FOR_PAGE_EVENT: {
-      const {
-        user: { token },
-      } = store.getState();
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
 
       api
         .get(`v1/events/${action.eventId}`, {
@@ -98,9 +98,8 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       // envoyer le token
 
-      const {
-        user: { token },
-      } = store.getState();
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
 
       api
         .post(`v1/events/${eventId}/add`, { headers: eventId, token })
@@ -123,9 +122,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENT_LIST_IN_PROGRESS: {
       // endpoints to load 6 cateogories for home
 
-      const {
-        user: { token },
-      } = store.getState();
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
       api
         .get("v1/events", {
           headers: { Authorization: `Bearer ${token}` },
@@ -146,10 +144,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENT_LIST_ARCHIVED: {
       // endpoints to load 6 cateogories for home
 
-      const {
-        user: { token },
-      } = store.getState();
-
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
       api
         .get("v1/events?limit=2", {
           headers: { Authorization: `Bearer ${token}` },
@@ -198,9 +194,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
 
-      const {
-        user: { token },
-      } = store.getState();
+      const cookies = new Cookies();
+      const token = cookies.get('Pizzeria');
 
       api
         .get("v1/categories?limit=50", {
@@ -220,6 +215,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOGIN: {
+      const cookies = new Cookies();
       api
         .post("/login_check", {
           username: action.values.email,
@@ -228,6 +224,8 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(setCurrentUser(response.data));
+          const {user: { token }} = store.getState();
+          cookies.set("Pizzeria", token);
         })
         .catch((error) => console.log("on a une erreur sur la ", error));
       next(action);

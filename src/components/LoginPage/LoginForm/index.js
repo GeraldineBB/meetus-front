@@ -6,10 +6,16 @@ import { Formik, Form, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { login } from "../../../actions/user";
+import Cookies from 'universal-cookie';
 
 export default function LoginForm() {
   const navigate = useNavigate()
   const {logged} = useSelector(state => state.user)
+  const cookies = new Cookies();
+ 
+cookies.set('myCat', 'Pacman',);
+console.log(cookies.get('myCat'));
+
   const handleVerify = () => {
     if(logged == true){
       console.log(logged)
@@ -17,7 +23,9 @@ export default function LoginForm() {
     }
     return navigate("/login");
   }
+  
   handleVerify();
+
   const dispatch = useDispatch()
   return (
     <div>
