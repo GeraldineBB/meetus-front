@@ -2,7 +2,10 @@ import "./style.scss";
 import Button from "@mui/material/Button";
 import Logo from "../../assets/logo/logoWhite.png";
 import { NavLink } from "react-router-dom";
+
 function Header() {
+
+  
   return (
     <div className="header">
       <div className="header__logo">
@@ -28,7 +31,7 @@ function Header() {
           >
             S'inscrire
           </Button>
-        </NavLink>
+        </NavLink> 
       </div>
     </div>
   );
