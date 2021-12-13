@@ -135,7 +135,7 @@ const EventForm = () => {
             place: '',
             picture: '', 
         },
-        /* validationSchema: validationSchema, */
+         validationSchema: validationSchema, 
         onSubmit,
     });
 
