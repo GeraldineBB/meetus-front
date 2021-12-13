@@ -158,7 +158,11 @@ const EventForm = () => {
             country:'TODO',
 
         },
+<<<<<<< HEAD
          validationSchema: validationSchema,   
+=======
+         validationSchema: validationSchema, 
+>>>>>>> 1b1f628ff1df53309f24b1cbff07a633998e09df
         onSubmit,
     });
 
