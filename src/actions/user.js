@@ -11,3 +11,10 @@ export const setCurrentUser = (values) => ({
     type: SET_CURRENT_USER,
     values
 })
+
+export const LOGOUT = 'LOGOUT'
+
+export const logout = (values) => ({
+    type: LOGOUT,
+    values
+})

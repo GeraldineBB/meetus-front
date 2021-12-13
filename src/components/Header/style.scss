@@ -35,6 +35,21 @@
             margin-right: 1rem;
 
         }
+        &__logout{
+            &:hover {background-color: darken(#F36B7F, 20%);}
+            background-color: #F36B7F;
+            display: flex;
+            justify-items: center;
+            margin-right: 1rem;
+
+        }
+        &__account{
+            background-color: #F8CF61;
+            &:hover {background-color: darken(#F8CF61, 20%) ;}
+            margin-right: 1rem;
+            text-decoration: none;
+
+        }
     }
     
     

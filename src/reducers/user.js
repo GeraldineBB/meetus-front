@@ -1,10 +1,10 @@
-import { SET_CURRENT_USER } from "../actions/user";
+import { LOGOUT, SET_CURRENT_USER } from "../actions/user";
 
 export const initialState = {
     token: null,
     user: {
     },
-    logged: false,
+    logged: true,
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -15,6 +15,13 @@ export const initialState = {
           token: action.values.token,
           user: action.values.data.user,
           logged: true,
+        }
+        case LOGOUT:
+        return {
+          ...state,
+          token: null,
+          user: {},
+          logged: false,
         }
       default:
         return state;

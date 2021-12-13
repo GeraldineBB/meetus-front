@@ -38,7 +38,7 @@ xhr.js:210 GET http://localhost:8080/api/v1/categories 401 (Unauthorized)
 */
 //TODO CORRIGER ERREUR ADD EVENTS
 
-const EventForm = () => {
+const EventEdit = () => {
   const Input = styled("input")({
     display: "none",
   });
@@ -308,4 +308,4 @@ const EventForm = () => {
   );
 };
 
-export default EventForm;
+export default EventEdit;
