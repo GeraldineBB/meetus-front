@@ -10,9 +10,8 @@ import LinkSection from "../../components/HomePage/LinkSection";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
-
 import { useSelector, useDispatch } from "react-redux";
-
+import GoogleMaps from "./GoogleMaps";
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
@@ -26,13 +25,14 @@ const EventContent = ({ eventId }) => {
 
   const { logged } = useSelector((state) => state.user);
 
+  const key = 'AIzaSyBHXnM8D1D3pfOMK2NZQs_U3MGLMmWjYnE';
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
     console.log(eventInfoPage); 
-
-
+    
   }, [dispatch, eventId]);
 
 
@@ -79,11 +79,8 @@ const EventContent = ({ eventId }) => {
           </div>
         </div>
         <div className="eventContent__detail">
-          <div className="eventContent__detail__map">
-            <img
-              alt="event-illu"
-              src={`${process.env.PUBLIC_URL}/illustrations/eventPage.svg`}
-            />
+          <div className="eventContent__detail__map" style={{width: "300px", height: "200px", position: "relative"}}>
+            <GoogleMaps />
           </div>
           <p className="eventContent__detail__date">
             {new Date(eventInfoPage.event.date).toLocaleDateString("fr-FR", {
