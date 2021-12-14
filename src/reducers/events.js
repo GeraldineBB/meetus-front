@@ -10,6 +10,7 @@ import {
   SET_EVENT_LIST_IN_PROGRESS,
   SET_SELECT_CATEGORIES_EVENT_LIST,
   SET_INFO_FOR_EVENTPAGE,
+  SET_CURRENT_LATITUDE_LONGITUDE,
 } from "../actions/events.js";
 
 export const initialState = {
@@ -26,6 +27,8 @@ export const initialState = {
   eventInfoPage: [], 
   loading: true, 
   eventCurrentInfo: [],
+  currentLng: null,
+  currentLat: null,
 
 };
 
@@ -90,6 +93,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state, 
         loading: false, 
         eventInfoPage: action.value, 
+      }
+    case SET_CURRENT_LATITUDE_LONGITUDE:
+      return{
+        ...state,
+        currentLat: action.lat,
+        currentLng: action.lng
       }
     default:
       return state;

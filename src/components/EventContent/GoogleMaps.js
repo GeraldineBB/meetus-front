@@ -1,21 +1,27 @@
 import { Map, GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from 'react';
+import { useSelector } from "react-redux";
+
+// const Lat = () => {
+//   const {currentLat} = useSelector(state => state.events);
+//   return {currentLat};
+// }
+
+// const Lng = () => {
+//   const {currentLng} = useSelector(state => state.events);
+//   return {currentLng};
+// }
 
 export class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {lat: '48.864716', lng: '2.349014'};
-  }
-
-  render() {
+  render(props) {
     return (
       <Map
         google={this.props.google}
         zoom={14}
         initialCenter={
           {
-            lat: this.state.lat,
-            lng: this.state.lng
+            lat: this.props.currentLat,
+            lng: this.props.currentLng
           }
         }
       />

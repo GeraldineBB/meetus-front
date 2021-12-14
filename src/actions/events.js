@@ -170,3 +170,11 @@ export const setResponse = () => ({
   type: SET_RESPONSE,
   
 });
+
+export const SET_CURRENT_LATITUDE_LONGITUDE = 'SET_CURRENT_LATITUDE_LONGITUDE'
+
+export const setCurrentLatitudeLongitude = (lat, lng) => ({
+  type: SET_CURRENT_LATITUDE_LONGITUDE,
+  lat,
+  lng,
+})
