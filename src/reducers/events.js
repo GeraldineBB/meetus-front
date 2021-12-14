@@ -26,6 +26,8 @@ export const initialState = {
   eventInfoPage: [], 
   loading: true, 
   eventCurrentInfo: [],
+  currentLng: null,
+  currentLat: null,
 
 };
 

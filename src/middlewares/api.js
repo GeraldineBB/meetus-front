@@ -16,9 +16,9 @@ import {
   setCategoriesForHome,
   setInfoForEventPage,
 } from "../actions/events";
-import { LOGIN, login, setCurrentUser } from "../actions/user";
+import { LOGIN, setCurrentUser } from "../actions/user";
 import Cookies from 'universal-cookie';
-import { set } from "date-fns";
+
 
 
 // link to the API in order to put only endpoints in switch case
@@ -74,9 +74,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_INFO_FOR_PAGE_EVENT: {
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-
       api
         .get(`v1/events/${action.eventId}`, {
 
@@ -121,9 +118,6 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_EVENT_LIST_IN_PROGRESS: {
       // endpoints to load 6 cateogories for home
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
       api
         .get("v1/events", {
         })
@@ -142,9 +136,6 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
       // endpoints to load 6 cateogories for home
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
       api
         .get("v1/events?limit=2", {
 
@@ -192,10 +183,6 @@ const apiMiddleware = (store) => (next) => (action) => {
     } */
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-
       api
         .get("v1/categories?limit=50", {
         })

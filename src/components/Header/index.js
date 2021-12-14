@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { logout } from "../../actions/user";
 import Cookies from "universal-cookie";
-import {useEffect} from "react";
 
 function Header() {
   const { logged } = useSelector((state) => state.user);
