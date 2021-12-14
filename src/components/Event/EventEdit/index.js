@@ -31,15 +31,12 @@ import HeaderSignUp from "../../Signup/HeaderSignup";
 import LocationAutoComplete from '../Tools';
 
 
-
 import Thumb from "../Tools/Thumb";
 
 import { LOAD_INFO_FOR_PAGE_EVENT, LOAD_CATEGORIES, editEvent, setNewEvent, setNewEventOnline} from "../../../actions/events";
 
 
-
-
-const EventEdit = ({eventId}) => {
+const EventEdit = ({eventId, eventInfoPage}) => {
 
     const Input = styled('input')({
         display: 'none',
@@ -60,9 +57,9 @@ const EventEdit = ({eventId}) => {
 
     useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
-    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
-    console.log(eventInfoPage);     
-    }, [dispatch, eventId]);
+    // dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
+    // console.log(eventInfoPage);     
+    }, [dispatch]);
 
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
@@ -107,10 +104,6 @@ const EventEdit = ({eventId}) => {
         //TODO Date VALIDATION
 
     });
-
-    // const myForm = () => {
-        
-    // }
 
 
     const formik = useFormik({

@@ -10,6 +10,7 @@ import Footer from "../../components/Footer";
 
 const EventEdition = () => {
 
+
   let { id } = useParams();
 
   return (
