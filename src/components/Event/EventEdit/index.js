@@ -54,31 +54,38 @@ export default function EventEdit ({eventId}) {
 
 
     useEffect(() => {
-    dispatch({ type: LOAD_CATEGORIES });
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
-    console.log(eventInfoPage);     
+    console.log(eventInfoPage);  
+    dispatch({ type: LOAD_CATEGORIES });
+   
     }, [dispatch, eventId]);
 
+    if (loading) {
+        return <div>coucou</div>;
+      }
 
     return (
 
     <div>
 
         <Formik
+            enableReinitialize={true} 
+
             initialValues={
                 {
-                    title: '',
-                    description: '',
-                    mawMembers: '',
-                    isOnline: '', 
-                    category: '',
+                    title: eventInfoPage.event.title,
+                    description: eventInfoPage.event.description,
+                    mawMembers: eventInfoPage.event.maxMembers,
+                    isOnline: eventInfoPage.event.isOnline, 
+                    category: eventInfoPage.event.category.name,
                     date: format(new Date(), 'yyyy/MM/dd kk:mm:ss'),
                     /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-                    place: '',
-                    picture: '',
-                    city:'',
-                    // zipcode:'38000',
-                    // country:'FRANCE',
+                    address: eventInfoPage.event.address,
+                    picture: eventInfoPage.event.picture.name,
+                    author: eventInfoPage.event.author.id,
+                    city: eventInfoPage.event.city,
+                    zipcode: eventInfoPage.event.zipcode,
+                    country: eventInfoPage.event.country,
                 }
                 
             } 
@@ -239,10 +246,7 @@ export default function EventEdit ({eventId}) {
                     </FormControl>
                     </div>
 
-
-
                     </Form>
-
 
                 </div>
 
