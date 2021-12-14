@@ -1,4 +1,4 @@
-import { Map, GoogleApiWrapper } from "google-maps-react";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import React, { Component} from 'react';
 
 export class MapContainer extends Component {
@@ -14,7 +14,13 @@ export class MapContainer extends Component {
             lng: this.props.currentLng
           }
         }
-      />
+        
+      >
+        <Marker
+          onClick={this.onMarkerClick}
+          name={'Kenyatta International Convention Centre'}
+        />
+      </Map>
     );
   }
 }
