@@ -40,7 +40,7 @@ import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 
 console.log(format(new Date(), 'yyyy-dd-MM kk:mm:ss'))
 
-const Test = () => {
+const EventForm = () => {
 
     const Input = styled('input')({
         display: 'none',
@@ -275,4 +275,4 @@ const Test = () => {
 };
 
 
-export default Test;
+export default EventForm;

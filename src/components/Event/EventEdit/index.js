@@ -35,7 +35,7 @@ import Thumb from "../Tools/Thumb";
 import { LOAD_INFO_FOR_PAGE_EVENT, LOAD_CATEGORIES, editEvent, setNewEvent, setNewEventOnline} from "../../../actions/events";
 
 
-const EventEdit = ({eventId, eventInfoPage}) => {
+const EventEdit = ({eventId}) => {
 
     const Input = styled('input')({
         display: 'none',
