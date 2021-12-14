@@ -244,7 +244,6 @@ const apiMiddleware = (store) => (next) => (action) => {
             category: action.values.category,
             maxMembers:action.values.maxMembers,
             picture: action.values.picture.name,
-            author: action.values.author,
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
@@ -280,9 +279,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture.name,
-            author: action.values.author,
-            address: action.values.address,
+            picture: action.values.picture.name,          
             isOnline: action.values.picked,
         },
            url: 'http://localhost:8080/api/v1/events?type=online', 
@@ -292,6 +289,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       .then(function (reponse) {
           //TODO setResponseValidateForm(true);
           console.log(reponse.data);
+          console.log("EVENT CREER");
       })
       .catch(function (erreur) {
         window.alert("Une erreur s'est produite, veuillez réessayer"); 
