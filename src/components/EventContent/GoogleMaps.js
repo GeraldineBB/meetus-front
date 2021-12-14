@@ -2,6 +2,11 @@ import { Map, GoogleApiWrapper } from "google-maps-react";
 import React, { Component } from 'react';
 
 export class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {lat: '48.864716', lng: '2.349014'};
+  }
+
   render() {
     return (
       <Map
@@ -9,8 +14,8 @@ export class MapContainer extends Component {
         zoom={14}
         initialCenter={
           {
-            lat: -1.2884,
-            lng: 36.8233
+            lat: this.state.lat,
+            lng: this.state.lng
           }
         }
       />
@@ -20,10 +25,3 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: "AIzaSyBHXnM8D1D3pfOMK2NZQs_U3MGLMmWjYnE",
 })(MapContainer);
-
-// export default GoogleApiWrapper(
-//   (props) => ({
-//     apiKey: props.apiKey,
-//     language: props.language,
-//   }
-// ))(MapContainer)
