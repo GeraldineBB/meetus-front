@@ -86,7 +86,7 @@ const Test = () => {
             .required('Un lieu est requis'),
         description: yup
             .string('Entré une description')
-            .min(50, 'Une description doit contenir 20 caractères au minimum')
+            .min(50, 'Une description doit contenir 50 caractères au minimum')
             .required('Une description est requise'),
         maxMembers: yup
             .number('Entré un nombre maximum de participant ')
