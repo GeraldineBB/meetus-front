@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
+
 const RedirectEdition = () => {
 
 
     window.setTimeout(function () {
-        window.location.href = '/';
+        window.location.href = '/eventList';
     }, 3000);
 
     return (
@@ -22,7 +23,7 @@ const RedirectEdition = () => {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
 
-                            Vous allez maintenant être redirigé vers la page de l'évènement.
+                            Vous allez maintenant être redirigé vers la liste des évènements.
 
                         </Typography>
                     </CardContent>
