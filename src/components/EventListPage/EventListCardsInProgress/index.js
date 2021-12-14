@@ -109,8 +109,13 @@ export default function EventListCardsInProgress({
                     variant="contained"
                     size="small"
                   >
+                    <Link to={`/edit/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+
                     <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
                     Modifier mon evenement
+
+                    </Link>
+
                   </Button>
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
