@@ -7,10 +7,6 @@ import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { Select } from '@mui/material';
 import { FormControl } from '@mui/material';
-// import { FormLabel } from '@mui/material';
-// import { RadioGroup } from '@mui/material';
-// import { Radio } from '@mui/material';
-// import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -22,10 +18,7 @@ import { format } from 'date-fns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 
-// import { useFormik } from 'formik';
 import { Formik, Form, ErrorMessage } from "formik";
-
-// import * as yup from 'yup';
 
 import LocationAutoComplete from '../Tools';
 
@@ -60,9 +53,9 @@ export default function EventEdit ({eventId}) {
    
     }, [dispatch, eventId]);
 
-    if (loading) {
-        return <div>coucou</div>;
-      }
+    // if (loading) {
+    //     return <div>coucou</div>;
+    //   }
 
     return (
 

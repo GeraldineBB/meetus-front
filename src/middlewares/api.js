@@ -332,11 +332,11 @@ const apiMiddleware = (store) => (next) => (action) => {
         headers: { "Authorization": `Bearer ${token}` },
         data: { 
           title: action.values.title,
-          date: action.values.date,
+          // date: action.values.date,
           city: action.values.city,
           category: action.values.category,
           // picture: action.values.picture,
-          description: action.values.description,
+          // description: action.values.description,
           maxMembers: action.values.maxMembers,
           // address: action.values.address,
           // author: action.values.author.id,
@@ -346,8 +346,6 @@ const apiMiddleware = (store) => (next) => (action) => {
         url: `http://localhost:8080/api/v1/events/${action.eventId}`, 
       })
         .then((response) => {
-          // store.dispatch(setValidateForm());
-          // store.dispatch(setNewEventOnline(response.data));
           alert(JSON.stringify( response.data, null, 2));
           console.log('modif event', response);
         })
