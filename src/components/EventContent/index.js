@@ -15,7 +15,6 @@ import GoogleMaps from "./GoogleMaps";
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
-  setCurrentLatitudeLongitude,
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
 
@@ -25,14 +24,12 @@ const EventContent = ({ eventId }) => {
   const loading = useSelector((state) => state.events.loading);
 
   const { logged } = useSelector((state) => state.user);
-  const { currentLng, currentLat } = useSelector((state) => state.events);
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
-    dispatch(setCurrentLatitudeLongitude(eventInfoPage.event.latitude, eventInfoPage.event.longitude))
-
   }, [dispatch, eventId]);
 
   if (loading) {
@@ -87,7 +84,7 @@ const EventContent = ({ eventId }) => {
               className="eventContent__detail__map"
               style={{ width: "300px", height: "200px", position: "relative" }}
             >
-              <GoogleMaps currentLng={currentLng} currentLat={currentLat}/>
+              <GoogleMaps currentLng={eventInfoPage.event.longitude} currentLat={eventInfoPage.event.latitude}/>
             </div>
           </Box>
 
