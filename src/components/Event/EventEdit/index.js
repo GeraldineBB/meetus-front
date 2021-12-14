@@ -72,13 +72,12 @@ export default function EventEdit ({eventId}) {
             enableReinitialize={true} 
 
             initialValues={
-                {
-                    isOnline: eventInfoPage.event.isOnline, 
+                {                 
                     title: eventInfoPage.event.title,
                     date: eventInfoPage.event.date,
                     city: eventInfoPage.event.city,
-                    category: eventInfoPage.event.category.name,
-                    picture: eventInfoPage.event.picture.name,
+                    category: '',
+                    picture: eventInfoPage.event.picture,
                     description: eventInfoPage.event.description,
                     maxMembers: eventInfoPage.event.maxMembers,
                     /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
@@ -189,9 +188,9 @@ export default function EventEdit ({eventId}) {
                         </label>
                     </FormControl>
                     </div>
-                    <div className='event__form__photo'>
+                    {/* <div className='event__form__photo'>
                         <Thumb file={values.picture} />
-                    </div>
+                    </div> */}
 
                     <div className='event__form__description'>
                     <TextField fullWidth label="Votre description"
@@ -221,7 +220,9 @@ export default function EventEdit ({eventId}) {
                         <Button
                             sx={{ backgroundColor: '#F36B7F', '&:hover': { backgroundColor: '#F8CF61' } }}
                             variant="contained"
-                            type="submit">
+                            type="submit"
+                            // disabled={isSubmitting}
+                            >
                             Modifier mon évènement
                         </Button>
                     </FormControl>
