@@ -20,7 +20,6 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 
 import { Formik, Form, ErrorMessage } from "formik";
 
-import LocationAutoComplete from '../Tools';
 
 import Thumb from "../Tools/Thumb";
 
@@ -39,12 +38,8 @@ export default function EventEdit ({eventId}) {
     const categorieList = useSelector(
     (state) => state.categories.categorieList
     );
-    
-    const loading = useSelector(
-    (state) => state.events.loading);     
 
     const dispatch = useDispatch();
-
 
     useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
@@ -53,16 +48,12 @@ export default function EventEdit ({eventId}) {
    
     }, [dispatch, eventId]);
 
-    // if (loading) {
-    //     return <div>coucou</div>;
-    //   }
 
     return (
 
     <div>
 
         <Formik
-            // enableReinitialize={true} 
 
             initialValues={
                 {                 
@@ -73,19 +64,23 @@ export default function EventEdit ({eventId}) {
                     picture: '',
                     description: '',
                     maxMembers: '',
-                    /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-                    // author: eventInfoPage.event.author.id,
-                    // zipcode: eventInfoPage.event.zipcode,
-                    // country: eventInfoPage.event.country,
-                    // address: eventInfoPage.event.address,
 
                 }
                 
             } 
-            // validate={(values) => {
-            //     // TO DO APRES
-            // }
-            // }
+            validate={(values) => {
+
+                const errors = {};
+                if (!values.title) {
+                    errors.title = "Champ requis";
+                } else if (
+                    values.title<10
+                ) {
+                    errors.title = "Le titre de l'évènement doit contenir au moins 10 caractères";
+                } 
+                return errors;
+            }
+            }
             onSubmit={(values) => {
                 console.log(values); 
                 dispatch (editEvent(values, eventId)); 
@@ -104,10 +99,11 @@ export default function EventEdit ({eventId}) {
 
                 <div className="editEvent"> 
                     <h2>Modifier mon évènement</h2>
-                    <Form onSubmit={handleSubmit} /*method="post" action={myApi}*/>
+                    <Form onSubmit={handleSubmit}>
 
                     <div className='event__form__name'>
-                    <TextField fullWidth label="Nom de l'évènement" className="eventForm"
+                    <TextField fullWidth label="Nom de l'évènement" 
+                        className="eventForm"
                         id="title"
                         name="title"
                         value={values.title}
@@ -133,7 +129,6 @@ export default function EventEdit ({eventId}) {
 
 
                     <div className='event__form__place'>
-                    {/* <LocationAutoComplete /> */}
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -182,9 +177,9 @@ export default function EventEdit ({eventId}) {
                         </label>
                     </FormControl>
                     </div>
-                    {/* <div className='event__form__photo'>
+                    <div className='event__form__photo'>
                         <Thumb file={values.picture} />
-                    </div> */}
+                    </div>
 
                     <div className='event__form__description'>
                     <TextField fullWidth label="Votre description"
