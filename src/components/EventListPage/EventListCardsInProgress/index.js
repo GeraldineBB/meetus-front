@@ -13,6 +13,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
+import { Link } from 'react-router-dom';
+
 import "./style.scss";
 
 export default function EventListCardsInProgress({
@@ -59,9 +61,12 @@ export default function EventListCardsInProgress({
           sx={{ display: "flex", justifyContent: "center" }}
           key={event.id}
         >
+        <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+
           <Card
             sx={{ display: "flex", ml: "3em", position: "relative" }}
             className="eventListCard"
+            
           >
             <CardMedia
               component="img"
@@ -70,7 +75,7 @@ export default function EventListCardsInProgress({
               alt="Live from space album cover"
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-                
+
               <CardContent sx={{ flex: "1 0 auto" }}>
                 <div
                   style={{
@@ -144,6 +149,8 @@ export default function EventListCardsInProgress({
               </CardContent>
             </Box>
           </Card>
+          </Link>
+
         </Grid>
       ))}
     </Grid>
