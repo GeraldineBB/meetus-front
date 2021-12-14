@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './style.scss';
 
 import TextField from '@mui/material/TextField';
@@ -7,10 +7,10 @@ import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
 import { Select } from '@mui/material';
 import { FormControl } from '@mui/material';
-import { FormLabel } from '@mui/material';
-import { RadioGroup } from '@mui/material';
-import { Radio } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
+// import { FormLabel } from '@mui/material';
+// import { RadioGroup } from '@mui/material';
+// import { Radio } from '@mui/material';
+// import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -73,26 +73,27 @@ export default function EventEdit ({eventId}) {
 
             initialValues={
                 {
-                    title: eventInfoPage.event.title,
-                    description: eventInfoPage.event.description,
-                    mawMembers: eventInfoPage.event.maxMembers,
                     isOnline: eventInfoPage.event.isOnline, 
-                    category: eventInfoPage.event.category.name,
-                    date: format(new Date(), 'yyyy/MM/dd kk:mm:ss'),
-                    /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-                    address: eventInfoPage.event.address,
-                    picture: eventInfoPage.event.picture.name,
-                    author: eventInfoPage.event.author.id,
+                    title: eventInfoPage.event.title,
+                    date: eventInfoPage.event.date,
                     city: eventInfoPage.event.city,
-                    zipcode: eventInfoPage.event.zipcode,
-                    country: eventInfoPage.event.country,
+                    category: eventInfoPage.event.category.name,
+                    picture: eventInfoPage.event.picture.name,
+                    description: eventInfoPage.event.description,
+                    maxMembers: eventInfoPage.event.maxMembers,
+                    /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
+                    // author: eventInfoPage.event.author.id,
+                    // zipcode: eventInfoPage.event.zipcode,
+                    // country: eventInfoPage.event.country,
+                    // address: eventInfoPage.event.address,
+
                 }
                 
             } 
-            validate={(values) => {
-                // TO DO APRES
-            }
-            }
+            // validate={(values) => {
+            //     // TO DO APRES
+            // }
+            // }
             onSubmit={(values) => {
             dispatch (editEvent(values, eventId)); 
             }}
@@ -111,26 +112,6 @@ export default function EventEdit ({eventId}) {
                 <div className="editEvent"> 
                     <h2>Modifier mon évènement</h2>
                     <Form onSubmit={handleSubmit} /*method="post" action={myApi}*/>
-
-                    <div className="event__form__if">
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">Type d'évènement</FormLabel>
-                        <RadioGroup
-                            row aria-label="type"
-                        >
-                            <FormControlLabel value="1"
-                                name="isOnline"
-                                control={<Radio />}
-                                onChange={handleChange}
-                                label="En ligne" />
-                            <FormControlLabel value="0"
-                                name="isOnline"
-                                control={<Radio />}
-                                onChange={handleChange}
-                                label="En présentiel" />
-                        </RadioGroup>
-                    </FormControl>
-                    </div>
 
                     <div className='event__form__name'>
                     <TextField fullWidth label="Nom de l'évènement" className="eventForm"
@@ -159,7 +140,7 @@ export default function EventEdit ({eventId}) {
 
 
                     <div className='event__form__place'>
-                    <LocationAutoComplete />
+                    {/* <LocationAutoComplete /> */}
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"

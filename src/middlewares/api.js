@@ -331,24 +331,25 @@ const apiMiddleware = (store) => (next) => (action) => {
       axios({
         headers: { "Authorization": `Bearer ${token}` },
         data: { 
-          title: action.values.email,
+          title: action.values.title,
+          date: action.values.date,
+          city: action.values.city,
+          category: action.values.category,
           picture: action.values.picture.name,
           description: action.values.description,
           maxMembers: action.values.maxMembers,
-          category: action.values.category,
-          date: action.values.date,
-          adress: action.values.place,
-          author: action.values.author,
-          city: action.values.city,
-          country: action.values.country,
+          // address: action.values.address,
+          // author: action.values.author.id,
+          // country: action.values.country,
         },
         method: 'put',
         url: `http://localhost:8080/api/v1/events/${action.eventId}`, 
       })
         .then((response) => {
-          store.dispatch(setValidateForm());
-          store.dispatch(setNewEventOnline(response.data));
-          console.log(response);
+          // store.dispatch(setValidateForm());
+          // store.dispatch(setNewEventOnline(response.data));
+
+          console.log('modif event', response);
         })
         .catch((erreur) => {
           window.alert("Une erreur s'est produite, veuillez réessayer");
