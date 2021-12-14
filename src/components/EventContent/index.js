@@ -25,7 +25,6 @@ const EventContent = ({ eventId }) => {
 
   const { logged } = useSelector((state) => state.user);
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,7 +83,10 @@ const EventContent = ({ eventId }) => {
               className="eventContent__detail__map"
               style={{ width: "300px", height: "200px", position: "relative" }}
             >
-              <GoogleMaps currentLng={eventInfoPage.event.longitude} currentLat={eventInfoPage.event.latitude}/>
+              <GoogleMaps
+                currentLng={eventInfoPage.event.longitude}
+                currentLat={eventInfoPage.event.latitude}
+              />
             </div>
           </Box>
 
