@@ -341,7 +341,7 @@ const apiMiddleware = (store) => (next) => (action) => {
         url: `http://localhost:8080/api/v1/events/${action.eventId}`, 
       })
         .then((response) => {
-          alert(JSON.stringify( response.data, null, 2));
+          // alert(JSON.stringify( response.data, null, 2));
           console.log('modif event', response);
         })
         .catch((erreur) => {

@@ -72,12 +72,28 @@ export default function EventEdit ({eventId}) {
 
                 const errors = {};
                 if (!values.title) {
-                    errors.title = "Champ requis";
+                    errors.title = "Nom de l'évènement requis";
+                } else if (!values.date){
+                    errors.date = "Date requise"; 
+                } else if (!values.city){
+                    errors.date = "Adresse requise";
+                } else if (!values.category){
+                    errors.category = "Categorie requise";
+                } else if (!values.description){
+                    errors.description = "Description requise"; 
+                } else if (!values.maxMembers){
+                    errors.maxMembers= "Nombre de participants requis"; 
                 } else if (
-                    values.title<10
+                    values.title.length<10
                 ) {
                     errors.title = "Le titre de l'évènement doit contenir au moins 10 caractères";
+                } else if (
+                    values.description.length<50
+                ) {
+                    errors.title = "La description de l'évènement doit contenir au moins 50 caractères";
                 } 
+
+
                 return errors;
             }
             }
