@@ -10,7 +10,7 @@ import { FormControl } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-// import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { NavLink, Redirect, Navigate } from "react-router-dom";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { format } from 'date-fns';
@@ -36,8 +36,10 @@ export default function EventEdit ({eventId}) {
     (state) => state.events.eventInfoPage);
 
     const categorieList = useSelector(
-    (state) => state.categories.categorieList
-    );
+    (state) => state.categories.categorieList);
+
+    const edition = useSelector(
+    (state) => state.events.edition); 
 
     const dispatch = useDispatch();
 
@@ -48,6 +50,9 @@ export default function EventEdit ({eventId}) {
    
     }, [dispatch, eventId]);
 
+    if(!edition){
+        return <Navigate to="/edition-done" />
+    }
 
     return (
 
@@ -76,7 +81,7 @@ export default function EventEdit ({eventId}) {
                 } else if (!values.date){
                     errors.date = "Date requise"; 
                 } else if (!values.city){
-                    errors.date = "Adresse requise";
+                    errors.city = "Adresse requise";
                 } else if (!values.category){
                     errors.category = "Categorie requise";
                 } else if (!values.description){
@@ -93,13 +98,13 @@ export default function EventEdit ({eventId}) {
                     errors.title = "La description de l'évènement doit contenir au moins 50 caractères";
                 } 
 
-
                 return errors;
             }
             }
             onSubmit={(values) => {
                 console.log(values); 
                 dispatch (editEvent(values, eventId)); 
+                
             }}
             >
             {({

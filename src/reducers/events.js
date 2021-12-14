@@ -31,7 +31,7 @@ export const initialState = {
   loading: true, 
   eventCurrentInfo: [],
   setValidateForm: false, 
-
+  edition: true, 
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -104,6 +104,7 @@ const reducer = (state = initialState, action = {}) => {
       case EDIT_EVENT:
         return {
           ...state, 
+          edition: false, 
           eventInfoPage: action.values, 
         }
         case SET_NEW_EVENT:
