@@ -335,7 +335,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           date: action.values.date,
           city: action.values.city,
           category: action.values.category,
-          picture: action.values.picture,
+          // picture: action.values.picture,
           description: action.values.description,
           maxMembers: action.values.maxMembers,
           // address: action.values.address,
@@ -348,11 +348,11 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // store.dispatch(setValidateForm());
           // store.dispatch(setNewEventOnline(response.data));
-
+          alert(JSON.stringify( response.data, null, 2));
           console.log('modif event', response);
         })
         .catch((erreur) => {
-          window.alert("Une erreur s'est produite, veuillez réessayer");
+          // window.alert("Une erreur s'est produite, veuillez réessayer");
           console.log(erreur);
         })
       next(action);

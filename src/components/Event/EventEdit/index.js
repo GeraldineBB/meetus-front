@@ -54,9 +54,9 @@ export default function EventEdit ({eventId}) {
 
 
     useEffect(() => {
+    dispatch({ type: LOAD_CATEGORIES });
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
     console.log(eventInfoPage);  
-    dispatch({ type: LOAD_CATEGORIES });
    
     }, [dispatch, eventId]);
 
@@ -69,17 +69,17 @@ export default function EventEdit ({eventId}) {
     <div>
 
         <Formik
-            enableReinitialize={true} 
+            // enableReinitialize={true} 
 
             initialValues={
                 {                 
-                    title: eventInfoPage.event.title,
-                    date: eventInfoPage.event.date,
-                    city: eventInfoPage.event.city,
+                    title: '',
+                    date: format(new Date(), 'yyyy-MM-dd kk:mm:ss'),
+                    city: '',
                     category: '',
-                    picture: eventInfoPage.event.picture,
-                    description: eventInfoPage.event.description,
-                    maxMembers: eventInfoPage.event.maxMembers,
+                    picture: '',
+                    description: '',
+                    maxMembers: '',
                     /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
                     // author: eventInfoPage.event.author.id,
                     // zipcode: eventInfoPage.event.zipcode,
@@ -94,7 +94,8 @@ export default function EventEdit ({eventId}) {
             // }
             // }
             onSubmit={(values) => {
-            dispatch (editEvent(values, eventId)); 
+                console.log(values); 
+                dispatch (editEvent(values, eventId)); 
             }}
             >
             {({
@@ -129,7 +130,7 @@ export default function EventEdit ({eventId}) {
                                 label="Date&Time picker"
                                 value={values.date}
                                 onChange={(newDate) => {
-                                    setFieldValue("date", newDate);
+                                    setFieldValue("date", format(newDate, 'yyyy-MM-dd kk:mm:ss')); 
                                 }}
                                 renderInput={(params) => <TextField {...params} />}
                             />
