@@ -23,33 +23,34 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-
 import HeaderSignUp from "../../Signup/HeaderSignup";
 
-import LocationAutoComplete from '../Tools';
+/* 
+import LocationAutoComplete from '../Tools'; */
 
 
 
 import Thumb from "../Tools/Thumb";
 
-import { LOAD_CATEGORIES, setNewEvent, setNewEventOnline } from "../../../actions/events";
+import { LOAD_CATEGORIES } from "../../../actions/events";
 
+import { format } from 'date-fns';
 
+import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 
+console.log(format(new Date(), 'yyyy-dd-MM kk:mm:ss'))
 
-const EventForm = () => {
+const Test = () => {
 
     const Input = styled('input')({
         display: 'none',
     });
-
+    
       const dispatch = useDispatch();
     
-
       const categorieList = useSelector(
         (state) => state.categories.categorieList
       );
-    
     
       useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
@@ -58,42 +59,39 @@ const EventForm = () => {
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI.
+// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI. LE ISONLINE
 
     const onSubmit = async (values) => {
         /* alert(JSON.stringify( values, null, 2)); */
 
         if (values.isOnline === '1')
-         {
-            alert(JSON.stringify( values.title, null, 2));
-            dispatch(setNewEventOnline(values));
+         {           
+            dispatch(setNewEventOnline(values))
+            console.log(values);
+         
         } else {
-            alert(JSON.stringify( values, null, 2));
-            dispatch(setNewEvent(values));
+            dispatch(setNewEvent(values))
+            console.log(values);
         }; 
     };
 
     const validationSchema = yup.object({
         title: yup
-            .string('Entrer le nom de l\'évènement')
+            .string('Entré le nom de l\'évènement')
             .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
             .required('Le nom de l\'évènement doit être rempli'),
         city: yup
-            .string('Entrer un lieu valide')
+            .string('Entré un lieu valide')
             .min(3, 'Un lieu doit contenir au moins 3 lettres')
             .required('Un lieu est requis'),
         description: yup
-            .string('Entrer une description')
-            .min(20, 'Une description doit contenir 20 caractères au minimum')
+            .string('Entré une description')
+            .min(50, 'Une description doit contenir 50 caractères au minimum')
             .required('Une description est requise'),
         maxMembers: yup
-            .number('Entrer un nombre maximum de participant ')
+            .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-        picture : yup.object().shape({
-            file: yup.mixed().required(),
-          })
-        //TODO Date VALIDATION
 
     });
 
@@ -106,17 +104,17 @@ const EventForm = () => {
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: new Date(),
+            date: format(new Date(), 'yyyy/MM/dd kk:mm:ss'),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-            place: '',
+            address: 'ODOGoogleAPI',
             picture: '',
-            author: 'TODOWITHTOKEN',
-            city:'TODOGoogleAPI',
+            author: '3',
+            city:'',
             zipcode:'38000',
             country:'FRANCE',
 
         },
-          validationSchema: validationSchema,   
+          validationSchema: validationSchema,  
         onSubmit,
     });
 
@@ -173,17 +171,18 @@ const EventForm = () => {
                             <DateTimePicker
                                 label="Date&Time picker"
                                 value={formik.values.date}
+                                format= {format(new Date(), 'yyyy/MM/dd kk:mm:ss')}
                                 onChange={(newDate) => {
-                                    formik.setFieldValue("date", newDate);
+                                    formik.setFieldValue("date", format(newDate, 'yyyy-MM-dd kk:mm:ss'));
                                 }}
                                 renderInput={(params) => <TextField {...params} />}
-                            />
+                            />{/* format(new Date(), 'yyyy/MM/dd kk:mm:ss') */}
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <LocationAutoComplete />
+                    {/* <LocationAutoComplete /> */} {/* //TODO RECUP DATA AUTOCOMPLETION GOOGLE */}
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -212,8 +211,6 @@ const EventForm = () => {
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
                        ))}   
-                            <MenuItem value={2}>Category2</MenuItem>
-                            <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -278,4 +275,4 @@ const EventForm = () => {
 };
 
 
-export default EventForm;
+export default Test;

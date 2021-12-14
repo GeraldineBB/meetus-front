@@ -188,9 +188,9 @@ export const setNewEventOnline = (values) => ({
 
 export const SET_VALIDATE_FORM = 'SET_VALIDATE_FORM';
 
-export const setValidateForm = () => ({
+export const setValidateForm = (values) => ({
   type: SET_VALIDATE_FORM,
-  
+  values
 });
 
 export const EDIT_EVENT = 'EDIT_EVENT';

@@ -26,9 +26,10 @@ import * as yup from 'yup';
 import axios from "axios";
 
 
-import HeaderSignUp from "../Signup/HeaderSignup";
+import HeaderSignUp from "../../Signup/HeaderSignup";
 
-import LocationAutoComplete from '../Tools';
+/* 
+import LocationAutoComplete from '../Tools'; */
 
 
 
@@ -36,10 +37,13 @@ import Thumb from "../Tools/Thumb";
 
 import { LOAD_CATEGORIES } from "../../../actions/events";
 
+import { format } from 'date-fns';
+
+console.log(format(new Date(), 'yyyy-dd-MM kk:mm:ss'))
 
 
 
-const EventForm = () => {
+const Test = () => {
 
     const Input = styled('input')({
         display: 'none',
@@ -66,26 +70,26 @@ const EventForm = () => {
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI.
+// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI. LE ISONLINE
 
     const onSubmit = async (values) => {
         /* alert(JSON.stringify( values, null, 2)); */
 
         if (values.isOnline === '1')
          {
-            alert(JSON.stringify( values.picture.name,webApiUrlOnlineEvent, null, 2));
+            alert(JSON.stringify( values.picture.name, null, 2));
             axios({
                 headers: { "Authorization": `Bearer ${tokenStr}` },
                 data: {
-                    title : values.email, 
+                    title : values.title, 
                     picture: values.picture.name,
                     description: values.description,
                     maxMembers:values.maxMembers ,
                     isOnline: values.picked,
-                    category: values.category.id,
+                    category: values.category,
                     date: values.date,
-                    adress: values.place,
-                    author: values.author,                                   
+                    address: values.place,
+                    author: values.author,                               
                   },
                 url: webApiUrlOnlineEvent,
                 method: 'post',
@@ -104,21 +108,20 @@ const EventForm = () => {
             axios({
                 headers: { "Authorization": `Bearer ${tokenStr}` },
                 data: {
-                    title : values.email, 
-                    picture: values.picture.name,
+                    title : values.title, 
                     description: values.description,
-                    maxMembers:values.maxMembers,
-                    isOnline: values.picked,
-                    category: values.category.id,
                     date: values.date,
-                    adress: values.place,
+                    category: values.category,
+                    maxMembers:values.maxMembers,
+                    picture: values.picture.name,
                     author: values.author,
+                    address: values.address,
                     city: values.city,
                     country: values.country,
-                  },
+                    zipcode: values.zipcode,
+                },
                 url: webApiUrl,
-                method: 'post',
-    
+                method: 'post',    
             })
                 .then(function (reponse) {
                     setResponseValidateForm(true);
@@ -147,17 +150,12 @@ const EventForm = () => {
             .required('Un lieu est requis'),
         description: yup
             .string('Entré une description')
-            .min(20, 'Une description doit contenir 20 caractères au minimum')
+            .min(50, 'Une description doit contenir 20 caractères au minimum')
             .required('Une description est requise'),
         maxMembers: yup
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-        picture : yup.object().shape({
-            file: yup.mixed().required(),
-          })
-        //TODO Date VALIDATION
-
     });
 
 
@@ -169,17 +167,17 @@ const EventForm = () => {
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: new Date(),
+            date: format(new Date(), 'yyyy/MM/dd kk:mm:ss'),
             /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-            place: '',
+            address: 'ODOGoogleAPI',
             picture: '',
-            author: 'TODOWITHTOKEN',
-            city:'TODOGoogleAPI',
+            author: '3',
+            city:'',
             zipcode:'38000',
             country:'FRANCE',
 
         },
-         /* validationSchema: validationSchema, */   
+         validationSchema: validationSchema,  
         onSubmit,
     });
 
@@ -236,17 +234,18 @@ const EventForm = () => {
                             <DateTimePicker
                                 label="Date&Time picker"
                                 value={formik.values.date}
+                                format= {format(new Date(), 'yyyy/MM/dd kk:mm:ss')}
                                 onChange={(newDate) => {
-                                    formik.setFieldValue("date", newDate);
+                                    formik.setFieldValue("date", format(newDate, 'yyyy-MM-dd kk:mm:ss'));
                                 }}
                                 renderInput={(params) => <TextField {...params} />}
-                            />
+                            />{/* format(new Date(), 'yyyy/MM/dd kk:mm:ss') */}
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <LocationAutoComplete />
+                    {/* <LocationAutoComplete /> */} {/* //TODO RECUP DATA AUTOCOMPLETION GOOGLE */}
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -275,8 +274,6 @@ const EventForm = () => {
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
                        ))}   
-                            <MenuItem value={2}>Category2</MenuItem>
-                            <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -341,4 +338,4 @@ const EventForm = () => {
 };
 
 
-export default EventForm;
+export default Test;
