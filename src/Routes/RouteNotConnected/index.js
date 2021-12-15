@@ -6,6 +6,7 @@ import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
 import HomePage from "../../Views/HomePage";
 import { SignUpForm } from "../../components/Signup";
+import RedirectSignup from "../../components/Signup/Loading";
 
 
 function RouteNotConnected() {
@@ -19,6 +20,7 @@ function RouteNotConnected() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/signup-done" element={<RedirectSignup />} />
       <Route path="/events/:id" element={<EventPage />} />
       <Route path="/eventList" element={<EventListPage />} />
       <Route path="/signup" element={<SignUpForm />} />

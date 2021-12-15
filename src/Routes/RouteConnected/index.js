@@ -5,7 +5,7 @@ import EventForm from "../../components/Event/EventForm";
 import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
 import HomePage from "../../Views/HomePage";
-
+import RedirectEventForm from "../../components/Event/EventForm/LoadingCreation";
 
 function RouteConnected() {
   // quand la location change, on applique un effet qui fait
@@ -21,6 +21,7 @@ function RouteConnected() {
       <Route path="/events/:id" element={<EventPage />} />
       <Route path="/eventList" element={<EventListPage />} />
       <Route path="/create" element={<EventForm />} />
+      <Route path="//event-creation-done" element={<RedirectEventForm />} />
       <Route path="/edit/:id" element={<EventEdit />} />
       <Route path="/signup" element={<Navigate to="/" />} />
       <Route path="/login" element={<Navigate to="/" />} />
