@@ -4,7 +4,6 @@ import './style.scss';
 
 import Button from "@mui/material/Button";
 
-
 import Cards from "./Cards";
 import LinkSection from "../../components/HomePage/LinkSection";
 
@@ -13,6 +12,8 @@ import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
 
 import { useSelector, useDispatch } from "react-redux";
+
+import { Navigate } from "react-router-dom";
 
 import { LOAD_INFO_FOR_PAGE_EVENT, ADD_USER_TO_EVENT } from '../../actions/events';
 
@@ -40,7 +41,7 @@ const EventContent = ({eventId}) => {
 
 
   if (loading) {
-    return <div>coucou</div>;
+    return <div>Les données sont en cours de chargement</div>;
   }
 
       return (
@@ -103,8 +104,7 @@ const EventContent = ({eventId}) => {
                   "&:hover": { backgroundColor: "#F8CF61" },
                 }}
                 onClick={() => {
-                  alert('clicked');
-                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId, userId:  1 });
+                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId });
                 }}>
                Rejoindre
               </Button>

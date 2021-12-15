@@ -66,11 +66,13 @@ const EventForm = () => {
 
         if (values.isOnline === '1')
          {           
-            dispatch(setNewEventOnline(values))
+            dispatch(setNewEventOnline(values));
+            setResponseValidateForm(true); 
             console.log(values);
          
         } else {
-            dispatch(setNewEvent(values))
+            dispatch(setNewEvent(values));
+            setResponseValidateForm(true); 
             console.log(values);
         }; 
     };

@@ -9,6 +9,8 @@ import { SignUpForm } from "../Signup";
 import EventForm from "../Event/EventForm";
 import EventEdit from "../../Views/EventEdit";
 import RedirectSignup from "../Signup/Loading";
+import RedirectEdition from "../Event/EventEdit/LoadingEdition";
+
 import Test from "../Event/Test";
 
 function App() {
@@ -19,7 +21,6 @@ function App() {
   const {logged} = useSelector(state => state.user)
   useEffect(
     () => {
-      console.log('on veut scroller !');
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
     },
@@ -39,6 +40,8 @@ function App() {
         <Route path="/create" element={<EventForm />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/edit/:id" element={<EventEdit />} />
+        <Route path="/edition-done" element={<RedirectEdition />} />
+
       </Routes>
     </div>
 
