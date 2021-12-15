@@ -14,7 +14,7 @@ import { FormControlLabel } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -23,12 +23,10 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios";
+import HeaderSignUp from "../../Signup/HeaderSignup";
 
-
-import HeaderSignUp from "../Signup/HeaderSignup";
-
-import LocationAutoComplete from '../Tools';
+/* 
+import LocationAutoComplete from '../Tools'; */
 
 
 
@@ -36,25 +34,23 @@ import Thumb from "../Tools/Thumb";
 
 import { LOAD_CATEGORIES } from "../../../actions/events";
 
+import { format } from 'date-fns';
 
+import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 
+console.log(format(new Date(), 'yyyy-dd-MM kk:mm:ss'))
 
 const EventForm = () => {
 
     const Input = styled('input')({
         display: 'none',
     });
-    let webApiUrl = 'http://localhost:8080/api/v1/events';
-    let tokenStr = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzkzODc0ODQsImV4cCI6MTYzOTQ3Mzg4NCwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGdtYWlsLmNvbSJ9.m1WKw152sWiclYjALSrrnSH-8AS-NOBXpPg-kv4XI1LzNgHINqj84PKZh2NR_VcKXZmN8TAcbq7MhRcTzWw_r848r3Go0CQNjT7Y7JKVhEhqsyJPVurpVmA5jeng7FihB-Aim4TBXTa1dlkd2wZiVLITl3PKa4aE0RipzIJUVTXKvajPy7GsqJjQHQ658i8faVwcU4hb9YvGG5ZxOIY0XQSsKKX_iYAXfndcimojfaIM177ivL_2oQp8BzZkCjLGmq9uLbGqS6U043BryhDaqtt6ezyjNOzCwBDwg8LVxCY06obdGJfXsmgI68H5XKp_QCPHOT5Q2rtS6LrEk6VPeg';
-    
-    
-    const categorieList = useSelector(
-        (state) => state.categories.categorieList
-      );
-
-    console.log(categorieList);  
     
       const dispatch = useDispatch();
+    
+      const categorieList = useSelector(
+        (state) => state.categories.categorieList
+      );
     
       useEffect(() => {
         dispatch({ type: LOAD_CATEGORIES });
@@ -64,48 +60,26 @@ const EventForm = () => {
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
 
-
     const onSubmit = async (values) => {
-        alert(JSON.stringify( values, null, 2));
+        
 
-        axios({
-            headers: { "Authorization": `Bearer ${tokenStr}` },
-            data: {
-                title : values.email, 
-                picture:values.picture.name,
-                description: values.description,
-                maxMembers:values.maxMembers ,
-                isOnline: values.isOnline,
-                category: values.category,
-                date: values.date,
-                adress:values.place,
-                author:values.author,
-                city:values.city,
-                country:values.country,
-
-              },
-            url: webApiUrl,
-            method: 'post',
-
-        })
-            .then(function (reponse) {
-                setResponseValidateForm(true);
-                console.log(reponse);
-            })
-            .catch(function (erreur) {
-
-                window.alert("Une erreur s'est produite, veuillez réessayer");              
-                console.log(erreur);
-            });
-
-
-
+        if (values.isOnline === '1')
+         {           
+            dispatch(setNewEventOnline(values));
+            setResponseValidateForm(true); 
+            console.log(values);
+         
+        } else {
+            dispatch(setNewEvent(values));
+            setResponseValidateForm(true); 
+            console.log(values);
+        }; 
     };
 
     const validationSchema = yup.object({
         title: yup
             .string('Entré le nom de l\'évènement')
-            .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
+            .min(10, 'Un nom d\'évènement doit contenir 3 caractères minimum')
             .required('Le nom de l\'évènement doit être rempli'),
         city: yup
             .string('Entré un lieu valide')
@@ -113,20 +87,15 @@ const EventForm = () => {
             .required('Un lieu est requis'),
         description: yup
             .string('Entré une description')
-            .min(20, 'Une description doit contenir 20 caractères au minimum')
+            .min(50, 'Une description doit contenir 50 caractères au minimum')
             .required('Une description est requise'),
         maxMembers: yup
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-        picture : yup.object().shape({
-            file: yup.mixed().required(),
-          })
-        //TODO Date VALIDATION
-
     });
 
-
+    const today = new Date();
 
     const formik = useFormik({
         initialValues: {
@@ -135,26 +104,27 @@ const EventForm = () => {
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: new Date(),
-            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
-            place: '',
+            date: new Date(new Date().setDate(today.getDate() + 1)),
+            address: 'ODOGoogleAPI',
             picture: '',
-            author: 'TODOWITHTOKEN',
-            city:'TODOGoogleAPI',
-            zipcode:'TODO',
-            country:'TODO',
+            author: '3',
+            city:'',
+            zipcode:'38000',
+            country:'FRANCE',
 
         },
-         validationSchema: validationSchema,   
+          validationSchema: validationSchema,  
         onSubmit,
     });
 
 
 
+/* 
+  console.log("Error: ", formik.errors);  */
 
 
     if (responseFormValidateForm) {
-        return <Navigate to="/" />
+        return <Navigate to="/event-creation-done" />
     }
     return (
 
@@ -171,13 +141,13 @@ const EventForm = () => {
                         <RadioGroup
                             row aria-label="type"
                         >
-                            <FormControlLabel value="online"
-                                name="picked"
+                            <FormControlLabel value="1"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En ligne" />
-                            <FormControlLabel value="realLife"
-                                name="picked"
+                            <FormControlLabel value="0"
+                                name="isOnline"
                                 control={<Radio />}
                                 onChange={formik.handleChange}
                                 label="En présentiel" />
@@ -202,17 +172,18 @@ const EventForm = () => {
                             <DateTimePicker
                                 label="Date&Time picker"
                                 value={formik.values.date}
+                                format= {format(new Date(), 'yyyyy-MM-dd kk:mm:ss')}
                                 onChange={(newDate) => {
-                                    formik.setFieldValue("date", newDate);
+                                    formik.setFieldValue("date", format(newDate, 'yyyy-MM-dd kk:mm:ss'));
                                 }}
                                 renderInput={(params) => <TextField {...params} />}
-                            />
+                            />{/* format(new Date(), 'yyyy/MM/dd kk:mm:ss') */}
                         </LocalizationProvider>
                     </FormControl>
                 </div>
 
                 <div className='event__form__place'>
-                    <LocationAutoComplete />
+                    {/* <LocationAutoComplete /> */} {/* //TODO RECUP DATA AUTOCOMPLETION GOOGLE */}
 
                     <TextField fullWidth label="Lieu" className="eventForm"
                         id="city"
@@ -229,11 +200,10 @@ const EventForm = () => {
                         <Select
                             labelId="event_form_single_select_label"
                             id="event_form_single_select"
-                            label="categorySelect"
-                            name="categorySelect"
-                            defaultValue=""
+                            label="category"
+                            name="category"                           
                             type="select"
-                            value={formik.values.categorySelect}
+                            value={formik.values.category}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur} >
 
@@ -242,8 +212,6 @@ const EventForm = () => {
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>   
                                
                        ))}   
-                            <MenuItem value={2}>Category2</MenuItem>
-                            <MenuItem value={3}>Category3</MenuItem>
                         </Select>
                     </FormControl>
                 </div>

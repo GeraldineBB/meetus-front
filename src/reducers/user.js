@@ -33,6 +33,7 @@ export const initialState = {
           ...state,
           token: action.token,
           logged: true,
+          user: action.user
         }
         case SET_JOIN_EVENT_STATUS:
         return {

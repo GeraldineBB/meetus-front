@@ -18,6 +18,9 @@ import {
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
 
+import { Navigate } from "react-router-dom";
+
+
 const EventContent = ({ eventId }) => {
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
 
@@ -35,7 +38,7 @@ const EventContent = ({ eventId }) => {
   }, [dispatch, eventId]);
 
   if (loading) {
-    return <div>coucou</div>;
+    return <div>Les données sont en cours de chargement</div>;
   }
   return (
     <div className="eventPage">
@@ -121,7 +124,9 @@ const EventContent = ({ eventId }) => {
                   backgroundColor: "#F36B7F",
                   "&:hover": { backgroundColor: "#F8CF61" },
                 }}
-              >
+                onClick={() => {
+                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId });
+                }}>             
                 Rejoindre
               </Button>
             </NavLink>

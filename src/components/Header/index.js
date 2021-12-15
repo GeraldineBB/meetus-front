@@ -14,6 +14,8 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     cookie.remove("Pizzeria");
+    localStorage.removeItem('User')
+    localStorage.removeItem('Token')
   }
   if (logged === false) {
     return (
