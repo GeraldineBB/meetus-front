@@ -34,7 +34,6 @@ export const initialState = {
   edition: true, 
   currentLng: null,
   currentLat: null,
-
 };
 
 const reducer = (state = initialState, action = {}) => {

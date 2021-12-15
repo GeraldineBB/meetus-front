@@ -1,10 +1,15 @@
-import { LOGOUT, SET_CURRENT_USER, STOCK_LOGIN_COOKIE } from "../actions/user";
+import { 
+  LOGOUT, 
+  SET_CURRENT_USER, 
+  STOCK_LOGIN_COOKIE, 
+  SET_JOIN_EVENT_STATUS } from "../actions/user";
 
 export const initialState = {
     token: null,
     user: {
     },
     logged: false,
+    joinEvent: false, 
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -29,6 +34,11 @@ export const initialState = {
           token: action.token,
           logged: true,
           user: action.user
+        }
+        case SET_JOIN_EVENT_STATUS:
+        return {
+          ...state, 
+          joinEvent: true, 
         }
       default:
         return state;

@@ -22,8 +22,8 @@ import {
   setValidateForm, 
   EDIT_EVENT, 
 } from "../actions/events";
-import setResponseValidateForm from '../components/Event/EventForm'
-import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
+import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
+// import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 import Cookies from 'universal-cookie';
 
 
@@ -112,7 +112,8 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          //On traite la suite une fois la réponse obtenue 
+          //When user join the event, status is true and button will change
+          store.dispatch(setJoinEventStatus()); 
           console.log(reponse.data);
       })
       .catch(function (erreur) {

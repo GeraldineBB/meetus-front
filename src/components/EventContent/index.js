@@ -28,6 +28,9 @@ const EventContent = ({ eventId }) => {
 
   const { logged } = useSelector((state) => state.user);
 
+  const { joinEvent } = useSelector((state) => state.user);
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +61,6 @@ const EventContent = ({ eventId }) => {
                     >
                     </DayJS>   */}
             </p>
-
             <p className="eventContent__info__header--author">
               crée par {eventInfoPage.event.author.fullName}
             </p>
@@ -139,7 +141,6 @@ const EventContent = ({ eventId }) => {
                 "&:hover": { backgroundColor: "#F8CF61" },
               }}
               onClick={() => {
-                alert("clicked");
                 dispatch({
                   type: ADD_USER_TO_EVENT,
                   eventId: eventId,
@@ -147,7 +148,7 @@ const EventContent = ({ eventId }) => {
                 });
               }}
             >
-              Rejoindre
+            {!joinEvent ?  'Rejoindre' : 'Inscrit' }
             </Button>
           )}
 
