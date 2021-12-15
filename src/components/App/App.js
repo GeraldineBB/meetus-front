@@ -38,19 +38,6 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signup-done" element={<RedirectSignup />} />
-        <Route path="/event-creation-done" element={<RedirectEventForm />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/events/:id" element={<EventPage />} />
-        <Route path="/eventList" element={<EventListPage />} />
-        <Route path="/create" element={<EventCreation/>} />
-        <Route path="/signup" element={<SignUpForm />} />
-        <Route path="/edit/:id" element={<EventEdit />} />
-        <Route path="/edition-done" element={<RedirectEdition />} />
-
-      </Routes>
       {logged ? <RouteConnected /> : <RouteNotConnected />}
     </div>
   );
