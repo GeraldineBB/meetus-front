@@ -31,15 +31,26 @@ const EventContent = ({ eventId }) => {
   const { joinEvent } = useSelector((state) => state.user);
 
 
+  const { user }   = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
   }, [dispatch, eventId]);
 
+           
   if (loading) {
     return <div>Les données sont en cours de chargement</div>;
   }
+
+  // we want to check if user id is contained in eventInfoPage.event.members
+  if (eventInfoPage.event.members.some (member => member.id === user.id)) {
+    console.log ('inscrit'); 
+  } else {
+    console.log ('pas inscrit'); 
+  }
+
   return (
     <div className="eventPage">
       <div className="eventContent">
@@ -113,6 +124,26 @@ const EventContent = ({ eventId }) => {
           <p className="eventContent__detail__zipcode">
             {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
           </p>
+          {/* /si user id récupéré dans le state est présent dans le tableau eventInfoPage.event.members alors on affiche le bouton inscrit */}
+          {/* { if (user.id === )} */}
+    
+          {logged && eventInfoPage.event.members.some ((member) => {
+            if (member.id === user.id) {
+             return  <Button
+              size="small"
+              variant="contained"
+              className="card__button"
+              sx={{
+                width: "60%",
+                backgroundColor: "#F36B7F",
+                "&:hover": { backgroundColor: "#F8CF61" },
+              }}
+              >             
+              Inscrit
+            </Button>
+            }
+          })}
+
           {!logged ? (
             <NavLink to="/login" style={{ textDecoration: "none" }}>
               <Button
