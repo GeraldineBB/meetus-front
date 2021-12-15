@@ -43,6 +43,9 @@ export default function EventListCardsInProgressCategory({
     console.log('log eventList', eventList)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+  // we will return event if categoryId (from useParam) is equal to category id of events from api v1/events 
+
   return (
     <Grid container>
       {eventList.filter((event) => {

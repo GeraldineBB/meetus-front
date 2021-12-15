@@ -43,7 +43,11 @@ const EventContent = ({ eventId }) => {
     return <div>Les données sont en cours de chargement</div>;
   }
 
-  // we want to check if user id is contained in eventInfoPage.event.members
+  // we want to check if user id is contained in eventInfoPage.event.members (info from api v1/events/id)
+  // api send an array with members information (id, avatar and fullname)
+  // if suscribed then button "inscrit"
+  // in order to inform directly the user that is suscribed we change state of joinEvent to true when user click on the button (in middleware, action ADD AN USER TO EVENT)
+
   const suscribed = () =>  {
     if (eventInfoPage.event.members.some (member => member.id === user.id)) {
     return true; 
@@ -53,6 +57,8 @@ const EventContent = ({ eventId }) => {
   }
   suscribed(); 
 
+  // if the user is the organizer we pin the button "modify"
+  // we have to check if the author of the event (from api v1/events/id) is equal to user id (from state)
   const organizer = () => {
     if (eventInfoPage.event.author.id === user.id) {
       console.log ('organisateur'); 
