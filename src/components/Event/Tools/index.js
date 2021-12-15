@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
+import { useDispatch } from 'react-redux';
+import { setOptionsRedux, setValueRedux } from '../../../actions/googleMapAutocompletion';
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -24,6 +26,7 @@ const autocompleteService = { current: null };
 
 export default function GoogleMaps() {
   const [value, setValue] = React.useState(null);
+  const dispatch = useDispatch()
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
@@ -101,6 +104,7 @@ export default function GoogleMaps() {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
+        dispatch(setValueRedux(newValue))
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);

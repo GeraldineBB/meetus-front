@@ -164,8 +164,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all categories 
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem("Token");
 
       api
         .get("v1/categories?limit=50", {
@@ -218,8 +218,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case SET_NEW_EVENT: {
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      const token = localStorage.getItem("Token");
+      const {google: { value }} = store.getState();
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -231,7 +231,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             maxMembers:action.values.maxMembers,
             picture: action.values.picture.name,
             address: action.values.address,
-            city: action.values.city,
+            city: value.structured_formatting.main_text,
             country: action.values.country,
             zipcode: action.values.zipcode,
         },
