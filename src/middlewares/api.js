@@ -99,8 +99,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TO_EVENT: {
       const eventId = action.eventId;
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.setItem('Token'); 
+
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -218,8 +221,9 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case SET_NEW_EVENT: {
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+      const token = localStorage.setItem('Token'); 
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,

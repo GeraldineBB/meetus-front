@@ -5,6 +5,7 @@ import EventForm from "../../components/Event/EventForm";
 import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
 import HomePage from "../../Views/HomePage";
+import CategoryPage from "../../Views/CategoryPage";
 import RedirectEventForm from "../../components/Event/EventForm/LoadingCreation";
 
 function RouteConnected() {
@@ -25,6 +26,7 @@ function RouteConnected() {
       <Route path="/edit/:id" element={<EventEdit />} />
       <Route path="/signup" element={<Navigate to="/" />} />
       <Route path="/login" element={<Navigate to="/" />} />
+      <Route path="/events/category/:id" element={<CategoryPage />} />
     </Routes>
   );
 }

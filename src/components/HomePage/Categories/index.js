@@ -30,6 +30,7 @@ const Categories = () => {
           key={category.id} >
             <Category
               key={category.id}
+              id={category.id}
               name={category.name}
               picture={category.picture}
             />
