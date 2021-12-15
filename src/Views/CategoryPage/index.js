@@ -1,12 +1,12 @@
-import EventHeaderPage from "../../components/EventListPage/EventHeaderPage";
+import EventHeaderPageCategory from "../../components/Category/EventHeaderPageCategory";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { ARCHIVED, IN_PROGRESS } from "../../actions/events";
-import EventListCardsArchived from "../../components/EventListPage/EventListCardsArchived";
-import EventListCardsInProgress from "../../components/EventListPage/EventListCardsInProgress";
 
 import { useParams } from "react-router-dom";
+import EventListCardsInProgressCategory from "../../components/Category/EventListCardsInProgressCategory";
+import EventListCardsArchivedCategory from "../../components/Category/EventListCardsArchivedCategory";
 
 
 function CategoryPage() {
@@ -27,13 +27,13 @@ function CategoryPage() {
   return (
     <div className="eventListPage">
       <Header />
-      <EventHeaderPage
+      <EventHeaderPageCategory
         handleArchived={handleArchived}
         handleInProgress={handleInProgress}
         inProgress={inProgress}
         archived={archived}
       />
-      {inProgress ? <EventListCardsInProgress /> : <EventListCardsArchived />}
+      {inProgress ? <EventListCardsInProgressCategory categoryId={id} /> : <EventListCardsArchivedCategory categoryId={id} />}
       <Footer />
     </div>
   );

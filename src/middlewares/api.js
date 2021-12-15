@@ -128,12 +128,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_IN_PROGRESS: {
-      // endpoints to load 6 cateogories for home
       api
         .get("v1/events", {
         })
         .then((response) => {
-          console.log(response);
+          console.log('reponse load event list in progress', response);
           store.dispatch(setEventListInProgress(response.data));
         })
         .catch((error) =>
@@ -146,7 +145,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
-      // endpoints to load 6 cateogories for home
       api
         .get("v1/events?limit=2", {
 
