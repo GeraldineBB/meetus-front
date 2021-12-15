@@ -17,6 +17,7 @@ import {
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
+// import { setJoinEventStatus } from "../actions/user";
 
 import { Navigate } from "react-router-dom";
 
@@ -45,13 +46,16 @@ const EventContent = ({ eventId }) => {
   }
 
   // we want to check if user id is contained in eventInfoPage.event.members
-  if (eventInfoPage.event.members.some (member => member.id === user.id)) {
-    console.log ('inscrit'); 
-  } else {
-    console.log ('pas inscrit'); 
+  const suscribed = () =>  {
+    if (eventInfoPage.event.members.some (member => member.id === user.id)) {
+    // dispatch(setJoinEventStatus()); 
+    return true; 
+    }
   }
+  suscribed(); 
 
   return (
+
     <div className="eventPage">
       <div className="eventContent">
         <div className="eventContent__info">
@@ -66,11 +70,6 @@ const EventContent = ({ eventId }) => {
                 month: "long",
                 day: "numeric",
               })}
-              {/* <DayJS
-                    format="DD / MM / YYYY"
-                    {...eventInfoPage.event.date}
-                    >
-                    </DayJS>   */}
             </p>
             <p className="eventContent__info__header--author">
               crée par {eventInfoPage.event.author.fullName}
@@ -114,7 +113,6 @@ const EventContent = ({ eventId }) => {
             })}
           </p>
           <p className="eventContent__detail__hour">
-            {/* {new Date(eventInfoPage.event.date).toLocaleDateString('fr-FR', { hour: 'numeric', minute: 'numeric' })}   */}
             {("0" + new Date(eventInfoPage.event.date).getHours()).slice(-2)}H
             {("0" + new Date(eventInfoPage.event.date).getMinutes()).slice(-2)}
           </p>
@@ -125,24 +123,7 @@ const EventContent = ({ eventId }) => {
             {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
           </p>
           {/* /si user id récupéré dans le state est présent dans le tableau eventInfoPage.event.members alors on affiche le bouton inscrit */}
-          {/* { if (user.id === )} */}
-    
-          {logged && eventInfoPage.event.members.some ((member) => {
-            if (member.id === user.id) {
-             return  <Button
-              size="small"
-              variant="contained"
-              className="card__button"
-              sx={{
-                width: "60%",
-                backgroundColor: "#F36B7F",
-                "&:hover": { backgroundColor: "#F8CF61" },
-              }}
-              >             
-              Inscrit
-            </Button>
-            }
-          })}
+        
 
           {!logged ? (
             <NavLink to="/login" style={{ textDecoration: "none" }}>
@@ -175,11 +156,11 @@ const EventContent = ({ eventId }) => {
                 dispatch({
                   type: ADD_USER_TO_EVENT,
                   eventId: eventId,
-                  userId: 1,
+                  userId: user.id,
                 });
               }}
             >
-            {!joinEvent ?  'Rejoindre' : 'Inscrit' }
+            {suscribed () ?  'Inscrit' : 'Rejoindre' }
             </Button>
           )}
 
