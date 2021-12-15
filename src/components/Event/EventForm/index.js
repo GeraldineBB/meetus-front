@@ -78,7 +78,7 @@ const EventForm = () => {
     const validationSchema = yup.object({
         title: yup
             .string('Entré le nom de l\'évènement')
-            .min(3, 'Un nom d\'évènement doit contenir 3 caractères minimum')
+            .min(10, 'Un nom d\'évènement doit contenir 3 caractères minimum')
             .required('Le nom de l\'évènement doit être rempli'),
         city: yup
             .string('Entré un lieu valide')
@@ -92,10 +92,9 @@ const EventForm = () => {
             .number('Entré un nombre maximum de participant ')
             .min(2, 'Un évènement doit avoir un moins 2 participant')
             .required('Le nombre maximum de participant est requis'),
-
     });
 
-
+    const today = new Date();
 
     const formik = useFormik({
         initialValues: {
@@ -104,8 +103,9 @@ const EventForm = () => {
             maxMembers: '',
             isOnline: '', 
             category: '',
-            date: format(new Date(), 'yyyy/MM/dd kk:mm:ss'),
-            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION  */
+            date: new Date(new Date().setDate(today.getDate() + 1)),
+            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION
+            new Date(new Date(today).setDate(today.getDate() + 1)),  */
             address: 'ODOGoogleAPI',
             picture: '',
             author: '3',
@@ -171,7 +171,7 @@ const EventForm = () => {
                             <DateTimePicker
                                 label="Date&Time picker"
                                 value={formik.values.date}
-                                format= {format(new Date(), 'yyyy/MM/dd kk:mm:ss')}
+                                format= {format(new Date(), 'yyyyy-MM-dd kk:mm:ss')}
                                 onChange={(newDate) => {
                                     formik.setFieldValue("date", format(newDate, 'yyyy-MM-dd kk:mm:ss'));
                                 }}
