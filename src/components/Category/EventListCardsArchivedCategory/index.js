@@ -23,16 +23,15 @@ export default function EventListCardsArchived({
   city,
   membersCount,
   picture,
-  category
+  category, 
+  categoryId
 }) {
   const eventList = useSelector(
     (state) => state.events.eventPageListArchived
   );
 
-  const currentInput = useSelector(state => state.events.currentSearchBar)
-  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
+  
   const {logged} = useSelector(state => state.user)
-
 
 
   const dispatch = useDispatch();
@@ -44,11 +43,11 @@ export default function EventListCardsArchived({
   return (
     <Grid container>
       {eventList.filter((event) => {
-         if (event.title.toLowerCase().includes(currentInput.toLowerCase()) 
-         && event.category.name.includes(currentSelect)){
-           return event;
-         }
-      }).map((event) => (
+        if (event.category.id == categoryId) 
+        {
+          return event;
+        }
+        }).map((event) => (
         <Grid
           item
           md={12}
