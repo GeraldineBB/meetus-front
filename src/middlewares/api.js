@@ -102,7 +102,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       // const cookies = new Cookies();
       // const token = cookies.get('Pizzeria');
 
-      const token = localStorage.setItem('Token'); 
+      const token = localStorage.getItem('Token'); 
 
 
         axios({

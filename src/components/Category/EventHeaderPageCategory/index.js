@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { darken } from "@mui/system";
 
 import Stack from "@mui/material/Stack";
+import { NavLink } from "react-router-dom";
 
 
 function EventHeaderPage({
@@ -33,6 +34,7 @@ function EventHeaderPage({
               Archivé
             </h2>
           </div>
+          <NavLink to="/create" style={{ textDecoration: "none" }}>
           <Button
             sx={{
               mb: 3,
@@ -43,9 +45,10 @@ function EventHeaderPage({
           >
             Créer un évènement
           </Button>
+          </NavLink>
         </div>
 
-        <h3>Evènements suggérés pour vous</h3>
+        <h3>Evènements de la catégorie choisie</h3>
         <Stack direction="row" spacing={1}>
         </Stack>
       </div>

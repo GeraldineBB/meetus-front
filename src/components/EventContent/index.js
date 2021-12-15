@@ -17,9 +17,6 @@ import {
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
-import { setJoinEventStatus } from "../../actions/user";
-
-import { Navigate } from "react-router-dom";
 
 
 const EventContent = ({ eventId }) => {
