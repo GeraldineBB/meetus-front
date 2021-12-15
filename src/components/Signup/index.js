@@ -13,8 +13,6 @@ import { useDispatch } from "react-redux";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios";
-
 import HeaderSignUp from "./HeaderSignup";
 import { signup } from "../../actions/user";
 
@@ -61,6 +59,7 @@ export function SignUpForm(props) {
         const onSubmit = async (values) => {
           /* alert(JSON.stringify(values, null, 2)); */
           dispatch(signup(values));
+          setResponseValidate(true); 
       }; 
 
 
@@ -74,7 +73,7 @@ export function SignUpForm(props) {
     },
     validateOnBlur: true,
     onSubmit,
-    /* validationSchema: validationSchema, */
+     validationSchema: validationSchema, 
   });
 
 /* 

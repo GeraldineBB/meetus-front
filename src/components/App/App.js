@@ -6,12 +6,11 @@ import HomePage from "../../Views/HomePage";
 import EventPage from "../../Views/EventPage";
 import EventListPage from "../../Views/EventListPage";
 import { SignUpForm } from "../Signup";
-import EventForm from "../Event/EventForm";
 import EventEdit from "../../Views/EventEdit";
 import RedirectSignup from "../Signup/Loading";
 import RedirectEdition from "../Event/EventEdit/LoadingEdition";
-
-import Test from "../Event/Test";
+import EventCreation from "../../Views/EventCreation";
+import RedirectEventForm from "../Event/EventForm/LoadingCreation";
 
 function App() {
 
@@ -31,13 +30,13 @@ function App() {
 
     <div className="App">
       <Routes>
-        <Route path="/test" element={<Test />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/signup-done" element={<RedirectSignup />} />
+        <Route path="/event-creation-done" element={<RedirectEventForm />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/eventList" element={<EventListPage />} />
-        <Route path="/create" element={<EventForm />} />
+        <Route path="/create" element={<EventCreation/>} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/edit/:id" element={<EventEdit />} />
         <Route path="/edition-done" element={<RedirectEdition />} />

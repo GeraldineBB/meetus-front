@@ -59,10 +59,9 @@ const EventForm = () => {
 
     const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-// TODO DIRE AU BACK, AJOUT NE FONCTIONNE PAS SUR INSOMNIA, DONC ICI AUSSI. LE ISONLINE
 
     const onSubmit = async (values) => {
-        /* alert(JSON.stringify( values, null, 2)); */
+        
 
         if (values.isOnline === '1')
          {           
@@ -106,8 +105,6 @@ const EventForm = () => {
             isOnline: '', 
             category: '',
             date: new Date(new Date().setDate(today.getDate() + 1)),
-            /* cityid: { name: "", id: null, state: "" }, // A CONSERVER POUR AUTOCOMPLETION
-            new Date(new Date(today).setDate(today.getDate() + 1)),  */
             address: 'ODOGoogleAPI',
             picture: '',
             author: '3',
@@ -122,10 +119,12 @@ const EventForm = () => {
 
 
 
+/* 
+  console.log("Error: ", formik.errors);  */
 
 
     if (responseFormValidateForm) {
-        return <Navigate to="/" />
+        return <Navigate to="/event-creation-done" />
     }
     return (
 

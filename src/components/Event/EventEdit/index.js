@@ -32,6 +32,9 @@ export default function EventEdit ({eventId}) {
         display: 'none',
     });
 
+
+    const today = new Date();
+
     const eventInfoPage = useSelector(
     (state) => state.events.eventInfoPage);
 
@@ -63,7 +66,7 @@ export default function EventEdit ({eventId}) {
             initialValues={
                 {                 
                     title: '',
-                    date: format(new Date(), 'yyyy-MM-dd kk:mm:ss'),
+                    date: new Date(new Date().setDate(today.getDate() + 1)),
                     city: '',
                     category: '',
                     picture: '',
