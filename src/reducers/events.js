@@ -28,7 +28,6 @@ export const initialState = {
   eventCurrentInfo: [],
   currentLng: null,
   currentLat: null,
-
 };
 
 const reducer = (state = initialState, action = {}) => {

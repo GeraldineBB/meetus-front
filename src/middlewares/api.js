@@ -16,7 +16,7 @@ import {
   setCategoriesForHome,
   setInfoForEventPage,
 } from "../actions/events";
-import { LOGIN, setCurrentUser } from "../actions/user";
+import { LOGIN, setCurrentUser, setJoinEventStatus } from "../actions/user";
 import Cookies from 'universal-cookie';
 
 
@@ -105,7 +105,8 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          //On traite la suite une fois la réponse obtenue 
+          //When user join the event, status is true and button will change
+          store.dispatch(setJoinEventStatus()); 
           console.log(reponse.data);
       })
       .catch(function (erreur) {

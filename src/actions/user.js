@@ -25,3 +25,10 @@ export const stockLoginCookie = (token) => ({
     type: STOCK_LOGIN_COOKIE,
     token
 })
+
+export const SET_JOIN_EVENT_STATUS = 'SET_JOIN_EVENT_STATUS';
+
+export const setJoinEventStatus = () => ({
+  type: SET_JOIN_EVENT_STATUS,
+  
+});
