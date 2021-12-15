@@ -67,6 +67,14 @@ const EventContent = ({ eventId }) => {
   }
   organizer(); 
 
+  // we want to know if there are members in the event in order to show avatar picture
+  const members = () => {
+    if (eventInfoPage.event.members.length > 0) {
+      return true; 
+    }
+  }
+  members(); 
+
   return (
 
     <div className="eventPage">
@@ -74,7 +82,7 @@ const EventContent = ({ eventId }) => {
         <div className="eventContent__info">
           <div className="eventContent__info__header">
             {
-              organizer() ? 
+              organizer() && 
               <Button
                     className="button__eventlist"
                     sx={{
@@ -95,8 +103,7 @@ const EventContent = ({ eventId }) => {
                     </Link>
 
                   </Button> 
-              : 
-              <p></p>
+           
             }
             <p className="eventContent__info__header--title">
               {eventInfoPage.event.title}
@@ -207,22 +214,26 @@ const EventContent = ({ eventId }) => {
             {joinEvent ? (eventInfoPage.event.membersCount +1) : eventInfoPage.event.membersCount} Participants
             {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
           </p>
+            {
+              members &&  
+              <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
+              <AvatarGroup max={3} sx={{ mx: "auto" }}>
+                {/* {{eventInfoPage.event.members}.map((member) => (
+                      <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
+                    ))} */}
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+                <Avatar
+                  alt="Trevor Henderson"
+                  src="/static/images/avatar/5.jpg"
+                />
+              </AvatarGroup>
+            </Container>
 
-          <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
-            <AvatarGroup max={3} sx={{ mx: "auto" }}>
-              {/* {{eventInfoPage.event.members}.map((member) => (
-                    <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
-                  ))} */}
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-              <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-              <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-              <Avatar
-                alt="Trevor Henderson"
-                src="/static/images/avatar/5.jpg"
-              />
-            </AvatarGroup>
-          </Container>
+            }  
+         
         </div>
       </div>
       <div className="eventSimilar">
