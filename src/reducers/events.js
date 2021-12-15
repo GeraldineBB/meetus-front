@@ -32,6 +32,9 @@ export const initialState = {
   eventCurrentInfo: [],
   setValidateForm: false, 
   edition: true, 
+  currentLng: null,
+  currentLat: null,
+
 };
 
 const reducer = (state = initialState, action = {}) => {

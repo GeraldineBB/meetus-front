@@ -18,3 +18,18 @@ export const signup = (values) => ({
     type: SIGNUP,
     values
 })
+
+export const LOGOUT = 'LOGOUT'
+
+export const logout = (values) => ({
+    type: LOGOUT,
+    values
+})
+
+export const STOCK_LOGIN_COOKIE = 'STOCK_LOGIN_COOKIE'
+
+export const stockLoginCookie = (token, user) => ({
+    type: STOCK_LOGIN_COOKIE,
+    token,
+    user
+})

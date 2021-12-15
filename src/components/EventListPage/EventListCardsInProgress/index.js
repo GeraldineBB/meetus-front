@@ -32,7 +32,7 @@ export default function EventListCardsInProgress({
   );
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
-
+  const {logged} = useSelector(state => state.user)
 
   const dispatch = useDispatch();
 
@@ -80,11 +80,10 @@ export default function EventListCardsInProgress({
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-around",
                     width: "100%",
                   }}
                 >
-                  <Typography component="div" variant="h5">
+                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}}>
                     {event.title}
                     <Chip
                       label={event.category.name}
@@ -97,7 +96,8 @@ export default function EventListCardsInProgress({
                       size="small"
                     />
                   </Typography>
-                  <Button
+                  {
+                    logged && <Button
                     className="button__eventlist"
                     sx={{
                       mb: 3,
@@ -117,6 +117,8 @@ export default function EventListCardsInProgress({
                     </Link>
 
                   </Button>
+                  }
+                  
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <Typography

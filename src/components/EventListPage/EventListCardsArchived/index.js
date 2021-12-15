@@ -31,6 +31,9 @@ export default function EventListCardsArchived({
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
+  const {logged} = useSelector(state => state.user)
+
+
 
   const dispatch = useDispatch();
 
@@ -68,11 +71,13 @@ export default function EventListCardsArchived({
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-around",
+                    flexDirection: "row",
+                    justifyItems: 'left',
                     width: "100%",
+
                   }}
                 >
-                  <Typography component="div" variant="h5">
+                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}} >
                     {event.title}
                     <Chip
                       label={event.category.name}
@@ -85,7 +90,8 @@ export default function EventListCardsArchived({
                       size="small"
                     />
                   </Typography>
-                  <Button
+                    { logged &&
+                      <Button
                     className="button__eventlist"
                     sx={{
                       mb: 3,
@@ -97,9 +103,10 @@ export default function EventListCardsArchived({
                     variant="contained"
                     size="small"
                   >
-                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em"}} />
                     Modifier mon evenement
                   </Button>
+                    }
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <Typography

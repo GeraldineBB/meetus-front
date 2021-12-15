@@ -25,7 +25,7 @@ import {
 import setResponseValidateForm from '../components/Event/EventForm'
 import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 import Cookies from 'universal-cookie';
-import { set } from "date-fns";
+
 
 
 // link to the API in order to put only endpoints in switch case
@@ -47,7 +47,6 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get("v1/events?limit=3", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -82,12 +81,9 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_INFO_FOR_PAGE_EVENT: {
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-
       api
         .get(`v1/events/${action.eventId}`, {
-          headers: { Authorization: `Bearer ${token}` },
+
         })
         .then((response) => {
           console.log(response);
@@ -103,37 +99,34 @@ const apiMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TO_EVENT: {
       const eventId = action.eventId;
 
-      // envoyer le token
-
       const cookies = new Cookies();
       const token = cookies.get('Pizzeria');
 
-      api
-        .post(`v1/events/${eventId}/add`, { headers: eventId, token })
-        .then((response) => {
-          console.log(response);
-          console.log(
-            "ici je récupère les données de la requête en post",
-            response.data
-          );
-        })
-        .catch((error) =>
-          console.log(
-            "on a une erreur sur l'ajout d'un membre à un event",
-            error
-          )
-        );
+        axios({
+          headers: { "Authorization": `Bearer ${token}` } ,
+           data: {
+             eventId: eventId, 
+           },
+           url: `http://localhost:8080/api/v1/events/${eventId}/add`, 
+           method: 'post',
+
+      })
+      .then(function (reponse) {
+          //On traite la suite une fois la réponse obtenue 
+          console.log(reponse.data);
+      })
+      .catch(function (erreur) {
+          //On traite ici les erreurs éventuellement survenues
+          console.log(erreur);
+      });
+
       next(action);
       break;
     }
     case LOAD_EVENT_LIST_IN_PROGRESS: {
       // endpoints to load 6 cateogories for home
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
       api
         .get("v1/events", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -150,12 +143,9 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
       // endpoints to load 6 cateogories for home
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
       api
         .get("v1/events?limit=2", {
-          headers: { Authorization: `Bearer ${token}` },
+
         })
         .then((response) => {
           console.log(response);
@@ -192,13 +182,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-
       api
         .get("v1/categories?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -214,7 +199,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOGIN: {
-      const cookies = new Cookies();
       api
         .post("/login_check", {
           username: action.values.email,
@@ -223,8 +207,9 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(setCurrentUser(response.data));
-          const { user: { token } } = store.getState();
-          cookies.set("Pizzeria", token);
+          const {user: { token, user }} = store.getState();
+          localStorage.setItem('Token', token);
+          localStorage.setItem('User', JSON.stringify(user));
         })
         .catch((error) => console.log("on a une erreur sur la ", error));
       next(action);
@@ -254,7 +239,6 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          //TODO setResponseValidateForm(true);
           console.log(reponse.data);
           console.log("CA A FONCTIONNER")
       })
@@ -287,7 +271,6 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          //TODO setResponseValidateForm(true);
           console.log(reponse.data);
           console.log("EVENT CREER");
       })

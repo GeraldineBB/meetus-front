@@ -10,7 +10,7 @@ import { FormControl } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { format } from 'date-fns';
@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 
 
 import Thumb from "../Tools/Thumb";
@@ -259,5 +259,4 @@ export default function EventEdit ({eventId}) {
 
     
 };
-
 
