@@ -170,3 +170,34 @@ export const setResponse = () => ({
   type: SET_RESPONSE,
   
 });
+
+export const SET_NEW_EVENT = 'SET_NEW_EVENT';
+
+export const setNewEvent = (values) => ({
+  type: SET_NEW_EVENT,
+  values
+});
+
+
+export const SET_NEW_EVENT_ONLINE = 'SET_NEW_EVENT_ONLINE';
+
+export const setNewEventOnline = (values) => ({
+  type: SET_NEW_EVENT_ONLINE,
+  values
+});
+
+export const SET_VALIDATE_FORM = 'SET_VALIDATE_FORM';
+
+export const setValidateForm = (values) => ({
+  type: SET_VALIDATE_FORM,
+  values
+});
+
+export const EDIT_EVENT = 'EDIT_EVENT';
+
+export const editEvent = (values, eventId) => ({
+  type: EDIT_EVENT,
+  values: values, 
+  eventId: eventId, 
+});
+

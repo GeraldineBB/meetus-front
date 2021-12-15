@@ -8,13 +8,13 @@ import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
 import { useState, useSelector } from "react";
 
+import { useDispatch } from "react-redux";
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import axios from "axios";
-
 import HeaderSignUp from "./HeaderSignup";
+import { signup } from "../../actions/user";
 
 
 
@@ -46,9 +46,6 @@ const validationSchema = yup.object({
 });
 
 
-let webApiUrl = 'http://localhost:8080/api/v1/users';
- 
-
 
 
 export function SignUpForm(props) {
@@ -56,35 +53,13 @@ export function SignUpForm(props) {
 
     const [responseFormValidate, setResponseValidate] = useState(false); 
     
-  
+
+    const dispatch = useDispatch();
+
         const onSubmit = async (values) => {
-          /* alert(JSON.stringify(values, null, 2)); 
-   */
-  
-              axios({
-                   data: {
-                    email : values.email, 
-                    password: values.password, 
-                    lastname: values.lastname, 
-                    firstname: values.firstname, 
-                  },
-                   url: webApiUrl,
-                   method: 'post',
-  
-              })
-              .then(function (reponse) {
-                  //On traite la suite une fois la réponse obtenue 
-                  setResponseValidate(true);
-                  console.log(reponse);
-              })
-              .catch(function (erreur) {
-                  //On traite ici les erreurs éventuellement survenues
-                  console.log(erreur);
-                  window.alert("Une erreur s'est produite, veuillez réessayer");
-              });
-  
-         
-    
+          /* alert(JSON.stringify(values, null, 2)); */
+          dispatch(signup(values));
+          setResponseValidate(true); 
       }; 
 
 
@@ -98,7 +73,7 @@ export function SignUpForm(props) {
     },
     validateOnBlur: true,
     onSubmit,
-    validationSchema: validationSchema,
+     validationSchema: validationSchema, 
   });
 
 /* 
