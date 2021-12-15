@@ -17,7 +17,7 @@ import {
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
-// import { setJoinEventStatus } from "../actions/user";
+import { setJoinEventStatus } from "../../actions/user";
 
 import { Navigate } from "react-router-dom";
 
@@ -30,7 +30,6 @@ const EventContent = ({ eventId }) => {
   const { logged } = useSelector((state) => state.user);
 
   const { joinEvent } = useSelector((state) => state.user);
-
 
   const { user }   = useSelector((state) => state.user);
 
@@ -48,8 +47,9 @@ const EventContent = ({ eventId }) => {
   // we want to check if user id is contained in eventInfoPage.event.members
   const suscribed = () =>  {
     if (eventInfoPage.event.members.some (member => member.id === user.id)) {
-    // dispatch(setJoinEventStatus()); 
     return true; 
+    } else {
+      return false; 
     }
   }
   suscribed(); 
@@ -136,9 +136,11 @@ const EventContent = ({ eventId }) => {
                   backgroundColor: "#F36B7F",
                   "&:hover": { backgroundColor: "#F8CF61" },
                 }}
-                onClick={() => {
-                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId });
-                }}>             
+                // onClick={() => {
+                //   dispatch({ type: ADD_USER_TO_EVENT, 
+                //     eventId: eventId });
+                // }}
+                >             
                 Rejoindre
               </Button>
             </NavLink>
@@ -155,17 +157,17 @@ const EventContent = ({ eventId }) => {
               onClick={() => {
                 dispatch({
                   type: ADD_USER_TO_EVENT,
-                  eventId: eventId,
-                  userId: user.id,
+                  eventId: eventId, 
                 });
               }}
             >
-            {suscribed () ?  'Inscrit' : 'Rejoindre' }
+            {(joinEvent || suscribed()) ?  'Inscrit' : 'Rejoindre' }
             </Button>
           )}
 
           <p className="eventContent__detail__membersCount">
-            {eventInfoPage.event.membersCount} Participants
+            {joinEvent ? (eventInfoPage.event.membersCount +1) : eventInfoPage.event.membersCount} Participants
+            {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
           </p>
 
           <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>

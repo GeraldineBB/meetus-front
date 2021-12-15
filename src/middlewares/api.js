@@ -113,7 +113,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           //When user join the event, status is true and button will change
-          // store.dispatch(setJoinEventStatus()); 
+          store.dispatch(setJoinEventStatus()); 
           console.log(reponse.data);
       })
       .catch(function (erreur) {
