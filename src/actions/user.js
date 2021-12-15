@@ -21,7 +21,8 @@ export const logout = (values) => ({
 
 export const STOCK_LOGIN_COOKIE = 'STOCK_LOGIN_COOKIE'
 
-export const stockLoginCookie = (token) => ({
+export const stockLoginCookie = (token, user) => ({
     type: STOCK_LOGIN_COOKIE,
-    token
+    token,
+    user
 })

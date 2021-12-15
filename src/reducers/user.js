@@ -28,6 +28,7 @@ export const initialState = {
           ...state,
           token: action.token,
           logged: true,
+          user: action.user
         }
       default:
         return state;

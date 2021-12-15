@@ -200,7 +200,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOGIN: {
-      const cookies = new Cookies();
       api
         .post("/login_check", {
           username: action.values.email,
@@ -209,8 +208,9 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(setCurrentUser(response.data));
-          const {user: { token }} = store.getState();
-          cookies.set("Pizzeria", token);
+          const {user: { token, user }} = store.getState();
+          localStorage.setItem('Token', token);
+          localStorage.setItem('User', JSON.stringify(user));
         })
         .catch((error) => console.log("on a une erreur sur la ", error));
       next(action);
