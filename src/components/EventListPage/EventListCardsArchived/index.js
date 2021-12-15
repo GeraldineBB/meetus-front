@@ -90,23 +90,7 @@ export default function EventListCardsArchived({
                       size="small"
                     />
                   </Typography>
-                    { logged &&
-                      <Button
-                    className="button__eventlist"
-                    sx={{
-                      mb: 3,
-                      backgroundColor: "#F36B7F",
-                      "&:hover": {
-                        backgroundColor: "#e51332",
-                      },
-                    }}
-                    variant="contained"
-                    size="small"
-                  >
-                    <EditIcon fontSize="small" sx={{ mr: "0.2em"}} />
-                    Modifier mon evenement
-                  </Button>
-                    }
+            
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <Typography

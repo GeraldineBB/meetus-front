@@ -30,9 +30,11 @@ export default function EventListCardsInProgress({
   const eventList = useSelector(
     (state) => state.events.eventPageListInProgress
   );
-  const currentInput = useSelector(state => state.events.currentSearchBar)
-  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
-  const {logged} = useSelector(state => state.user)
+  const currentInput = useSelector(state => state.events.currentSearchBar);
+  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList);
+  const {logged} = useSelector(state => state.user);
+  const { user }   = useSelector((state) => state.user);
+
 
   const dispatch = useDispatch();
 
@@ -41,6 +43,16 @@ export default function EventListCardsInProgress({
     ;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // we want to check if the user is the organiser in order to print the button "Modifier"
+  // but for the moment, we don't have the author id in eventList 
+  // const organizer = () =>  {
+  //   if (eventList.some (event => event.authorId === user.id)) {
+  //   return true; 
+  //   } 
+  // }
+  // organizer(); 
+
   return (
     <Grid container>
       {eventList.filter((event) => {
