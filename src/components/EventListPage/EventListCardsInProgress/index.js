@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from '@mui/material';
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -73,18 +74,21 @@ export default function EventListCardsInProgress({
           sx={{ display: "flex", justifyContent: "center" }}
           key={event.id}
         >
-        <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
-
+          <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <Card
             sx={{ display: "flex", ml: "3em", position: "relative" }}
             className="eventListCard"
             
           >
+
             <CardMedia
+
               component="img"
               sx={{ maxWidth: "30%" }}
               image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
               alt="Live from space album cover"
+
+
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -167,6 +171,7 @@ export default function EventListCardsInProgress({
                 </Typography>
               </CardContent>
             </Box>
+
           </Card>
           </Link>
 
