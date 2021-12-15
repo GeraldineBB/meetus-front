@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./style.scss";
 
-import Button from "@mui/material/Button";
-
 import Cards from "./Cards";
 import LinkSection from "../../components/HomePage/LinkSection";
+
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
+
 import GoogleMaps from "./GoogleMaps";
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
-import { NavLink } from "react-router-dom";
 
 
 const EventContent = ({ eventId }) => {
@@ -51,12 +53,45 @@ const EventContent = ({ eventId }) => {
   }
   suscribed(); 
 
+  const organizer = () => {
+    if (eventInfoPage.event.author.id === user.id) {
+      console.log ('organisateur'); 
+      return true; 
+      } 
+  }
+  organizer(); 
+
   return (
 
     <div className="eventPage">
       <div className="eventContent">
         <div className="eventContent__info">
           <div className="eventContent__info__header">
+            {
+              organizer() ? 
+              <Button
+                    className="button__eventlist"
+                    sx={{
+                      mb: 3,
+                      backgroundColor: "#F8CF61",
+                      "&:hover": {
+                        backgroundColor: "#f8d061",
+                      },
+                    }}
+                    variant="contained"
+                    size="small"
+                  >
+                    <Link to={`/edit/${eventId}`} style={{ textDecoration: 'none', color: 'white' }}>
+
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    Modifier mon évènement
+
+                    </Link>
+
+                  </Button> 
+              : 
+              <p></p>
+            }
             <p className="eventContent__info__header--title">
               {eventInfoPage.event.title}
             </p>
