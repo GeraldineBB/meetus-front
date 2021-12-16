@@ -111,6 +111,7 @@ const EventForm = () => {
   console.log("Error: ", formik.errors);  */
 
   if (responseFormValidateForm) {
+    window.location.reload();
     return <Navigate to="/event-creation-done" />;
   }
   return (
