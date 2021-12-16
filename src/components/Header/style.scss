@@ -3,7 +3,10 @@
 
     display: flex; 
     justify-content: space-between; 
-    background-color: #82B5A5;
+    background-color: #9FBFFF;
+    // background-color: #3040C4;
+    // background-color: black;
+
 
     img{
         width: 5em;
@@ -61,14 +64,14 @@
 
 
     img{
-        width: 6em;
+        width: 7em;
         margin-top: 0.3em;
         margin-bottom: 0.3em;
     }
 
         .header__buttons{
             
-            margin-top: 0.5em;
+            margin-top: 0.8em;
             margin-right: 1em; 
             // margin-bottom: 0.5em; 
             display: flex;
