@@ -51,7 +51,9 @@ export default function SelectCategories() {
         >
           <MenuItem value="">Pas de filtre</MenuItem>
           {categoriesList.map((event) => (
-            <MenuItem value={event.name} key={event.id}>{event.name}</MenuItem>
+            <MenuItem value={event.name} key={event.id}>
+              {event.name}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

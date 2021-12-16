@@ -26,8 +26,7 @@ const Categories = () => {
     <Container maxWidth="md" sx={{ mt: 3, mb: 8 }}>
       <Grid container spacing={4}>
         {homeCategorieList.map((category) => (
-          <Grid item md={4}
-          key={category.id} >
+          <Grid item md={4} key={category.id}>
             <Category
               key={category.id}
               name={category.name}

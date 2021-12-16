@@ -18,9 +18,6 @@ import {
 } from "../../actions/events";
 import { NavLink } from "react-router-dom";
 
-import { Navigate } from "react-router-dom";
-
-
 const EventContent = ({ eventId }) => {
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
 
@@ -29,7 +26,6 @@ const EventContent = ({ eventId }) => {
   const { logged } = useSelector((state) => state.user);
 
   const { joinEvent } = useSelector((state) => state.user);
-
 
   const dispatch = useDispatch();
 
@@ -126,7 +122,8 @@ const EventContent = ({ eventId }) => {
                 }}
                 onClick={() => {
                   dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId });
-                }}>             
+                }}
+              >
                 Rejoindre
               </Button>
             </NavLink>
@@ -148,7 +145,7 @@ const EventContent = ({ eventId }) => {
                 });
               }}
             >
-            {!joinEvent ?  'Rejoindre' : 'Inscrit' }
+              {!joinEvent ? "Rejoindre" : "Inscrit"}
             </Button>
           )}
 

@@ -8,7 +8,6 @@ import HomePage from "../../Views/HomePage";
 import { SignUpForm } from "../../components/Signup";
 import RedirectSignup from "../../components/Signup/Loading";
 
-
 function RouteNotConnected() {
   // quand la location change, on applique un effet qui fait
   // scroller la page en haut

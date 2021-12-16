@@ -6,9 +6,11 @@ import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import { LOAD_SELECT_CATEGORIES_EVENT_LIST, SEARCH_BAR_EVENT_LIST,} from "../../../actions/events";
+import {
+  LOAD_SELECT_CATEGORIES_EVENT_LIST,
+  SEARCH_BAR_EVENT_LIST,
+} from "../../../actions/events";
 import SelectCategories from "./Select";
-
 
 function EventHeaderPage({
   handleArchived,
@@ -18,18 +20,17 @@ function EventHeaderPage({
 }) {
   const underlineInProgress = inProgress ? "underlined" : "";
   const underlineArchived = archived ? "underlined" : "";
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSearch = (event) => {
     event.preventDefault();
-    const value = event.target.value
-    dispatch({ type: SEARCH_BAR_EVENT_LIST, value})
-  }
+    const value = event.target.value;
+    dispatch({ type: SEARCH_BAR_EVENT_LIST, value });
+  };
 
   useEffect(() => {
-    dispatch({ type: LOAD_SELECT_CATEGORIES_EVENT_LIST })
-    ;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch({ type: LOAD_SELECT_CATEGORIES_EVENT_LIST });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -72,8 +73,7 @@ function EventHeaderPage({
         </Box>
         <SelectCategories />
         <h3>Evènements suggérés pour vous</h3>
-        <Stack direction="row" spacing={1}>
-        </Stack>
+        <Stack direction="row" spacing={1}></Stack>
       </div>
     </div>
   );
