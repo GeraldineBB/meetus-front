@@ -41,9 +41,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENTS_FOR_HOME: {
       // endpoints to load the 3 next events for home
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-      console.log(token)
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+      const token = localStorage.getItem('Token'); 
+
+      // console.log(token)
 
       api
         .get("v1/events?limit=3", {
@@ -63,8 +65,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
 
       api
         .get("v1/categories?limit=6", {
@@ -165,8 +170,10 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all categories 
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+      const token = localStorage.getItem('Token'); 
+
 
       api
         .get("v1/categories?limit=50", {
@@ -221,7 +228,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       // const cookies = new Cookies();
       // const token = cookies.get('Pizzeria');
-      const token = localStorage.setItem('Token'); 
+      const token = localStorage.getItem('Token'); 
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -255,8 +262,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case SET_NEW_EVENT_ONLINE: {
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -312,8 +322,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case EDIT_EVENT: {
 
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
       axios({
         headers: { "Authorization": `Bearer ${token}` },
         data: { 

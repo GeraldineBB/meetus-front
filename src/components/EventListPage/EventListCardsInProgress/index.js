@@ -46,14 +46,15 @@ export default function EventListCardsInProgress({
   }, []);
 
   // we want to check if the user is the organiser in order to print the button "Modifier"
-  // but for the moment, we don't have the author id in eventList 
-  // const organizer = () =>  {
-  //   if (eventList.some (event => event.authorId === user.id)) {
-  //   return true; 
-  //   } 
-  // }
-  // organizer(); 
+ const organizer = () => {
+    if (eventList.some (event => event.author.id === user.id)) {
+      console.log ('organiser');
+      return true; 
+    } 
+  }; 
 
+// organizer(); 
+  
   return (
     <Grid container>
       {eventList.filter((event) => {
@@ -88,7 +89,6 @@ export default function EventListCardsInProgress({
               image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
               alt="Live from space album cover"
 
-
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -113,7 +113,7 @@ export default function EventListCardsInProgress({
                     />
                   </Typography>
                   {
-                    logged && <Button
+                    organizer() && <Button
                     className="button__eventlist"
                     sx={{
                       mb: 3,
@@ -179,4 +179,5 @@ export default function EventListCardsInProgress({
       ))}
     </Grid>
   );
+  
 }
