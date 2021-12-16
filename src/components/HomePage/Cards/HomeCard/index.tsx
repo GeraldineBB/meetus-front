@@ -64,6 +64,7 @@ export default function HomeCard({
           <CardContent>
             <CardMedia
               component="img"
+              height= "300"
               sizes="100"
               image={`${process.env.PUBLIC_URL}/images/${picture}`}
               alt="Paella dish"
@@ -76,22 +77,9 @@ export default function HomeCard({
               <LocationOnIcon fontSize="medium" />
               {city}
             </Typography>
-            <Typography sx={{ mb: 1.5 }}>
+            <Typography sx={{ mb: 1 }}>
               <CalendarTodayIcon sx={{ mr: 1.5 }} />
               {formatDate(date)}
-            </Typography>
-            <Typography
-              sx={{
-                mb: 2,
-                height: 70,
-                my: 2,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-              variant="body1"
-              component="div"
-            >
-              {description}
             </Typography>
             <Typography sx={{ mt: 2 }} color="text.primary">
               {membersCount} participants
