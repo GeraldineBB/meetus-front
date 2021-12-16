@@ -6,10 +6,8 @@ import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import {
-  LOAD_SELECT_CATEGORIES_EVENT_LIST,
-  SEARCH_BAR_EVENT_LIST,
-} from "../../../actions/events";
+import { NavLink } from "react-router-dom";
+import { LOAD_SELECT_CATEGORIES_EVENT_LIST, SEARCH_BAR_EVENT_LIST,} from "../../../actions/events";
 import SelectCategories from "./Select";
 
 function EventHeaderPage({
@@ -50,6 +48,7 @@ function EventHeaderPage({
               Archivé
             </h2>
           </div>
+          <NavLink to="/create" style={{ textDecoration: "none" }}>
           <Button
             sx={{
               mb: 3,
@@ -60,6 +59,8 @@ function EventHeaderPage({
           >
             Créer un évènement
           </Button>
+          </NavLink>
+
         </div>
         <Box
           component="form"

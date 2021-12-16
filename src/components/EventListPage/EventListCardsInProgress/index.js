@@ -30,11 +30,10 @@ export default function EventListCardsInProgress({
   const eventList = useSelector(
     (state) => state.events.eventPageListInProgress
   );
-  const currentInput = useSelector((state) => state.events.currentSearchBar);
-  const currentSelect = useSelector(
-    (state) => state.events.currentSelectCategoriesEventList
-  );
-  const { logged } = useSelector((state) => state.user);
+  const currentInput = useSelector(state => state.events.currentSearchBar);
+  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList);
+  const { user }   = useSelector((state) => state.user);
+
 
   const dispatch = useDispatch();
 
@@ -42,114 +41,100 @@ export default function EventListCardsInProgress({
     dispatch({ type: LOAD_EVENT_LIST_IN_PROGRESS });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // we want to check if the user is the organiser in order to print the button "Modifier"
+
+  
   return (
     <Grid container>
-      {eventList
-        .filter((event) => {
-          if (
-            event.title.toLowerCase().includes(currentInput.toLowerCase()) &&
-            event.category.name.includes(currentSelect)
-          ) {
-            return event;
-          }
-        })
-        .filter((event) => {
-          if (event.category.name.includes(currentSelect)) {
-            return event;
-          } else if (
-            event.title.toLowerCase().includes(currentInput.toLowerCase())
-          ) {
-            return event;
-          }
-        })
-        .map((event) => (
-          <Grid
-            item
-            md={12}
-            sx={{ display: "flex", justifyContent: "center" }}
-            key={event.id}
+      {eventList.filter((event) => {
+        if (event.title.toLowerCase().includes(currentInput.toLowerCase()) 
+        && event.category.name.includes(currentSelect)){
+          return event;
+        }
+      }).filter((event) => {
+        if (event.category.name.includes(currentSelect)){
+          return event; 
+        } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())){
+          return event; 
+        }
+      }).map((event) => (
+        <Grid
+          item
+          md={12}
+          sx={{ display: "flex", justifyContent: "center" }}
+          key={event.id}
+        >
+          <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+          <Card
+            sx={{ display: "flex", ml: "3em", position: "relative" }}
+            className="eventListCard"
+            
           >
-            <Link
-              to={`/events/${event.id}`}
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              <Card
-                sx={{ display: "flex", ml: "3em", position: "relative" }}
-                className="eventListCard"
-              >
-                <CardMedia
-                  component="img"
-                  sx={{ maxWidth: "30%" }}
-                  image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
-                  alt="Live from space album cover"
-                />
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <CardContent sx={{ flex: "1 0 auto" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        width: "100%",
+
+            <CardMedia
+
+              component="img"
+              sx={{ maxWidth: "30%" }}
+              image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
+              alt="Live from space album cover"
+
+            />
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+
+              <CardContent sx={{ flex: "1 0 auto" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                  }}
+                >
+                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}}>
+                    {event.title}
+                    <Chip
+                      label={event.category.name}
+                      sx={{
+                        backgroundColor: "#788795",
+                        color: "white",
+                        ml: "1.5em",
+                        mr: "1.5em",
                       }}
-                    >
-                      <Typography
-                        component="div"
-                        variant="h5"
-                        sx={{ mb: "0.4em" }}
-                      >
-                        {event.title}
-                        <Chip
-                          label={event.category.name}
-                          sx={{
-                            backgroundColor: "#788795",
-                            color: "white",
-                            ml: "1.5em",
-                            mr: "1.5em",
-                          }}
-                          size="small"
-                        />
-                      </Typography>
-                      {logged && (
-                        <Button
-                          className="button__eventlist"
-                          sx={{
-                            mb: 3,
-                            backgroundColor: "#F8CF61",
-                            "&:hover": {
-                              backgroundColor: "#f8d061",
-                            },
-                          }}
-                          variant="contained"
-                          size="small"
-                        >
-                          <Link
-                            to={`/edit/${event.id}`}
-                            style={{ textDecoration: "none", color: "white" }}
-                          >
-                            <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
-                            Modifier mon évènement
-                          </Link>
-                        </Button>
-                      )}
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Typography
-                        variant="subtitle1"
-                        color="text.primary"
-                        component="div"
-                        sx={{ mb: "0.5em" }}
-                      >
-                        <CalendarTodayIcon sx={{ mr: "0.2em" }} />
-                        10/12/2021{" "}
-                        <Typography
-                          component="span"
-                          variant="subtitle1"
-                          sx={{ ml: "2em" }}
-                        >
-                          <LocationOnIcon />
-                          {event.city}
-                        </Typography>
-                      </Typography>
-                    </div>
+                      size="small"
+                    />
+                  </Typography>
+                  {
+                    event.author.id === user.id ? <Button
+                    className="button__eventlist"
+                    sx={{
+                      mb: 3,
+                      backgroundColor: "#F8CF61",
+                      "&:hover": {
+                        backgroundColor: "#f8d061",
+                      },
+                    }}
+                    variant="contained"
+                    size="small"
+                  >
+                    <Link to={`/edit/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    Modifier mon évènement
+
+                    </Link>
+
+                  </Button> : false
+                  }
+                  
+                </div>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <Typography
+                    variant="subtitle1"
+                    color="text.primary"
+                    component="div"
+                    sx={{ mb: "0.5em" }}
+                  >
+                    <CalendarTodayIcon sx={{ mr: "0.2em" }} />
+                    10/12/2021{" "}
                     <Typography
                       variant="body1"
                       component="p"
@@ -157,19 +142,31 @@ export default function EventListCardsInProgress({
                     >
                       {event.description}
                     </Typography>
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      sx={{ position: "relative", bottom: "0px", left: "0px" }}
-                    >
-                      {event.membersCount} Participants
-                    </Typography>
-                  </CardContent>
-                </Box>
-              </Card>
-            </Link>
-          </Grid>
-        ))}
+                  </Typography>
+                </div>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                >
+                  {event.description}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  sx={{ position: "relative", bottom: "0px", left: "0px" }}
+                >
+                  {event.membersCount} Participants
+                </Typography>
+              </CardContent>
+            </Box>
+
+          </Card>
+          </Link>
+
+        </Grid>
+      ))}
     </Grid>
   );
+  
 }

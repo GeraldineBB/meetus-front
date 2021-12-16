@@ -4,6 +4,7 @@ import LoginPage from "../../Views/Login";
 
 import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
+import CategoryPage from "../../Views/CategoryPage";
 import HomePage from "../../Views/HomePage";
 import { SignUpForm } from "../../components/Signup";
 import RedirectSignup from "../../components/Signup/Loading";
@@ -26,6 +27,7 @@ function RouteNotConnected() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/create" element={<Navigate to="/login" />} />
       <Route path="/edit/:id" element={<Navigate to="/login" />} />
+      <Route path="/events/category/:id" element={<CategoryPage />} />
     </Routes>
   );
 }

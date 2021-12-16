@@ -1,10 +1,10 @@
 import React from "react";
-import "./style.scss";
+import './style.scss';
 import { NavLink, Navigate } from "react-router-dom";
 
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { FormControl } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { FormControl } from '@mui/material';
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";

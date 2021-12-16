@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./style.scss";
 
-import Button from "@mui/material/Button";
-
 import Cards from "./Cards";
 import LinkSection from "../../components/HomePage/LinkSection";
+
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
+
 import GoogleMaps from "./GoogleMaps";
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
 } from "../../actions/events";
-import { NavLink } from "react-router-dom";
 
 const EventContent = ({ eventId }) => {
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
@@ -27,20 +29,81 @@ const EventContent = ({ eventId }) => {
 
   const { joinEvent } = useSelector((state) => state.user);
 
+  const { user }   = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
   }, [dispatch, eventId]);
 
+           
   if (loading) {
     return <div>Les données sont en cours de chargement</div>;
   }
+
+  // we want to check if user id is contained in eventInfoPage.event.members (info from api v1/events/id)
+  // api send an array with members information (id, avatar and fullname)
+  // if suscribed then button "inscrit"
+  // in order to inform directly the user that is suscribed we change state of joinEvent to true when user click on the button (in middleware, action ADD AN USER TO EVENT)
+
+  const suscribed = () =>  {
+    if (eventInfoPage.event.members.some (member => member.id === user.id)) {
+    return true; 
+    } else {
+      return false; 
+    }
+  }
+  suscribed(); 
+
+  // if the user is the organizer we pin the button "modify"
+  // we have to check if the author of the event (from api v1/events/id) is equal to user id (from state)
+  const organizer = () => {
+    if (eventInfoPage.event.author.id === user.id) {
+      console.log ('organisateur'); 
+      return true; 
+      } 
+  }
+  organizer(); 
+
+  // we want to know if there are members in the event in order to show avatar picture
+  const members = () => {
+    if (eventInfoPage.event.members.length > 0) {
+      return true; 
+    }
+  }
+  members(); 
+
   return (
+
     <div className="eventPage">
       <div className="eventContent">
         <div className="eventContent__info">
           <div className="eventContent__info__header">
+            {
+              organizer() && 
+              <Button
+                    className="button__eventlist"
+                    sx={{
+                      mb: 3,
+                      backgroundColor: "#F8CF61",
+                      "&:hover": {
+                        backgroundColor: "#f8d061",
+                      },
+                    }}
+                    variant="contained"
+                    size="small"
+                  >
+                    <Link to={`/edit/${eventId}`} style={{ textDecoration: 'none', color: 'white' }}>
+
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    Modifier mon évènement
+
+                    </Link>
+
+                  </Button> 
+           
+            }
             <p className="eventContent__info__header--title">
               {eventInfoPage.event.title}
             </p>
@@ -51,11 +114,6 @@ const EventContent = ({ eventId }) => {
                 month: "long",
                 day: "numeric",
               })}
-              {/* <DayJS
-                    format="DD / MM / YYYY"
-                    {...eventInfoPage.event.date}
-                    >
-                    </DayJS>   */}
             </p>
             <p className="eventContent__info__header--author">
               crée par {eventInfoPage.event.author.fullName}
@@ -99,7 +157,6 @@ const EventContent = ({ eventId }) => {
             })}
           </p>
           <p className="eventContent__detail__hour">
-            {/* {new Date(eventInfoPage.event.date).toLocaleDateString('fr-FR', { hour: 'numeric', minute: 'numeric' })}   */}
             {("0" + new Date(eventInfoPage.event.date).getHours()).slice(-2)}H
             {("0" + new Date(eventInfoPage.event.date).getMinutes()).slice(-2)}
           </p>
@@ -109,6 +166,9 @@ const EventContent = ({ eventId }) => {
           <p className="eventContent__detail__zipcode">
             {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
           </p>
+          {/* /si user id récupéré dans le state est présent dans le tableau eventInfoPage.event.members alors on affiche le bouton inscrit */}
+        
+
           {!logged ? (
             <NavLink to="/login" style={{ textDecoration: "none" }}>
               <Button
@@ -120,10 +180,11 @@ const EventContent = ({ eventId }) => {
                   backgroundColor: "#F36B7F",
                   "&:hover": { backgroundColor: "#F8CF61" },
                 }}
-                onClick={() => {
-                  dispatch({ type: ADD_USER_TO_EVENT, eventId: eventId });
-                }}
-              >
+                // onClick={() => {
+                //   dispatch({ type: ADD_USER_TO_EVENT, 
+                //     eventId: eventId });
+                // }}
+                >             
                 Rejoindre
               </Button>
             </NavLink>
@@ -140,34 +201,38 @@ const EventContent = ({ eventId }) => {
               onClick={() => {
                 dispatch({
                   type: ADD_USER_TO_EVENT,
-                  eventId: eventId,
-                  userId: 1,
+                  eventId: eventId, 
                 });
               }}
             >
-              {!joinEvent ? "Rejoindre" : "Inscrit"}
+            {(joinEvent || suscribed()) ?  'Inscrit' : 'Rejoindre' }
             </Button>
           )}
 
           <p className="eventContent__detail__membersCount">
-            {eventInfoPage.event.membersCount} Participants
+            {joinEvent ? (eventInfoPage.event.membersCount +1) : eventInfoPage.event.membersCount} Participants
+            {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
           </p>
+            {
+              members &&  
+              <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
+              <AvatarGroup max={3} sx={{ mx: "auto" }}>
+                {/* {{eventInfoPage.event.members}.map((member) => (
+                      <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
+                    ))} */}
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+                <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+                <Avatar
+                  alt="Trevor Henderson"
+                  src="/static/images/avatar/5.jpg"
+                />
+              </AvatarGroup>
+            </Container>
 
-          <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
-            <AvatarGroup max={3} sx={{ mx: "auto" }}>
-              {/* {{eventInfoPage.event.members}.map((member) => (
-                    <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
-                  ))} */}
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-              <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-              <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-              <Avatar
-                alt="Trevor Henderson"
-                src="/static/images/avatar/5.jpg"
-              />
-            </AvatarGroup>
-          </Container>
+            }  
+         
         </div>
       </div>
       <div className="eventSimilar">

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation } from "react-router-dom";
 import RouteConnected from "../../Routes/RouteConnected";

@@ -29,7 +29,7 @@ const RedirectEventForm = () => {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
 
-                            Vous aller maintenant être redirigé vers la page des évènements.
+                            Vous allez maintenant être redirigé vers la page des évènements.
 
                         </Typography>
                     </CardContent>

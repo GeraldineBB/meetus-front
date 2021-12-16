@@ -21,7 +21,6 @@ import {
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
-import Cookies from 'universal-cookie';
 
 
 
@@ -37,10 +36,6 @@ const apiMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOAD_EVENTS_FOR_HOME: {
       // endpoints to load the 3 next events for home
-
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
-      console.log(token)
 
       api
         .get("v1/events?limit=3", {
@@ -60,8 +55,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
+      const token = localStorage.getItem('Token'); 
 
-      const token = localStorage.getItem("Token")
 
       api
         .get("v1/categories?limit=6", {
@@ -96,8 +91,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case ADD_USER_TO_EVENT: {
       const eventId = action.eventId;
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -122,12 +120,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_IN_PROGRESS: {
-      // endpoints to load 6 cateogories for home
       api
         .get("v1/events", {
         })
         .then((response) => {
-          console.log(response);
+          console.log('reponse load event list in progress', response);
           store.dispatch(setEventListInProgress(response.data));
         })
         .catch((error) =>
@@ -140,7 +137,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
-      // endpoints to load 6 cateogories for home
       api
         .get("v1/events?limit=2", {
 
@@ -250,8 +246,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case SET_NEW_EVENT_ONLINE: {
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -307,8 +306,11 @@ const apiMiddleware = (store) => (next) => (action) => {
     case EDIT_EVENT: {
 
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+      // const cookies = new Cookies();
+      // const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem('Token'); 
+
       axios({
         headers: { "Authorization": `Bearer ${token}` },
         data: { 
