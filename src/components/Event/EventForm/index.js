@@ -13,27 +13,16 @@ import { Radio } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 import { Navigate } from "react-router-dom";
-
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-
 import { useFormik } from "formik";
 import * as yup from "yup";
-
 import HeaderSignUp from "../../Signup/HeaderSignup";
-
-/* 
-import LocationAutoComplete from '../Tools'; */
-
 import Thumb from "../Tools/Thumb";
-
 import { LOAD_CATEGORIES } from "../../../actions/events";
-
 import { format } from "date-fns";
-
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 import GoogleMaps from "../Tools";
 
@@ -64,7 +53,7 @@ const EventForm = () => {
       setResponseValidateForm(true);
       console.log(values);
     }
-    console.log('ca marche pas ')
+    
   };
 
   const validationSchema = yup.object({
@@ -95,7 +84,7 @@ const EventForm = () => {
       maxMembers: "",
       isOnline: "",
       category: "",
-      date: new Date(new Date().setDate(today.getDate() + 1)),
+      date: new Date(new Date().setDate(today.getDate() + 2)),
       address: "ODOGoogleAPI",
       picture: "",
       author: "3",
@@ -171,7 +160,6 @@ const EventForm = () => {
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
-              {/* format(new Date(), 'yyyy/MM/dd kk:mm:ss') */}
             </LocalizationProvider>
           </FormControl>
         </div>
@@ -204,6 +192,41 @@ const EventForm = () => {
           </FormControl>
         </div>
 
+
+        <div className="event__form__number">
+          <TextField
+            fullWidth
+            label="Nombre maximum de participant"
+            className="eventForm"
+            id="maxMembers"
+            name="maxMembers"
+            value={formik.values.maxMembers}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.maxMembers && Boolean(formik.errors.maxMembers)
+            }
+            helperText={formik.touched.maxMembers && formik.errors.maxMembers}
+          />
+        </div>
+
+
+        <div className="event__form__description">
+          <TextField
+            fullWidth
+            label="Votre description"
+            className="eventForm"
+            id="description"
+            name="description"
+            type="description"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.description && Boolean(formik.errors.description)
+            }
+            helperText={formik.touched.description && formik.errors.description}
+          />
+        </div>
+
         <div className="event__form__photo">
           <FormControl fullWidth>
             <label htmlFor="contained-button-file">
@@ -233,39 +256,8 @@ const EventForm = () => {
         <div className="event__form__photo">
           <Thumb file={formik.values.picture} />
         </div>
-        
-        <div className="event__form__description">
-          <TextField
-            fullWidth
-            label="Votre description"
-            className="eventForm"
-            id="description"
-            name="description"
-            type="description"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-          />
-        </div>
 
-        <div className="event__form__number">
-          <TextField
-            fullWidth
-            label="Nombre maximum de participant"
-            className="eventForm"
-            id="maxMembers"
-            name="maxMembers"
-            value={formik.values.maxMembers}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.maxMembers && Boolean(formik.errors.maxMembers)
-            }
-            helperText={formik.touched.maxMembers && formik.errors.maxMembers}
-          />
-        </div>
+
         <div className="event__form__buttom">
           <FormControl fullWidth>
             <Button
