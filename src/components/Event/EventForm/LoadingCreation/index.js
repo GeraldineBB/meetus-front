@@ -15,8 +15,8 @@ const RedirectEventForm = () => {
 
     return (
 
-        <div className="card">
-        <div className="card__loading">
+        <div className="cardEvent">
+        <div className="cardEvent__loading">
             <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea>
                     <CardMedia

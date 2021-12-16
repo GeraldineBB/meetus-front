@@ -233,6 +233,7 @@ const EventForm = () => {
         <div className="event__form__photo">
           <Thumb file={formik.values.picture} />
         </div>
+        
         <div className="event__form__description">
           <TextField
             fullWidth

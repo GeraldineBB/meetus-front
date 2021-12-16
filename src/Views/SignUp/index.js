@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 
 import Footer from "../../components/Footer";
 
@@ -16,4 +16,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUp; 
