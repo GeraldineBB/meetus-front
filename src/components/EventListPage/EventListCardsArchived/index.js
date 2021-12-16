@@ -8,8 +8,6 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import Button from "@mui/material/Button";
-import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_ARCHIVED} from "../../../actions/events";

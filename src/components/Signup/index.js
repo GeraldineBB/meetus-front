@@ -1,12 +1,11 @@
 import React from "react";
 import './style.scss';
-import { NavLink, Redirect, Navigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { MenuItem } from '@mui/material';
 import { FormControl } from '@mui/material';
-import { useState, useSelector } from "react";
+import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 

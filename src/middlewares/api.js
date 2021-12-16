@@ -13,18 +13,14 @@ import {
   ADD_USER_TO_EVENT,
   SET_NEW_EVENT,
   SET_NEW_EVENT_ONLINE,
-  setNewEvent,
-  setNewEventOnline,
   setCategories,
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
-  setValidateForm, 
   EDIT_EVENT, 
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
-import Cookies from 'universal-cookie';
 
 
 
