@@ -46,7 +46,7 @@ export default function EventListCardsInProgress({
 
   // we want to check if the user is the organiser in order to print the button "Modifier"
  const organizer = () => {
-    if (eventList.some (event => event.author.id === user.id)) {
+    if (eventList.filter (event => event.author.id === user.id)) {
       console.log ('organiser');
       return true; 
     } 
