@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -136,11 +136,12 @@ export default function EventListCardsInProgress({
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
                     10/12/2021{" "}
                     <Typography
-                      variant="body1"
-                      component="p"
-                      sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                      component="span"
+                      variant="subtitle1"
+                      sx={{ ml: "2em" }}
                     >
-                      {event.description}
+                      <LocationOnIcon />
+                      {event.city}
                     </Typography>
                   </Typography>
                 </div>
