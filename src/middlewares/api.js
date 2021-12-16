@@ -13,13 +13,10 @@ import {
   ADD_USER_TO_EVENT,
   SET_NEW_EVENT,
   SET_NEW_EVENT_ONLINE,
-  setNewEvent,
-  setNewEventOnline,
   setCategories,
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
-  setValidateForm, 
   EDIT_EVENT, 
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
@@ -63,8 +60,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
 
-      const cookies = new Cookies();
-      const token = cookies.get('Pizzeria');
+
+      const token = localStorage.getItem("Token")
 
       api
         .get("v1/categories?limit=6", {

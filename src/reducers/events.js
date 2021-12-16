@@ -10,9 +10,9 @@ import {
   SET_EVENT_LIST_IN_PROGRESS,
   SET_SELECT_CATEGORIES_EVENT_LIST,
   SET_INFO_FOR_EVENTPAGE,
-  SET_VALIDATE_FORM, 
+  SET_VALIDATE_FORM,
   EDIT_EVENT,
-  SET_NEW_EVENT, 
+  SET_NEW_EVENT,
   SET_NEW_EVENT_ONLINE,
 } from "../actions/events.js";
 
@@ -22,16 +22,16 @@ export const initialState = {
   eventPageListArchived: [],
   inProgress: true,
   archived: false,
-  currentSearchBar: '',
-  currentSelectCategoriesEventList: '',
+  currentSearchBar: "",
+  currentSelectCategoriesEventList: "",
   selectCategoriesEventList: [],
   selectCategoriesEventListIsOpen: false,
   selectCategoriesEventListIsClose: true,
-  eventInfoPage: [], 
-  loading: true, 
+  eventInfoPage: [],
+  loading: true,
   eventCurrentInfo: [],
-  setValidateForm: false, 
-  edition: true, 
+  setValidateForm: false,
+  edition: true,
   currentLng: null,
   currentLat: null,
 };
@@ -48,7 +48,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         eventPageListInProgress: action.value,
       };
-      case SET_EVENT_LIST_ARCHIVED:
+    case SET_EVENT_LIST_ARCHIVED:
       return {
         ...state,
         eventPageListArchived: action.value,
@@ -66,59 +66,59 @@ const reducer = (state = initialState, action = {}) => {
         inProgress: false,
       };
     case SEARCH_BAR_EVENT_LIST:
-      return{
+      return {
         ...state,
-        currentSearchBar: action.value
+        currentSearchBar: action.value,
       };
-      case SET_SELECT_CATEGORIES_EVENT_LIST:
-        return{
-          ...state,
-          selectCategoriesEventList: action.value
-        };
-      case SELECT_CATEGORIES_EVENT_LIST_IS_CLOSE:
-        return{
-          ...state,
-          selectCategoriesEventListIsOpen: false,
-          selectCategoriesEventListIsClose: true,
-        };
-      case SELECT_CATEGORIES_EVENT_LIST_IS_OPEN:
-        return{
-          ...state,
-          selectCategoriesEventListIsClose: false,
-          selectCategoriesEventListIsOpen: true,
-        };
-      case CURRENT_SELECT_CATEGORIES_EVENT_LIST:
-        return{
-          ...state,
-          currentSelectCategoriesEventList: action.value,
-        };
-      case SET_INFO_FOR_EVENTPAGE:
-        return {
-          ...state, 
-          loading: false, 
-          eventInfoPage: action.value, 
-        }
-      case SET_VALIDATE_FORM:
-        return {
-          ...state, 
-          setValidateForm: true, 
-        }
-      case EDIT_EVENT:
-        return {
-          ...state, 
-          edition: false, 
-          eventInfoPage: action.values, 
-        }
-        case SET_NEW_EVENT:
-        return {
-          ...state,
-          setValidateForm: true,
-        }
-        case SET_NEW_EVENT_ONLINE:
-        return {
-          ...state,
-          setValidateForm: true,
-        }
+    case SET_SELECT_CATEGORIES_EVENT_LIST:
+      return {
+        ...state,
+        selectCategoriesEventList: action.value,
+      };
+    case SELECT_CATEGORIES_EVENT_LIST_IS_CLOSE:
+      return {
+        ...state,
+        selectCategoriesEventListIsOpen: false,
+        selectCategoriesEventListIsClose: true,
+      };
+    case SELECT_CATEGORIES_EVENT_LIST_IS_OPEN:
+      return {
+        ...state,
+        selectCategoriesEventListIsClose: false,
+        selectCategoriesEventListIsOpen: true,
+      };
+    case CURRENT_SELECT_CATEGORIES_EVENT_LIST:
+      return {
+        ...state,
+        currentSelectCategoriesEventList: action.value,
+      };
+    case SET_INFO_FOR_EVENTPAGE:
+      return {
+        ...state,
+        loading: false,
+        eventInfoPage: action.value,
+      };
+    case SET_VALIDATE_FORM:
+      return {
+        ...state,
+        setValidateForm: true,
+      };
+    case EDIT_EVENT:
+      return {
+        ...state,
+        edition: false,
+        eventInfoPage: action.values,
+      };
+    case SET_NEW_EVENT:
+      return {
+        ...state,
+        setValidateForm: true,
+      };
+    case SET_NEW_EVENT_ONLINE:
+      return {
+        ...state,
+        setValidateForm: true,
+      };
     default:
       return state;
   }

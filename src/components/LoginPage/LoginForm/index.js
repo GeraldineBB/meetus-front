@@ -6,23 +6,22 @@ import { Formik, Form, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { login } from "../../../actions/user";
-import Cookies from 'universal-cookie';
 
 export default function LoginForm() {
-  const navigate = useNavigate()
-  const {logged} = useSelector(state => state.user)
+  const navigate = useNavigate();
+  const { logged } = useSelector((state) => state.user);
 
   const handleVerify = () => {
-    if(logged === true){
-      console.log(logged)
+    if (logged === true) {
+      console.log(logged);
       return navigate("/");
     }
     return navigate("/login");
-  }
+  };
 
   handleVerify();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div>
       <Formik
@@ -47,10 +46,9 @@ export default function LoginForm() {
           return errors;
         }}
         onSubmit={(values) => {
-          dispatch(login(values))
-          console.log(values)
+          dispatch(login(values));
+          console.log(values);
         }}
-
       >
         {({
           values,

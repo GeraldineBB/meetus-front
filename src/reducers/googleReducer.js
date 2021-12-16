@@ -6,7 +6,7 @@ import {
 } from "../actions/googleMapAutocompletion";
 
 export const initialState = {
-  value: '',
+  value: "",
   inputValue: null,
   options: [],
   loaded: false,

@@ -14,9 +14,9 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
     cookie.remove("Pizzeria");
-    localStorage.removeItem('User')
-    localStorage.removeItem('Token')
-  }
+    localStorage.removeItem("User");
+    localStorage.removeItem("Token");
+  };
   if (logged === false) {
     return (
       <div className="header">
@@ -57,21 +57,22 @@ function Header() {
       </div>
       <div className="header__buttons">
         <NavLink to="/" style={{ textDecoration: "none" }}>
-            <Avatar
-              alt="Remy Sharp"
-              src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}
-              sx={{ mr: "1em" }}
-            />
+          <Avatar
+            alt="Remy Sharp"
+            src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}
+            sx={{ mr: "1em" }}
+          />
         </NavLink>
         <NavLink to="/" style={{ textDecoration: "none" }}>
-        <Button
-          className="header__buttons__logout"
-          size="small"
-          variant="contained"
-          onClick={handleLogout}
-        >
-          Deconnexion
-        </Button></NavLink>
+          <Button
+            className="header__buttons__logout"
+            size="small"
+            variant="contained"
+            onClick={handleLogout}
+          >
+            Deconnexion
+          </Button>
+        </NavLink>
       </div>
     </div>
   );

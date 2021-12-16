@@ -11,11 +11,10 @@ const RedirectEventForm = () => {
 
     window.setTimeout(function () {
         window.location.href = '/eventList';
-    }, 5000);
+    }, 2000);
 
     return (
         <div className="loading">
-
             <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea>
                     <CardMedia
@@ -36,7 +35,6 @@ const RedirectEventForm = () => {
                     </CardContent>
                 </CardActionArea>
             </Card>
-
         </div>
     );
 };
