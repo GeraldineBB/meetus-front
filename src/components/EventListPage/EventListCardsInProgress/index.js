@@ -53,7 +53,7 @@ export default function EventListCardsInProgress({
     } 
   }; 
 
-// organizer(); 
+organizer(); 
   
   return (
     <Grid container>
@@ -64,9 +64,9 @@ export default function EventListCardsInProgress({
         }
       }).filter((event) => {
         if (event.category.name.includes(currentSelect)){
-          return event
+          return event; 
         } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())){
-          return event
+          return event; 
         }
       }).map((event) => (
         <Grid

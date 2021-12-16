@@ -1,15 +1,5 @@
-import { Routes, Route, Redirect } from "react-router-dom";
 import React, { useEffect } from 'react';
-import LoginPage from "../../Views/Login";
-import HomePage from "../../Views/HomePage";
-import EventPage from "../../Views/EventPage";
-import EventListPage from "../../Views/EventListPage";
-import { SignUpForm } from "../Signup";
-import EventEdit from "../../Views/EventEdit";
-import RedirectSignup from "../Signup/Loading";
-import RedirectEdition from "../Event/EventEdit/LoadingEdition";
-import EventCreation from "../../Views/EventCreation";
-import RedirectEventForm from "../Event/EventForm/LoadingCreation";
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation } from "react-router-dom";
 import RouteConnected from "../../Routes/RouteConnected";
