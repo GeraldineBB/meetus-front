@@ -6,8 +6,8 @@ import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
 import CategoryPage from "../../Views/CategoryPage";
 import HomePage from "../../Views/HomePage";
-import { SignUpForm } from "../../components/Signup";
 import RedirectSignup from "../../components/Signup/Loading";
+import SignUp from "../../Views/SignUp";
 
 function RouteNotConnected() {
   // quand la location change, on applique un effet qui fait
@@ -23,7 +23,7 @@ function RouteNotConnected() {
       <Route path="/signup-done" element={<RedirectSignup />} />
       <Route path="/events/:id" element={<EventPage />} />
       <Route path="/eventList" element={<EventListPage />} />
-      <Route path="/signup" element={<SignUpForm />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/create" element={<Navigate to="/login" />} />
       <Route path="/edit/:id" element={<Navigate to="/login" />} />
