@@ -29,8 +29,6 @@ export default function EventListCardsArchived({
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
-  const {logged} = useSelector(state => state.user)
-
 
 
   const dispatch = useDispatch();

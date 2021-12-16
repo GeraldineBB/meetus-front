@@ -35,8 +35,8 @@ export default function EventEdit ({eventId}) {
 
     const today = new Date();
 
-    const eventInfoPage = useSelector(
-    (state) => state.events.eventInfoPage);
+    // const eventInfoPage = useSelector(
+    // (state) => state.events.eventInfoPage);
 
     const categorieList = useSelector(
     (state) => state.categories.categorieList);
@@ -48,10 +48,9 @@ export default function EventEdit ({eventId}) {
 
     useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
-    dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
-    console.log(eventInfoPage);  
+    // dispatch({ type: LOAD_INFO_FOR_PAGE_EVENT, eventId: eventId });
    
-    }, [dispatch, eventId]);
+    }, [dispatch]);
 
     if(!edition){
         return <Navigate to="/edition-done" />

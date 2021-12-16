@@ -32,7 +32,6 @@ export default function EventListCardsInProgress({
   );
   const currentInput = useSelector(state => state.events.currentSearchBar);
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList);
-  const {logged} = useSelector(state => state.user);
   const { user }   = useSelector((state) => state.user);
 
 

@@ -22,7 +22,7 @@ function RouteConnected() {
       <Route path="/events/:id" element={<EventPage />} />
       <Route path="/eventList" element={<EventListPage />} />
       <Route path="/create" element={<EventForm />} />
-      <Route path="//event-creation-done" element={<RedirectEventForm />} />
+      <Route path="/event-creation-done" element={<RedirectEventForm />} />
       <Route path="/edit/:id" element={<EventEdit />} />
       <Route path="/signup" element={<Navigate to="/" />} />
       <Route path="/login" element={<Navigate to="/" />} />

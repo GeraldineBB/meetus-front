@@ -37,12 +37,6 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_EVENTS_FOR_HOME: {
       // endpoints to load the 3 next events for home
 
-      // const cookies = new Cookies();
-      // const token = cookies.get('Pizzeria');
-      const token = localStorage.getItem('Token'); 
-
-      // console.log(token)
-
       api
         .get("v1/events?limit=3", {
         })
@@ -60,9 +54,6 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
-
-      // const cookies = new Cookies();
-      // const token = cookies.get('Pizzeria');
 
       const token = localStorage.getItem('Token'); 
 
