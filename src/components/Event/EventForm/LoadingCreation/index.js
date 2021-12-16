@@ -9,17 +9,19 @@ import "./style.scss";
 const RedirectEventForm = () => {
 
 
-    window.setTimeout(function () {
+     window.setTimeout(function () {
         window.location.href = '/eventList';
-    }, 2000);
+    }, 4000); 
 
     return (
-        <div className="loading">
+
+        <div className="card">
+        <div className="card__loading">
             <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        height="180"
+                        height="250"
                         image={`${process.env.PUBLIC_URL}/illustrations/music-illu.svg`}
                         alt="ENJOY"
                     />
@@ -35,6 +37,7 @@ const RedirectEventForm = () => {
                     </CardContent>
                 </CardActionArea>
             </Card>
+        </div>
         </div>
     );
 };
