@@ -136,11 +136,12 @@ export default function EventListCardsInProgress({
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
                     10/12/2021{" "}
                     <Typography
-                      variant="body1"
-                      component="p"
-                      sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                      component="span"
+                      variant="subtitle1"
+                      sx={{ ml: "2em" }}
                     >
-                      {event.description}
+                      <LocationOnIcon />
+                      {event.city}
                     </Typography>
                   </Typography>
                 </div>
