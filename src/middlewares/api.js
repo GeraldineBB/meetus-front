@@ -222,7 +222,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture.name,
+            picture: action.values.picture,
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,

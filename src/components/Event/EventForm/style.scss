@@ -31,6 +31,22 @@
         width: 600px;
         padding: 1em;
     }
+    &__city{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        padding: 1em;
+    }
+    &__zipcode{
+        display: flex;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 100%;
+        width: 600px;
+        padding: 1em;
+    }
     &__select{
         display: flex;
         justify-self: center;
