@@ -212,7 +212,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case SET_NEW_EVENT: {
 
       const token = localStorage.getItem("Token");
-      const {google: { value }} = store.getState();
+      // const {google: { value }} = store.getState();
 
         axios({
           headers: { "Authorization": `Bearer ${token}` } ,
@@ -224,7 +224,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             maxMembers:action.values.maxMembers,
             picture: action.values.picture.name,
             address: action.values.address,
-            city: value.structured_formatting.main_text,
+            city: action.values.city,
             country: action.values.country,
             zipcode: action.values.zipcode,
         },

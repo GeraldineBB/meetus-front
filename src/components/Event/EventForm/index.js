@@ -85,11 +85,11 @@ const EventForm = () => {
       isOnline: "",
       category: "",
       date: new Date(new Date().setDate(today.getDate() + 2)),
-      address: "ODOGoogleAPI",
+      address: "",
       picture: "",
-      author: "3",
-      city: 'main_text',
-      zipcode: "38000",
+      author: "",
+      city: "",
+      zipcode: "",
       country: "FRANCE",
     },
     validationSchema: validationSchema,
@@ -165,7 +165,45 @@ const EventForm = () => {
         </div>
 
         <div className="event__form__place">
-          <GoogleMaps />
+          <TextField
+            fullWidth
+            label="Adresse"
+            className="eventForm"
+            id="address"
+            name="address"
+            value={formik.values.address}
+            onChange={formik.handleChange}
+            error={formik.touched.address && Boolean(formik.errors.address)}
+            helperText={formik.touched.address && formik.errors.address}
+          />
+        </div>
+
+        <div className="event__form__city">
+          <TextField
+            fullWidth
+            label="Ville"
+            className="eventForm"
+            id="city"
+            name="city"
+            value={formik.values.city}
+            onChange={formik.handleChange}
+            error={formik.touched.city && Boolean(formik.errors.city)}
+            helperText={formik.touched.city && formik.errors.city}
+          />
+        </div>
+
+        <div className="event__form__zipcode">
+          <TextField
+            fullWidth
+            label="Code Postal"
+            className="eventForm"
+            id="zipcode"
+            name="zipcode"
+            value={formik.values.zipcode}
+            onChange={formik.handleChange}
+            error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
+            helperText={formik.touched.zipcode && formik.errors.zipcode}
+          />
         </div>
 
         <div className="event__form__select">
