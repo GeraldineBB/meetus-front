@@ -13,27 +13,16 @@ import { Radio } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
 import { Navigate } from "react-router-dom";
-
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-
 import { useFormik } from "formik";
 import * as yup from "yup";
-
 import HeaderSignUp from "../../Signup/HeaderSignup";
-
-/* 
-import LocationAutoComplete from '../Tools'; */
-
 import Thumb from "../Tools/Thumb";
-
 import { LOAD_CATEGORIES } from "../../../actions/events";
-
 import { format } from "date-fns";
-
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 import GoogleMaps from "../Tools";
 
@@ -64,7 +53,7 @@ const EventForm = () => {
       setResponseValidateForm(true);
       console.log(values);
     }
-    console.log('ca marche pas ')
+    
   };
 
   const validationSchema = yup.object({
@@ -84,6 +73,10 @@ const EventForm = () => {
       .number("Entré un nombre maximum de participant ")
       .min(2, "Un évènement doit avoir un moins 2 participant")
       .required("Le nombre maximum de participant est requis"),
+      zipcode: yup
+      .number("Entré un nombre maximum de participant ")
+      .min(5, "Un code postal doit avec 5 caractères")
+      .required("Le nombre maximum de participant est requis"),
   });
 
   const today = new Date();
@@ -95,12 +88,12 @@ const EventForm = () => {
       maxMembers: "",
       isOnline: "",
       category: "",
-      date: new Date(new Date().setDate(today.getDate() + 1)),
-      address: "ODOGoogleAPI",
+      date: new Date(new Date().setDate(today.getDate() + 2)),
+      address: "",
       picture: "",
-      author: "3",
-      city: 'main_text',
-      zipcode: "38000",
+      author: "",
+      city: "",
+      zipcode: "",
       country: "FRANCE",
     },
     validationSchema: validationSchema,
@@ -171,13 +164,50 @@ const EventForm = () => {
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
-              {/* format(new Date(), 'yyyy/MM/dd kk:mm:ss') */}
             </LocalizationProvider>
           </FormControl>
         </div>
 
         <div className="event__form__place">
-          <GoogleMaps />
+          <TextField
+            fullWidth
+            label="Adresse"
+            className="eventForm"
+            id="address"
+            name="address"
+            value={formik.values.address}
+            onChange={formik.handleChange}
+            error={formik.touched.address && Boolean(formik.errors.address)}
+            helperText={formik.touched.address && formik.errors.address}
+          />
+        </div>
+
+        <div className="event__form__city">
+          <TextField
+            fullWidth
+            label="Ville"
+            className="eventForm"
+            id="city"
+            name="city"
+            value={formik.values.city}
+            onChange={formik.handleChange}
+            error={formik.touched.city && Boolean(formik.errors.city)}
+            helperText={formik.touched.city && formik.errors.city}
+          />
+        </div>
+
+        <div className="event__form__zipcode">
+          <TextField
+            fullWidth
+            label="Code Postal"
+            className="eventForm"
+            id="zipcode"
+            name="zipcode"
+            value={formik.values.zipcode}
+            onChange={formik.handleChange}
+            error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
+            helperText={formik.touched.zipcode && formik.errors.zipcode}
+          />
         </div>
 
         <div className="event__form__select">
@@ -202,6 +232,41 @@ const EventForm = () => {
               ))}
             </Select>
           </FormControl>
+        </div>
+
+
+        <div className="event__form__number">
+          <TextField
+            fullWidth
+            label="Nombre maximum de participant"
+            className="eventForm"
+            id="maxMembers"
+            name="maxMembers"
+            value={formik.values.maxMembers}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.maxMembers && Boolean(formik.errors.maxMembers)
+            }
+            helperText={formik.touched.maxMembers && formik.errors.maxMembers}
+          />
+        </div>
+
+
+        <div className="event__form__description">
+          <TextField
+            fullWidth
+            label="Votre description"
+            className="eventForm"
+            id="description"
+            name="description"
+            type="description"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.description && Boolean(formik.errors.description)
+            }
+            helperText={formik.touched.description && formik.errors.description}
+          />
         </div>
 
         <div className="event__form__photo">
@@ -233,38 +298,8 @@ const EventForm = () => {
         <div className="event__form__photo">
           <Thumb file={formik.values.picture} />
         </div>
-        <div className="event__form__description">
-          <TextField
-            fullWidth
-            label="Votre description"
-            className="eventForm"
-            id="description"
-            name="description"
-            type="description"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.description && Boolean(formik.errors.description)
-            }
-            helperText={formik.touched.description && formik.errors.description}
-          />
-        </div>
 
-        <div className="event__form__number">
-          <TextField
-            fullWidth
-            label="Nombre maximum de participant"
-            className="eventForm"
-            id="maxMembers"
-            name="maxMembers"
-            value={formik.values.maxMembers}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.maxMembers && Boolean(formik.errors.maxMembers)
-            }
-            helperText={formik.touched.maxMembers && formik.errors.maxMembers}
-          />
-        </div>
+
         <div className="event__form__buttom">
           <FormControl fullWidth>
             <Button

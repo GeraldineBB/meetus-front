@@ -203,14 +203,15 @@ const EventContent = ({ eventId }) => {
                   type: ADD_USER_TO_EVENT,
                   eventId: eventId, 
                 });
+                window.location.reload();
               }}
             >
-            {(joinEvent || suscribed()) ?  'Inscrit' : 'Rejoindre' }
+            { suscribed() ?  'Inscrit' : 'Rejoindre' }
             </Button>
           )}
 
           <p className="eventContent__detail__membersCount">
-            {joinEvent ? (eventInfoPage.event.membersCount +1) : eventInfoPage.event.membersCount} Participants
+            {eventInfoPage.event.membersCount} Participants
             {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
           </p>
             {
