@@ -73,6 +73,10 @@ const EventForm = () => {
       .number("Entré un nombre maximum de participant ")
       .min(2, "Un évènement doit avoir un moins 2 participant")
       .required("Le nombre maximum de participant est requis"),
+      zipcode: yup
+      .number("Entré un nombre maximum de participant ")
+      .min(5, "Un code postal doit avec 5 caractères")
+      .required("Le nombre maximum de participant est requis"),
   });
 
   const today = new Date();
