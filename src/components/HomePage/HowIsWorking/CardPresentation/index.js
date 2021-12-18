@@ -16,7 +16,6 @@ const CardPresentation = () => {
       <Container maxWidth="lg" sx={{ mt: 3, mb: 5 }}>
         <Grid
           container
-          direction="row-reverse"
           justifyContent="space-evenly"
           alignItems="center"
         >
@@ -32,22 +31,18 @@ const CardPresentation = () => {
                 alt="explaining how to use create an event"
               />
               <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-                <Button>
-                  <Link to="/TODOTOUTLESEVENTS">Trouver un évènement</Link>
-                </Button>
+                  <Link style={{textDecoration: 'none', color: '#000000'}} to="/eventList">
+                    <Button >
+                    Trouver un évènement
+                    </Button>
+                    </Link>
               </CardActions>
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h4"
-                  component="div"
-                ></Typography>
-                <Typography variant="body2" color="text.secondary">
+
+                <Typography variant="inherit" color="text.secondary" sx={{fontFamily: 'Space Grotesk', lineHeight: 1.5, mb:2, mr: 1, ml: 1}}>
                   Vous ne savez pas quoi faire ce week-end ? 
                   Parcourez la liste des évènements et choisissez celui qui vous convient ! 
                   Meet Us, c'est l'occasion de tester de nouvelles activités ! 
                 </Typography>
-              </CardContent>
             </Card>
           </Grid>
           <Grid item md={4}>
@@ -62,23 +57,20 @@ const CardPresentation = () => {
                 alt="explaining how to use create an event"
               />
               <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-                <Button>
-                  <Link to="/TODOCREEREVENT" sx={{textDecoration: "none"}}>Organiser un évènement </Link>
-                </Button>
+
+                <Link style={{textDecoration: 'none', color: '#000000'  }} to="/create">
+                    <Button >
+                    Organiser un évènement
+                    </Button>
+                    </Link>
               </CardActions>
 
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h4"
-                  component="div"
-                ></Typography>
-                <Typography variant="body2" color="text.secondary">
+  
+                <Typography variant="inherit" color="text.secondary" sx={{fontFamily: 'Space Grotesk', lineHeight: 1.5, mb:2, mr: 1, ml: 1}}>
                   Vous avez une passion que vous souhaitez partager ? 
                   Avec MeetUs vous pouvez trouver vos prochains compagnons ! 
                   Etre entouré vous permettra d'aller au bout de vos envies...
                 </Typography>
-              </CardContent>
             </Card>
           </Grid>
         </Grid>

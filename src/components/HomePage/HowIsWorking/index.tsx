@@ -15,7 +15,6 @@ const HowIsWorking = () => {
       <div>
         <Grid
           container
-          direction="row-reverse"
           justifyContent="space-evenly"
           alignItems="center"
         >
@@ -25,7 +24,8 @@ const HowIsWorking = () => {
               sx={{
                 backgroundColor: "#F36B7F",
                 "&:hover": { backgroundColor: "#F8CF61" },
-                mb: '1em'
+                mb: 5,
+                mr: 4
               }}
               className="buttom"
               variant="contained"
