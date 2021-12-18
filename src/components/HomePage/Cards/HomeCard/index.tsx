@@ -70,18 +70,18 @@ export default function HomeCard({
               alt="Paella dish"
             />
 
-            <Typography sx={{ mt: 1.2 }} variant="h5" component="div">
+            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h5" component="div">
               {title}
             </Typography>
-            <Typography color="text.primary">
+            <Typography color="text.primary" sx={{fontFamily: 'Space Grotesk'}}>
               <LocationOnIcon fontSize="medium" />
               {city}
             </Typography>
-            <Typography sx={{ mb: 1 }}>
+            <Typography sx={{ mb: 1, fontFamily: 'Space Grotesk' }}>
               <CalendarTodayIcon sx={{ mr: 1.5 }} />
               {formatDate(date)}
             </Typography>
-            <Typography sx={{ mt: 2 }} color="text.primary">
+            <Typography sx={{ mt: 2, fontFamily: 'Space Grotesk' }} color="text.primary">
               {membersCount} participants
             </Typography>
           </CardContent>
@@ -98,7 +98,10 @@ export default function HomeCard({
             >
               <Link
                 to={`/events/${id}`}
-                style={{ textDecoration: "none", color: "white" }}
+                style={{ 
+                  textDecoration: "none", 
+                  color: "white", 
+                  fontFamily: 'Space Grotesk'  }}
               >
                 En savoir plus
               </Link>

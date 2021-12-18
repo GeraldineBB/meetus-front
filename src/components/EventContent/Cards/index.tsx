@@ -45,61 +45,61 @@ export default function EventCard({
       style={{ textDecoration: "none", color: "white" }}
     >
       <Card
-        className="card"
-        sx={{
-          mr: 3,
-          height: 540,
-          display: "flex",
-          justifyContent: "space-between",
-          flexDirection: "column",
-        }}
-      >
-        <CardContent>
-          <CardMedia
-            component="img"
-            sizes="100"
-            image={`${process.env.PUBLIC_URL}/images/${picture}`}
-            alt="Paella dish"
-          />
+          className="card"
+          sx={{
+            mr: { xs: 0, sm: 0, md: 3, lg: 3 },
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
+          }}
+        >
+          <CardContent>
+            <CardMedia
+              component="img"
+              height= "300"
+              sizes="100"
+              image={`${process.env.PUBLIC_URL}/images/${picture}`}
+              alt="Paella dish"
+            />
 
-          <Typography sx={{ mt: 1.5 }} variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography color="text.primary">
-            <LocationOnIcon fontSize="medium" />
-            {city}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }}>
-            <CalendarTodayIcon sx={{ mr: 1.5 }} />
-            {formatDate(date)}
-          </Typography>
-          <Typography sx={{ mb: 0.3, height: 100 }} variant="body1">
-            {description}
-          </Typography>
-          <Typography color="text.primary">
-            {membersCount} participants
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            variant="contained"
-            className="card__button"
-            sx={{
-              width: "100%",
-              backgroundColor: "#F36B7F",
-              "&:hover": { backgroundColor: "#F8CF61" },
-            }}
-          >
-            <Link
-              to={`/events/${id}`}
-              style={{ textDecoration: "none", color: "white" }}
+            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h5" component="div">
+              {title}
+            </Typography>
+            <Typography color="text.primary" sx={{fontFamily: 'Space Grotesk'}}>
+              <LocationOnIcon fontSize="medium" />
+              {city}
+            </Typography>
+            <Typography sx={{ mb: 1, fontFamily: 'Space Grotesk' }}>
+              <CalendarTodayIcon sx={{ mr: 1.5 }} />
+              {formatDate(date)}
+            </Typography>
+            <Typography sx={{ mt: 2, fontFamily: 'Space Grotesk' }} color="text.primary">
+              {membersCount} participants
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button
+              size="small"
+              variant="contained"
+              className="card__button"
+              sx={{
+                width: "100%",
+                backgroundColor: "#F36B7F",
+                "&:hover": { backgroundColor: "#F8CF61" },
+              }}
             >
-              En savoir plus
-            </Link>
-          </Button>
-        </CardActions>
-      </Card>
+              <Link
+                to={`/events/${id}`}
+                style={{ 
+                  textDecoration: "none", 
+                  color: "white", 
+                  fontFamily: 'Space Grotesk'  }}
+              >
+                En savoir plus
+              </Link>
+            </Button>
+          </CardActions>
+        </Card>
     </Link>
   );
 }
