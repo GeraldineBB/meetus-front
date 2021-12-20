@@ -24,7 +24,6 @@ import Thumb from "../Tools/Thumb";
 import { LOAD_CATEGORIES } from "../../../actions/events";
 import { format } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
-import GoogleMaps from "../Tools";
 
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 

@@ -49,7 +49,7 @@ export default function EventListCardsInProgressCategory({
   return (
     <Grid container>
       {eventList.filter((event) => {
-        if (event.category.id == categoryId) 
+        if (event.category.id === categoryId) 
         {
           return event;
         }

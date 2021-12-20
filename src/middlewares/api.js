@@ -78,7 +78,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
         })
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           store.dispatch(setInfoForEventPage(response.data));
         })
         .catch((error) =>

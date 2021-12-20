@@ -14,7 +14,6 @@ import {
   EDIT_EVENT,
   SET_NEW_EVENT,
   SET_NEW_EVENT_ONLINE,
-  LOADING,
 } from "../actions/events.js";
 
 export const initialState = {
@@ -42,7 +41,6 @@ const reducer = (state = initialState, action = {}) => {
     case SET_EVENT_FOR_HOME:
       return {
         ...state,
-        loading: false,
         homeEventList: action.value,
       };
     case SET_EVENT_LIST_IN_PROGRESS:
@@ -99,8 +97,8 @@ const reducer = (state = initialState, action = {}) => {
     case SET_INFO_FOR_EVENTPAGE:
       return {
         ...state,
-        loading: false,
         eventInfoPage: action.value,
+        loading: false,
       };
     case SET_VALIDATE_FORM:
       return {
