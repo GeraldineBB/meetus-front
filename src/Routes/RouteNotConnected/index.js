@@ -9,6 +9,9 @@ import HomePage from "../../Views/HomePage";
 import RedirectSignup from "../../components/Signup/Loading";
 import SignUp from "../../Views/SignUp";
 
+import NotFound from "../../components/404";
+import NotFoundPage from "../../Views/404Page";
+
 function RouteNotConnected() {
   // quand la location change, on applique un effet qui fait
   // scroller la page en haut
@@ -28,6 +31,7 @@ function RouteNotConnected() {
       <Route path="/create" element={<Navigate to="/login" />} />
       <Route path="/edit/:id" element={<Navigate to="/login" />} />
       <Route path="/events/category/:id" element={<CategoryPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
