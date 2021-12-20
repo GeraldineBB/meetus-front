@@ -13,6 +13,8 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import CardMedia from "@mui/material/CardMedia";
+
 
 import GoogleMaps from "./GoogleMaps";
 import {

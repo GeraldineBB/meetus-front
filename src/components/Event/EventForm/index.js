@@ -35,23 +35,34 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
-
-
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
   const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, actions) => {
+
+    let bodyFormData = new FormData(); 
+    bodyFormData.set('title', values.title);
+    bodyFormData.set('description', values.description);
+    bodyFormData.set('date', values.date);
+    bodyFormData.set('category', values.category);
+    bodyFormData.set('maxMembers', values.maxMembers); 
+    bodyFormData.set('address', values.address); 
+    bodyFormData.set('city', values.city);
+    bodyFormData.set('zipcode', values.zipcode); 
+    bodyFormData.set('country', values.country);
+    bodyFormData.append('picture', values.picture); 
+
     if (values.isOnline === "1") {
-      dispatch(setNewEventOnline(values));
+      dispatch(setNewEventOnline(bodyFormData));
       setResponseValidateForm(true);
-      console.log(values);
+      console.log(bodyFormData);
     } else {
-      dispatch(setNewEvent(values));
+      dispatch(setNewEvent(bodyFormData));
       setResponseValidateForm(true);
-      console.log(values);
+      console.log(bodyFormData);
     }
     
   };
@@ -73,7 +84,7 @@ const EventForm = () => {
       .number("Entré un nombre maximum de participant ")
       .min(2, "Un évènement doit avoir un moins 2 participant")
       .required("Le nombre maximum de participant est requis"),
-      zipcode: yup
+    zipcode: yup
       .number("Entré un nombre maximum de participant ")
       .min(5, "Un code postal doit avec 5 caractères")
       .required("Le nombre maximum de participant est requis"),
