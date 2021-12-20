@@ -21,7 +21,6 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 
 import { Formik, Form } from "formik";
 
-import Thumb from "../Tools/Thumb";
 
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
@@ -205,7 +204,6 @@ export default function EventEdit({ eventId }) {
                 </FormControl>
               </div>
               <div className="event__form__photo">
-                <Thumb file={values.picture} />
               </div>
 
               <div className="event__form__description">

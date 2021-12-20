@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
 
 import TextField from "@mui/material/TextField";
@@ -20,10 +20,13 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
-import Thumb from "../Tools/Thumb";
+/* 
+import Thumb from "../Tools/Thumb"; */
 import { LOAD_CATEGORIES } from "../../../actions/events";
-import { format } from "date-fns";
+import { format, formatRelative } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
+import PreviewImage from "../EventForm/PreviewImage";
+
 
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
@@ -34,6 +37,9 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
+  const pictureRef = useRef(null);
+
+
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
@@ -43,12 +49,12 @@ const EventForm = () => {
   const onSubmit = async (values, actions) => {
 
     if (values.isOnline === "1") {
-      dispatch(setNewEventOnline(values));
-      setResponseValidateForm(true);
+      dispatch(setNewEventOnline(values));/* 
+      setResponseValidateForm(true); */
       console.log(values);
     } else {
-      dispatch(setNewEvent(values));
-      setResponseValidateForm(true);
+      dispatch(setNewEvent(values));/* 
+      setResponseValidateForm(true); */
       console.log(values);
     }
     
@@ -88,7 +94,7 @@ const EventForm = () => {
       category: "",
       date: new Date(new Date().setDate(today.getDate() + 2)),
       address: "",
-      picture: "",
+      picture: null,
       author: "",
       city: "",
       zipcode: "",
@@ -97,6 +103,8 @@ const EventForm = () => {
     validationSchema: validationSchema,
     onSubmit,
   });
+
+
 
   /* 
   console.log("Error: ", formik.errors);  */
@@ -278,6 +286,7 @@ const EventForm = () => {
                 onChange={(event) => {
                   formik.setFieldValue("picture", event.currentTarget.files[0]);
                 }}
+                ref={pictureRef}           
               />
               <Button
                 sx={{
@@ -287,14 +296,19 @@ const EventForm = () => {
                 fullWidth
                 variant="contained"
                 component="span"
+                onClick ={()=> {pictureRef.current.click();}
+              }
               >
                 Téléchargez votre image de couverture d'évènement
               </Button>
             </label>
           </FormControl>
         </div>
+        
         <div className="event__form__photo">
-          <Thumb file={formik.values.picture} />
+              { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
+             {/*  <PreviewImage file={formik.values.picture} />  */}
+        {/* <PreviewImage file = {formik.values.picture} /> */}
         </div>
 
 
@@ -308,6 +322,7 @@ const EventForm = () => {
               variant="contained"
               type="submit"
               onClick={onSubmit}
+              
             >
               Créer mon évènement
             </Button>

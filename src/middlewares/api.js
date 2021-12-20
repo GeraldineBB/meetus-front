@@ -223,8 +223,8 @@ const apiMiddleware = (store) => (next) => (action) => {
             description: action.values.description,
             date: action.values.date,
             category: action.values.category,
-            maxMembers:action.values.maxMembers,
-            picture: action.values.picture,
+            maxMembers:action.values.maxMembers,          
+            picture: action.values.picture ? action.values.picture.name: null, 
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
@@ -240,7 +240,8 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log("CA A FONCTIONNE")
       })
       .catch(function (erreur) {
-        window.alert("Une erreur s'est produite, veuillez réessayer"); 
+        /* 
+        window.alert("Une erreur s'est produite, veuillez réessayer");  */
           console.log(erreur);
       });
 
@@ -263,7 +264,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture.name,          
+            picture: action.values.picture ? action.values.picture.name: null,         
             isOnline: action.values.picked,
         },
            url: 'http://localhost:8080/api/v1/events?type=online', 
@@ -274,8 +275,8 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log(reponse.data);
           console.log("EVENT CREER");
       })
-      .catch(function (erreur) {
-        window.alert("Une erreur s'est produite, veuillez réessayer"); 
+      .catch(function (erreur) {/* 
+        window.alert("Une erreur s'est produite, veuillez réessayer");  */
           console.log(erreur);
       });
 
@@ -331,7 +332,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log('modif event', response);
         })
         .catch((erreur) => {
-          // window.alert("Une erreur s'est produite, veuillez réessayer");
+           window.alert("Une erreur s'est produite, veuillez réessayer");
           console.log(erreur);
         })
       next(action);
