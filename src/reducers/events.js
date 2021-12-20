@@ -46,11 +46,13 @@ const reducer = (state = initialState, action = {}) => {
     case SET_EVENT_LIST_IN_PROGRESS:
       return {
         ...state,
+        loading: false,
         eventPageListInProgress: action.value,
       };
     case SET_EVENT_LIST_ARCHIVED:
       return {
         ...state,
+        loading: false,
         eventPageListArchived: action.value,
       };
     case IN_PROGRESS:
@@ -95,8 +97,8 @@ const reducer = (state = initialState, action = {}) => {
     case SET_INFO_FOR_EVENTPAGE:
       return {
         ...state,
-        loading: false,
         eventInfoPage: action.value,
+        loading: false,
       };
     case SET_VALIDATE_FORM:
       return {

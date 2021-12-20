@@ -1,15 +1,12 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import LoginPage from "../../Views/Login";
-
 import EventListPage from "../../Views/EventListPage";
 import EventPage from "../../Views/EventPage";
 import CategoryPage from "../../Views/CategoryPage";
 import HomePage from "../../Views/HomePage";
 import RedirectSignup from "../../components/Signup/Loading";
 import SignUp from "../../Views/SignUp";
-
-import NotFound from "../../components/404";
 import NotFoundPage from "../../Views/404Page";
 
 function RouteNotConnected() {

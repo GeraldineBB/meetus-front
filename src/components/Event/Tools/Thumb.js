@@ -1,4 +1,5 @@
 import React from "react";
+import LinearIndeterminate from "../../Spinner";
 
 class Thumb extends React.Component {
     state = {
@@ -26,7 +27,7 @@ class Thumb extends React.Component {
   
       if (!file) { return null; }
   
-      if (loading) { return <p>loading...</p>; }
+      if (loading) { return <LinearIndeterminate />; }
   
       return (<img src={thumb}
         alt={file.name}

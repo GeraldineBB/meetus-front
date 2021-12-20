@@ -22,7 +22,6 @@ export const loadCategoriesForHome = () => ({
   
 });
 
-
 // action to change state with 6 categories on homepage (reducer)
 export const SET_CATEGORIES_FOR_HOME = 'SET_CATEGORIES_FOR_HOME';
 

@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_ARCHIVED} from "../../../actions/events";
 import "./style.scss";
+import LinearIndeterminate from "../../Spinner";
 
 export default function EventListCardsArchived({
   id,
@@ -29,6 +30,8 @@ export default function EventListCardsArchived({
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
+  const loading = useSelector(state => state.events.loading)
+
 
 
   const dispatch = useDispatch();
@@ -37,6 +40,11 @@ export default function EventListCardsArchived({
     dispatch({ type: LOAD_EVENT_LIST_ARCHIVED })
     ;
   }, [dispatch]);
+
+  if (loading) {
+    return <LinearIndeterminate />;
+  }
+
   return (
     <Grid container>
       {eventList.filter((event) => {
