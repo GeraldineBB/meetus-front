@@ -22,8 +22,6 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
-/* 
-import Thumb from "../Tools/Thumb"; */
 import { LOAD_CATEGORIES } from "../../../actions/events";
 import { format, formatRelative } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
@@ -46,9 +44,8 @@ const EventForm = () => {
   const handleVerify = () => {
     if (formSucces === true) {
       console.log(formSucces);
-      // return navigate("/event-creation-done");
+       return navigate("/event-creation-done");
     }
-    /* return navigate("/event-creation-done"); */
   };
 
   handleVerify();
@@ -57,20 +54,15 @@ const EventForm = () => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
-/* 
-  const [responseFormValidateForm, setResponseValidateForm] = useState(false);
- */
 
   const onSubmit = async (values) => {
 
     
     if (values.isOnline === "1") {
-      dispatch(setNewEventOnline(values));/* 
-      setResponseValidateForm(true); */
+      dispatch(setNewEventOnline(values));
       console.log(values);
     } else {
-      dispatch(setNewEvent(values));/* 
-      setResponseValidateForm(true); */
+      dispatch(setNewEvent(values));
       console.log('picture eventForm', values.picture);
     }
     
@@ -125,10 +117,6 @@ const EventForm = () => {
   /* 
   console.log("Error: ", formik.errors);  */
 
-  /* if (responseFormValidateForm) {
-    window.location.reload();
-    return <Navigate to="/event-creation-done" />;
-  } */
   return (
     <div>
       <HeaderSignUp />
@@ -323,8 +311,7 @@ const EventForm = () => {
         
         <div className="event__form__photo">
               { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
-             {/*  <PreviewImage file={formik.values.picture} />  */}
-        {/* <PreviewImage file = {formik.values.picture} /> */}
+             
         </div>
 
 
