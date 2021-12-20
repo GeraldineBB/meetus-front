@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 import LinearIndeterminate from "../../Spinner";
 
+
+
 export default function EventListCardsInProgress({
   id,
   title,
@@ -38,6 +40,14 @@ export default function EventListCardsInProgress({
 
 
 
+  function formatDate(value) {
+    return new Date(value).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  }
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -139,7 +149,8 @@ export default function EventListCardsInProgress({
                     sx={{ mb: "0.5em" }}
                   >
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
-                    10/12/2021{" "}
+                    {formatDate(event.date)}
+
                     <Typography
                       component="span"
                       variant="subtitle1"
