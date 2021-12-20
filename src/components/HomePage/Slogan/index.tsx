@@ -2,13 +2,15 @@ import "./style.scss";
 import Button from "@mui/material/Button";
 import friends from "../../../assets/illustrations/friends.svg";
 import { NavLink } from "react-router-dom";
+import TypedReactHooksSlogan from "./TypedJS";
 
 const Slogan = () => {
   return (
     <div className="slogan">
       <div className="slogan__presentation">
         <div className="slogan__presentation__text">
-          <h1>Découvrez votre prochaine activité du week-end</h1>
+          <h1>Découvrez votre prochaine activité du week-end : <span> <TypedReactHooksSlogan /> </span>
+          </h1>
         </div>
         <div className="slogan__presentation__button">
         <NavLink to="/create" style={{ textDecoration: "none" }}>
