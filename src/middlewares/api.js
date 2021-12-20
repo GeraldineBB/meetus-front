@@ -215,10 +215,15 @@ const apiMiddleware = (store) => (next) => (action) => {
       const token = localStorage.getItem("Token");
       // const {google: { value }} = store.getState();
 
+      let data = new FormData(); 
+      data.append('picture', action.values.picture);
+
         axios({
           headers: { 
-            "Authorization": `Bearer ${token}`,
-           } ,
+            "Authorization": `Bearer ${token}`,  
+            "Accept": "application/json", 
+            "Content-Type": "multipart/form-data", 
+          } ,
           data: {
             title : action.values.title, 
             description: action.values.description,
@@ -238,8 +243,8 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           store.dispatch(setValidateForm(reponse.data));
-          console.log(reponse.data);
-          console.log("CA A FONCTIONNE")
+          console.log('formData middleware', reponse.data);
+          console.log("CA A FONCTIONNER"); 
       })
       .catch(function (erreur) {
         /* 

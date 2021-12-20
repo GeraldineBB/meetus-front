@@ -40,25 +40,18 @@ const EventForm = () => {
 
   const pictureRef = useRef(null);
 
-
-
-
   const navigate = useNavigate();
   const { formSucces } = useSelector((state) => state.events);
 
   const handleVerify = () => {
     if (formSucces === true) {
       console.log(formSucces);
-      return navigate("/event-creation-done");
+      // return navigate("/event-creation-done");
     }
     /* return navigate("/event-creation-done"); */
   };
 
   handleVerify();
-
-
-
-
 
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
@@ -68,8 +61,9 @@ const EventForm = () => {
   const [responseFormValidateForm, setResponseValidateForm] = useState(false);
  */
 
-  const onSubmit = async (values, actions) => {
+  const onSubmit = async (values) => {
 
+    
     if (values.isOnline === "1") {
       dispatch(setNewEventOnline(values));/* 
       setResponseValidateForm(true); */
@@ -77,7 +71,7 @@ const EventForm = () => {
     } else {
       dispatch(setNewEvent(values));/* 
       setResponseValidateForm(true); */
-      console.log(values);
+      console.log('picture eventForm', values.picture);
     }
     
   };

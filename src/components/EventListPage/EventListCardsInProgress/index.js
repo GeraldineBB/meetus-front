@@ -81,7 +81,7 @@ export default function EventListCardsInProgress({
 
               component="img"
               sx={{ maxWidth: "30%" }}
-              image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
+              image="https://api-meet-us.herokuapp.com/uploads/categories/home-61bca0dc75b52115249662.png"
               alt="Live from space album cover"
 
             />
