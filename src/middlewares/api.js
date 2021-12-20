@@ -225,12 +225,15 @@ const apiMiddleware = (store) => (next) => (action) => {
             "Content-Type": "multipart/form-data", 
           } ,
           data: {
-            title : action.values.title, 
+            title : action.values.title,
             description: action.values.description,
             date: action.values.date,
             category: action.values.category,
-            maxMembers:action.values.maxMembers,          
-            picture: action.values.picture ? action.values.picture.name: null, 
+            maxMembers:action.values.maxMembers,
+            picture: {
+              name  :action.values.picture ? action.values.picture.name: null,
+              value :action.values.picture
+            },
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
@@ -249,7 +252,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       .catch(function (erreur) {
          
         window.alert("Une erreur s'est produite, veuillez réessayer");  
-          console.log(erreur);
+          console.log(erreur.message);
       });
 
       next(action);
