@@ -18,6 +18,8 @@ const TypedReactHooksSlogan = () => {
       ],
       typeSpeed: 50,
       backSpeed: 50,
+      loop: true, 
+      showCursor: true, 
     };
     
     // elRef refers to the <span> rendered below

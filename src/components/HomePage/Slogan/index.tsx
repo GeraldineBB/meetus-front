@@ -1,6 +1,6 @@
 import "./style.scss";
 import Button from "@mui/material/Button";
-import friends from "../../../assets/illustrations/friends.svg";
+import friends from "../../../assets/illustrations/friends2-illu.svg";
 import { NavLink } from "react-router-dom";
 import TypedReactHooksSlogan from "./TypedJS";
 
