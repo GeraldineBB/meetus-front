@@ -56,6 +56,8 @@ export default function HomeCard({
           className="card"
           sx={{
             mr: { xs: 0, sm: 0, md: 3, lg: 3 },
+            ml: { xs: 3, sm: 3, md: 0, lg: 0 }, 
+            mb: {xs: 2, sm: 2, md: 0, lg: 0},
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",

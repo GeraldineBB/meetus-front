@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./style.scss";
 
 import TextField from "@mui/material/TextField";
@@ -40,6 +40,8 @@ export default function EventEdit({ eventId }) {
   const categorieList = useSelector((state) => state.categories.categorieList);
 
   const edition = useSelector((state) => state.events.edition);
+
+  const pictureRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -177,35 +179,6 @@ export default function EventEdit({ eventId }) {
                 </FormControl>
               </div>
 
-              <div className="event__form__photo">
-                <FormControl fullWidth>
-                  <label htmlFor="contained-button-file">
-                    <Input
-                      accept="image/*"
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={(event) => {
-                        setFieldValue("picture", event.currentTarget.files[0]);
-                      }}
-                    />
-                    <Button
-                      sx={{
-                        backgroundColor: "#9FBFFF",
-                        "&:hover": { backgroundColor: "#82B5A5" },
-                      }}
-                      fullWidth
-                      variant="contained"
-                      component="span"
-                    >
-                      Téléchargez votre image de couverture d'évènement
-                    </Button>
-                  </label>
-                </FormControl>
-              </div>
-              <div className="event__form__photo">
-              </div>
-
               <div className="event__form__description">
                 <TextField
                   fullWidth
@@ -233,6 +206,38 @@ export default function EventEdit({ eventId }) {
                   error={touched.maxMembers && Boolean(errors.maxMembers)}
                   helperText={touched.maxMembers && errors.maxMembers}
                 />
+              </div>
+
+              <div className="event__form__photo">
+                <FormControl fullWidth>
+                  <label htmlFor="contained-button-file">
+                    <Input
+                      accept="image/*"
+                      id="contained-button-file"
+                      multiple
+                      type="file"
+                      onChange={(event) => {
+                        setFieldValue("picture", event.currentTarget.files[0]);
+                      }}
+                      ref={pictureRef}
+                    />
+                  <Button
+                    sx={{
+                      backgroundColor: "#9FBFFF",
+                      "&:hover": { backgroundColor: "#82B5A5" },
+                    }}
+                    fullWidth
+                    variant="contained"
+                    component="span"
+                    onClick ={()=> {pictureRef.current.click();}
+                  }
+                  >
+                    Téléchargez votre image de couverture d'évènement
+                  </Button>
+                </label>
+                </FormControl>
+              </div>
+              <div className="event__form__photo">
               </div>
 
               <div className="event__form__buttom">
