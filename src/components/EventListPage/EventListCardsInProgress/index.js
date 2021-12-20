@@ -82,7 +82,7 @@ export default function EventListCardsInProgress({
         >
           <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <Card
-            sx={{ display: "flex", ml: "3em", position: "relative" }}
+            sx={{ display: "flex", ml: "3em", position: "relative", height: 350 }}
             className="eventListCard"
             
           >
@@ -161,10 +161,11 @@ export default function EventListCardsInProgress({
                     </Typography>
                   </Typography>
                 </div>
-                <Typography
+                <Typography noWrap
                   variant="body1"
                   component="p"
-                  sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                  sx={{ border: "black", pr: 2, mr: 2, mb: "2em", maxWidth: 750}}
+
                 >
                   {event.description}
                 </Typography>
