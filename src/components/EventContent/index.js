@@ -13,14 +13,14 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { AvatarGroup, Avatar } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import CardMedia from "@mui/material/CardMedia";
-
 
 import GoogleMaps from "./GoogleMaps";
 import {
   LOAD_INFO_FOR_PAGE_EVENT,
   ADD_USER_TO_EVENT,
+  LOADING,
 } from "../../actions/events";
+import LinearIndeterminate from "../Spinner";
 
 const EventContent = ({ eventId }) => {
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
@@ -28,8 +28,6 @@ const EventContent = ({ eventId }) => {
   const loading = useSelector((state) => state.events.loading);
 
   const { logged } = useSelector((state) => state.user);
-
-  const { joinEvent } = useSelector((state) => state.user);
 
   const { user }   = useSelector((state) => state.user);
 
@@ -41,7 +39,7 @@ const EventContent = ({ eventId }) => {
 
            
   if (loading) {
-    return <div>Les données sont en cours de chargement</div>;
+    return <LinearIndeterminate />;
   }
 
   // we want to check if user id is contained in eventInfoPage.event.members (info from api v1/events/id)
@@ -51,6 +49,7 @@ const EventContent = ({ eventId }) => {
 
   const suscribed = () =>  {
     if (eventInfoPage.event.members.some (member => member.id === user.id)) {
+
     return true; 
     } else {
       return false; 

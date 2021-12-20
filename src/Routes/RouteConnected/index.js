@@ -8,7 +8,6 @@ import HomePage from "../../Views/HomePage";
 import CategoryPage from "../../Views/CategoryPage";
 import RedirectEventForm from "../../components/Event/EventForm/LoadingCreation";
 import RedirectEdition from "../../components/Event/EventEdit/LoadingEdition";
-import NotFound from "../../components/404";
 import NotFoundPage from "../../Views/404Page";
 
 function RouteConnected() {

@@ -14,7 +14,6 @@ function Cards() {
   useEffect(() => {
     dispatch({ type: LOAD_EVENTS_FOR_HOME });
   }, [dispatch]);
-
   return (
     <Container maxWidth="lg" sx={{ mt: 1, mb: 2 }}>
       <Grid container>
