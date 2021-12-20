@@ -43,26 +43,14 @@ const EventForm = () => {
 
   const onSubmit = async (values, actions) => {
 
-    let bodyFormData = new FormData(); 
-    bodyFormData.set('title', values.title);
-    bodyFormData.set('description', values.description);
-    bodyFormData.set('date', values.date);
-    bodyFormData.set('category', values.category);
-    bodyFormData.set('maxMembers', values.maxMembers); 
-    bodyFormData.set('address', values.address); 
-    bodyFormData.set('city', values.city);
-    bodyFormData.set('zipcode', values.zipcode); 
-    bodyFormData.set('country', values.country);
-    bodyFormData.append('picture', values.picture); 
-
     if (values.isOnline === "1") {
-      dispatch(setNewEventOnline(bodyFormData));
+      dispatch(setNewEventOnline(values));
       setResponseValidateForm(true);
-      console.log(bodyFormData);
+      console.log(values);
     } else {
-      dispatch(setNewEvent(bodyFormData));
+      dispatch(setNewEvent(values));
       setResponseValidateForm(true);
-      console.log(bodyFormData);
+      console.log(values);
     }
     
   };
