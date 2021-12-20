@@ -3,9 +3,7 @@
 .slogan {
 
     display: flex; 
-    // margin-left: 3rem; 
     justify-content: space-between;
-    // background-color: white;
 
 
     &__presentation{
@@ -13,7 +11,6 @@
         flex-direction: column;
         width: 40%; 
         margin-top: 5rem; 
-        // margin-left: 3rem;
 
         &__text{
         font-size: 1.5rem; 
@@ -30,7 +27,9 @@
     }
 
     &__illustration{
-        width: 50%;
+        width: 40%;
+        margin-right: 4rem;
+        margin-top: 1rem;
     }
 
     @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -41,6 +40,13 @@
 
         &__presentation{
             width: 90%;
+
+            &__text{
+                
+            span{
+                color: vars.$color-blue-light; 
+            }
+            }
         }
 
 
@@ -69,6 +75,10 @@
 
         &__text{
             margin: auto;
+
+            span{
+                color: vars.$color-blue-light; 
+            }
         }
 
         .slogan__presentation__button{
