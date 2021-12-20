@@ -247,8 +247,8 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log("CA A FONCTIONNER"); 
       })
       .catch(function (erreur) {
-        /* 
-        window.alert("Une erreur s'est produite, veuillez réessayer");  */
+         
+        window.alert("Une erreur s'est produite, veuillez réessayer");  
           console.log(erreur);
       });
 
@@ -283,8 +283,8 @@ const apiMiddleware = (store) => (next) => (action) => {
           store.dispatch(setValidateForm(reponse.data));  
           console.log("EVENT CREER");
       })
-      .catch(function (erreur) {/*
-        window.alert("Une erreur s'est produite, veuillez réessayer");  */
+      .catch(function (erreur) {
+        window.alert("Une erreur s'est produite, veuillez réessayer");  
           console.log(erreur);
       });
 

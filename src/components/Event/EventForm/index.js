@@ -79,7 +79,7 @@ const EventForm = () => {
   const validationSchema = yup.object({
     title: yup
       .string("Entré le nom de l'évènement")
-      .min(10, "Un nom d'évènement doit contenir 3 caractères minimum")
+      .min(10, "Un nom d'évènement doit contenir 10 caractères minimum")
       .required("Le nom de l'évènement doit être rempli"),
     city: yup
       .string("Entré un lieu valide")
