@@ -11,7 +11,7 @@ const RedirectEventForm = () => {
 
      window.setTimeout(function () {
         window.location.href = '/eventList';
-    }, 8000); 
+    }, 4000); 
 
     return (
 

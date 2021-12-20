@@ -17,7 +17,8 @@ import {
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
-  EDIT_EVENT, 
+  EDIT_EVENT,
+  setValidateForm, 
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
@@ -214,17 +215,25 @@ const apiMiddleware = (store) => (next) => (action) => {
       const token = localStorage.getItem("Token");
       // const {google: { value }} = store.getState();
 
+      let data = new FormData(); 
+      data.append('picture', action.values.picture);
+
         axios({
           headers: { 
-            "Authorization": `Bearer ${token}`,
-           } ,
+            "Authorization": `Bearer ${token}`,  
+            "Accept": "application/json", 
+            "Content-Type": "multipart/form-data", 
+          } ,
           data: {
-            title : action.values.title, 
+            title : action.values.title,
             description: action.values.description,
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture,
+            picture: {
+              name  :action.values.picture ? action.values.picture.name: null,
+              value :action.values.picture
+            },
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
@@ -236,12 +245,14 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          console.log(reponse.data);
-          console.log("CA A FONCTIONNE")
+          store.dispatch(setValidateForm(reponse.data));
+          console.log('formData middleware', reponse.data);
+          console.log("CA A FONCTIONNER"); 
       })
       .catch(function (erreur) {
-        window.alert("Une erreur s'est produite, veuillez réessayer"); 
-          console.log(erreur);
+         
+        window.alert("Une erreur s'est produite, veuillez réessayer");  
+          console.log(erreur.message);
       });
 
       next(action);
@@ -263,7 +274,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture.name,          
+            picture: action.values.picture ? action.values.picture.name: null,         
             isOnline: action.values.picked,
         },
            url: 'http://localhost:8080/api/v1/events?type=online', 
@@ -272,10 +283,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           console.log(reponse.data);
+          store.dispatch(setValidateForm(reponse.data));  
           console.log("EVENT CREER");
       })
       .catch(function (erreur) {
-        window.alert("Une erreur s'est produite, veuillez réessayer"); 
+        window.alert("Une erreur s'est produite, veuillez réessayer");  
           console.log(erreur);
       });
 
@@ -331,7 +343,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log('modif event', response);
         })
         .catch((erreur) => {
-          // window.alert("Une erreur s'est produite, veuillez réessayer");
+           window.alert("Une erreur s'est produite, veuillez réessayer");
           console.log(erreur);
         })
       next(action);

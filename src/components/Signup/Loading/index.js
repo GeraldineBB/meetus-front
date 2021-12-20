@@ -11,10 +11,12 @@ const RedirectSignup = () => {
 
     window.setTimeout(function () {
         window.location.href = '/login';
-    }, 5000);
+    }, 4000);
 
     return (
-        <div className="loading">
+
+        <div className="cardEvent">
+        <div className="cardEvent__loading">
 
             <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea>
@@ -39,6 +41,8 @@ const RedirectSignup = () => {
                     </CardContent>
                 </CardActionArea>
             </Card>
+
+        </div>
 
         </div>
     );

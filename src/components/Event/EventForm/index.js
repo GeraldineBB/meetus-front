@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
+
+import { useNavigate } from "react-router-dom";
 
 import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,10 +22,10 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
-import Thumb from "../Tools/Thumb";
 import { LOAD_CATEGORIES } from "../../../actions/events";
-import { format } from "date-fns";
+import { format, formatRelative } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
+import PreviewImage from "../EventForm/PreviewImage";
 
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
@@ -34,22 +36,34 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
+  const pictureRef = useRef(null);
+
+  const navigate = useNavigate();
+  const { formSucces } = useSelector((state) => state.events);
+
+  const handleVerify = () => {
+    if (formSucces === true) {
+      console.log(formSucces);
+       return navigate("/event-creation-done");
+    }
+  };
+
+  handleVerify();
+
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
-  const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-  const onSubmit = async (values, actions) => {
+  const onSubmit = async (values) => {
 
+    
     if (values.isOnline === "1") {
       dispatch(setNewEventOnline(values));
-      setResponseValidateForm(true);
       console.log(values);
     } else {
       dispatch(setNewEvent(values));
-      setResponseValidateForm(true);
-      console.log(values);
+      console.log('picture eventForm', values.picture);
     }
     
   };
@@ -57,7 +71,7 @@ const EventForm = () => {
   const validationSchema = yup.object({
     title: yup
       .string("Entré le nom de l'évènement")
-      .min(10, "Un nom d'évènement doit contenir 3 caractères minimum")
+      .min(10, "Un nom d'évènement doit contenir 10 caractères minimum")
       .required("Le nom de l'évènement doit être rempli"),
     city: yup
       .string("Entré un lieu valide")
@@ -88,7 +102,7 @@ const EventForm = () => {
       category: "",
       date: new Date(new Date().setDate(today.getDate() + 2)),
       address: "",
-      picture: "",
+      picture: null,
       author: "",
       city: "",
       zipcode: "",
@@ -98,13 +112,11 @@ const EventForm = () => {
     onSubmit,
   });
 
+
+
   /* 
   console.log("Error: ", formik.errors);  */
 
-  if (responseFormValidateForm) {
-    window.location.reload();
-    return <Navigate to="/event-creation-done" />;
-  }
   return (
     <div>
       <HeaderSignUp />
@@ -278,6 +290,7 @@ const EventForm = () => {
                 onChange={(event) => {
                   formik.setFieldValue("picture", event.currentTarget.files[0]);
                 }}
+                ref={pictureRef}           
               />
               <Button
                 sx={{
@@ -287,14 +300,18 @@ const EventForm = () => {
                 fullWidth
                 variant="contained"
                 component="span"
+                onClick ={()=> {pictureRef.current.click();}
+              }
               >
                 Téléchargez votre image de couverture d'évènement
               </Button>
             </label>
           </FormControl>
         </div>
+        
         <div className="event__form__photo">
-          <Thumb file={formik.values.picture} />
+              { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
+             
         </div>
 
 
@@ -308,6 +325,7 @@ const EventForm = () => {
               variant="contained"
               type="submit"
               onClick={onSubmit}
+              
             >
               Créer mon évènement
             </Button>

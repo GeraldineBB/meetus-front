@@ -8,11 +8,11 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import Button from "@mui/material/Button";
-import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_ARCHIVED} from "../../../actions/events";
+import { Link } from "react-router-dom";
+
 import "./style.scss";
 
 export default function EventListCardsArchived({
@@ -29,10 +29,17 @@ export default function EventListCardsArchived({
   const eventList = useSelector(
     (state) => state.events.eventPageListArchived
   );
-
   
   const {logged} = useSelector(state => state.user)
 
+
+  function formatDate(value) {
+    return new Date(value).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  }
 
   const dispatch = useDispatch();
 
@@ -48,40 +55,48 @@ export default function EventListCardsArchived({
           return event;
         }
         }).map((event) => (
-        <Grid
+          <Grid
           item
           md={12}
           sx={{ display: "flex", justifyContent: "center" }}
           key={event.id}
         >
+          <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <Card
-            sx={{ display: "flex", ml: "3em", position: "relative" }}
+            sx={{ 
+              display: "flex", 
+              position: "relative", 
+              height: 350, 
+              ml: { xs: 1, sm: 1, md: 1, lg: 1},
+              mr: { xs: 0, sm: 0, md: 1, lg: 1 },
+            }}
             className="eventListCard"
+            
           >
+
             <CardMedia
+
               component="img"
               sx={{ maxWidth: "30%" }}
-              image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
+              image="https://api-meet-us.herokuapp.com/uploads/categories/home-61bca0dc75b52115249662.png"
               alt="Live from space album cover"
+
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-                
+
               <CardContent sx={{ flex: "1 0 auto" }}>
                 <div
                   style={{
                     display: "flex",
-                    flexDirection: "row",
-                    justifyItems: 'left',
                     width: "100%",
-
                   }}
                 >
-                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}} >
+                  <Typography component="div" variant="h5" sx={{mb: 1, fontFamily: 'Space Grotesk'}}>
                     {event.title}
                     <Chip
                       label={event.category.name}
                       sx={{
-                        backgroundColor: "#788795",
+                        backgroundColor: "#696969",
                         color: "white",
                         ml: "1.5em",
                         mr: "1.5em",
@@ -89,60 +104,50 @@ export default function EventListCardsArchived({
                       size="small"
                     />
                   </Typography>
-                    { logged &&
-                      <Button
-                    className="button__eventlist"
-                    sx={{
-                      mb: 3,
-                      backgroundColor: "#F36B7F",
-                      "&:hover": {
-                        backgroundColor: "#e51332",
-                      },
-                    }}
-                    variant="contained"
-                    size="small"
-                  >
-                    <EditIcon fontSize="small" sx={{ mr: "0.2em"}} />
-                    Modifier mon evenement
-                  </Button>
-                    }
+            
+                  
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <Typography
                     variant="subtitle1"
                     color="text.primary"
                     component="div"
-                    sx={{ mb: "0.5em" }}
+                    sx={{ mb: 2, fontFamily: 'Space Grotesk' }}
                   >
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
-                    10/12/2021{" "}
+                    {formatDate(event.date)}
+
                     <Typography
                       component="span"
                       variant="subtitle1"
-                      sx={{ ml: "2em" }}
+                      sx={{ ml: 2, fontFamily: 'Space Grotesk' }}
                     >
                       <LocationOnIcon />
                       {event.city}
                     </Typography>
                   </Typography>
                 </div>
-                <Typography
+                <Typography 
                   variant="body1"
                   component="p"
-                  sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                  sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden', fontFamily: 'Space Grotesk'}}
+
                 >
                   {event.description}
                 </Typography>
                 <Typography
                   variant="body1"
                   component="p"
-                  sx={{ position: "relative", bottom: "0px", left: "0px" }}
+                  sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3, fontFamily: 'Space Grotesk' }}
                 >
                   {event.membersCount} Participants
                 </Typography>
               </CardContent>
             </Box>
+
           </Card>
+          </Link>
+
         </Grid>
       ))}
     </Grid>
