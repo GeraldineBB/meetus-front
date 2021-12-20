@@ -39,7 +39,6 @@ const EventContent = ({ eventId }) => {
   if (loading) {
     return <LinearIndeterminate />;
   } else {
-    console.log(eventInfoPage.event.author.id)
     // we want to check if user id is contained in eventInfoPage.event.members (info from api v1/events/id)
     // api send an array with members information (id, avatar and fullname)
     // if suscribed then button "inscrit"
