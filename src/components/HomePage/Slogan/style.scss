@@ -52,7 +52,13 @@
 
         &__illustration{
             margin-top: 1rem;
-            width: 60%;
+            margin: auto;
+            width: 90%;
+
+            img{
+                width: 60%;
+                margin-left: 4rem;
+            }
         }
 
         h1{
@@ -89,7 +95,8 @@
 
         &__illustration{
             margin-top: 1rem;
-            width: 60%;
+            width: 100%;
+            margin-left: 6rem;
         }
 
         h1{

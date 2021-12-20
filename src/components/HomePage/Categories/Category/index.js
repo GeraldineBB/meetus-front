@@ -9,7 +9,15 @@ import { Link } from 'react-router-dom';
 
 const Category = ({ name, picture, id }) => {
   return (
-    <Card className="card">
+    <Card className="card"
+    sx={{
+      mr: { xs: 0, sm: 0, md: 3, lg: 3 },
+      ml: { xs: 6, sm: 8, md: 0, lg: 0 }, 
+      mb: {xs: 2, sm: 2, md: 0, lg: 0},
+      display: "flex",
+      justifyContent: "space-between",
+      flexDirection: "column",
+    }}>
       <CardActionArea>
         <CardContent>
         <Link to={`/events/category/${id}`} style={{ textDecoration: 'none', color: 'white' }}>
@@ -21,7 +29,7 @@ const Category = ({ name, picture, id }) => {
             height="180"
           />
           </Link>
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="div" fontFamily="Space Grotesk">
             {name}
           </Typography>
         </CardContent>
