@@ -35,15 +35,14 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
-
-
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
   const [responseFormValidateForm, setResponseValidateForm] = useState(false);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, actions) => {
+
     if (values.isOnline === "1") {
       dispatch(setNewEventOnline(values));
       setResponseValidateForm(true);
@@ -73,7 +72,7 @@ const EventForm = () => {
       .number("Entré un nombre maximum de participant ")
       .min(2, "Un évènement doit avoir un moins 2 participant")
       .required("Le nombre maximum de participant est requis"),
-      zipcode: yup
+    zipcode: yup
       .number("Entré un nombre maximum de participant ")
       .min(5, "Un code postal doit avec 5 caractères")
       .required("Le nombre maximum de participant est requis"),

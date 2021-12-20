@@ -26,8 +26,8 @@ import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/us
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  // baseURL: "http://localhost:8080/api/",
-  baseURL: "https://api-meet-us.herokuapp.com/api/",
+  baseURL: "http://localhost:8080/api/",
+  // baseURL: "https://api-meet-us.herokuapp.com/api/",
   // baseUrl: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
   // headers: {'Authorization': `Bearer ${token}`}
 });
@@ -215,18 +215,21 @@ const apiMiddleware = (store) => (next) => (action) => {
       // const {google: { value }} = store.getState();
 
         axios({
-          headers: { "Authorization": `Bearer ${token}` } ,
+          headers: { 
+            "Authorization": `Bearer ${token}`,
+           } ,
           data: {
             title : action.values.title, 
             description: action.values.description,
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture.name,
+            picture: action.values.picture,
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
             zipcode: action.values.zipcode,
+      
         },
            url: 'https://api-meet-us.herokuapp.com/api/v1/events', 
            method: 'post',
@@ -234,7 +237,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           console.log(reponse.data);
-          console.log("CA A FONCTIONNER")
+          console.log("CA A FONCTIONNE")
       })
       .catch(function (erreur) {
         window.alert("Une erreur s'est produite, veuillez réessayer"); 
