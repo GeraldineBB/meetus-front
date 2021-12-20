@@ -104,7 +104,7 @@ export default function EventListCardsInProgress({
                     width: "100%",
                   }}
                 >
-                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}}>
+                  <Typography component="div" variant="h5" sx={{mb: 1}}>
                     {event.title}
                     <Chip
                       label={event.category.name}
@@ -121,7 +121,7 @@ export default function EventListCardsInProgress({
                     event.author.id === user.id ? <Button
                     className="button__eventlist"
                     sx={{
-                      mb: 3,
+                      mb: 4,
                       backgroundColor: "#F8CF61",
                       "&:hover": {
                         backgroundColor: "#f8d061",
@@ -146,7 +146,7 @@ export default function EventListCardsInProgress({
                     variant="subtitle1"
                     color="text.primary"
                     component="div"
-                    sx={{ mb: "0.5em" }}
+                    sx={{ mb: 2 }}
                   >
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
                     {formatDate(event.date)}
@@ -154,17 +154,17 @@ export default function EventListCardsInProgress({
                     <Typography
                       component="span"
                       variant="subtitle1"
-                      sx={{ ml: "2em" }}
+                      sx={{ ml: 2 }}
                     >
                       <LocationOnIcon />
                       {event.city}
                     </Typography>
                   </Typography>
                 </div>
-                <Typography noWrap
+                <Typography 
                   variant="body1"
                   component="p"
-                  sx={{ border: "black", pr: 2, mr: 2, mb: "2em", maxWidth: 750}}
+                  sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden'}}
 
                 >
                   {event.description}
@@ -172,7 +172,7 @@ export default function EventListCardsInProgress({
                 <Typography
                   variant="body1"
                   component="p"
-                  sx={{ position: "relative", bottom: "0px", left: "0px" }}
+                  sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3 }}
                 >
                   {event.membersCount} Participants
                 </Typography>
