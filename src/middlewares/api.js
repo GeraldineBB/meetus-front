@@ -17,7 +17,8 @@ import {
   setEventForHome,
   setCategoriesForHome,
   setInfoForEventPage,
-  EDIT_EVENT, 
+  EDIT_EVENT,
+  setValidateForm, 
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
@@ -236,6 +237,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
+          store.dispatch(setValidateForm(reponse.data));
           console.log(reponse.data);
           console.log("CA A FONCTIONNE")
       })
@@ -273,9 +275,10 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           console.log(reponse.data);
+          store.dispatch(setValidateForm(reponse.data));  
           console.log("EVENT CREER");
       })
-      .catch(function (erreur) {/* 
+      .catch(function (erreur) {/*
         window.alert("Une erreur s'est produite, veuillez réessayer");  */
           console.log(erreur);
       });

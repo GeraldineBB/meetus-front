@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
 
+import { useNavigate } from "react-router-dom";
+
 import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
@@ -27,7 +29,6 @@ import { format, formatRelative } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
 import PreviewImage from "../EventForm/PreviewImage";
 
-
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
 const EventForm = () => {
@@ -40,11 +41,32 @@ const EventForm = () => {
   const pictureRef = useRef(null);
 
 
+
+
+  const navigate = useNavigate();
+  const { formSucces } = useSelector((state) => state.events);
+
+  const handleVerify = () => {
+    if (formSucces === true) {
+      console.log(formSucces);
+      return navigate("/event-creation-done");
+    }
+    /* return navigate("/event-creation-done"); */
+  };
+
+  handleVerify();
+
+
+
+
+
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
+/* 
   const [responseFormValidateForm, setResponseValidateForm] = useState(false);
+ */
 
   const onSubmit = async (values, actions) => {
 
@@ -109,10 +131,10 @@ const EventForm = () => {
   /* 
   console.log("Error: ", formik.errors);  */
 
-  if (responseFormValidateForm) {
+  /* if (responseFormValidateForm) {
     window.location.reload();
     return <Navigate to="/event-creation-done" />;
-  }
+  } */
   return (
     <div>
       <HeaderSignUp />

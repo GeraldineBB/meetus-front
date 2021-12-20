@@ -30,7 +30,7 @@ export const initialState = {
   eventInfoPage: [],
   loading: true,
   eventCurrentInfo: [],
-  setValidateForm: false,
+  formSucces: false,
   edition: true,
   currentLng: null,
   currentLat: null,
@@ -103,7 +103,7 @@ const reducer = (state = initialState, action = {}) => {
     case SET_VALIDATE_FORM:
       return {
         ...state,
-        setValidateForm: true,
+        formSucces: true,
       };
     case EDIT_EVENT:
       return {
