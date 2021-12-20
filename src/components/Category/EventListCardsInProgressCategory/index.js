@@ -32,8 +32,16 @@ export default function EventListCardsInProgressCategory({
     (state) => state.events.eventPageListInProgress
   );
 
-  const {logged} = useSelector(state => state.user)
+  const {logged} = useSelector(state => state.user);
+  const { user }   = useSelector((state) => state.user);
 
+  function formatDate(value) {
+    return new Date(value).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+  }
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,18 +68,26 @@ export default function EventListCardsInProgressCategory({
           sx={{ display: "flex", justifyContent: "center" }}
           key={event.id}
         >
-        <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
-
+          <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <Card
-            sx={{ display: "flex", ml: "3em", position: "relative" }}
+            sx={{ 
+              display: "flex", 
+              position: "relative", 
+              height: 350, 
+              ml: { xs: 1, sm: 1, md: 1, lg: 1},
+              mr: { xs: 0, sm: 0, md: 1, lg: 1 },
+            }}
             className="eventListCard"
             
           >
+
             <CardMedia
+
               component="img"
               sx={{ maxWidth: "30%" }}
-              image={`${process.env.PUBLIC_URL}/images/${event.picture}`}
+              image="https://api-meet-us.herokuapp.com/uploads/categories/home-61bca0dc75b52115249662.png"
               alt="Live from space album cover"
+
             />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
 
@@ -82,12 +98,12 @@ export default function EventListCardsInProgressCategory({
                     width: "100%",
                   }}
                 >
-                  <Typography component="div" variant="h5" sx={{mb: '0.4em'}}>
+                  <Typography component="div" variant="h5" sx={{mb: 1, fontFamily: 'Space Grotesk'}}>
                     {event.title}
                     <Chip
                       label={event.category.name}
                       sx={{
-                        backgroundColor: "#788795",
+                        backgroundColor: "#F36B7F",
                         color: "white",
                         ml: "1.5em",
                         mr: "1.5em",
@@ -96,11 +112,12 @@ export default function EventListCardsInProgressCategory({
                     />
                   </Typography>
                   {
-                    logged && <Button
+                    event.author.id === user.id ? <Button
                     className="button__eventlist"
                     sx={{
-                      mb: 3,
+                      mb: 4,
                       backgroundColor: "#F8CF61",
+                      fontFamily: 'Space Grotesk', 
                       "&:hover": {
                         backgroundColor: "#f8d061",
                       },
@@ -110,12 +127,12 @@ export default function EventListCardsInProgressCategory({
                   >
                     <Link to={`/edit/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
 
-                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em", fontFamily: 'Space Grotesk' }} />
                     Modifier mon évènement
 
                     </Link>
 
-                  </Button>
+                  </Button> : false
                   }
                   
                 </div>
@@ -124,36 +141,39 @@ export default function EventListCardsInProgressCategory({
                     variant="subtitle1"
                     color="text.primary"
                     component="div"
-                    sx={{ mb: "0.5em" }}
+                    sx={{ mb: 2, fontFamily: 'Space Grotesk' }}
                   >
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
-                    10/12/2021{" "}
+                    {formatDate(event.date)}
+
                     <Typography
                       component="span"
                       variant="subtitle1"
-                      sx={{ ml: "2em" }}
+                      sx={{ ml: 2, fontFamily: 'Space Grotesk' }}
                     >
                       <LocationOnIcon />
                       {event.city}
                     </Typography>
                   </Typography>
                 </div>
-                <Typography
+                <Typography 
                   variant="body1"
                   component="p"
-                  sx={{ border: "black", maxWidth: "500px", mb: "2em" }}
+                  sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden', fontFamily: 'Space Grotesk'}}
+
                 >
                   {event.description}
                 </Typography>
                 <Typography
                   variant="body1"
                   component="p"
-                  sx={{ position: "relative", bottom: "0px", left: "0px" }}
+                  sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3, fontFamily: 'Space Grotesk' }}
                 >
                   {event.membersCount} Participants
                 </Typography>
               </CardContent>
             </Box>
+
           </Card>
           </Link>
 

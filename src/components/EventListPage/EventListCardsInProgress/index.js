@@ -82,7 +82,13 @@ export default function EventListCardsInProgress({
         >
           <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
           <Card
-            sx={{ display: "flex", ml: "3em", position: "relative", height: 350 }}
+            sx={{ 
+              display: "flex", 
+              position: "relative", 
+              height: 350, 
+              ml: { xs: 1, sm: 1, md: 1, lg: 1},
+              mr: { xs: 0, sm: 0, md: 1, lg: 1 },
+            }}
             className="eventListCard"
             
           >
@@ -104,12 +110,12 @@ export default function EventListCardsInProgress({
                     width: "100%",
                   }}
                 >
-                  <Typography component="div" variant="h5" sx={{mb: 1}}>
+                  <Typography component="div" variant="h5" sx={{mb: 1, fontFamily: 'Space Grotesk'}}>
                     {event.title}
                     <Chip
                       label={event.category.name}
                       sx={{
-                        backgroundColor: "#788795",
+                        backgroundColor: "#F36B7F",
                         color: "white",
                         ml: "1.5em",
                         mr: "1.5em",
@@ -123,6 +129,7 @@ export default function EventListCardsInProgress({
                     sx={{
                       mb: 4,
                       backgroundColor: "#F8CF61",
+                      fontFamily: 'Space Grotesk', 
                       "&:hover": {
                         backgroundColor: "#f8d061",
                       },
@@ -132,7 +139,7 @@ export default function EventListCardsInProgress({
                   >
                     <Link to={`/edit/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
 
-                    <EditIcon fontSize="small" sx={{ mr: "0.2em" }} />
+                    <EditIcon fontSize="small" sx={{ mr: "0.2em", fontFamily: 'Space Grotesk' }} />
                     Modifier mon évènement
 
                     </Link>
@@ -146,7 +153,7 @@ export default function EventListCardsInProgress({
                     variant="subtitle1"
                     color="text.primary"
                     component="div"
-                    sx={{ mb: 2 }}
+                    sx={{ mb: 2, fontFamily: 'Space Grotesk' }}
                   >
                     <CalendarTodayIcon sx={{ mr: "0.2em" }} />
                     {formatDate(event.date)}
@@ -154,7 +161,7 @@ export default function EventListCardsInProgress({
                     <Typography
                       component="span"
                       variant="subtitle1"
-                      sx={{ ml: 2 }}
+                      sx={{ ml: 2, fontFamily: 'Space Grotesk' }}
                     >
                       <LocationOnIcon />
                       {event.city}
@@ -164,7 +171,7 @@ export default function EventListCardsInProgress({
                 <Typography 
                   variant="body1"
                   component="p"
-                  sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden'}}
+                  sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden', fontFamily: 'Space Grotesk'}}
 
                 >
                   {event.description}
@@ -172,7 +179,7 @@ export default function EventListCardsInProgress({
                 <Typography
                   variant="body1"
                   component="p"
-                  sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3 }}
+                  sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3, fontFamily: 'Space Grotesk' }}
                 >
                   {event.membersCount} Participants
                 </Typography>
