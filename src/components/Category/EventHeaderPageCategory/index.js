@@ -5,7 +5,6 @@ import { darken } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import { NavLink } from "react-router-dom";
 
-
 function EventHeaderPage({
   handleArchived,
   handleInProgress,
@@ -14,8 +13,6 @@ function EventHeaderPage({
 }) {
   const underlineInProgress = inProgress ? "underlined" : "";
   const underlineArchived = archived ? "underlined" : "";
-
-
 
   return (
     <div className="eventHeaderPage">
@@ -35,22 +32,21 @@ function EventHeaderPage({
             </h2>
           </div>
           <NavLink to="/create" style={{ textDecoration: "none" }}>
-          <Button
-            sx={{
-              mb: 3,
-              backgroundColor: "#F36B7F",
-              "&:hover": { backgroundColor: darken("#F36B7F", "20%") },
-            }}
-            variant="contained"
-          >
-            Créer un évènement
-          </Button>
+            <Button
+              sx={{
+                mb: 3,
+                backgroundColor: "#F36B7F",
+                "&:hover": { backgroundColor: darken("#F36B7F", "20%") },
+              }}
+              variant="contained"
+            >
+              Créer un évènement
+            </Button>
           </NavLink>
         </div>
 
         <h3>Evènements de la catégorie choisie</h3>
-        <Stack direction="row" spacing={1}>
-        </Stack>
+        <Stack direction="row" spacing={1}></Stack>
       </div>
     </div>
   );
