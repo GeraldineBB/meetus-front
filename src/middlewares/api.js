@@ -245,7 +245,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       })
       .then(function (reponse) {
-          store.dispatch(setValidateForm(reponse.data));
+          // store.dispatch(setValidateForm(reponse.data));
           console.log('formData middleware', reponse.data);
           console.log("CA A FONCTIONNER"); 
       })
