@@ -3,6 +3,7 @@ import {
   SET_CURRENT_USER,
   STOCK_LOGIN_COOKIE,
   SET_JOIN_EVENT_STATUS,
+  SET_ERROR_LOGIN,
 } from "../actions/user";
 
 export const initialState = {
@@ -10,6 +11,7 @@ export const initialState = {
   user: {},
   logged: false,
   joinEvent: false,
+  errorLogin: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -20,6 +22,7 @@ const reducer = (state = initialState, action = {}) => {
         token: action.values.token,
         user: action.values.data.user,
         logged: true,
+        errorLogin: false,
       };
     case LOGOUT:
       return {
@@ -40,6 +43,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         joinEvent: true,
       };
+    case SET_ERROR_LOGIN:
+      return{
+        ...state,
+        errorLogin: true,
+      }
     default:
       return state;
   }

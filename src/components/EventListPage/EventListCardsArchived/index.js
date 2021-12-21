@@ -14,7 +14,6 @@ import { LOAD_EVENT_LIST_ARCHIVED} from "../../../actions/events";
 import { Link } from "react-router-dom";
 
 import "./style.scss";
-import LinearIndeterminate from "../../Spinner";
 
 export default function EventListCardsArchived({
   id,

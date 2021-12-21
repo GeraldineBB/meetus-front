@@ -9,14 +9,14 @@ import { login } from "../../../actions/user";
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { logged } = useSelector((state) => state.user);
+  const { logged, errorLogin} = useSelector((state) => state.user);
+
 
   const handleVerify = () => {
     if (logged === true) {
       console.log(logged);
       return navigate("/");
     }
-    return navigate("/login");
   };
 
   handleVerify();
@@ -60,6 +60,11 @@ export default function LoginForm() {
         }) => (
           <div className="login">
             <h2>Se connecter</h2>
+            { errorLogin &&
+              <h3 style={{ color: "red", textAlign: "center" }}>
+                Adresse mail ou mot de passe incorrect
+              </h3>
+            }
             <Form onSubmit={handleSubmit} method="post" /*action={myApi}*/>
               <div className="login__form__email">
                 <TextField
@@ -111,14 +116,14 @@ export default function LoginForm() {
               </div>
 
               <div className="login__form__button">
-                <Button
-                  variant="contained"
-                  type="submit"
-                >
+                <Button variant="contained" type="submit">
                   Se connecter
                 </Button>
               </div>
-              <NavLink style={{ textDecoration: "none", color: "black" }} to="/signup">
+              <NavLink
+                style={{ textDecoration: "none", color: "black" }}
+                to="/signup"
+              >
                 <span className="alreadyAccount">
                   Vous ne possedez pas de compte ?
                 </span>
