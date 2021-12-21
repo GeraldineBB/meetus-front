@@ -18,7 +18,7 @@ const RedirectSignup = () => {
         <div className="cardEvent">
         <div className="cardEvent__loading">
 
-            <Card sx={{ maxWidth: 340 }}>
+            <Card sx={{ maxWidth: 500 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
