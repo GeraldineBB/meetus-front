@@ -55,16 +55,12 @@ const EventForm = () => {
   }, [dispatch]);
 
 
-  const onSubmit = async (values) => {
+  const onSubmit = (values) => {
 
     
-    if (values.isOnline === "1") {
-      dispatch(setNewEventOnline(values));
-      console.log(values);
-    } else {
       dispatch(setNewEvent(values));
-      console.log('picture eventForm', values.picture);
-    }
+      console.log(values);
+      // console.log('picture eventForm', values.picture);
     
   };
 
@@ -102,17 +98,14 @@ const EventForm = () => {
       category: "",
       date: new Date(new Date().setDate(today.getDate() + 2)),
       address: "",
-      picture: null,
       author: "",
       city: "",
       zipcode: "",
-      country: "FRANCE",
+      country: "FRANCE"
     },
     validationSchema: validationSchema,
     onSubmit,
   });
-
-
 
   /* 
   console.log("Error: ", formik.errors);  */
