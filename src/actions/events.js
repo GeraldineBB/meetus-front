@@ -200,3 +200,15 @@ export const editEvent = (values, eventId) => ({
   eventId: eventId, 
 });
 
+export const EVENT_FORM_ONLINE = 'EVENT_FORM_ONLINE';
+
+export const EventFormOnline = () => ({
+  type: EVENT_FORM_ONLINE,
+});
+
+export const EVENT_FORM_PRESENT = 'EVENT_FORM_PRESENT';
+
+export const EventFormPresent = () => ({
+  type: EVENT_FORM_PRESENT,
+});
+
