@@ -57,7 +57,6 @@ export default function LoginForm() {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
         }) => (
           <div className="login">
             <h2>Se connecter</h2>
@@ -115,7 +114,6 @@ export default function LoginForm() {
                 <Button
                   variant="contained"
                   type="submit"
-                  disabled={isSubmitting}
                 >
                   Se connecter
                 </Button>
