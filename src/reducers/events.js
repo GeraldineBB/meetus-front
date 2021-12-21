@@ -14,6 +14,8 @@ import {
   EDIT_EVENT,
   SET_NEW_EVENT,
   SET_NEW_EVENT_ONLINE,
+  EVENT_FORM_ONLINE,
+  EVENT_FORM_PRESENT,
 } from "../actions/events.js";
 
 export const initialState = {
@@ -34,6 +36,8 @@ export const initialState = {
   edition: true,
   currentLng: null,
   currentLat: null,
+  formIsOnline: false,
+  formIsPresent: true
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -118,6 +122,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         setValidateForm: true,
+      };
+    case EVENT_FORM_ONLINE:
+      return {
+        ...state,
+        formIsOnline: true,
+        formIsPresent: false,
+      };
+    case EVENT_FORM_PRESENT:
+      return {
+        ...state,
+        formIsOnline: false,
+        formIsPresent: true,
       };
     default:
       return state;

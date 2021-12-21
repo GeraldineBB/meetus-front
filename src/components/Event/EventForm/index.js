@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 
 import { useNavigate } from "react-router-dom";
@@ -14,38 +14,42 @@ import { RadioGroup } from "@mui/material";
 import { Radio } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { InputLabel } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Navigate } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
-import { LOAD_CATEGORIES } from "../../../actions/events";
-import { format, formatRelative } from "date-fns";
+import {
+  EventFormOnline,
+  EventFormPresent,
+  LOAD_CATEGORIES,
+} from "../../../actions/events";
+import { format } from "date-fns";
 import { setNewEvent, setNewEventOnline } from "../../../actions/events";
-import PreviewImage from "../EventForm/PreviewImage";
 
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
 const EventForm = () => {
-  const Input = styled("input")({
-    display: "none",
-  });
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
-  const pictureRef = useRef(null);
-
   const navigate = useNavigate();
-  const { formSucces } = useSelector((state) => state.events);
+  const { formSucces, formIsPresent } = useSelector((state) => state.events);
 
   const handleVerify = () => {
     if (formSucces === true) {
       console.log(formSucces);
-       return navigate("/event-creation-done");
+      return navigate("/event-creation-done");
     }
+  };
+
+  const handleOnline = () => {
+    dispatch(EventFormOnline());
+  };
+
+  const handlePresent = () => {
+    dispatch(EventFormPresent());
   };
 
   handleVerify();
@@ -54,14 +58,14 @@ const EventForm = () => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
 
-
-  const onSubmit = (values) => {
-
-    
-      dispatch(setNewEvent(values));
+  const onSubmit = async (values) => {
+    if (values.isOnline === "1") {
+      dispatch(setNewEventOnline(values));
       console.log(values);
-      // console.log('picture eventForm', values.picture);
-    
+    } else {
+      dispatch(setNewEvent(values));
+      console.log("picture eventForm", values.picture);
+    }
   };
 
   const validationSchema = yup.object({
@@ -101,7 +105,7 @@ const EventForm = () => {
       author: "",
       city: "",
       zipcode: "",
-      country: "FRANCE"
+      country: "FRANCE",
     },
     validationSchema: validationSchema,
     onSubmit,
@@ -115,7 +119,7 @@ const EventForm = () => {
       <HeaderSignUp />
       <h2> Créer votre évènement </h2>
 
-      <form onSubmit={formik.handleSubmit} >
+      <form onSubmit={formik.handleSubmit}>
         <div className="event__form__if">
           <FormControl component="fieldset">
             <FormLabel component="legend">Type d'évènement</FormLabel>
@@ -125,14 +129,19 @@ const EventForm = () => {
                 name="isOnline"
                 control={<Radio />}
                 onChange={formik.handleChange}
+                onClick={handleOnline}
                 label="En ligne"
+                checked={formIsPresent ? false : true}
+
               />
               <FormControlLabel
                 value="0"
-                name="isOnline"
+                name="inPresent"
                 control={<Radio />}
                 onChange={formik.handleChange}
+                onClick={handlePresent}
                 label="En présentiel"
+                checked={formIsPresent ? true : false}
               />
             </RadioGroup>
           </FormControl>
@@ -156,7 +165,7 @@ const EventForm = () => {
           <FormControl fullWidth>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateTimePicker
-                label="Date&Time picker"
+                label="Date & heure"
                 value={formik.values.date}
                 format={format(new Date(), "yyyyy-MM-dd kk:mm:ss")}
                 onChange={(newDate) => {
@@ -171,47 +180,49 @@ const EventForm = () => {
           </FormControl>
         </div>
 
-        <div className="event__form__place">
-          <TextField
-            fullWidth
-            label="Adresse"
-            className="eventForm"
-            id="address"
-            name="address"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            error={formik.touched.address && Boolean(formik.errors.address)}
-            helperText={formik.touched.address && formik.errors.address}
-          />
-        </div>
-
-        <div className="event__form__city">
-          <TextField
-            fullWidth
-            label="Ville"
-            className="eventForm"
-            id="city"
-            name="city"
-            value={formik.values.city}
-            onChange={formik.handleChange}
-            error={formik.touched.city && Boolean(formik.errors.city)}
-            helperText={formik.touched.city && formik.errors.city}
-          />
-        </div>
-
-        <div className="event__form__zipcode">
-          <TextField
-            fullWidth
-            label="Code Postal"
-            className="eventForm"
-            id="zipcode"
-            name="zipcode"
-            value={formik.values.zipcode}
-            onChange={formik.handleChange}
-            error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
-            helperText={formik.touched.zipcode && formik.errors.zipcode}
-          />
-        </div>
+        {formIsPresent && (
+          <>
+            <div className="event__form__place">
+              <TextField
+                fullWidth
+                label="Adresse"
+                className="eventForm"
+                id="address"
+                name="address"
+                value={formik.values.address}
+                onChange={formik.handleChange}
+                error={formik.touched.address && Boolean(formik.errors.address)}
+                helperText={formik.touched.address && formik.errors.address}
+              />
+            </div>
+            <div className="event__form__city">
+              <TextField
+                fullWidth
+                label="Ville"
+                className="eventForm"
+                id="city"
+                name="city"
+                value={formik.values.city}
+                onChange={formik.handleChange}
+                error={formik.touched.city && Boolean(formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
+              />
+            </div>
+            <div className="event__form__zipcode">
+              <TextField
+                fullWidth
+                label="Code Postal"
+                className="eventForm"
+                id="zipcode"
+                name="zipcode"
+                value={formik.values.zipcode}
+                onChange={formik.handleChange}
+                error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
+                helperText={formik.touched.zipcode && formik.errors.zipcode}
+              />
+            </div>
+          </>
+        )}
 
         <div className="event__form__select">
           <FormControl fullWidth>
@@ -237,7 +248,6 @@ const EventForm = () => {
           </FormControl>
         </div>
 
-
         <div className="event__form__number">
           <TextField
             fullWidth
@@ -253,7 +263,6 @@ const EventForm = () => {
             helperText={formik.touched.maxMembers && formik.errors.maxMembers}
           />
         </div>
-
 
         <div className="event__form__description">
           <TextField
@@ -272,42 +281,6 @@ const EventForm = () => {
           />
         </div>
 
-        {/* <div className="event__form__photo">
-          <FormControl fullWidth>
-            <label htmlFor="contained-button-file">
-              <Input
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-                onChange={(event) => {
-                  formik.setFieldValue("picture", event.currentTarget.files[0]);
-                }}
-                ref={pictureRef}           
-              />
-              <Button
-                sx={{
-                  backgroundColor: "#9FBFFF",
-                  "&:hover": { backgroundColor: "#82B5A5" },
-                }}
-                fullWidth
-                variant="contained"
-                component="span"
-                onClick ={()=> {pictureRef.current.click();}
-              }
-              >
-                Téléchargez votre image de couverture d'évènement
-              </Button>
-            </label>
-          </FormControl>
-        </div>
-        
-        <div className="event__form__photo">
-              { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
-             
-        </div> */}
-
-
         <div className="event__form__buttom">
           <FormControl fullWidth>
             <Button
@@ -317,8 +290,7 @@ const EventForm = () => {
               }}
               variant="contained"
               type="submit"
-              onClick={onSubmit}
-              
+              onClick={formik.onSubmit}
             >
               Créer mon évènement
             </Button>
