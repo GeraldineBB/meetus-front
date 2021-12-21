@@ -20,7 +20,7 @@ import {
   EDIT_EVENT,
   setValidateForm, 
 } from "../actions/events";
-import { LOGIN, setCurrentUser, setJoinEventStatus, SIGNUP } from "../actions/user";
+import { LOGIN, setCurrentUser, setErrorLogin, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 
 
@@ -139,7 +139,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
       api
-        .get("v1/events?limit=2", {
+        .get("v1/events/past", {
 
         })
         .then((response) => {
@@ -206,7 +206,10 @@ const apiMiddleware = (store) => (next) => (action) => {
           localStorage.setItem('Token', token);
           localStorage.setItem('User', JSON.stringify(user));
         })
-        .catch((error) => console.log("on a une erreur sur la ", error));
+        .catch((error) => {
+        store.dispatch(setErrorLogin())
+        console.log("on a une erreur sur la ", error)
+      });
       next(action);
       break;
     }

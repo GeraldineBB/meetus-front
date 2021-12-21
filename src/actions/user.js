@@ -40,3 +40,10 @@ export const setJoinEventStatus = () => ({
   type: SET_JOIN_EVENT_STATUS,
   
 });
+
+export const SET_ERROR_LOGIN = 'SET_ERROR_LOGIN';
+
+export const setErrorLogin = () => ({
+  type: SET_ERROR_LOGIN,
+  
+});
