@@ -61,7 +61,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get("v1/categories?limit=6", {
-          headers: { Authorization: `Bearer ${token}` },
+          // headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -163,7 +163,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
       api
         .get("v1/categories?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
+          // headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -274,7 +274,8 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: action.values.picture ? action.values.picture.name: null,         
+            picture: 'event_placeholder.png',
+            // picture: action.values.picture ? action.values.picture.name: null,         
             isOnline: action.values.picked,
         },
            url: 'https://api-meet-us.herokuapp.com/api/v1/events?type=online', 

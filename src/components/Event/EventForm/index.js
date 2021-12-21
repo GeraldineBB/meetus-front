@@ -279,7 +279,7 @@ const EventForm = () => {
           />
         </div>
 
-        <div className="event__form__photo">
+        {/* <div className="event__form__photo">
           <FormControl fullWidth>
             <label htmlFor="contained-button-file">
               <Input
@@ -312,7 +312,7 @@ const EventForm = () => {
         <div className="event__form__photo">
               { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
              
-        </div>
+        </div> */}
 
 
         <div className="event__form__buttom">
