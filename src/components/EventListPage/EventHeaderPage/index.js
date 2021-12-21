@@ -17,7 +17,6 @@ function EventHeaderPage({
   archived,
 }) {
   const underlineInProgress = inProgress ? "underlined" : "";
-  const underlineArchived = archived ? "underlined" : "";
   const dispatch = useDispatch();
 
   const handleSearch = (event) => {
@@ -43,9 +42,6 @@ function EventHeaderPage({
               className={underlineInProgress}
             >
               A venir
-            </h2>
-            <h2 onClick={handleArchived} className={underlineArchived}>
-              Archivé
             </h2>
           </div>
           <NavLink to="/create" style={{ textDecoration: "none" }}>
