@@ -120,9 +120,9 @@ export default function LoginForm() {
                   Se connecter
                 </Button>
               </div>
-              <NavLink style={{ textDecoration: "none", color: "black" }} to="">
+              <NavLink style={{ textDecoration: "none", color: "black" }} to="/signup">
                 <span className="alreadyAccount">
-                  Vous possédez déjà un compte ?
+                  Vous ne possedez pas de compte ?
                 </span>
               </NavLink>
             </Form>

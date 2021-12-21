@@ -32,7 +32,7 @@ export default function EventListCardsArchived({
 
   const currentInput = useSelector(state => state.events.currentSearchBar)
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList)
-  const loading = useSelector(state => state.events.loading)
+
 
 
   function formatDate(value) {
@@ -49,10 +49,6 @@ export default function EventListCardsArchived({
     dispatch({ type: LOAD_EVENT_LIST_ARCHIVED })
     ;
   }, [dispatch]);
-
-  if (loading) {
-    return <LinearIndeterminate />;
-  }
 
   return (
     <Grid container>

@@ -36,7 +36,6 @@ export default function EventListCardsInProgress({
   const currentInput = useSelector(state => state.events.currentSearchBar);
   const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList);
   const { user }   = useSelector((state) => state.user);
-  const loading = useSelector(state => state.events.loading)
 
 
 
@@ -56,10 +55,7 @@ export default function EventListCardsInProgress({
   }, []);
 
   // we want to check if the user is the organiser in order to print the button "Modifier"
-  if (loading) {
-    return <LinearIndeterminate />;
-  }
-  
+ 
   return (
     <Grid container>
       {eventList.filter((event) => {
