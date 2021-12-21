@@ -27,8 +27,8 @@ import { LOGIN, setCurrentUser, setErrorLogin, setJoinEventStatus, SIGNUP } from
 
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/",
-  // baseURL: "https://api-meet-us.herokuapp.com/api/",
+  // baseURL: "http://localhost:8080/api/",
+  baseURL: "https://api-meet-us.herokuapp.com/api/",
   // baseUrl: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
   // headers: {'Authorization': `Bearer ${token}`}
 });
