@@ -36,8 +36,6 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
-  const pictureRef = useRef(null);
-
   const navigate = useNavigate();
   const { formSucces } = useSelector((state) => state.events);
 
@@ -55,12 +53,16 @@ const EventForm = () => {
   }, [dispatch]);
 
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
 
     
-      dispatch(setNewEvent(values));
+    if (values.isOnline === "1") {
+      dispatch(setNewEventOnline(values));
       console.log(values);
-      // console.log('picture eventForm', values.picture);
+    } else {
+      dispatch(setNewEvent(values));
+      console.log('picture eventForm', values.picture);
+    }
     
   };
 
@@ -101,11 +103,13 @@ const EventForm = () => {
       author: "",
       city: "",
       zipcode: "",
-      country: "FRANCE"
+      country: "FRANCE",
     },
     validationSchema: validationSchema,
     onSubmit,
   });
+
+
 
   /* 
   console.log("Error: ", formik.errors);  */
@@ -272,42 +276,6 @@ const EventForm = () => {
           />
         </div>
 
-        {/* <div className="event__form__photo">
-          <FormControl fullWidth>
-            <label htmlFor="contained-button-file">
-              <Input
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-                onChange={(event) => {
-                  formik.setFieldValue("picture", event.currentTarget.files[0]);
-                }}
-                ref={pictureRef}           
-              />
-              <Button
-                sx={{
-                  backgroundColor: "#9FBFFF",
-                  "&:hover": { backgroundColor: "#82B5A5" },
-                }}
-                fullWidth
-                variant="contained"
-                component="span"
-                onClick ={()=> {pictureRef.current.click();}
-              }
-              >
-                Téléchargez votre image de couverture d'évènement
-              </Button>
-            </label>
-          </FormControl>
-        </div>
-        
-        <div className="event__form__photo">
-              { formik.values.picture && <PreviewImage picture={formik.values.picture} /> } 
-             
-        </div> */}
-
-
         <div className="event__form__buttom">
           <FormControl fullWidth>
             <Button
@@ -317,7 +285,7 @@ const EventForm = () => {
               }}
               variant="contained"
               type="submit"
-              onClick={onSubmit}
+              onClick={formik.onSubmit}
               
             >
               Créer mon évènement

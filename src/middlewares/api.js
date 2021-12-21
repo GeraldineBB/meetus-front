@@ -236,10 +236,6 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            // picture: {
-            //   name  :action.values.picture ? action.values.picture.name: null,
-            //   value :action.values.picture
-            // },
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
@@ -251,6 +247,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .then(function (reponse) {
           // store.dispatch(setValidateForm(reponse.data));
+          store.dispatch(setValidateForm(reponse.data)); 
           console.log('formData middleware', reponse.data);
           console.log("CA A FONCTIONNER"); 
       })
@@ -278,8 +275,7 @@ const apiMiddleware = (store) => (next) => (action) => {
             description: action.values.description,
             date: action.values.date,
             category: action.values.category,
-            maxMembers:action.values.maxMembers,
-            picture: action.values.picture ? action.values.picture.name: null,         
+            maxMembers:action.values.maxMembers,    
             isOnline: action.values.picked,
         },
            url: 'http://localhost:8080/api/v1/events?type=online', 
