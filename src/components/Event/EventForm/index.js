@@ -73,10 +73,6 @@ const EventForm = () => {
       .string("Entrez le nom de l'évènement")
       .min(10, "Un nom d'évènement doit contenir 10 caractères minimum")
       .required("Le nom de l'évènement doit être rempli"),
-    city: yup
-      .string("Entrez un lieu valide")
-      .min(3, "Un lieu doit contenir au moins 3 lettres")
-      .required("Un lieu est requis"),
     description: yup
       .string("Entrez une description")
       .min(50, "Une description doit contenir 50 caractères au minimum")
@@ -84,10 +80,6 @@ const EventForm = () => {
     maxMembers: yup
       .number("Entrez un nombre maximum de participant ")
       .min(2, "Un évènement doit avoir un moins 2 participant")
-      .required("Le nombre maximum de participant est requis"),
-    zipcode: yup
-      .number("Entrez un nombre maximum de participant ")
-      .min(5, "Un code postal doit comporter 5 caractères")
       .required("Le nombre maximum de participant est requis"),
   });
 
@@ -101,10 +93,10 @@ const EventForm = () => {
       isOnline: "",
       category: "",
       date: new Date(new Date().setDate(today.getDate() + 2)),
-      address: "CHEZTOI",
+      address: "",
       author: "",
-      city: "ENLIGNE",
-      zipcode: "75000",
+      city: "",
+      zipcode: "",
       country: "FRANCE",
     },
     validationSchema: validationSchema,
