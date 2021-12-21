@@ -11,7 +11,7 @@ const RedirectSignup = () => {
 
     window.setTimeout(function () {
         window.location.href = '/login';
-    }, 4000);
+    }, 2000);
 
     return (
 

@@ -5,9 +5,12 @@ import { darken } from "@mui/system";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { LOAD_SELECT_CATEGORIES_EVENT_LIST, SEARCH_BAR_EVENT_LIST,} from "../../../actions/events";
+import {
+  LOAD_SELECT_CATEGORIES_EVENT_LIST,
+  SEARCH_BAR_EVENT_LIST,
+} from "../../../actions/events";
 import SelectCategories from "./Select";
 
 function EventHeaderPage({
@@ -17,7 +20,9 @@ function EventHeaderPage({
   archived,
 }) {
   const underlineInProgress = inProgress ? "underlined" : "";
+  const underlineArchived = archived ? "underlined" : "";
   const dispatch = useDispatch();
+  const logged = useSelector(state => state.user.logged)
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -43,20 +48,24 @@ function EventHeaderPage({
             >
               A venir
             </h2>
+            { logged &&
+              <h2 onClick={handleArchived} className={underlineArchived}>
+                Passés
+              </h2>
+            }
           </div>
           <NavLink to="/create" style={{ textDecoration: "none" }}>
-          <Button
-            sx={{
-              mb: 3,
-              backgroundColor: "#F36B7F",
-              "&:hover": { backgroundColor: darken("#F36B7F", "20%") },
-            }}
-            variant="contained"
-          >
-            Créer un évènement
-          </Button>
+            <Button
+              sx={{
+                mb: 3,
+                backgroundColor: "#F36B7F",
+                "&:hover": { backgroundColor: darken("#F36B7F", "20%") },
+              }}
+              variant="contained"
+            >
+              Créer un évènement
+            </Button>
           </NavLink>
-
         </div>
         <Box
           component="form"

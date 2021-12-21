@@ -138,8 +138,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
+      const token = localStorage.getItem('Token'); 
+
       api
         .get("v1/events/past", {
+          headers: { Authorization: `Bearer ${token}` },
 
         })
         .then((response) => {
@@ -218,8 +221,8 @@ const apiMiddleware = (store) => (next) => (action) => {
       const token = localStorage.getItem("Token");
       // const {google: { value }} = store.getState();
 
-      let data = new FormData(); 
-      data.append('picture', action.values.picture);
+      // let data = new FormData(); 
+      // data.append('picture', action.values.picture);
 
         axios({
           headers: { 
@@ -233,15 +236,14 @@ const apiMiddleware = (store) => (next) => (action) => {
             date: action.values.date,
             category: action.values.category,
             maxMembers:action.values.maxMembers,
-            picture: {
-              name  :action.values.picture ? action.values.picture.name: null,
-              value :action.values.picture
-            },
+            // picture: {
+            //   name  :action.values.picture ? action.values.picture.name: null,
+            //   value :action.values.picture
+            // },
             address: action.values.address,
             city: action.values.city,
             country: action.values.country,
-            zipcode: action.values.zipcode,
-      
+            zipcode: action.values.zipcode
         },
            url: 'http://localhost:8080/api/v1/events', 
            method: 'post',
@@ -255,7 +257,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       .catch(function (erreur) {
          
         window.alert("Une erreur s'est produite, veuillez réessayer");  
-          console.log(erreur.message);
+          console.log(erreur);
       });
 
       next(action);
