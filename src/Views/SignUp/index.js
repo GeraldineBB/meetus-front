@@ -1,19 +1,17 @@
- import React from 'react';
+import React from "react";
 
 import Footer from "../../components/Footer";
 
-import { SignUpForm } from '../../components/Signup';
+import { SignUpForm } from "../../components/Signup";
 
 const SignUp = () => {
-    return (
-        <div>
-        
-        <SignUpForm/>
+  return (
+    <div>
+      <SignUpForm />
 
-          <Footer/>
-
-        </div>
-    );
+      <Footer />
+    </div>
+  );
 };
 
-export default SignUp; 
+export default SignUp;

@@ -16,7 +16,6 @@ import { LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
 import { Link } from "react-router-dom";
 
 import "./style.scss";
-import LinearIndeterminate from "../../Spinner";
 
 
 

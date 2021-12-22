@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 
 import { useNavigate } from "react-router-dom";
@@ -85,7 +85,7 @@ const EventForm = () => {
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
-  handleVerify()
+  handleVerify();
 
   const today = new Date();
   /* 
@@ -102,7 +102,7 @@ const EventForm = () => {
           maxMembers: "",
           isOnline: "",
           category: "",
-          date: new Date(new Date().setDate(today.getDate() + 2)),
+          date: new Date(new Date().setDate(today.getDate() + 1)),
           address: "",
           author: "",
           city: "",
@@ -110,11 +110,12 @@ const EventForm = () => {
           country: "FRANCE",
         }}
         onSubmit={(values) => {
-          formIsPresent ? dispatch(setNewEvent(values)) : dispatch(setNewEventOnline(values));
+          formIsPresent
+            ? dispatch(setNewEvent(values))
+            : dispatch(setNewEventOnline(values));
           console.log(values);
         }}
         validationSchema={validationSchema}
-
       >
         {({
           values,
@@ -168,7 +169,7 @@ const EventForm = () => {
             <div className="event__form__date">
               <FormControl fullWidth>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePickerField name="date" />
+                  <DatePickerField name="date" />
                 </LocalizationProvider>
               </FormControl>
             </div>
