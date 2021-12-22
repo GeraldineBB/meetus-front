@@ -13,11 +13,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import "./style.scss";
-
-
+import { ButtonBase } from "@mui/material";
 
 export default function EventListCardsInProgress({
   id,
@@ -32,11 +31,12 @@ export default function EventListCardsInProgress({
   const eventList = useSelector(
     (state) => state.events.eventPageListInProgress
   );
-  const currentInput = useSelector(state => state.events.currentSearchBar);
-  const currentSelect = useSelector(state => state.events.currentSelectCategoriesEventList);
+  const currentInput = useSelector((state) => state.events.currentSearchBar);
+  const currentSelect = useSelector(
+    (state) => state.events.currentSelectCategoriesEventList
+  );
   const { user } = useSelector((state) => state.user);
-
-
+  const navigate = useNavigate();
 
   function formatDate(value) {
     return new Date(value).toLocaleDateString("fr-FR", {
@@ -57,25 +57,31 @@ export default function EventListCardsInProgress({
 
   return (
     <Grid container>
-      {eventList.filter((event) => {
-        if (event.title.toLowerCase().includes(currentInput.toLowerCase())
-          && event.category.name.includes(currentSelect)) {
-          return event;
-        }
-      }).filter((event) => {
-        if (event.category.name.includes(currentSelect)) {
-          return event;
-        } else if (event.title.toLowerCase().includes(currentInput.toLowerCase())) {
-          return event;
-        }
-      }).map((event) => (
-        <Grid
-          item
-          md={12}
-          sx={{ display: "flex", justifyContent: "center" }}
-          key={event.id}
-        >
-          <Link to={`/events/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+      {eventList
+        .filter((event) => {
+          if (
+            event.title.toLowerCase().includes(currentInput.toLowerCase()) &&
+            event.category.name.includes(currentSelect)
+          ) {
+            return event;
+          }
+        })
+        .filter((event) => {
+          if (event.category.name.includes(currentSelect)) {
+            return event;
+          } else if (
+            event.title.toLowerCase().includes(currentInput.toLowerCase())
+          ) {
+            return event;
+          }
+        })
+        .map((event) => (
+          <Grid
+            item
+            md={12}
+            sx={{ display: "flex", justifyContent: "center" }}
+            key={event.id}
+          >
             <Card
               sx={{
                 display: "flex",
@@ -85,19 +91,14 @@ export default function EventListCardsInProgress({
                 mr: { xs: 0, sm: 0, md: 1, lg: 1 },
               }}
               className="eventListCard"
-
             >
-
               <CardMedia
-
                 component="img"
-                sx={{ maxWidth: "30%" }}
+                sx={{ maxWidth: "30%", height: "100%" }}
                 image={`https://api-meet-us.herokuapp.com/uploads/events/${event.picture}`}
                 alt="Live from space album cover"
-
               />
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <div
                     style={{
@@ -105,7 +106,11 @@ export default function EventListCardsInProgress({
                       width: "100%",
                     }}
                   >
-                    <Typography component="div" variant="h5" sx={{ mb: 1, fontFamily: 'Space Grotesk' }}>
+                    <Typography
+                      component="div"
+                      variant="h5"
+                      sx={{ mb: 1, fontFamily: "Space Grotesk" }}
+                    >
                       {event.title}
                       <Chip
                         label={event.category.name}
@@ -118,13 +123,13 @@ export default function EventListCardsInProgress({
                         size="small"
                       />
                     </Typography>
-                    {
-                      event.author.id === user.id ? <Button
+                    {event.author.id === user.id ? (
+                      <Button
                         className="button__eventlist"
                         sx={{
                           mb: 4,
                           backgroundColor: "#F8CF61",
-                          fontFamily: 'Space Grotesk',
+                          fontFamily: "Space Grotesk",
                           "&:hover": {
                             backgroundColor: "#f8d061",
                           },
@@ -132,23 +137,30 @@ export default function EventListCardsInProgress({
                         variant="contained"
                         size="small"
                       >
-                        <Link to={`/edit/${event.id}`} style={{ textDecoration: 'none', color: 'white' }}>
-
-                          <EditIcon fontSize="small" sx={{ mr: "0.2em", fontFamily: 'Space Grotesk' }} />
+                        <Link
+                          to={`/edit/${event.id}`}
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          <EditIcon
+                            fontSize="small"
+                            sx={{
+                              mr: "0.2em",
+                              fontFamily: "Space Grotesk",
+                            }}
+                          />
                           Modifier mon évènement
-
                         </Link>
-
-                      </Button> : false
-                    }
-
+                      </Button>
+                    ) : (
+                      false
+                    )}
                   </div>
                   <div style={{ display: "flex", flexDirection: "row" }}>
                     <Typography
                       variant="subtitle1"
                       color="text.primary"
                       component="div"
-                      sx={{ mb: 2, fontFamily: 'Space Grotesk' }}
+                      sx={{ mb: 2, fontFamily: "Space Grotesk" }}
                     >
                       <CalendarTodayIcon sx={{ mr: "0.2em" }} />
                       {formatDate(event.date)}
@@ -156,43 +168,72 @@ export default function EventListCardsInProgress({
                       <Typography
                         component="span"
                         variant="subtitle1"
-                        sx={{ ml: 2, fontFamily: 'Space Grotesk' }}
+                        sx={{ ml: 2, fontFamily: "Space Grotesk" }}
                       >
                         <LocationOnIcon />
 
-                        {event.isOnline === true ?
-                          "En ligne"
-                          :
-                          event.city
-                        }
-
+                        {event.isOnline === true ? "En ligne" : event.city}
                       </Typography>
                     </Typography>
                   </div>
                   <Typography
                     variant="body1"
                     component="p"
-                    sx={{ border: "black", mr: 2, pb: 2, mb: 1, maxWidth: 850, maxHeight: 80, overflow: 'hidden', fontFamily: 'Space Grotesk' }}
-
+                    sx={{
+                      border: "black",
+                      mr: 2,
+                      pb: 2,
+                      mb: 1,
+                      overflow: "hidden",
+                      fontFamily: "Space Grotesk",
+                    }}
                   >
                     {event.description}
                   </Typography>
                   <Typography
                     variant="body1"
                     component="p"
-                    sx={{ position: "relative", bottom: "0px", left: "0px", mt: 3, fontFamily: 'Space Grotesk' }}
+                    sx={{
+                      position: "relative",
+                      bottom: "0px",
+                      left: "0px",
+                      mt: 3,
+                      fontFamily: "Space Grotesk",
+                    }}
                   >
                     {event.membersCount} Participants
+                    
                   </Typography>
+                  
+                  <Button
+                    size="small"
+                    variant="contained"
+                    className="card__button"
+                    sx={{
+                      mt: "2em",
+                      backgroundColor: "#F36B7F",
+                      "&:hover": { backgroundColor: "#F8CF61" },
+                    }}
+                  >
+                    <Link
+                      to={`/events/${event.id}`}
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        fontFamily: "Space Grotesk",
+                      }}
+                    >
+                      En savoir plus
+                    </Link>
+                  </Button>
                 </CardContent>
+                
               </Box>
-
+              
             </Card>
-          </Link>
-
-        </Grid>
-      ))}
+            
+          </Grid>
+        ))}
     </Grid>
   );
-
 }
