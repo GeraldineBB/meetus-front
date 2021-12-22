@@ -22,9 +22,6 @@ import {
 } from "../actions/events";
 import { LOGIN, setCurrentUser, setErrorLogin, setJoinEventStatus, SIGNUP } from "../actions/user";
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
-
-
-
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
   // baseURL: "http://localhost:8080/api/",
@@ -249,7 +246,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           // store.dispatch(setValidateForm(reponse.data));
           store.dispatch(setValidateForm(reponse.data)); 
           console.log('formData middleware', reponse.data);
-          console.log("CA A FONCTIONNER"); 
+          console.log("CA A FONCTIONNER");
       })
       .catch(function (erreur) {
          

@@ -2,11 +2,10 @@ import EventHeaderPageCategory from "../../components/Category/EventHeaderPageCa
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useSelector, useDispatch } from "react-redux";
-import { ARCHIVED, IN_PROGRESS } from "../../actions/events";
+import { IN_PROGRESS } from "../../actions/events";
 
 import { useParams } from "react-router-dom";
 import EventListCardsInProgressCategory from "../../components/Category/EventListCardsInProgressCategory";
-import EventListCardsArchivedCategory from "../../components/Category/EventListCardsArchivedCategory";
 
 // in order to reuse code, CategoryPage is similar to EventListPage
 // 1. we take same components but they are simplified (no search bar and no select)
@@ -22,10 +21,6 @@ function CategoryPage() {
   const { inProgress, archived } = useSelector((state) => state.events);
   const dispatch = useDispatch();
 
-  const handleArchived = () => {
-    dispatch({ type: ARCHIVED });
-  };
-
   const handleInProgress = () => {
     dispatch({ type: IN_PROGRESS });
   };
@@ -33,12 +28,11 @@ function CategoryPage() {
     <div className="eventListPage">
       <Header />
       <EventHeaderPageCategory
-        handleArchived={handleArchived}
         handleInProgress={handleInProgress}
         inProgress={inProgress}
         archived={archived}
       />
-      {inProgress ? <EventListCardsInProgressCategory categoryId={id} /> : <EventListCardsArchivedCategory categoryId={id} />}
+      <EventListCardsInProgressCategory categoryId={id} /> 
       <Footer />
     </div>
   );
