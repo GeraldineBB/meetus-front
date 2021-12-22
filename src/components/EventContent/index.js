@@ -159,12 +159,16 @@ const EventContent = ({ eventId }) => {
                     "0" + new Date(eventInfoPage.event.date).getMinutes()
                   ).slice(-2)}
                 </p>
-                <p className="eventContent__detail__adress">
-                  {eventInfoPage.event.address}
-                </p>
-                <p className="eventContent__detail__zipcode">
-                  {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
-                </p>
+                {eventInfoPage.event.isOnline === true ?  '' :
+                  <Box>   <p className="eventContent__detail__adress">
+                    {eventInfoPage.event.address}
+                  </p>
+
+                    <p className="eventContent__detail__zipcode">
+                      {eventInfoPage.event.zipcode} {eventInfoPage.event.city}
+                    </p></Box>
+                }
+
                 {/* /si user id récupéré dans le state est présent dans le tableau eventInfoPage.event.members alors on affiche le bouton inscrit */}
 
                 {!logged ? (
@@ -213,20 +217,20 @@ const EventContent = ({ eventId }) => {
                 )}
 
                 <p className="eventContent__detail__membersCount">
-                  {eventInfoPage.event.membersCount} Participants    
+                  {eventInfoPage.event.membersCount} Participants
                   {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
-                    / {eventInfoPage.event.maxMembers}</p>
+                  / {eventInfoPage.event.maxMembers}</p>
                 {eventInfoPage.event.members.length > 0 && (
                   <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
                     <AvatarGroup max={3} sx={{ mx: "auto" }}>
                       {/* {{eventInfoPage.event.members}.map((member) => (
                       <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
                     ))} */}
-                    {eventInfoPage.event.members.map((members)=>(
-                      <Avatar
-                        alt={members.fullName}
-                        src={members.avatar}
-                      />))
+                      {eventInfoPage.event.members.map((members) => (
+                        <Avatar
+                          alt={members.fullName}
+                          src={members.avatar}
+                        />))
                       }
                       {/* 
                       <Avatar
@@ -252,15 +256,15 @@ const EventContent = ({ eventId }) => {
 
             </div>
             <LinkSection
-                title={"Evènements similaires"}
-                buttonName={"Voir tous les évènements"}
-              />
+              title={"Evènements similaires"}
+              buttonName={"Voir tous les évènements"}
+            />
             <div className="eventSimilar">
 
-              <Container maxWidth="lg" 
-              sx={{ 
-                mt: 1,
-              }}>
+              <Container maxWidth="lg"
+                sx={{
+                  mt: 1,
+                }}>
                 <Grid container>
                   {eventInfoPage.recommendedEvents.map((event) => (
                     <Grid item md={4} key={event.id}>
