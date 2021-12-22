@@ -14,12 +14,10 @@ import { RadioGroup } from "@mui/material";
 import { Radio } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { InputLabel } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { Navigate } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
-import { Form, Formik, useField, useFormik, useFormikContext } from "formik";
+import { Form, Formik, useField, useFormikContext } from "formik";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
 import {
@@ -29,7 +27,7 @@ import {
   setNewEvent,
   setNewEventOnline,
 } from "../../../actions/events";
-import { format, formatRelative } from "date-fns";
+import { format } from "date-fns";
 
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
@@ -45,6 +43,20 @@ const EventForm = () => {
       return navigate("/event-creation-done");
     }
   };
+  const validationSchema = yup.object({
+    title: yup
+      .string("Entrez le nom de l'évènement")
+      .min(10, "Un nom d'évènement doit contenir 10 caractères minimum")
+      .required("Le nom de l'évènement doit être rempli"),
+    description: yup
+      .string("Entrez une description")
+      .min(50, "Une description doit contenir 50 caractères au minimum")
+      .required("Une description est requise"),
+    maxMembers: yup
+      .number("Entrez un nombre maximum de participant ")
+      .min(2, "Un évènement doit avoir un moins 2 participant")
+      .required("Le nombre maximum de participant est requis"),
+  });
 
   const DatePickerField = ({ ...props }) => {
     const { setFieldValue } = useFormikContext();
@@ -61,7 +73,7 @@ const EventForm = () => {
       />
     );
   };
-  
+
   const handleOnline = () => {
     dispatch(EventFormOnline());
   };
@@ -101,6 +113,8 @@ const EventForm = () => {
           formIsPresent ? dispatch(setNewEvent(values)) : dispatch(setNewEventOnline(values));
           console.log(values);
         }}
+        validationSchema={validationSchema}
+
       >
         {({
           values,
