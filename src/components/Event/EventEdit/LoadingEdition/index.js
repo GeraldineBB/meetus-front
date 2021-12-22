@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 const RedirectEdition = () => {
   window.setTimeout(function () {
     window.location.href = "/eventList";
-  }, 3000);
+  }, 2000);
 
   return (
     <div className="loading">
