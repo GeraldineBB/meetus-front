@@ -56,7 +56,7 @@ export default function HomeCard({
           className="card"
           sx={{
             mr: { xs: 0, sm: 0, md: 3, lg: 3 },
-            ml: { xs: 3, sm: 3, md: 0, lg: 0 }, 
+            // ml: { xs: 3, sm: 3, md: 0, lg: 0 }, 
             mb: {xs: 2, sm: 2, md: 0, lg: 0},
             display: "flex",
             justifyContent: "space-between",
@@ -66,24 +66,24 @@ export default function HomeCard({
           <CardContent>
             <CardMedia
               component="img"
-              height= "300"
+              height= "200"
               sizes="100"
               image={`https://api-meet-us.herokuapp.com/uploads/events/${picture}`}
               alt="Paella dish"
             />
 
-            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h5" component="div">
+            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h6" component="div">
               {title}
             </Typography>
             <Typography color="text.primary" sx={{fontFamily: 'Space Grotesk'}}>
-              <LocationOnIcon fontSize="medium" />
-              {city}
+              <LocationOnIcon fontSize="small" />
+              {city === "" ? 'En ligne' : `${city}` }
             </Typography>
-            <Typography sx={{ mb: 1, fontFamily: 'Space Grotesk' }}>
-              <CalendarTodayIcon sx={{ mr: 1.5 }} />
+            <Typography sx={{ mb: 0.5, fontFamily: 'Space Grotesk' }}>
+              <CalendarTodayIcon sx={{ mr: 1.5 }} fontSize="small" />
               {formatDate(date)}
             </Typography>
-            <Typography sx={{ mt: 2, fontFamily: 'Space Grotesk' }} color="text.primary">
+            <Typography sx={{ mt: 1, fontFamily: 'Space Grotesk' }} color="text.primary" fontSize="small">
               {membersCount} participants
             </Typography>
           </CardContent>

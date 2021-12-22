@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./style.scss";
 
 import HomeCard from "./HomeCard";
 import Grid from "@mui/material/Grid";
@@ -15,7 +16,8 @@ function Cards() {
     dispatch({ type: LOAD_EVENTS_FOR_HOME });
   }, [dispatch]);
   return (
-    <Container maxWidth="lg" sx={{ mt: 1, mb: 2 }}>
+    <div className="cards">
+    <Container maxWidth="lg" sx={{ mt: 1, mb: 1 }}>
       <Grid container>
         {homeEventList.map((event) => (
           <Grid item md={4} key={event.id}>
@@ -24,6 +26,7 @@ function Cards() {
         ))}
       </Grid>
     </Container>
+    </div>
   );
 }
 
