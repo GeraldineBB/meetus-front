@@ -72,7 +72,7 @@ export default function HomeCard({
             />
 
             <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h6" component="div">
-              {title}
+            {title.substring(0,18)}
             </Typography>
             <Typography color="text.primary" sx={{fontFamily: 'Space Grotesk'}}>
               <LocationOnIcon fontSize="small" />

@@ -46,9 +46,8 @@ export default function EventCard({
       <Card
           className="card"
           sx={{
-            mr: { xs: 0, sm: 0, md: 2, lg: 2 },
-            ml: { xs: 0, sm: 0, md: 4, lg: 6 }, 
-            height: 420, 
+            mr: { xs: 0, sm: 0, md: 3, lg: 3 },
+            // ml: { xs: 0, sm: 0, md: 4, lg: 6 }, 
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",
@@ -57,8 +56,8 @@ export default function EventCard({
           <CardContent>
             <CardMedia
               component="img"
-              height= "200"
-              sizes="100"
+              height= "190"
+              sizes="90"
               image={`https://api-meet-us.herokuapp.com/uploads/events/${picture}`}
               alt="Paella dish"
             />

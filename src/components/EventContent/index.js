@@ -236,12 +236,14 @@ const EventContent = ({ eventId }) => {
                   </Container>
                 )}
               </div>
+
             </div>
-            <div className="eventSimilar">
-              <LinkSection
+            <LinkSection
                 title={"Evènements similaires"}
                 buttonName={"Voir tous les évènements"}
               />
+            <div className="eventSimilar">
+
               <Container maxWidth="lg" 
               sx={{ 
                 mt: 1,
