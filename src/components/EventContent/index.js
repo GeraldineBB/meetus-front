@@ -213,9 +213,9 @@ const EventContent = ({ eventId }) => {
                 )}
 
                 <p className="eventContent__detail__membersCount">
-                  {eventInfoPage.event.membersCount} Participants
+                  {eventInfoPage.event.membersCount} Participants    
                   {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
-                </p>
+                    / {eventInfoPage.event.maxMembers}</p>
                 {eventInfoPage.event.members.length > 0 && (
                   <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
                     <AvatarGroup max={3} sx={{ mx: "auto" }}>
