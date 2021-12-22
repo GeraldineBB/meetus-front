@@ -68,7 +68,7 @@ export default function HomeCard({
               component="img"
               height= "300"
               sizes="100"
-              image={`${process.env.PUBLIC_URL}/images/${picture}`}
+              image={`https://api-meet-us.herokuapp.com/uploads/events/${picture}`}
               alt="Paella dish"
             />
 

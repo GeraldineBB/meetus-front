@@ -59,7 +59,7 @@ function Header() {
         <NavLink to="/" style={{ textDecoration: "none" }}>
           <Avatar
             alt="Remy Sharp"
-            src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}
+            src={`https://api-meet-us.herokuapp.com/uploads/users/user_placeholder.png`}
             sx={{ mr: "1em" }}
           />
         </NavLink>

@@ -24,7 +24,7 @@ const Category = ({ name, picture, id }) => {
 
           <CardMedia
             component="img"
-            image={`${process.env.PUBLIC_URL}/images/${picture}`}
+            image={`https://api-meet-us.herokuapp.com/uploads/categories/${picture}`}
             alt={name}
             height="180"
           />
