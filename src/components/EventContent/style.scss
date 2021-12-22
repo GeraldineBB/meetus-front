@@ -1,13 +1,14 @@
 @use '../../../styles/vars'; 
 
 .eventSimilar{
+    width: 80%;
 
     &__illustration {
         display: flex; 
         justify-content: end;
         img{
             max-width: 30%;
-            margin-left: 2;
+            margin-left: 10;
         }
     }
 
@@ -15,7 +16,7 @@
 
 .eventContent{
 
-    width: 90%;
+    width: 80%;
     margin: auto;
     background-color: #f3eeee;
     border-radius: 3rem;
@@ -34,7 +35,7 @@
         }
 
         &__header--title{
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-block-start: 0;
             margin-block-end: 0;
             color: vars.$color-pink-dark; 
@@ -81,7 +82,7 @@
             padding-left: 5rem;
 
             &__header--title{
-                font-size: 3rem;
+                font-size: 2rem;
                 font-weight: 800;
                 margin-block-start: 0;
                 margin-block-end: 0;
@@ -105,7 +106,7 @@
 
             &__description{
                 max-width: 60%;
-                font-size: 1.2rem; 
+                font-size: 1.1rem; 
             }
 
         }
@@ -123,7 +124,7 @@
             text-align: center;
 
             p{
-                font-size: 1.2rem;
+                font-size: 1rem;
                 font-weight: 400;
             }
 

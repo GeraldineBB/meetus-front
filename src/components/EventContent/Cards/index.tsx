@@ -23,9 +23,8 @@ interface EventCardProps {
 
 function formatDate(value: string) {
   return new Date(value).toLocaleDateString("fr-FR", {
-    weekday: "long",
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   });
 }
@@ -47,7 +46,9 @@ export default function EventCard({
       <Card
           className="card"
           sx={{
-            mr: { xs: 0, sm: 0, md: 3, lg: 3 },
+            mr: { xs: 0, sm: 0, md: 2, lg: 2 },
+            ml: { xs: 0, sm: 0, md: 4, lg: 6 }, 
+            height: 420, 
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",
@@ -56,24 +57,24 @@ export default function EventCard({
           <CardContent>
             <CardMedia
               component="img"
-              height= "300"
+              height= "200"
               sizes="100"
-              image={`${process.env.PUBLIC_URL}/images/${picture}`}
+              image={`https://api-meet-us.herokuapp.com/uploads/events/${picture}`}
               alt="Paella dish"
             />
 
-            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h5" component="div">
-              {title}
+            <Typography sx={{ mt: 1.2, fontFamily: 'Space Grotesk' }} variant="h6" component="div">
+              {title.substring(0,18)}
             </Typography>
             <Typography color="text.primary" sx={{fontFamily: 'Space Grotesk'}}>
-              <LocationOnIcon fontSize="medium" />
-              {city}
+              <LocationOnIcon fontSize="small" />
+              {city === "" ? 'En ligne' : `${city}` }
             </Typography>
-            <Typography sx={{ mb: 1, fontFamily: 'Space Grotesk' }}>
-              <CalendarTodayIcon sx={{ mr: 1.5 }} />
+            <Typography sx={{ mb: 1, fontFamily: 'Space Grotesk' }} fontSize="small">
+              <CalendarTodayIcon sx={{ mr: 1.5 }}  />
               {formatDate(date)}
             </Typography>
-            <Typography sx={{ mt: 2, fontFamily: 'Space Grotesk' }} color="text.primary">
+            <Typography sx={{ mt: 2, fontFamily: 'Space Grotesk' }} color="text.primary" fontSize="small">
               {membersCount} participants
             </Typography>
           </CardContent>
