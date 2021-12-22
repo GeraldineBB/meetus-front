@@ -24,7 +24,7 @@ function HomePage() {
         <>
           <LinkSection
             title={"Toutes les catégories"}
-            buttonName={"Voir toutes les catégories"}
+            buttonName={""}
           />
           <Categories />
         </>

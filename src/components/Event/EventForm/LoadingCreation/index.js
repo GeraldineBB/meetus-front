@@ -27,7 +27,7 @@ const RedirectEventForm = () => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Votre évènement a bien été créer.
+                            Votre évènement a bien été crée.
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
 

@@ -101,7 +101,7 @@ const EventContent = ({ eventId }) => {
                 <div className="eventContent__info__picture">
                   <img
                     alt={eventInfoPage.event.picture}
-                    src={`${process.env.PUBLIC_URL}/images/concert-event.jpg`}
+                    src={`https://api-meet-us.herokuapp.com/uploads/events/${eventInfoPage.event.picture}`}
                   />
                 </div>
                 <div className="eventContent__info__description">
@@ -223,32 +223,12 @@ const EventContent = ({ eventId }) => {
                 {eventInfoPage.event.members.length > 0 && (
                   <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
                     <AvatarGroup max={3} sx={{ mx: "auto" }}>
-                      {/* {{eventInfoPage.event.members}.map((member) => (
-                      <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
-                    ))} */}
                       {eventInfoPage.event.members.map((members) => (
                         <Avatar
                           alt={members.fullName}
-                          src={members.avatar}
+                          src={`https://api-meet-us.herokuapp.com/uploads/users/${members.avatar}`}
                         />))
                       }
-                      {/* 
-                      <Avatar
-                        alt="Travis Howard"
-                        src="/static/images/avatar/2.jpg"
-                      />
-                      <Avatar
-                        alt="Cindy Baker"
-                        src="/static/images/avatar/3.jpg"
-                      />
-                      <Avatar
-                        alt="Agnes Walker"
-                        src="/static/images/avatar/4.jpg"
-                      />
-                      <Avatar
-                        alt="Trevor Henderson"
-                        src="/static/images/avatar/5.jpg"
-                      /> */}
                     </AvatarGroup>
                   </Container>
                 )}
