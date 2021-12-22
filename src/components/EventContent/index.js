@@ -36,6 +36,8 @@ const EventContent = ({ eventId }) => {
 
   const { user } = useSelector((state) => state.user);
 
+
+
   if (loading) {
     return <LinearIndeterminate />;
   } else {
@@ -109,27 +111,35 @@ const EventContent = ({ eventId }) => {
                 </div>
               </div>
               <div className="eventContent__detail">
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    className="eventContent__detail__map"
-                    style={{
-                      width: "300px",
-                      height: "200px",
-                      position: "relative",
+
+                {eventInfoPage.event.isOnline === true ?
+
+                  <Box component="span" sx={{ p: 2, border: '1px dashed grey' }}>
+                    <Button>Evènement en ligne</Button>
+                  </Box> :
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
                     }}
                   >
-                    <GoogleMaps
-                      currentLng={eventInfoPage.event.longitude}
-                      currentLat={eventInfoPage.event.latitude}
-                    />
-                  </div>
-                </Box>
+                    <div
+                      className="eventContent__detail__map"
+                      style={{
+                        width: "300px",
+                        height: "200px",
+                        position: "relative",
+                      }}
+                    >
+                      <GoogleMaps
+                        currentLng={eventInfoPage.event.longitude}
+                        currentLat={eventInfoPage.event.latitude}
+                      />
+                    </div>
+                  </Box>
 
+
+                }
                 <p className="eventContent__detail__date">
                   {new Date(eventInfoPage.event.date).toLocaleDateString(
                     "fr-FR",
@@ -168,10 +178,10 @@ const EventContent = ({ eventId }) => {
                         backgroundColor: "#F36B7F",
                         "&:hover": { backgroundColor: "#F8CF61" },
                       }}
-                      // onClick={() => {
-                      //   dispatch({ type: ADD_USER_TO_EVENT,
-                      //     eventId: eventId });
-                      // }}
+                    // onClick={() => {
+                    //   dispatch({ type: ADD_USER_TO_EVENT,
+                    //     eventId: eventId });
+                    // }}
                     >
                       Rejoindre
                     </Button>
@@ -203,9 +213,9 @@ const EventContent = ({ eventId }) => {
                 )}
 
                 <p className="eventContent__detail__membersCount">
-                  {eventInfoPage.event.membersCount} Participants
+                  {eventInfoPage.event.membersCount} Participants    
                   {/* eventInfoPage.event.membersCount + (joinEvent ? 1 : 0) */}
-                </p>
+                    / {eventInfoPage.event.maxMembers}</p>
                 {eventInfoPage.event.members.length > 0 && (
                   <Container maxWidth="md" sx={{ mt: 2, display: "flex" }}>
                     <AvatarGroup max={3} sx={{ mx: "auto" }}>
