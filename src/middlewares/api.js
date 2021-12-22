@@ -71,7 +71,7 @@ const apiMiddleware = (store) => (next) => (action) => {
 
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(setInfoForEventPage(response.data));
         })
         .catch((error) =>
@@ -245,7 +245,6 @@ const apiMiddleware = (store) => (next) => (action) => {
       })
       .catch(function (erreur) {
          
-        window.alert("Une erreur s'est produite, veuillez réessayer");  
           console.log(erreur);
       });
 
@@ -280,7 +279,6 @@ const apiMiddleware = (store) => (next) => (action) => {
           console.log("EVENT CREER");
       })
       .catch(function (erreur) {
-        window.alert("Une erreur s'est produite, veuillez réessayer");  
           console.log(erreur);
       });
 

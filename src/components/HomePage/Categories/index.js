@@ -23,7 +23,9 @@ const Categories = () => {
   }, [dispatch]);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 3, mb: 8 }}>
+
+    <div className="categories">
+    <Container maxWidth="md" sx={{ mt: 1, mb: 8 }}>
       <Grid container spacing={4}>
         {homeCategorieList.map((category) => (
           <Grid item md={4} key={category.id}>
@@ -37,6 +39,7 @@ const Categories = () => {
         ))}
       </Grid>
     </Container>
+    </div>
   );
 };
 

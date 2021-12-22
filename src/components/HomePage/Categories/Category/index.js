@@ -11,8 +11,7 @@ const Category = ({ name, picture, id }) => {
   return (
     <Card className="card"
     sx={{
-      mr: { xs: 0, sm: 0, md: 3, lg: 3 },
-      ml: { xs: 6, sm: 8, md: 0, lg: 0 }, 
+
       mb: {xs: 2, sm: 2, md: 0, lg: 0},
       display: "flex",
       justifyContent: "space-between",
@@ -26,10 +25,10 @@ const Category = ({ name, picture, id }) => {
             component="img"
             image={`https://api-meet-us.herokuapp.com/uploads/categories/${picture}`}
             alt={name}
-            height="180"
+            height="160"
           />
           </Link>
-          <Typography variant="h5" component="div" fontFamily="Space Grotesk">
+          <Typography variant="h6" component="div" fontFamily="Space Grotesk">
             {name}
           </Typography>
         </CardContent>
