@@ -222,10 +222,13 @@ const EventContent = ({ eventId }) => {
                       {/* {{eventInfoPage.event.members}.map((member) => (
                       <Avatar alt={member.fullName} src="/static/images/avatar/1.jpg" />
                     ))} */}
+                    {eventInfoPage.event.members.map((members)=>(
                       <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
-                      />
+                        alt={members.fullName}
+                        src={members.avatar}
+                      />))
+                      }
+                      {/* 
                       <Avatar
                         alt="Travis Howard"
                         src="/static/images/avatar/2.jpg"
@@ -241,7 +244,7 @@ const EventContent = ({ eventId }) => {
                       <Avatar
                         alt="Trevor Henderson"
                         src="/static/images/avatar/5.jpg"
-                      />
+                      /> */}
                     </AvatarGroup>
                   </Container>
                 )}
