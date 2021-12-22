@@ -41,7 +41,6 @@ export default function EventEdit({ eventId }) {
 
   const edition = useSelector((state) => state.events.edition);
 
-  const pictureRef = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -63,7 +62,6 @@ export default function EventEdit({ eventId }) {
           date: new Date(new Date().setDate(today.getDate() + 1)),
           city: "",
           category: "",
-          picture: "",
           description: "",
           maxMembers: "",
         }}
@@ -206,38 +204,6 @@ export default function EventEdit({ eventId }) {
                   error={touched.maxMembers && Boolean(errors.maxMembers)}
                   helperText={touched.maxMembers && errors.maxMembers}
                 />
-              </div>
-
-              <div className="event__form__photo">
-                <FormControl fullWidth>
-                  <label htmlFor="contained-button-file">
-                    <Input
-                      accept="image/*"
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={(event) => {
-                        setFieldValue("picture", event.currentTarget.files[0]);
-                      }}
-                      ref={pictureRef}
-                    />
-                  <Button
-                    sx={{
-                      backgroundColor: "#9FBFFF",
-                      "&:hover": { backgroundColor: "#82B5A5" },
-                    }}
-                    fullWidth
-                    variant="contained"
-                    component="span"
-                    onClick ={()=> {pictureRef.current.click();}
-                  }
-                  >
-                    Téléchargez votre image de couverture d'évènement
-                  </Button>
-                </label>
-                </FormControl>
-              </div>
-              <div className="event__form__photo">
               </div>
 
               <div className="event__form__buttom">
