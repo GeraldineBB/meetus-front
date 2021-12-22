@@ -28,9 +28,8 @@ interface HomeCardProps {
 
 function formatDate(value: string) {
   return new Date(value).toLocaleDateString("fr-FR", {
-    weekday: "long",
     year: "numeric",
-    month: "long",
+    month: "numeric",
     day: "numeric",
   });
 }
