@@ -52,13 +52,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
-
-      const token = localStorage.getItem('Token'); 
-
-
       api
         .get("v1/categories?limit=6", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
