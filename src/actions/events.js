@@ -174,7 +174,7 @@ export const SET_NEW_EVENT = 'SET_NEW_EVENT';
 
 export const setNewEvent = (values) => ({
   type: SET_NEW_EVENT,
-  values
+  values,
 });
 
 
@@ -212,3 +212,8 @@ export const EventFormPresent = () => ({
   type: EVENT_FORM_PRESENT,
 });
 
+export const ERASE_EVENT_INFO_PAGE_DATA = 'ERASE_EVENT_INFO_PAGE_DATA';
+
+export const eraseEventInfoPageData = () => ({
+  type: ERASE_EVENT_INFO_PAGE_DATA,
+});

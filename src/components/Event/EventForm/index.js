@@ -18,6 +18,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { Form, Formik, useField, useFormikContext } from "formik";
+import Geocode from "react-geocode";
 import * as yup from "yup";
 import HeaderSignUp from "../../Signup/HeaderSignup";
 import {
@@ -32,17 +33,25 @@ import { format } from "date-fns";
 console.log(format(new Date(), "yyyy-dd-MM kk:mm:ss"));
 
 const EventForm = () => {
+  Geocode.setApiKey("AIzaSyAYzUfMMQ2n860H6UfviaTAL9EJYWKs794");
+  Geocode.setLanguage("fr");
+  Geocode.setRegion("fr");
+  Geocode.setLocationType("ROOFTOP");
+
   const dispatch = useDispatch();
   const categorieList = useSelector((state) => state.categories.categorieList);
 
   const { formIsPresent, formSuccess } = useSelector((state) => state.events);
+
   const navigate = useNavigate();
+
   const handleVerify = () => {
     if (formSuccess === true) {
       console.log(formSuccess);
       return navigate("/event-creation-done");
     }
   };
+
   const validationSchema = yup.object({
     title: yup
       .string("Entrez le nom de l'évènement")
@@ -85,6 +94,7 @@ const EventForm = () => {
   useEffect(() => {
     dispatch({ type: LOAD_CATEGORIES });
   }, [dispatch]);
+
   handleVerify();
 
   const today = new Date();
@@ -108,12 +118,31 @@ const EventForm = () => {
           city: "",
           zipcode: "",
           country: "FRANCE",
+          latitude: "",
+          longitude: "",
         }}
         onSubmit={(values) => {
-          formIsPresent
-            ? dispatch(setNewEvent(values))
-            : dispatch(setNewEventOnline(values));
-          console.log(values);
+          Geocode.fromAddress(values.city).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              console.log(lat, lng);
+              values.longitude = lng;
+              values.latitude = lat;
+              formIsPresent
+                ? dispatch(setNewEvent(values))
+                : dispatch(setNewEventOnline(values));
+
+              console.log(values);
+            },
+            (error) => {
+              console.error(error);
+              formIsPresent
+                ? dispatch(setNewEvent(values))
+                : dispatch(setNewEventOnline(values));
+
+              console.log(values);
+            }
+          );
         }}
         validationSchema={validationSchema}
       >

@@ -29,8 +29,9 @@ const EventContent = ({ eventId }) => {
   }, [dispatch, eventId]);
 
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
+  console.log(eventInfoPage);
 
-  const loading = useSelector((state) => state.events.loading);
+  const {loadingForEventPage} = useSelector((state) => state.events);
 
   const { logged } = useSelector((state) => state.user);
 
@@ -38,7 +39,7 @@ const EventContent = ({ eventId }) => {
 
 
 
-  if (loading) {
+  if (loadingForEventPage) {
     return <LinearIndeterminate />;
   } else {
     // we want to check if user id is contained in eventInfoPage.event.members (info from api v1/events/id)
@@ -132,8 +133,8 @@ const EventContent = ({ eventId }) => {
                       }}
                     >
                       <GoogleMaps
-                        currentLng={eventInfoPage.event.longitude}
-                        currentLat={eventInfoPage.event.latitude}
+                        currentLng={eventInfoPage.event.longitude ?? "2.349014"}
+                        currentLat={eventInfoPage.event.latitude ?? "48.864716"}
                       />
                     </div>
                   </Box>

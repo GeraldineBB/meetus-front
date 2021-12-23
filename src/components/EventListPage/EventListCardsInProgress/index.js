@@ -13,10 +13,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_EVENT_LIST_IN_PROGRESS } from "../../../actions/events";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./style.scss";
-import { ButtonBase } from "@mui/material";
 
 export default function EventListCardsInProgress({
   id,
@@ -36,7 +35,6 @@ export default function EventListCardsInProgress({
     (state) => state.events.currentSelectCategoriesEventList
   );
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
   function formatDate(value) {
     return new Date(value).toLocaleDateString("fr-FR", {

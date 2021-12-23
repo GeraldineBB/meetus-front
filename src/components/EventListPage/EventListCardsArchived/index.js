@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable array-callback-return */
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
