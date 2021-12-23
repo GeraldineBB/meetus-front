@@ -314,6 +314,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           title: action.values.title,
           date: action.values.date,
           city: action.values.city,
+          description: action.values.description,
           category: action.values.category,
           maxMembers: action.values.maxMembers,
         },
