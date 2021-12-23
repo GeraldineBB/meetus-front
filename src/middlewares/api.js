@@ -18,14 +18,21 @@ import {
   setCategoriesForHome,
   setInfoForEventPage,
   EDIT_EVENT,
-  setValidateForm, 
+  setValidateForm,
 } from "../actions/events";
-import { LOGIN, setCurrentUser, setErrorLogin, setJoinEventStatus, SIGNUP } from "../actions/user";
+import {
+  LOGIN,
+  setCurrentUser,
+  setErrorLogin,
+  setJoinEventStatus,
+  SIGNUP,
+} from "../actions/user";
+
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  // baseURL: "http://localhost:8080/api/",
-  baseURL: "https://api-meet-us.herokuapp.com/api/",
+  baseURL: "http://localhost:8080/api/",
+  // baseURL: "https://api-meet-us.herokuapp.com/api/",
   // baseUrl: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
   // headers: {'Authorization': `Bearer ${token}`}
 });
@@ -36,8 +43,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       // endpoints to load the 3 next events for home
 
       api
-        .get("v1/events?limit=3", {
-        })
+        .get("v1/events?limit=3", {})
         .then((response) => {
           console.log(response);
           // change state in order to put the 3 next events in prop list of the state events
@@ -53,8 +59,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES_FOR_HOME: {
       // endpoints to load 6 cateogories for home
       api
-        .get("v1/categories?limit=6", {
-        })
+        .get("v1/categories?limit=6", {})
         .then((response) => {
           console.log(response);
           store.dispatch(setCategoriesForHome(response.data));
@@ -67,9 +72,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     }
     case LOAD_INFO_FOR_PAGE_EVENT: {
       api
-        .get(`v1/events/${action.eventId}`, {
-
-        })
+        .get(`v1/events/${action.eventId}`, {})
         .then((response) => {
           // console.log(response.data);
           store.dispatch(setInfoForEventPage(response.data));
@@ -87,37 +90,34 @@ const apiMiddleware = (store) => (next) => (action) => {
       // const cookies = new Cookies();
       // const token = cookies.get('Pizzeria');
 
-      const token = localStorage.getItem('Token'); 
+      const token = localStorage.getItem("Token");
 
-
-        axios({
-          headers: { "Authorization": `Bearer ${token}` } ,
-           data: {
-             eventId: eventId, 
-           },
-           url: `https://api-meet-us.herokuapp.com/api/v1/events/${eventId}/add`, 
-           method: 'post',
-
+      axios({
+        headers: { Authorization: `Bearer ${token}` },
+        data: {
+          eventId: eventId,
+        },
+        url: `https://api-meet-us.herokuapp.com/api/v1/events/${eventId}/add`,
+        method: "post",
       })
-      .then(function (reponse) {
+        .then(function (reponse) {
           //When user join the event, status is true and button will change
-          store.dispatch(setJoinEventStatus()); 
+          store.dispatch(setJoinEventStatus());
           console.log(reponse.data);
-      })
-      .catch(function (erreur) {
+        })
+        .catch(function (erreur) {
           //On traite ici les erreurs éventuellement survenues
           console.log(erreur);
-      });
+        });
 
       next(action);
       break;
     }
     case LOAD_EVENT_LIST_IN_PROGRESS: {
       api
-        .get("v1/events", {
-        })
+        .get("v1/events", {})
         .then((response) => {
-          console.log('reponse load event list in progress', response);
+          console.log("reponse load event list in progress", response);
           store.dispatch(setEventListInProgress(response.data));
         })
         .catch((error) =>
@@ -130,12 +130,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_EVENT_LIST_ARCHIVED: {
-      const token = localStorage.getItem('Token'); 
+      const token = localStorage.getItem("Token");
 
       api
         .get("v1/events/past", {
           headers: { Authorization: `Bearer ${token}` },
-
         })
         .then((response) => {
           console.log(response);
@@ -151,8 +150,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       break;
     }
     case LOAD_CATEGORIES: {
-      // endpoints to load all categories 
-
+      // endpoints to load all categories
 
       const token = localStorage.getItem("Token");
 
@@ -173,8 +171,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_SELECT_CATEGORIES_EVENT_LIST: {
       // endpoints to load 6 cateogories for eventList
       api
-        .get("v1/categories?limit=50", {
-        })
+        .get("v1/categories?limit=50", {})
         .then((response) => {
           console.log(response);
           store.dispatch(setSelectCategoriesEventList(response.data));
@@ -197,106 +194,105 @@ const apiMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(setCurrentUser(response.data));
-          const {user: { token, user }} = store.getState();
-          localStorage.setItem('Token', token);
-          localStorage.setItem('User', JSON.stringify(user));
+          const {
+            user: { token, user },
+          } = store.getState();
+          localStorage.setItem("Token", token);
+          localStorage.setItem("User", JSON.stringify(user));
         })
         .catch((error) => {
-        store.dispatch(setErrorLogin())
-        console.log("on a une erreur sur la ", error)
-      });
+          store.dispatch(setErrorLogin());
+          console.log("on a une erreur sur la ", error);
+        });
       next(action);
       break;
     }
     case SET_NEW_EVENT: {
-
       const token = localStorage.getItem("Token");
+      console.log(action.values.title);
       // const {google: { value }} = store.getState();
 
-      // let data = new FormData(); 
+      // let data = new FormData();
       // data.append('picture', action.values.picture);
 
-        axios({
-          headers: { 
-            "Authorization": `Bearer ${token}`,  
-            "Accept": "application/json", 
-            "Content-Type": "multipart/form-data", 
-          } ,
-          data: {
-            title : action.values.title,
-            description: action.values.description,
-            date: action.values.date,
-            category: action.values.category,
-            maxMembers:action.values.maxMembers,
-            address: action.values.address,
-            city: action.values.city,
-            country: action.values.country,
-            zipcode: action.values.zipcode
+      axios({
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
         },
-           url: 'https://api-meet-us.herokuapp.com/api/v1/events', 
-           method: 'post',
-
+        data: {
+          title: action.values.title,
+          description: action.values.description,
+          date: action.values.date,
+          category: action.values.category,
+          maxMembers: action.values.maxMembers,
+          address: action.values.address,
+          city: action.values.city,
+          country: action.values.country,
+          zipcode: action.values.zipcode,
+          latitude: action.values.latitude,
+          longitude: action.values.longitude,
+        },
+        url: "http://localhost:8080/api/v1/events",
+        method: "post",
       })
-      .then(function (reponse) {
+        .then(function (reponse) {
           // store.dispatch(setValidateForm(reponse.data));
-          store.dispatch(setValidateForm(reponse.data)); 
-          console.log('formData middleware', reponse.data);
+          store.dispatch(setValidateForm(reponse.data));
+          console.log("formData middleware", reponse.data);
           console.log("CA A FONCTIONNER");
-      })
-      .catch(function (erreur) {
-         
+        })
+        .catch(function (erreur) {
           console.log(erreur);
-      });
+        });
 
       next(action);
       break;
     }
     case SET_NEW_EVENT_ONLINE: {
-
       // const cookies = new Cookies();
       // const token = cookies.get('Pizzeria');
 
-      const token = localStorage.getItem('Token'); 
+      const token = localStorage.getItem("Token");
 
-
-        axios({
-          headers: { "Authorization": `Bearer ${token}` } ,
-          data: {
-            title : action.values.title, 
-            description: action.values.description,
-            date: action.values.date,
-            category: action.values.category,
-            maxMembers:action.values.maxMembers,    
-            isOnline: action.values.picked,
+      axios({
+        headers: { Authorization: `Bearer ${token}` },
+        data: {
+          title: action.values.title,
+          description: action.values.description,
+          date: action.values.date,
+          category: action.values.category,
+          maxMembers: action.values.maxMembers,
+          isOnline: action.values.picked,
         },
-           url: 'https://api-meet-us.herokuapp.com/api/v1/events?type=online', 
-           method: 'post',
-
+        url: "http://localhost:8080/api/v1/events?type=online",
+        method: "post",
       })
-      .then(function (reponse) {
+        .then(function (reponse) {
           console.log(reponse.data);
-          store.dispatch(setValidateForm(reponse.data));  
+          store.dispatch(setValidateForm(reponse.data));
           console.log("EVENT CREER");
-      })
-      .catch(function (erreur) {
+        })
+        .catch(function (erreur) {
           console.log(erreur);
-      });
+        });
 
       next(action);
       break;
     }
     case SIGNUP: {
-      axios({   
-        // headers: { "Authorization": '' },   
-        data: { 
-          email : action.values.email, 
-          password: action.values.password, 
-          lastname: action.values.lastname, 
+      axios({
+        // headers: { "Authorization": '' },
+        data: {
+          email: action.values.email,
+          password: action.values.password,
+          lastname: action.values.lastname,
           firstname: action.values.firstname,
         },
-          method: 'post',
-          url: `https://api-meet-us.herokuapp.com/api/v1/users`, 
-        })
+        method: "post",
+        url: `http://localhost:8080/api/v1/users`,
+      })
         .then((response) => {
           // store.dispatch(setValidateForm());
           console.log(response);
@@ -304,42 +300,40 @@ const apiMiddleware = (store) => (next) => (action) => {
         .catch((erreur) => {
           console.log(erreur);
           window.alert("Une erreur s'est produite, veuillez réessayer");
-        })
+        });
       next(action);
       break;
-    } 
-  
+    }
+
     case EDIT_EVENT: {
-
-
       // const cookies = new Cookies();
       // const token = cookies.get('Pizzeria');
 
-      const token = localStorage.getItem('Token'); 
+      const token = localStorage.getItem("Token");
 
       axios({
-        headers: { "Authorization": `Bearer ${token}` },
-        data: { 
+        headers: { Authorization: `Bearer ${token}` },
+        data: {
           title: action.values.title,
           date: action.values.date,
           city: action.values.city,
           category: action.values.category,
           maxMembers: action.values.maxMembers,
         },
-        method: 'put',
-        url: `https://api-meet-us.herokuapp.com/api/v1/events/${action.eventId}`, 
+        method: "put",
+        url: `http://localhost:8080/api/v1/events/${action.eventId}`,
       })
         .then((response) => {
           // alert(JSON.stringify( response.data, null, 2));
-          console.log('modif event', response);
+          console.log("modif event", response);
         })
         .catch((erreur) => {
-           window.alert("Une erreur s'est produite, veuillez réessayer");
+          window.alert("Une erreur s'est produite, veuillez réessayer");
           console.log(erreur);
-        })
+        });
       next(action);
       break;
-    } 
+    }
     default:
       next(action);
   }

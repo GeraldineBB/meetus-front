@@ -3,13 +3,14 @@ import React, { Component } from "react";
 
 export class MapContainer extends Component {
   render(props) {
+    console.log(props);
     return (
       <Map
         google={this.props.google}
         zoom={14}
         initialCenter={{
-          lat: 48.8583,
-          lng: 2.2945,
+          lat: this.props.currentLat,
+          lng: this.props.currentLng,
         }}
       >
         <Marker

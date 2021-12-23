@@ -14,6 +14,9 @@ import {
   EDIT_EVENT,
   EVENT_FORM_ONLINE,
   EVENT_FORM_PRESENT,
+  LOAD_EVENT_LIST_IN_PROGRESS,
+  LOAD_EVENT_LIST_ARCHIVED,
+  ERASE_EVENT_INFO_PAGE_DATA,
 } from "../actions/events.js";
 
 export const initialState = {
@@ -28,14 +31,16 @@ export const initialState = {
   selectCategoriesEventListIsOpen: false,
   selectCategoriesEventListIsClose: true,
   eventInfoPage: [],
-  loading: true,
+  loadingForEventPage: true,
   eventCurrentInfo: [],
   formSuccess: false,
   edition: true,
   currentLng: null,
   currentLat: null,
   formIsOnline: false,
-  formIsPresent: true
+  formIsPresent: true,
+  cityForm: ""
+  
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -44,6 +49,8 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         homeEventList: action.value,
+        eventInfoPage: {},
+        loadingForEventPage: true,
       };
     case SET_EVENT_LIST_IN_PROGRESS:
       return {
@@ -60,12 +67,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         archived: false,
         inProgress: true,
+        eventInfoPage: {},
+        loadingForEventPage: true,
       };
     case ARCHIVED:
       return {
         ...state,
         archived: true,
         inProgress: false,
+        loadingForEventPage: true,
       };
     case SEARCH_BAR_EVENT_LIST:
       return {
@@ -98,7 +108,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         eventInfoPage: action.value,
-        loading: false,
+        loadingForEventPage: false,
       };
     case SET_VALIDATE_FORM:
       return {
@@ -110,6 +120,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         edition: false,
         eventInfoPage: action.values,
+        loadingForEventPage: true,
       };
     case EVENT_FORM_ONLINE:
       return {
@@ -123,6 +134,24 @@ const reducer = (state = initialState, action = {}) => {
         formIsOnline: false,
         formIsPresent: true,
       };
+    case LOAD_EVENT_LIST_IN_PROGRESS:
+      return{
+        ...state,
+        eventInfoPage: {},
+        loadingForEventPage: true,
+      };
+      case LOAD_EVENT_LIST_ARCHIVED:
+        return{
+          ...state,
+          eventInfoPage: {},
+          loadingForEventPage: true,
+        };
+      case ERASE_EVENT_INFO_PAGE_DATA:
+        return{
+          ...state,
+          eventInfoPage: {},
+          loadingForEventPage: true,
+        }
     default:
       return state;
   }

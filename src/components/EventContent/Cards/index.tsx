@@ -10,6 +10,8 @@ import { CardMedia } from "@mui/material";
 // import Image from "../../../../assets/images/fire-event.jpg";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import {useDispatch} from 'react-redux';
+import { eraseEventInfoPageData } from "../../../actions/events";
 
 interface EventCardProps {
   picture: string;
@@ -38,10 +40,12 @@ export default function EventCard({
   description,
   id,
 }: EventCardProps) {
+  const dispatch = useDispatch();
   return (
     <Link
       to={`/events/${id}`}
       style={{ textDecoration: "none", color: "white" }}
+      onClick={() => dispatch(eraseEventInfoPageData())}
     >
       <Card
           className="card"
