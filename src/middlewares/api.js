@@ -31,8 +31,8 @@ import {
 // import { LOGIN, login, setCurrentUser, SIGNUP, signup } from "../actions/user";
 // link to the API in order to put only endpoints in switch case
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/",
-  // baseURL: "https://api-meet-us.herokuapp.com/api/",
+  // baseURL: "http://localhost:8080/api/",
+  baseURL: "https://api-meet-us.herokuapp.com/api/",
   // baseUrl: "http://jimmy-martin.vpnuser.lan/SpeSymfony/meet-us-api/public/api/v1",
   // headers: {'Authorization': `Bearer ${token}`}
 });
@@ -152,11 +152,8 @@ const apiMiddleware = (store) => (next) => (action) => {
     case LOAD_CATEGORIES: {
       // endpoints to load all categories
 
-      const token = localStorage.getItem("Token");
-
       api
         .get("v1/categories?limit=50", {
-          headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
           console.log(response);
@@ -234,7 +231,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           latitude: action.values.latitude,
           longitude: action.values.longitude,
         },
-        url: "http://localhost:8080/api/v1/events",
+        url: "https://api-meet-us.herokuapp.com/api/v1/events",
         method: "post",
       })
         .then(function (reponse) {
@@ -266,7 +263,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           maxMembers: action.values.maxMembers,
           isOnline: action.values.picked,
         },
-        url: "http://localhost:8080/api/v1/events?type=online",
+        url: "https://api-meet-us.herokuapp.com/api/v1/events?type=online",
         method: "post",
       })
         .then(function (reponse) {
@@ -291,7 +288,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           firstname: action.values.firstname,
         },
         method: "post",
-        url: `http://localhost:8080/api/v1/users`,
+        url: `https://api-meet-us.herokuapp.com/api/v1/users`,
       })
         .then((response) => {
           // store.dispatch(setValidateForm());
@@ -321,7 +318,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           maxMembers: action.values.maxMembers,
         },
         method: "put",
-        url: `http://localhost:8080/api/v1/events/${action.eventId}`,
+        url: `https://api-meet-us.herokuapp.com/api/v1/events/${action.eventId}`,
       })
         .then((response) => {
           // alert(JSON.stringify( response.data, null, 2));

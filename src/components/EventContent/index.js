@@ -133,8 +133,8 @@ const EventContent = ({ eventId }) => {
                       }}
                     >
                       <GoogleMaps
-                        currentLng={eventInfoPage.event.longitude}
-                        currentLat={eventInfoPage.event.latitude}
+                        currentLng={eventInfoPage.event.longitude ?? "2.349014"}
+                        currentLat={eventInfoPage.event.latitude ?? "48.864716"}
                       />
                     </div>
                   </Box>

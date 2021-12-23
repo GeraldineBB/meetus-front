@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 
 import TextField from "@mui/material/TextField";
@@ -9,7 +9,6 @@ import { MenuItem } from "@mui/material";
 import { Select } from "@mui/material";
 import { FormControl } from "@mui/material";
 import { InputLabel } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
 import { Navigate } from "react-router-dom";
 
@@ -29,14 +28,9 @@ import {
 } from "../../../actions/events";
 
 export default function EventEdit({ eventId }) {
-  const Input = styled("input")({
-    display: "none",
-  });
-
-  const today = new Date();
 
   const eventInfoPage = useSelector((state) => state.events.eventInfoPage);
-
+  const initialValue = eventInfoPage.event
   const categorieList = useSelector((state) => state.categories.categorieList);
 
   const edition = useSelector((state) => state.events.edition);
@@ -51,20 +45,13 @@ export default function EventEdit({ eventId }) {
   }, [dispatch, eventId]);
 
   if (!edition) {
-    return <Navigate to="/edition-done" />;
+    return <Navigate to={`/events/${eventId}`} />;
   }
 
   return (
     <div>
       <Formik
-        initialValues={{
-          title: "",
-          date: new Date(new Date().setDate(today.getDate() + 1)),
-          city: "",
-          category: "",
-          description: "",
-          maxMembers: "",
-        }}
+        initialValues={initialValue}
         validate={(values) => {
           const errors = {};
           if (!values.title) {
