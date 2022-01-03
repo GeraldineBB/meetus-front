@@ -1,46 +1,30 @@
-# Getting Started with Create React App
+# Meet us
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description du projet
 
-## Available Scripts
+Meet Us est le projet de groupe sur lequel j'ai travaillé à la fin de la formation. Le projet a duré 1 mois au total : 1 sprint de conception, 2 sprints de développement et 1 sprint de préparation des démo. L'équipe est constituée de 2 autres développeurs front et 2 développeurs back. 
 
-In the project directory, you can run:
+Meet Us est une plateforme qui vous permet de rejoindre ou créer un évènement physique ou en ligne. Il vous permet donc d’avoir de nouvelles activités, de rencontrer de nouvelles personnes ou bien de proposer votre activité favorite à d’autres. 
 
-### `yarn start`
+Le front a été développé en react et consomme une api rest développée par les équipes back en Symfony. Il y a aussi un backoffice qui permet d’administrer le site, développé avec Bootstrap et le moteur de templates Twig. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Pour cadrer le périmètre de la V1, on a choisi de travailler à partir de personae. C'est-à-dire des utilisateurs qui pourraient utiliser MeetUs au quotidien. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+J'ai présenté le projet lors des démo, pour voir le replay c'est par ici : https://youtu.be/z_X-bUQtqlo?t=2065 
 
-### `yarn test`
+Pour voir le projet en live : https://meet-us.surge.sh/ 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Apprentissages du projet
+Ce projet a été très formateur pour moi, notamment car nous étions 5 à travailler sur ce projet. J'ai pu mettre à profit mes compétences de Product Manager pour cadrer le périmètre du projet. 
+- Communication : J'ai pu voir l'importance de la communication entre les développeurs, s'accorder sur des conventions parait essentiel pour faire évoluer le projet dans le temps. Par ailleurs, la communication entre le front et le back est également primordiale. Grâce à notre communication, l'équipe back a pu nous proposer des requêtes personnalisées pour nos pages en front. 
+- Choix technologiques : Le temps nous manquait mais avec le recul j'aurai aimé qu'on prenne davantage le temps de choisir les bibliothèques et librairies. En effet, nous avons utilisé Formik pour gérer nos formulaires. Ca nous a permis de gagner du temps dans les validations et la gestion du state, mais ça nous en a fait perdre à certains moments car la documentation n'était pas toujours à jour et nous avons eu du mal à coupler Formik avec la géolocalisation. 
+- Organisation : Nous avons commencé à utilser les routes en GET, ce qui nous a permis d'avoir des choses à montrer dès le premier sprint de développement. Cependant, les routes en POST étaient plus importantes car elles permettaient notamment d'identifier les utilisateurs, et donc de dynamiser nos affichages en fonction de l'utilisateur (organisateur, inscrit, connecté ou non...). 
+- Par manque de temps également, nous n'avons pas mis en place un environnement de dév et de prod. Ce que je regrette car nous avons perdu du temps ensuite à changer les urls dans le middleware en fonction de l'avancement du projet. 
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Evolutions potientielles
+- Améliorer l'UX (lien de redirection, messages utilisateur, mail de confirmation, rappel, loading à homogéneiser)
+- Proposer plus de filtres sur la liste des évènements 
+- Permettre l'édition de profil
+- Proposer les commentaires sur les évènements
+- Pouvoir mettre des évènements en favoris
