@@ -26,10 +26,9 @@ Ce projet a été très formateur pour moi, notamment car nous étions 5 à trav
 - Communication : J'ai pu voir l'importance de la communication entre les développeurs, s'accorder sur des conventions parait essentiel pour faire évoluer le projet dans le temps. Par ailleurs, la communication entre le front et le back est également primordiale. Grâce à notre communication, l'équipe back a pu nous proposer des requêtes personnalisées pour nos pages en front. 
 - Choix technologiques : Le temps nous manquait mais avec le recul j'aurai aimé qu'on prenne davantage le temps de choisir les bibliothèques et librairies. En effet, nous avons utilisé Formik pour gérer nos formulaires. Ca nous a permis de gagner du temps dans les validations et la gestion du state, mais ça nous en a fait perdre à certains moments car la documentation n'était pas toujours à jour et nous avons eu du mal à coupler Formik avec la géolocalisation. 
 - Organisation : Nous avons commencé à utilser les routes en GET, ce qui nous a permis d'avoir des choses à montrer dès le premier sprint de développement. Cependant, les routes en POST étaient plus importantes car elles permettaient notamment d'identifier les utilisateurs, et donc de dynamiser nos affichages en fonction de l'utilisateur (organisateur, inscrit, connecté ou non...). 
-- Par manque de temps également, nous n'avons pas mis en place un environnement de dév et de prod. Ce que je regrette car nous avons perdu du temps ensuite à changer les urls dans le middleware en fonction de l'avancement du projet. 
 
 
-## Evolutions potientielles du projet
+## Evolutions potentielles du projet
 - Améliorer l'UX (lien de redirection, messages utilisateur, mail de confirmation, rappel, loading à homogéneiser)
 - Proposer plus de filtres sur la liste des évènements 
 - Permettre l'édition de profil
